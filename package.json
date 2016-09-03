@@ -1,13 +1,13 @@
 {
-	"name": "vscode-idris",
+    "name": "vscode-idris",
     "displayName": "idris Syntax Highlighting",
-	"description": "Syntax highlighting and snippets for the idris programming language.",
-	"version": "1.0.0",
+    "description": "Syntax highlighting and snippets for the idris programming language.",
+    "version": "1.0.0",
     "publisher": "zjhmale",
-	"engines": {
-		"vscode": "^0.10.1"
-	},
-	"icon": "images/idris.png",
+    "engines": {
+        "vscode": "^0.10.1"
+    },
+    "icon": "images/idris.png",
     "galleryBanner": {
         "color": "#00ff99",
         "theme": "light"
@@ -15,7 +15,7 @@
     "keywords": [
         "language", "idris", "highlight", "syntax", "snippets"
     ],
-    "license": "MIT",
+    "license": "BSD",
     "homepage": "https://github.com/zjhmale/vscode-idris",
     "repository": {
         "type": "git",
@@ -23,20 +23,20 @@
     },
     "bugs": {
         "url": "https://github.com/zjhmale/vscode-idris/issues",
-        "email": "zjhmale@gmail.com"    
+        "email": "zjhmale@gmail.com"
     },
     "categories": [
         "Languages",
         "Snippets"
     ],
-	"activationEvents": [
-		"onLanguage:idris"
-	],
-	"main": "./out/src/extension",
-	"contributes": {
+    "activationEvents": [
+        "onLanguage:idris"
+    ],
+    "main": "./out/src/extension",
+    "contributes": {
         "languages": [{
             "id": "idris",
-            "aliases": ["idris", "idris"],
+            "aliases": ["Idris", "idris"],
             "extensions": [".idr"]
         }],
         "grammars": [{
@@ -44,12 +44,12 @@
             "scopeName": "source.idris",
             "path": "./syntaxes/idris.tmLanguage"
         }]},
-	"scripts": {
-		"vscode:prepublish": "node ./node_modules/vscode/bin/compile",
-		"compile": "node ./node_modules/vscode/bin/compile -watch -p ./"
-	},
-	"devDependencies": {
-		"typescript": "^1.6.2",
-		"vscode": "0.10.x"
-	}
+    "scripts": {
+        "vscode:prepublish": "node ./node_modules/vscode/bin/compile",
+        "compile": "node ./node_modules/vscode/bin/compile -watch -p ./"
+    },
+    "devDependencies": {
+        "typescript": "^1.6.2",
+        "vscode": "0.10.x"
+    }
 }
