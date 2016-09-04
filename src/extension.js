@@ -1,4 +1,6 @@
-var vscode = require("vscode");
+'use strict'
+
+let vscode = require('vscode')
 
 function activate(context) {
 	vscode.languages.setLanguageConfiguration("idris", {
@@ -19,10 +21,10 @@ function activate(context) {
 			["[", "]"],
 			["(", ")"]
 		]
-    });
+    })
 }
-exports.activate = activate;
+exports.activate = activate
 
 function deactivate() {
 }
-exports.deactivate = deactivate;
+exports.deactivate = deactivate
