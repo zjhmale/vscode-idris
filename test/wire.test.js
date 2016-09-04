@@ -1,8 +1,7 @@
-let assert = require("assert")
-
+let assert    = require("assert")
 let formatter = require('../src/wire/formatter')
-let parser        = require("../src/wire/parser")
-let runP          = require('bennu').parse.run
+let parser    = require("../src/wire/parser")
+let runP      = require('bennu').parse.run
 
 let test1 = "(:protocol-version 1 0)"
 let list1 = [':protocol-version', 1, 0]

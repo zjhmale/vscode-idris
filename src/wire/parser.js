@@ -1,9 +1,9 @@
-let bennu = require('bennu')
-let parse = bennu.parse
-let text = bennu.text
-let lang = bennu.lang
+let bennu     = require('bennu')
+let parse     = bennu.parse
+let text      = bennu.text
+let lang      = bennu.lang
 let nu_stream = require('nu-stream')
-let stream = nu_stream.stream
+let stream    = nu_stream.stream
 
 let streamToString = function(s) {
   return stream.toArray(s).join('')
