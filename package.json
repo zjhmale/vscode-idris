@@ -32,7 +32,7 @@
     "activationEvents": [
         "onLanguage:idris"
     ],
-    "main": "./out/src/extension",
+    "main": "./extension",
     "contributes": {
         "languages": [{
             "id": "idris",
@@ -45,11 +45,16 @@
             "path": "./syntaxes/idris.tmLanguage"
         }]},
     "scripts": {
-        "vscode:prepublish": "node ./node_modules/vscode/bin/compile",
-        "compile": "node ./node_modules/vscode/bin/compile -watch -p ./"
+        "postinstall": "node ./node_modules/vscode/bin/install"
+    },
+    "dependencies": {
+        "bennu": "17.3.0",
+        "nu-stream": "3.3.1",
+        "rx-lite": "4.0.0",
+        "@cycle/core": "3.1.0",
+        "@cycle/dom": "5.3.0"  
     },
     "devDependencies": {
-        "typescript": "^1.6.2",
-        "vscode": "0.10.x"
+        "vscode": "^0.11.0"
     }
 }
