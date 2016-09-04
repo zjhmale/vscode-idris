@@ -2,7 +2,7 @@ sudo: false
 
 os:
   - osx
-  - linux
+  #- linux
 
 before_install:
   - if [ $TRAVIS_OS_NAME == "linux" ]; then
@@ -13,7 +13,6 @@ before_install:
 
 install:
   - npm install
-  - npm run vscode:prepublish
 
 script:
   - npm test --silent
