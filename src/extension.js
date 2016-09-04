@@ -1,4 +1,5 @@
-let vscode = require('vscode')
+let vscode       = require('vscode')
+let IdrisIdeMode = require('./ide-mode')
 
 function activate(context) {
     vscode.languages.setLanguageConfiguration("idris", {

@@ -3,18 +3,18 @@ let parser       = require('./wire/parser')
 let EventEmitter = require('events').EventEmitter
 let spawn        = require('child_process').spawn
 
-class IdrisIdeMode extend EventEmitter {
+class IdrisIdeMode extends EventEmitter {
   constructor() {
     this.process = null
-		this.buffer = ''
- 		this.idrisBuffers = 0
- 		this.compilerOptions = {}
+    this.buffer = ''
+    this.idrisBuffers = 0
+    this.compilerOptions = {}
   }
- 
-  start = function(compilerOptions) {
+
+  start(compilerOptions) {
     var options, p, parameters, pathToIdris, pkgs
     if ((this.process == null) || this.process.killed) {
-      pathToIdris = atom.config.get("language-idris.pathToIdris")
+      pathToIdris = 'idris' 
       pkgs = compilerOptions.pkgs && compilerOptions.pkgs.length ? (p = compilerOptions.pkgs.map(function(p) {
         return ["-p", p]
       }), [].concat.apply([], p)) : []
@@ -32,21 +32,21 @@ class IdrisIdeMode extend EventEmitter {
     }
   }
 
-  setCompilerOptions = function(options) {
+  setCompilerOptions(options) {
     return this.compilerOptions(options)
   }
 
-  send = function(cmd) {
+  send(cmd) {
     Logger.logOutgoingCommand(cmd)
     return this.process.stdin.write(sexpFormatter.serialize(cmd))
   }
 
-  stop = function() {
+  stop() {
     var ref
     return (ref = this.process) != null ? ref.kill() : void 0
   }
 
-  error = function(error) {
+  error(error) {
     var e
     e = error.code === 'ENOENT' ? {
       short: "Couldn't find idris executable",
@@ -60,7 +60,7 @@ class IdrisIdeMode extend EventEmitter {
     })
   }
 
-  exited = function(code, signal) {
+  exited(code, signal) {
     var long, short
     if (signal === "SIGTERM") {
       short = "The idris compiler was closed"
@@ -77,11 +77,11 @@ class IdrisIdeMode extend EventEmitter {
     }
   }
 
-  running = function() {
+  running() {
     return !!this.process
   }
 
-  stdout = function(data) {
+  stdout(data) {
     var cmd, len, obj, results
     this.buffer += data
     results = []
