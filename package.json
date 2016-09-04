@@ -45,7 +45,8 @@
             "path": "./syntaxes/idris.tmLanguage"
         }]},
     "scripts": {
-        "postinstall": "node ./node_modules/vscode/bin/install"
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "node ./node_modules/vscode/bin/test"
     },
     "dependencies": {
         "bennu": "17.3.0",
