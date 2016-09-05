@@ -45,7 +45,8 @@
         "idris"
       ],
       "extensions": [
-        ".idr"
+        ".idr",
+        ".lidr"
       ]
     }],
     "grammars": [{
