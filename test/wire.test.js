@@ -12,11 +12,11 @@ let list2 = [":set-prompt", "*C:\\Programming\\Idris\\Start\\hello", 1]
 let test3 = "(:return (:ok ()) 5)"
 let list3 = [":return", [":ok", []], 5]
 
-let test4 = "(:return (:ok \"Main.a : Nat\" ((0 6 ((:name \"Main.a\") (:implicit :False) (:decor :function) (:doc-overview \"\") (:type \"Nat\"))) (9 3 ((:name \"Prelude.Nat.Nat\") (:implicit :False) (:decor :type) (:doc-overview \"Unary natural numbers\") (:type \"Type\"))) (9 3 ((:tt-term \"AAAAAAAAAAAAAwAAAAAACAAAAQyZWx1ZGU=\"))))) 2)";
-let list4 = [":return", [":ok", "Main.a : Nat", [[0, 6, [[":name", "Main.a"], [":implicit", false], [":decor", ":function"], [":doc-overview", ""], [":type", "Nat"]]], [9, 3, [[":name", "Prelude.Nat.Nat"], [":implicit", false], [":decor", ":type"], [":doc-overview", "Unary natural numbers"], [":type", "Type"]]], [9, 3, [[":tt-term", "AAAAAAAAAAAAAwAAAAAACAAAAQyZWx1ZGU="]]]]], 2];
+let test4 = "(:return (:ok \"Main.a : Nat\" ((0 6 ((:name \"Main.a\") (:implicit :False) (:decor :function) (:doc-overview \"\") (:type \"Nat\"))) (9 3 ((:name \"Prelude.Nat.Nat\") (:implicit :False) (:decor :type) (:doc-overview \"Unary natural numbers\") (:type \"Type\"))) (9 3 ((:tt-term \"AAAAAAAAAAAAAwAAAAAACAAAAQyZWx1ZGU=\"))))) 2)"
+let list4 = [":return", [":ok", "Main.a : Nat", [[0, 6, [[":name", "Main.a"], [":implicit", false], [":decor", ":function"], [":doc-overview", ""], [":type", "Nat"]]], [9, 3, [[":name", "Prelude.Nat.Nat"], [":implicit", false], [":decor", ":type"], [":doc-overview", "Unary natural numbers"], [":type", "Type"]]], [9, 3, [[":tt-term", "AAAAAAAAAAAAAwAAAAAACAAAAQyZWx1ZGU="]]]]], 2]
 
 
-let test5 = "(:return (:ok \"\\\"Z\\\" : String\" ((0 3 ((:name \"\\\"Z\\\"\"))))) 5)";
+let test5 = "(:return (:ok \"\\\"Z\\\" : String\" ((0 3 ((:name \"\\\"Z\\\"\"))))) 5)"
 let list5 =
   [
     ":return",
@@ -39,7 +39,7 @@ let list5 =
     5
   ]
 
-let test6 = "(:return (:ok \"\\\\__pi_arg => \\\\__pi_arg1 => (__pi_arg1)\") 6)";
+let test6 = "(:return (:ok \"\\\\__pi_arg => \\\\__pi_arg1 => (__pi_arg1)\") 6)"
 let list6 =
   [
     ":return",
@@ -50,7 +50,7 @@ let list6 =
     6
   ]
 
-let test7 = "(:interpret \":cd C:/Path/to/dir\")";
+let test7 = "(:interpret \":cd C:/Path/to/dir\")"
 let list7 =
   [
     ":interpret",

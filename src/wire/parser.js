@@ -54,12 +54,12 @@ let sexpP = parse.rec(function(self) {
 })
 
 module.exports = {
-  trueP: trueP,
-  falseP: falseP,
-  integerP: integerP,
-  stringCharP: stringCharP,
-  stringP: stringP,
-  symbolP: symbolP,
+  trueP,
+  falseP,
+  integerP,
+  stringCharP,
+  stringP,
+  symbolP,
   parse: function(input) {
     return parse.run(sexpP, input)
   }

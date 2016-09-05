@@ -41,7 +41,7 @@ let formatSexp = function(sexp) {
 }
 
 module.exports = {
-  serialize: serialize,
-  hexLength: hexLength,
-  formatSexp: formatSexp
+  serialize,
+  hexLength,
+  formatSexp
 }

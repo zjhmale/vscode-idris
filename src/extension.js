@@ -1,5 +1,5 @@
-let vscode       = require('vscode')
-let IdrisIdeMode = require('./ide-mode')
+let vscode          = require('vscode')
+let controller      = require('./controller')
 
 function activate(context) {
     vscode.languages.setLanguageConfiguration("idris", {
@@ -18,6 +18,11 @@ function activate(context) {
             ["[", "]"],
             ["(", ")"]
         ]
+    })
+
+    controller.getCommands().forEach(([key, value]) => {
+        let disposable = vscode.commands.registerCommand(key, value)
+        context.subscriptions.push(disposable)
     })
 }
 exports.activate = activate

@@ -38,25 +38,25 @@
   ],
   "main": "./src/extension",
   "contributes": {
-    "languages": [
-      {
-        "id": "idris",
-        "aliases": [
-          "Idris",
-          "idris"
-        ],
-        "extensions": [
-          ".idr"
-        ]
-      }
-    ],
-    "grammars": [
-      {
-        "language": "idris",
-        "scopeName": "source.idris",
-        "path": "./syntaxes/idris.tmLanguage"
-      }
-    ]
+    "languages": [{
+      "id": "idris",
+      "aliases": [
+        "Idris",
+        "idris"
+      ],
+      "extensions": [
+        ".idr"
+      ]
+    }],
+    "grammars": [{
+      "language": "idris",
+      "scopeName": "source.idris",
+      "path": "./syntaxes/idris.tmLanguage"
+    }],
+    "commands": [{
+      "command": "idris.typecheck",
+      "title": "Idris: Typecheck File"
+    }]
   },
   "scripts": {
     "postinstall": "node ./node_modules/vscode/bin/install",

@@ -5,6 +5,7 @@ let spawn        = require('child_process').spawn
 
 class IdrisIdeMode extends EventEmitter {
   constructor() {
+    super()
     this.process = null
     this.buffer = ''
     this.idrisBuffers = 0
@@ -37,8 +38,7 @@ class IdrisIdeMode extends EventEmitter {
   }
 
   send(cmd) {
-    Logger.logOutgoingCommand(cmd)
-    return this.process.stdin.write(sexpFormatter.serialize(cmd))
+    return this.process.stdin.write(formatter.serialize(cmd))
   }
 
   stop() {
@@ -90,7 +90,6 @@ class IdrisIdeMode extends EventEmitter {
       len = parseInt(this.buffer.substr(0, 6), 16)
       if (this.buffer.length >= 6 + len) {
         cmd = this.buffer.substr(6, len).trim()
-        Logger.logIncomingCommand(cmd)
         this.buffer = this.buffer.substr(6 + len)
         obj = parse.parse(cmd.trim())
         results.push(this.emit('message', obj))
