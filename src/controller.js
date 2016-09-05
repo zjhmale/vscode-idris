@@ -3,6 +3,8 @@ let cp        = require('child_process')
 let formatter = require('./wire/formatter')
 let parser    = require('./wire/parser')
 
+let outputChannel = vscode.window.createOutputChannel('Idris')
+
 let getCommands = () => {
   return [
     ['idris.typecheck', typecheckFile]
@@ -27,16 +29,33 @@ let handleCommand = (cmd) => {
         let ret = params[0]
         if (ret[0] === ':ok') {
           let okparams = ret[1]
+          outputChannel.clear()
+          outputChannel.show()
+          outputChannel.append("Idris: File loaded successfull")
         } else {
           let message = ret[1]
           console.log("message => " + message)
           let warning = warnings[id]
+          outputChannel.clear()
+          outputChannel.show()
+          let buf = []
+          buf.push(message)
           for (i = 0, len = warning.length; i < len; i++) {
-            let w = warning[i];
-            console.log("line => " + w[1][0]);
-            console.log("character => " + w[1][1]);
-            console.log("message => " + w[3]);
+            let w = warning[i]
+            let file = w[0]
+            let line = w[1][0]
+            let char = w[1][1]
+            let message = w[3]
+            console.log("file => " + file)
+            console.log("line => " + line)
+            console.log("character => " + char)
+            console.log("message => " + message)
+            buf.push(file)
+            buf.push(line)
+            buf.push(char)
+            buf.push(message)
           }
+          outputChannel.appendLine(buf.join('\n'))
         }
         break
       case ':write-string':
@@ -77,7 +96,7 @@ let typecheckFile = () => {
 	let cmd = [[':load-file', uri], 1]
 
 	new Promise(function (resolve, reject) {
-  	let options = vscode.workspace.rootPath ? { cwd : vscode.workspace.rootPath + "/src" } : {}
+  	let options = vscode.workspace.rootPath ? { cwd } : {}
   	let childProcess = cp.spawn('idris', ['--ide-mode'], options)
 
   	childProcess.on('error', (error) => {
@@ -93,10 +112,13 @@ let typecheckFile = () => {
     }
 
 		childProcess.stdin.write(formatter.serialize(cmd))
+    outputChannel.clear()
+    outputChannel.show()
+    outputChannel.append("loading...")
   }).then(function () {
-    vscode.window.showInformationMessage("Idris: File loaded successfully")
+    //vscode.window.showInformationMessage("Idris: File loaded successfully")
 	}).catch(function () {
-    vscode.window.showErrorMessage("Idris Errors")
+    //vscode.window.showErrorMessage("Idris Errors")
 	})
 }
 
