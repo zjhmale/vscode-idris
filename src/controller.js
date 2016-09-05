@@ -1,27 +1,7 @@
-let vscode     = require('vscode')
-let cp = require('child_process')
-let formatter    = require('./wire/formatter')
-let parser       = require('./wire/parser')
-
-/*let IdrisModel = require('./model')
-let IdrisIdeMode = require('./ide-mode')
-let formatter    = require('./wire/formatter')
-
-let handleCommand = (cmd) => {
-  console.log("cmd => " + cmd)
-}
-
-var model = new IdrisModel()
-let ideModeRef = new IdrisIdeMode()
-ideModeRef.on('message', handleCommand)
-ideModeRef.start({})
-
-let initialize = (compilerOptions) => {
-  if (!model) {
-    model = new IdrisModel()
-  }
-  return model.setCompilerOptions(compilerOptions)
-}*/
+let vscode    = require('vscode')
+let cp        = require('child_process')
+let formatter = require('./wire/formatter')
+let parser    = require('./wire/parser')
 
 let getCommands = () => {
   return [
@@ -30,6 +10,12 @@ let getCommands = () => {
 }
 
 var buffer = ''
+var requestId = 0
+var warnings = {}
+
+let getUID = () => {
+  return ++requestId
+}
 
 let handleCommand = (cmd) => {
   if (cmd.length > 0) {
@@ -41,25 +27,30 @@ let handleCommand = (cmd) => {
         let ret = params[0]
         if (ret[0] === ':ok') {
           let okparams = ret[1]
-          console.log("ok => " + okparams)
         } else {
-          //console.log("error message => " + ret[1])
-          //console.log("highlight info => " + ret[2])
+          let message = ret[1]
+          console.log("message => " + message)
+          let warning = warnings[id]
+          for (i = 0, len = warning.length; i < len; i++) {
+            let w = warning[i];
+            console.log("line => " + w[1][0]);
+            console.log("character => " + w[1][1]);
+            console.log("message => " + w[3]);
+          }
         }
+        break
       case ':write-string':
         let msg = params[0]
-        //console.log("write string msg => " + msg)
+        break
       case ':warning':
         warning = params[0]
-        console.log("warning => " + warning)
+        warnings[id].push(warning)
+        break
       case ':set-prompt':
         break
-      default:
-        //console.log(op, params)
     }
   }
 }
-
 
 let stdout = (data) => {
   buffer += data
@@ -70,9 +61,7 @@ let stdout = (data) => {
       let cmd = buffer.substr(6, len).trim()
       buffer = buffer.substr(6 + len)
       let obj = parser.parse(cmd.trim())
-			//console.log("obj => " + obj)
 			handleCommand(obj)
-      //results.push(emit('message', obj))
     } else {
       break
     }
@@ -82,47 +71,33 @@ let stdout = (data) => {
 let typecheckFile = () => {
 	let uri = vscode.window.activeTextEditor.document.uri.path
 	let cwd = vscode.workspace.rootPath + "/src"
-  console.log(uri)
-  console.log(cwd)
 
-	let uid = 1
+	let uid = getUID()
+  warnings[uid] = []
 	let cmd = [[':load-file', uri], 1]
 
 	new Promise(function (resolve, reject) {
-		let decoded = ''
-
   	let options = vscode.workspace.rootPath ? { cwd : vscode.workspace.rootPath + "/src" } : {}
-
   	let childProcess = cp.spawn('idris', ['--ide-mode'], options)
 
-  	console.log(childProcess.pid)
-
   	childProcess.on('error', (error) => {
-    	console.log(error)
-    	vscode.window.showInformationMessage('Cannot hlint the haskell file.')
+    	vscode.window.showErrorMessage('Cannot find Idris.')
 			resolve()
   	})
 
   	if (childProcess.pid) {
     	childProcess.stdout.setEncoding('utf8').on('data', (data) => {
-      	decoded += data
-      	//console.log("data => " + data)
         stdout(data)
 				resolve()
     	})
     }
 
-		console.log(formatter.serialize(cmd))
 		childProcess.stdin.write(formatter.serialize(cmd))
-  }).then(function (value) {
-    console.log(value)    // => 'Async Hello world'
-	}).catch(function (error) {
-    console.log(error)
+  }).then(function () {
+    vscode.window.showInformationMessage("Idris: File loaded successfully")
+	}).catch(function () {
+    vscode.window.showErrorMessage("Idris Errors")
 	})
-
-  /*
-  
-  */
 }
 
 module.exports = {
