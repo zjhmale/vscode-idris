@@ -57,6 +57,10 @@
     "commands": [{
       "command": "idris.typecheck",
       "title": "Idris: Typecheck File"
+    }],
+    "snippets": [{
+      "language": "idris",
+      "path": "./snippets/idris.json"
     }]
   },
   "scripts": {

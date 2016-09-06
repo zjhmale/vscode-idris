@@ -1,0 +1,87 @@
+{
+  "Show implementation": {
+		"prefix": "Show",
+    "body": [
+			"Show ${Type} where"
+		,	"  show s = $0"
+		]
+	},
+  "Eq implementation": {
+  	"prefix": "Eq",
+    "body": [
+			"Eq ${Type} where"
+		,	"  (==) a b = $0"
+		]
+	},
+  "Ord implementation": {
+		"prefix": "Ord",
+    "body": [
+			"Ord ${Type} where"
+		,	"  compare a b = $0"
+		]
+	},
+  "Semigroup implementation": {
+		"prefix": "Semigroup",
+    "body": [
+			"Semigroup ${Type} where"
+		,	"  (<+>) a b = $0"
+		]
+	},
+  "Monoid implementation": {
+		"prefix": "Monoid",
+    "body": [
+			"Monoid ${Type} where"
+		,	"  neutral = $0"
+		]
+	},
+  "Functor implementation": {
+		"prefix": "Functor",
+    "body": [
+			"Functor ${Type} where"
+		,	"  map f fa = $0"
+		]
+	},
+  "Applicative implementation": {
+		"prefix": "Applicative",
+    "body": [
+			"Applicative ${Type} where"
+		, "  pure a = $0"	
+		, "  (<*>) f fa = $1"
+		]
+	},
+  "Monad implementation": {
+		"prefix": "Monad",
+    "body": [
+			"Monad ${Type} where"
+	  , "  (>>=) fa f = $0"
+		]
+	},
+  "Traversable implementation": {
+  	"prefix": "Traversable",
+    "body": [
+			"Traversable ${Type} where"
+		,	"  traverse = $0"
+		]
+	},
+  "Foldable implementation": {
+		"prefix": "Foldable",
+    "body": [
+			"Foldable ${Type} where"
+		, "  foldr = $0"
+		]
+	},
+  "DecEq implementation": {
+		"prefix": "DecEq",
+    "body": [
+			"DecEq ${1:Type} where"
+    , "  decEq t1 t2 = ?holeDecEq"
+		]
+	},
+  "Uninhabited implementation": {
+		"prefix": "Uninhabited",
+    "body": [
+			"Uninhabited (${1:TypeWhichIsUninhabited}) where"
+    , "  uninhabited ${2:Proof} impossible"
+		]
+	}
+}
