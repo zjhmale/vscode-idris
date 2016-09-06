@@ -35,7 +35,6 @@ class IdrisModel {
   }
 
   handleCommand(cmd) {
-    /*
     var i, id, msg, okparams, op, params, ret, subject, warning
     if (cmd.length > 0) {
       op = cmd[0], params = 3 <= cmd.length ? slice.call(cmd, 1, i = cmd.length - 1) : (i = 1, []), id = cmd[i++]
@@ -82,7 +81,6 @@ class IdrisModel {
         }
       }
     }
-    */
   }
 
   getUID() {

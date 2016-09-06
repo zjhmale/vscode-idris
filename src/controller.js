@@ -2,6 +2,7 @@ let vscode    = require('vscode')
 let cp        = require('child_process')
 let formatter = require('./wire/formatter')
 let parser    = require('./wire/parser')
+let ipkg      = require('./ipkg')
 
 let outputChannel = vscode.window.createOutputChannel('Idris')
 let diagnosticCollection = vscode.languages.createDiagnosticCollection()
@@ -90,9 +91,8 @@ let stdout = (data, cwd) => {
   }
 }
 
-let initChildProcess = (resolve, cwd) => {
-  let options = vscode.workspace.rootPath ? { cwd } : {}
-  let childProcess = cp.spawn('idris', ['--ide-mode'], options)
+let initChildProcess = (resolve, params, options) => {
+  let childProcess = cp.spawn('idris', params, options)
   childProcess.on('error', (error) => {
     vscode.window.showErrorMessage('Cannot find Idris.')
     resolve()
@@ -100,7 +100,7 @@ let initChildProcess = (resolve, cwd) => {
 
   if (childProcess.pid) {
     childProcess.stdout.setEncoding('utf8').on('data', (data) => {
-      stdout(data, cwd)
+      stdout(data, options.cwd)
       resolve()
     })
   }
@@ -108,21 +108,31 @@ let initChildProcess = (resolve, cwd) => {
 }
 
 let typecheckFile = () => {
+  let root = vscode.workspace.rootPath
+  let compilerOptions = ipkg.compilerOptions(root)
+  
   let uri = vscode.window.activeTextEditor.document.uri.path
-  let cwd = vscode.workspace.rootPath + "/src"
-
   let uid = getUID()
   warnings[uid] = []
   let cmd = [[':load-file', uri], uid]
-
-  new Promise(function (resolve, reject) {
-    if (!childProcess) childProcess = initChildProcess(resolve, cwd)
-    childProcess.stdin.write(formatter.serialize(cmd))
-    outputChannel.clear()
-    outputChannel.show()
-    outputChannel.append("loading...")
-  }).then(function () {
-  }).catch(function () {
+  
+  compilerOptions.subscribe((compilerOptions) => {
+    let pkgs = compilerOptions.pkgs && compilerOptions.pkgs.length ? (p = compilerOptions.pkgs.map((p) => {
+        return ["-p", p]
+    }), [].concat.apply([], p)) : []
+    let parameters = ['--ide-mode'].concat(pkgs, compilerOptions.options ? compilerOptions.options.split(' ') : [])
+    let options = compilerOptions.src ? {
+      cwd: compilerOptions.src
+    } : {}
+    new Promise(function (resolve, reject) {
+      if (!childProcess) childProcess = initChildProcess(resolve, parameters, options)
+      childProcess.stdin.write(formatter.serialize(cmd))
+      outputChannel.clear()
+      outputChannel.show()
+      outputChannel.append("loading...")
+    }).then(function () {
+    }).catch(function () {
+    })
   })
 }
 
