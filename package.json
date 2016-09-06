@@ -70,6 +70,11 @@
       "command": "idris.typecheck",
       "title": "Idris: Typecheck File"
     }],
+    "keybindings": [{
+      "key": "shift+ctrl+l",
+		  "mac": "shift+cmd+l",
+      "command": "idris.typecheck"
+    }],
     "snippets": [{
       "language": "idris",
       "path": "./snippets/idris.json"
