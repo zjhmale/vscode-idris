@@ -4,6 +4,7 @@ let formatter = require('./wire/formatter')
 let parser    = require('./wire/parser')
 
 let outputChannel = vscode.window.createOutputChannel('Idris')
+let diagnosticCollection = vscode.languages.createDiagnosticCollection()
 
 let getCommands = () => {
   return [
@@ -37,7 +38,9 @@ let handleCommand = (cmd, cwd) => {
         let warning = warnings[id]
         outputChannel.clear()
         outputChannel.show()
+        diagnosticCollection.clear()
         let buf = []
+        let diagnostics = []
         let len = warning.length
         buf.push("Errors (" + len + ")")
         for (i = 0; i < len; i++) {
@@ -49,8 +52,12 @@ let handleCommand = (cmd, cwd) => {
           buf.push(file + ":" + line + ":" + char)
           buf.push(message)
           buf.push("")
+          let range = new vscode.Range(line - 1, char - 1, line, 0)
+          let diagnostic = new vscode.Diagnostic(range, message, vscode.DiagnosticSeverity.Error)
+          diagnostics.push([vscode.Uri.file(file), [diagnostic]])
         }
         outputChannel.appendLine(buf.join('\n'))
+        diagnosticCollection.set(diagnostics)
       }
       break
       case ':write-string':
@@ -118,5 +125,6 @@ let typecheckFile = () => {
 }
 
 module.exports = {
-  getCommands
+  getCommands,
+  diagnosticCollection
 }
