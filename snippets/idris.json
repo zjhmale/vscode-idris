@@ -1,87 +1,214 @@
 {
-  "Show implementation": {
-		"prefix": "Show",
-    "body": [
-			"Show ${Type} where"
-		,	"  show s = $0"
-		]
-	},
-  "Eq implementation": {
-  	"prefix": "Eq",
-    "body": [
-			"Eq ${Type} where"
-		,	"  (==) a b = $0"
-		]
-	},
-  "Ord implementation": {
-		"prefix": "Ord",
-    "body": [
-			"Ord ${Type} where"
-		,	"  compare a b = $0"
-		]
-	},
-  "Semigroup implementation": {
-		"prefix": "Semigroup",
-    "body": [
-			"Semigroup ${Type} where"
-		,	"  (<+>) a b = $0"
-		]
-	},
-  "Monoid implementation": {
-		"prefix": "Monoid",
-    "body": [
-			"Monoid ${Type} where"
-		,	"  neutral = $0"
-		]
-	},
-  "Functor implementation": {
-		"prefix": "Functor",
-    "body": [
-			"Functor ${Type} where"
-		,	"  map f fa = $0"
-		]
-	},
-  "Applicative implementation": {
-		"prefix": "Applicative",
-    "body": [
-			"Applicative ${Type} where"
-		, "  pure a = $0"	
-		, "  (<*>) f fa = $1"
-		]
-	},
-  "Monad implementation": {
-		"prefix": "Monad",
-    "body": [
-			"Monad ${Type} where"
-	  , "  (>>=) fa f = $0"
-		]
-	},
-  "Traversable implementation": {
-  	"prefix": "Traversable",
-    "body": [
-			"Traversable ${Type} where"
-		,	"  traverse = $0"
-		]
-	},
-  "Foldable implementation": {
-		"prefix": "Foldable",
-    "body": [
-			"Foldable ${Type} where"
-		, "  foldr = $0"
-		]
-	},
-  "DecEq implementation": {
-		"prefix": "DecEq",
-    "body": [
-			"DecEq ${1:Type} where"
-    , "  decEq t1 t2 = ?holeDecEq"
-		]
-	},
-  "Uninhabited implementation": {
-		"prefix": "Uninhabited",
-    "body": [
-			"Uninhabited (${1:TypeWhichIsUninhabited}) where"
-    , "  uninhabited ${2:Proof} impossible"
-		]
-	}
+    "Show implementation": {
+        "prefix": "Show",
+        "body": [
+            "Show ${Type} where"
+          , "  show s = $0"
+        ]
+    },
+    "Eq implementation": {
+        "prefix": "Eq",
+        "body": [
+            "Eq ${Type} where"
+          , "  (==) a b = $0"
+        ]
+    },
+    "Ord implementation": {
+        "prefix": "Ord",
+        "body": [
+            "Ord ${Type} where"
+          , "  compare a b = $0"
+        ]
+    },
+    "Semigroup implementation": {
+        "prefix": "Semigroup",
+        "body": [
+            "Semigroup ${Type} where"
+          , "  (<+>) a b = $0"
+        ]
+    },
+    "Monoid implementation": {
+        "prefix": "Monoid",
+        "body": [
+            "Monoid ${Type} where"
+          , "  neutral = $0"
+        ]
+    },
+    "Functor implementation": {
+        "prefix": "Functor",
+        "body": [
+            "Functor ${Type} where"
+          , "  map f fa = $0"
+        ]
+    },
+    "Applicative implementation": {
+        "prefix": "Applicative",
+        "body": [
+            "Applicative ${Type} where"
+          , "  pure a = $0"
+          , "  (<*>) f fa = $1"
+        ]
+    },
+    "Monad implementation": {
+        "prefix": "Monad",
+        "body": [
+            "Monad ${Type} where"
+          , "  (>>=) fa f = $0"
+        ]
+    },
+    "Traversable implementation": {
+        "prefix": "Traversable",
+        "body": [
+            "Traversable ${Type} where"
+          , "  traverse = $0"
+        ]
+    },
+    "Foldable implementation": {
+        "prefix": "Foldable",
+        "body": [
+            "Foldable ${Type} where"
+          , "  foldr = $0"
+        ]
+    },
+    "DecEq implementation": {
+        "prefix": "DecEq",
+        "body": [
+            "DecEq ${1:Type} where"
+          , "  decEq t1 t2 = ?holeDecEq"
+        ]
+    },
+    "Uninhabited implementation": {
+        "prefix": "Uninhabited",
+        "body": [
+            "Uninhabited (${1:TypeWhichIsUninhabited}) where"
+          , "  uninhabited ${2:Proof} impossible"
+        ]
+    },
+    "Main": {
+        "prefix": "main",
+        "body": [
+            "module Main"
+          , ""
+          , "main : IO ()"
+          , "main = ${0:return ()}"
+          , ""
+        ],
+        "description" : "main function"
+    },
+    "Module": {
+        "prefix": "module",
+        "body": [
+            "module ${MyModule}"
+        ],
+        "description": "module declaration"
+    },
+    "Lambda (trigger does not work)": {
+        "prefix": "lambda",
+        "body": "\\${inputs} -> ${body}",
+        "description": "lambda expression"
+    },
+    "Case": {
+        "prefix": "case",
+        "body": [
+            "case ${var} of"
+          , "\t${alt:Just a} -> ${body}"
+          , "\t${otehrwise:_} -> ${remaining}"
+        ],
+        "description": "case expression"
+    },
+    "Interface": {
+        "prefix": "interface",
+        "body": [
+            "interface ${name:MyClass} where"
+          , "\t${fname:myFunction} : ${type:String}"
+        ],
+        "description": "interface definition"
+    },
+    "Implementation": {
+        "prefix": "implementation",
+        "body": [
+            "implementation ${class:Show} ${type:String} where"
+          , "\t${function:function} = ${impl:id}"
+        ],
+        "description": "implement an interface"
+    },
+    "Map": {
+        "prefix": "map",
+        "body": [
+            "map (\\\\${element} -> ${element}) ${collection}"
+        ],
+        "description": "map function"
+    },
+    "Foldl": {
+        "prefix": "foldl",
+        "body": [
+            "foldl (\\\\${x} ${element} -> ${x} + ${element}) ${acc} ${collection}"
+        ],
+        "description": "foldl function"
+    },
+    "Foldr": {
+        "prefix": "foldr",
+        "body": [
+            "foldr (\\\\${element} ${x} -> ${x} + ${element}) ${acc} ${collection}"
+        ],
+        "description": "foldr function"
+    },
+    "Do": {
+        "prefix": "do",
+        "body": [
+            "do"
+          , "\t${body:return value}"
+        ],
+        "description": "do notation"
+    },
+    "Type Declaration": {
+        "prefix": "data",
+        "body": [
+            "data ${name:MyType} = ${alt1:Record {}} | ${alt2:Algebraic}"
+        ],
+        "description": "data type declaration"
+    },
+    "If": {
+        "prefix": "if",
+        "body": [
+            "if ${cond}"
+          , "\tthen ${branch1}"
+          , "\telse ${branch2}"
+        ],
+        "description": "if expression"
+    },
+    "Let": {
+        "prefix": "let",
+        "body": [
+            "let"
+          , "\t${name} = ${value}"
+          , "in"
+          , "\t${expr}"
+        ],
+        "description": "let binding"
+    },
+    "Where": {
+        "prefix": "where",
+        "body": [
+            "where ${name} = ${value}"
+        ],
+        "description": "where binding"
+    },
+    "Function": {
+        "prefix": "fun",
+        "body": [
+            "${name} : ${type1:Int} -> ${type2:Int}"
+          , "${name} ${val} = ${expr1}"
+          , "${name} ${val2:_} = ${expr2}"
+        ],
+        "description": "function declaration"
+    },
+    "Type Alias": {
+        "prefix": "type",
+        "body": [
+            "${type} : Type"
+          , "${type} = $0"
+        ],
+        "description": "type alias"
+    }
 }
