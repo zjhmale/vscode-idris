@@ -48,11 +48,23 @@
         ".idr",
         ".lidr"
       ]
+    }, {
+      "id": "ipkg",
+      "aliases": [
+        "Ipkg",
+        "ipkg"],
+      "extensions": [
+        ".ipkg"
+      ]
     }],
     "grammars": [{
       "language": "idris",
       "scopeName": "source.idris",
       "path": "./syntaxes/idris.tmLanguage"
+    }, {
+      "language": "ipkg",
+      "scopeName": "source.ipkg",
+      "path": "./syntaxes/ipkg.tmLanguage"
     }],
     "commands": [{
       "command": "idris.typecheck",
