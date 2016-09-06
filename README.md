@@ -11,7 +11,7 @@
 
 * ipkg highlighting
 
-![ipkg](./images/screenshots/idris-highlight.png)
+![ipkg](./images/screenshots/ipkg-highlight.png)
 
 ## Installation
 

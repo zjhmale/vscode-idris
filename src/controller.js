@@ -36,6 +36,7 @@ let handleCommand = (cmd, cwd) => {
         outputChannel.clear()
         outputChannel.show()
         outputChannel.append("Idris: File loaded successfull")
+        diagnosticCollection.clear()
       } else {
         let message = ret[1]
         let warning = warnings[id]
