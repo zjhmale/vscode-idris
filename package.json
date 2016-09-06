@@ -82,9 +82,7 @@
   "dependencies": {
     "bennu": "17.3.0",
     "nu-stream": "3.3.1",
-    "rx-lite": "4.0.0",
-    "@cycle/core": "3.1.0",
-    "@cycle/dom": "5.3.0"
+    "rx-lite": "4.0.0"
   },
   "devDependencies": {
     "eslint": "^3.4.0",
