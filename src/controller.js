@@ -6,6 +6,8 @@ let parser    = require('./wire/parser')
 let outputChannel = vscode.window.createOutputChannel('Idris')
 let diagnosticCollection = vscode.languages.createDiagnosticCollection()
 
+var childProcess = null
+
 let getCommands = () => {
   return [
     ['idris.typecheck', typecheckFile]
@@ -43,8 +45,7 @@ let handleCommand = (cmd, cwd) => {
         let diagnostics = []
         let len = warning.length
         buf.push("Errors (" + len + ")")
-        for (i = 0; i < len; i++) {
-          let w = warning[i]
+        warning.forEach(function(w) {
           let file = w[0].replace("./", cwd + "/")
           let line = w[1][0]
           let char = w[1][1]
@@ -55,7 +56,7 @@ let handleCommand = (cmd, cwd) => {
           let range = new vscode.Range(line - 1, char - 1, line, 0)
           let diagnostic = new vscode.Diagnostic(range, message, vscode.DiagnosticSeverity.Error)
           diagnostics.push([vscode.Uri.file(file), [diagnostic]])
-        }
+        })
         outputChannel.appendLine(buf.join('\n'))
         diagnosticCollection.set(diagnostics)
       }
@@ -89,38 +90,39 @@ let stdout = (data, cwd) => {
   }
 }
 
+let initChildProcess = (resolve, cwd) => {
+  let options = vscode.workspace.rootPath ? { cwd } : {}
+  let childProcess = cp.spawn('idris', ['--ide-mode'], options)
+  childProcess.on('error', (error) => {
+    vscode.window.showErrorMessage('Cannot find Idris.')
+    resolve()
+  })
+
+  if (childProcess.pid) {
+    childProcess.stdout.setEncoding('utf8').on('data', (data) => {
+      stdout(data, cwd)
+      resolve()
+    })
+  }
+  return childProcess
+}
+
 let typecheckFile = () => {
   let uri = vscode.window.activeTextEditor.document.uri.path
   let cwd = vscode.workspace.rootPath + "/src"
 
   let uid = getUID()
   warnings[uid] = []
-  let cmd = [[':load-file', uri], 1]
+  let cmd = [[':load-file', uri], uid]
 
   new Promise(function (resolve, reject) {
-    let options = vscode.workspace.rootPath ? { cwd } : {}
-    let childProcess = cp.spawn('idris', ['--ide-mode'], options)
-
-    childProcess.on('error', (error) => {
-      vscode.window.showErrorMessage('Cannot find Idris.')
-      resolve()
-    })
-
-    if (childProcess.pid) {
-      childProcess.stdout.setEncoding('utf8').on('data', (data) => {
-        stdout(data, cwd)
-        resolve()
-      })
-    }
-
+    if (!childProcess) childProcess = initChildProcess(resolve, cwd)
     childProcess.stdin.write(formatter.serialize(cmd))
     outputChannel.clear()
     outputChannel.show()
     outputChannel.append("loading...")
   }).then(function () {
-    //vscode.window.showInformationMessage("Idris: File loaded successfully")
   }).catch(function () {
-    //vscode.window.showErrorMessage("Idris Errors")
   })
 }
 
