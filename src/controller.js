@@ -55,9 +55,11 @@ let handleCommand = (cmd, cwd) => {
           buf.push(file + ":" + line + ":" + char)
           buf.push(message)
           buf.push("")
-          let range = new vscode.Range(line - 1, char - 1, line, 0)
-          let diagnostic = new vscode.Diagnostic(range, message, vscode.DiagnosticSeverity.Error)
-          diagnostics.push([vscode.Uri.file(file), [diagnostic]])
+          if (line > 0) {
+            let range = new vscode.Range(line - 1, char - 1, line, 0)
+            let diagnostic = new vscode.Diagnostic(range, message, vscode.DiagnosticSeverity.Error)
+            diagnostics.push([vscode.Uri.file(file), [diagnostic]])          
+          }
         })
         outputChannel.appendLine(buf.join('\n'))
         diagnosticCollection.set(diagnostics)
