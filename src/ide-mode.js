@@ -8,33 +8,30 @@ class IdrisIdeMode extends EventEmitter {
     super()
     this.process = null
     this.buffer = ''
-    this.idrisBuffers = 0
-    this.compilerOptions = {}
   }
 
   start(compilerOptions) {
-    var options, p, parameters, pathToIdris, pkgs
-    if ((this.process == null) || this.process.killed) {
-      pathToIdris = 'idris' 
-      pkgs = compilerOptions.pkgs && compilerOptions.pkgs.length ? (p = compilerOptions.pkgs.map(function(p) {
+    if ((this.process == null) || !this.process.connected) {
+      let pathToIdris = 'idris' 
+      let pkgs = compilerOptions.pkgs && compilerOptions.pkgs.length ? (p = compilerOptions.pkgs.map((p) => {
         return ["-p", p]
       }), [].concat.apply([], p)) : []
-      options = compilerOptions.options ? compilerOptions.options.split(' ') : []
-      parameters = ['--ide-mode'].concat(pkgs, options)
-      options = compilerOptions.src ? {
+      let parameters = ['--ide-mode'].concat(pkgs, compilerOptions.options ? compilerOptions.options.split(' ') : [])
+      let options = compilerOptions.src ? {
         cwd: compilerOptions.src
       } : {}
-      this.process = spawn(pathToIdris, parameters, options)
+
+      this.process = cp.spawn(pathToIdris, params, options)
+
       this.process.on('error', this.error)
       this.process.on('exit', this.exited)
       this.process.on('close', this.exited)
       this.process.on('disconnect', this.exited)
-      return this.process.stdout.setEncoding('utf8').on('data', this.stdout)
-    }
-  }
 
-  setCompilerOptions(options) {
-    return this.compilerOptions(options)
+      if (childProcess.pid) {
+        this.process.stdout.setEncoding('utf8').on('data', this.stdout)
+      }
+    }
   }
 
   send(cmd) {
@@ -42,62 +39,33 @@ class IdrisIdeMode extends EventEmitter {
   }
 
   stop() {
-    var ref
-    return (ref = this.process) != null ? ref.kill() : void 0
+    if (this.process != null) {
+      this.process.kill()
+    }
   }
 
   error(error) {
-    var e
-    e = error.code === 'ENOENT' ? {
-      short: "Couldn't find idris executable",
-      long: "Couldn't find idris executable at \"" + error.path + "\""
-    } : {
-      short: error.code,
-      long: error.message
-    }
-    return atom.notifications.addError(e.short, {
-      detail: e.long
-    })
+    vscode.window.showErrorMessage('Cannot find Idris.')
   }
 
   exited(code, signal) {
-    var long, short
-    if (signal === "SIGTERM") {
-      short = "The idris compiler was closed"
-      long = "You stopped the compiler"
-      return atom.notifications.addInfo(short, {
-        detail: long
-      })
-    } else {
-      short = "The idris compiler was closed or crashed"
-      long = signal ? "It was closed with the signal: " + signal : "It (probably) crashed with the error code: " + code
-      return atom.notifications.addError(short, {
-        detail: long
-      })
-    }
-  }
-
-  running() {
-    return !!this.process
+    vscode.window.showErrorMessage('The idris compiler was closed or crashed.')
   }
 
   stdout(data) {
-    var cmd, len, obj, results
     this.buffer += data
-    results = []
     while (this.buffer.length > 6) {
       this.buffer = this.buffer.trimLeft().replace(/\r\n/g, "\n")
-      len = parseInt(this.buffer.substr(0, 6), 16)
+      let len = parseInt(this.buffer.substr(0, 6), 16)
       if (this.buffer.length >= 6 + len) {
-        cmd = this.buffer.substr(6, len).trim()
+        let cmd = this.buffer.substr(6, len).trim()
         this.buffer = this.buffer.substr(6 + len)
-        obj = parse.parse(cmd.trim())
-        results.push(this.emit('message', obj))
+        let obj = parse.parse(cmd.trim())
+        this.emit('message', obj)
       } else {
         break
       }
     }
-    return results
   }
 }
 

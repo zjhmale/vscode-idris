@@ -11,7 +11,7 @@ class IdrisModel {
   }
 
   ideMode(compilerOptions) {
-    if (this.ideModeRef && !JS.objectEqual(this.oldCompilerOptions, compilerOptions)) {
+    if (this.ideModeRef && !this.objectEqual(this.oldCompilerOptions, compilerOptions)) {
       this.ideModeRef.process.removeAllListeners()
       this.ideModeRef.stop()
       this.ideModeRef = null
@@ -24,10 +24,13 @@ class IdrisModel {
     }
     return this.ideModeRef
   }
+  
+  objectEqual = function(a, b) {
+    return JSON.stringify(a) === JSON.stringify(b)
+  }
 
   stop() {
-    var ref
-    return (ref = this.ideModeRef) != null ? ref.stop() : void 0
+    this.ideModeRef.stop()
   }
 
   setCompilerOptions(options) {
