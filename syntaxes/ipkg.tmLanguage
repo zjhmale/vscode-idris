@@ -18,7 +18,7 @@
 		</dict>
         <dict>
 			<key>match</key>
-			<string>\b(package|opts|modules|sourcedir|makefile|objs|executable|main|libs|pkgs)\b</string>
+			<string>\b(package|opts|modules|sourcedir|makefile|objs|executable|main|libs|pkgs|tests)\b</string>
 			<key>name</key>
 			<string>keyword.control.ipkg</string>
 		</dict>
