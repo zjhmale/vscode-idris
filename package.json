@@ -47,7 +47,8 @@
       "extensions": [
         ".idr",
         ".lidr"
-      ]
+      ],
+      "configuration": "./configs/idris.json"
     }, {
       "id": "ipkg",
       "aliases": [
