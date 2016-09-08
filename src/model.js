@@ -55,7 +55,6 @@ class IdrisModel {
   }
 
   handleCommand(cmd) {
-    console.log("handleCommand => " + cmd)    
     if (cmd.length > 0) {
       let op = cmd[0]
       let params = cmd.slice(1, cmd.length - 1)
@@ -65,7 +64,6 @@ class IdrisModel {
         switch (op) {
           case ':return':
             let ret = params[0]
-            console.log("ret => " + ret)
             if (ret[0] === ':ok') {
               let okparams = ret[1]
               if (okparams[0] === ':metavariable-lemma') {
@@ -80,10 +78,13 @@ class IdrisModel {
                 })
               }
             } else {
+              let message = ret[1]
+              let highlightInformation = ret[2]
+              console.log("ret => " + ret)            
               subject.onError({
-                message: ret[1],
+                message: message,
                 warnings: this.warnings[id],
-                highlightInformation: ret[2],
+                highlightInformation: highlightInformation,
                 cwd: this.compilerOptions.src
               })
             }

@@ -163,8 +163,6 @@ let typecheckFile = () => {
 }
 
 let displayErrors = (err) => {
-  let message = ret[1]
-  let warning = warnings[id]
   outputChannel.clear()
   outputChannel.show()
   diagnosticCollection.clear()
@@ -173,7 +171,7 @@ let displayErrors = (err) => {
   let len = err.warnings.length
   buf.push("Errors (" + len + ")")
   err.warnings.forEach(function(w) {
-    let file = w[0].replace("./", cwd + "/")
+    let file = w[0].replace("./", err.cwd + "/")
     let line = w[1][0]
     let char = w[1][1]
     let message = w[3]
