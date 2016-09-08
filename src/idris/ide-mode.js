@@ -1,5 +1,5 @@
-let formatter    = require('./wire/formatter')
-let parser       = require('./wire/parser')
+let formatter    = require('../wire/formatter')
+let parser       = require('../wire/parser')
 let cp           = require('child_process')
 let EventEmitter = require('events').EventEmitter
 
@@ -37,7 +37,6 @@ class IdrisIdeMode extends EventEmitter {
   }
 
   send(cmd) {
-    console.log("send command => " + cmd)
     return this.process.stdin.write(formatter.serialize(cmd))
   }
 

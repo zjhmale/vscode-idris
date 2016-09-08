@@ -20,8 +20,6 @@ class IdrisModel {
     if (!this.ideModeRef) {
       this.ideModeRef = new IdrisIdeMode()
       this.ideModeRef.on('message', (obj) => { this.handleCommand(obj) })
-      let listenerEventsArr = this.ideModeRef.listeners('message');
-      console.log(listenerEventsArr.length)
       this.ideModeRef.start(compilerOptions)
       this.oldCompilerOptions = compilerOptions
     }
@@ -41,7 +39,6 @@ class IdrisModel {
   }
 
   prepareCommand(cmd) {
-    console.log("prepare command")
     let id = this.getUID()
     let subject = new Rx.Subject
     this.subjects[id] = subject
@@ -78,13 +75,10 @@ class IdrisModel {
                 })
               }
             } else {
-              let message = ret[1]
-              let highlightInformation = ret[2]
-              console.log("ret => " + ret)            
               subject.onError({
-                message: message,
+                message: ret[1],
                 warnings: this.warnings[id],
-                highlightInformation: highlightInformation,
+                highlightInformation: ret[2],
                 cwd: this.compilerOptions.src
               })
             }
