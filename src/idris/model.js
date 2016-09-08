@@ -118,6 +118,10 @@ class IdrisModel {
   printDefinition(name) {
     return this.prepareCommand([':print-definition', name])
   }
+
+  interpret(code) {
+    return this.prepareCommand([':interpret', code])
+  }
 }
 
 module.exports = IdrisModel

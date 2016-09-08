@@ -7,7 +7,8 @@ let getCommands = () => {
     ['idris.typecheck', runCommand(commands.typecheckFile)],
     ['idris.type-of', runCommand(commands.typeForWord)],
     ['idris.docs-for', runCommand(commands.docsForWord)],
-    ['idris.print-definition', runCommand(commands.printDefinition)]
+    ['idris.print-definition', runCommand(commands.printDefinition)],
+    ['idris.run-repl', runCommand(commands.runREPL)]
   ]
 }
 

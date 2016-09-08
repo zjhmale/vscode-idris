@@ -3,6 +3,7 @@ let vscode     = require('vscode')
 
 let model = null
 let outputChannel = vscode.window.createOutputChannel('Idris')
+let replChannel = vscode.window.createOutputChannel('Idris REPL')
 let diagnosticCollection = vscode.languages.createDiagnosticCollection()
 
 let initialize = (compilerOptions) => {
@@ -53,7 +54,7 @@ let getInfoForWord = (uri, cmd) => {
 
   let successHandler = (arg) => {
     let info = arg.msg[0]
-    let highlightingInfo = args.msg[1]
+    let highlightingInfo = arg.msg[1]
     outputChannel.clear()
     outputChannel.show()
     outputChannel.appendLine('Idris: ' + cmdMsgs[cmd] + ' ' + currentWord)
@@ -98,7 +99,38 @@ let printDefinition = (uri) => {
   getInfoForWord(uri, 'definition')
 }
 
+let runREPL = (uri) => {
+  let editor = vscode.window.activeTextEditor
+  let text = editor.document.lineAt(editor.selection.start).text
+
+  let successHandler = (arg) => {
+    let result = arg.msg[0]
+    let highlightingInfo = arg.msg[1]
+    outputChannel.clear()
+    diagnosticCollection.clear()
+    replChannel.clear()
+    replChannel.show()
+    replChannel.appendLine("λΠ> " + text)
+    replChannel.appendLine(result)
+  }
+
+  new Promise((resolve, reject) => {
+    model.load(uri).filter((arg) => {
+      return arg.responseType === 'return'
+    }).flatMap(() => {
+      return model.interpret(text)
+    }).subscribe(successHandler, displayErrors)
+    replChannel.clear()
+    replChannel.show()
+    replChannel.append("loading...")
+    resolve()
+  }).then(function () {
+  }).catch(function () {
+  })
+}
+
 let displayErrors = (err) => {
+  replChannel.clear()
   outputChannel.clear()
   outputChannel.show()
   diagnosticCollection.clear()
@@ -137,5 +169,6 @@ module.exports = {
   typeForWord,
   docsForWord,
   printDefinition,
+  runREPL,
   destroy
 }

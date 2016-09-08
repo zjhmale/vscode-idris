@@ -79,6 +79,9 @@
     }, {
       "command": "idris.print-definition",
       "title": "Idris: Definition of Identifier"
+    }, {
+      "command": "idris.run-repl",
+      "title": "Idris: Eval current line"
     }],
     "keybindings": [{
       "key": "shift+ctrl+l",
@@ -96,6 +99,10 @@
       "key": "shift+ctrl+f",
       "mac": "shift+cmd+f",
       "command": "idris.print-definition"
+    }, {
+      "key": "shift+ctrl+r",
+      "mac": "shift+cmd+r",
+      "command": "idris.run-repl"
     }],
     "snippets": [{
       "language": "idris",
