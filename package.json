@@ -70,11 +70,18 @@
     "commands": [{
       "command": "idris.typecheck",
       "title": "Idris: Typecheck File"
+    }, {
+      "command": "idris.typeof",
+      "title": "Idris: Type of Identifier"
     }],
     "keybindings": [{
       "key": "shift+ctrl+l",
 		  "mac": "shift+cmd+l",
       "command": "idris.typecheck"
+    }, {
+      "key": "shift+ctrl+o",
+		  "mac": "shift+cmd+o",
+      "command": "idris.typeof"
     }],
     "snippets": [{
       "language": "idris",

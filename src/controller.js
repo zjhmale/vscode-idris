@@ -8,7 +8,8 @@ let diagnosticCollection = vscode.languages.createDiagnosticCollection()
 
 let getCommands = () => {
   return [
-    ['idris.typecheck', typecheckFile]
+    ['idris.typecheck', typecheckFile],
+    ['idris.typeof', typeForWord]
   ]
 }
 
@@ -42,6 +43,47 @@ let typecheckFile = () => {
     }).then(function () {
     }).catch(function () {
     })
+  })
+}
+
+let typeForWord = () => {
+    let editor = vscode.window.activeTextEditor
+    let document = editor.document
+    let position = editor.selection.active
+    let wordRange = document.getWordRangeAtPosition(position)
+    let currentWord = document.getText(wordRange)
+    if (currentWord.match(/\r|\n| /g)) {
+      outputChannel.clear()
+      vscode.window.showWarningMessage("Please move cursor to an Identifier")
+      return
+    }
+
+    let root = vscode.workspace.rootPath
+    let compilerOptions = ipkg.compilerOptions(root)
+    compilerOptions.subscribe((compilerOptions) => {
+      initialize(compilerOptions)
+      let uri = vscode.window.activeTextEditor.document.uri.path
+      let successHandler = (arg) => {
+        let type = arg.msg[0]
+        outputChannel.clear()
+        outputChannel.show()
+        outputChannel.appendLine('Idris: Type of ' + currentWord)
+        outputChannel.append(type)
+        diagnosticCollection.clear()
+      }
+      new Promise((resolve, reject) => {
+        model.load(uri).filter((arg) => {
+          return arg.responseType === 'return'
+        }).flatMap(() => {
+          return model.getType(currentWord)
+        }).subscribe(successHandler, displayErrors)
+        outputChannel.clear()
+        outputChannel.show()
+        outputChannel.append("loading...")
+        resolve()
+      }).then(function () {
+      }).catch(function () {
+      })
   })
 }
 

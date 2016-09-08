@@ -106,6 +106,10 @@ class IdrisModel {
   load(uri) {
     return this.prepareCommand([':load-file', uri])
   }
+
+  getType(word) {
+    return this.prepareCommand([':type-of', word])
+  }
 }
 
 module.exports = IdrisModel
