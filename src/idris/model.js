@@ -114,6 +114,10 @@ class IdrisModel {
   getDocs(word) {
     return this.prepareCommand([':docs-for', word])
   }
+
+  printDefinition(name) {
+    return this.prepareCommand([':print-definition', name])
+  }
 }
 
 module.exports = IdrisModel

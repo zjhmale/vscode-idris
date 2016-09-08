@@ -71,11 +71,14 @@
       "command": "idris.typecheck",
       "title": "Idris: Typecheck File"
     }, {
-      "command": "idris.typeof",
+      "command": "idris.type-of",
       "title": "Idris: Type of Identifier"
     }, {
-      "command": "idris.docsfor",
+      "command": "idris.docs-for",
       "title": "Idris: Docs for Identifier"
+    }, {
+      "command": "idris.print-definition",
+      "title": "Idris: Definition of Identifier"
     }],
     "keybindings": [{
       "key": "shift+ctrl+l",
@@ -84,11 +87,15 @@
     }, {
       "key": "shift+ctrl+o",
       "mac": "shift+cmd+o",
-      "command": "idris.typeof"
+      "command": "idris.type-of"
     }, {
       "key": "shift+ctrl+d",
       "mac": "shift+cmd+d",
-      "command": "idris.docsfor"
+      "command": "idris.docs-for"
+    }, {
+      "key": "shift+ctrl+f",
+      "mac": "shift+cmd+f",
+      "command": "idris.print-definition"
     }],
     "snippets": [{
       "language": "idris",

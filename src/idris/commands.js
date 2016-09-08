@@ -33,7 +33,13 @@ let typecheckFile = (uri) => {
   })
 }
 
-let getInfoForWord = (uri, type) => {
+let cmdMsgs = {
+  type: 'Type of',
+  docs: 'Docs for',
+  definition: 'Definition of'
+}
+
+let getInfoForWord = (uri, cmd) => {
   let editor = vscode.window.activeTextEditor
   let document = editor.document
   let position = editor.selection.active
@@ -46,12 +52,11 @@ let getInfoForWord = (uri, type) => {
   }
 
   let successHandler = (arg) => {
-    let type = arg.msg[0]
+    let info = arg.msg[0]
     outputChannel.clear()
     outputChannel.show()
-    let msg = type == 'type' ? 'Type of' : 'Docs for' 
-    outputChannel.appendLine('Idris: ' + msg + ' ' + currentWord)
-    outputChannel.append(type)
+    outputChannel.appendLine('Idris: ' + cmdMsgs[cmd] + ' ' + currentWord)
+    outputChannel.append(info)
     diagnosticCollection.clear()
   }
 
@@ -59,10 +64,16 @@ let getInfoForWord = (uri, type) => {
     model.load(uri).filter((arg) => {
       return arg.responseType === 'return'
     }).flatMap(() => {
-      if (type == 'type') {
-        return model.getType(currentWord)
-      } else {
-        return model.getDocs(currentWord)
+      switch (cmd) {
+        case 'type':
+          return model.getType(currentWord)
+          break
+        case 'docs':
+          return model.getDocs(currentWord)
+          break
+        case 'definition':
+          return model.printDefinition(currentWord)
+          break
       }
     }).subscribe(successHandler, displayErrors)
     outputChannel.clear()
@@ -80,6 +91,10 @@ let typeForWord = (uri) => {
 
 let docsForWord = (uri) => {
   getInfoForWord(uri, 'docs')
+}
+
+let printDefinition = (uri) => {
+  getInfoForWord(uri, 'definition')
 }
 
 let displayErrors = (err) => {
@@ -102,7 +117,7 @@ let displayErrors = (err) => {
       if (line > 0) {
         let range = new vscode.Range(line - 1, char - 1, line, 0)
         let diagnostic = new vscode.Diagnostic(range, message, vscode.DiagnosticSeverity.Error)
-        diagnostics.push([vscode.Uri.file(file), [diagnostic]])          
+        diagnostics.push([vscode.Uri.file(file), [diagnostic]])
       }
     })
     outputChannel.appendLine(buf.join('\n'))
@@ -120,5 +135,6 @@ module.exports = {
   typecheckFile,
   typeForWord,
   docsForWord,
+  printDefinition,
   destroy
 }

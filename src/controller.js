@@ -5,8 +5,9 @@ let vscode   = require('vscode')
 let getCommands = () => {
   return [
     ['idris.typecheck', runCommand(commands.typecheckFile)],
-    ['idris.typeof', runCommand(commands.typeForWord)],
-    ['idris.docsfor', runCommand(commands.docsForWord)]
+    ['idris.type-of', runCommand(commands.typeForWord)],
+    ['idris.docs-for', runCommand(commands.docsForWord)],
+    ['idris.print-definition', runCommand(commands.printDefinition)]
   ]
 }
 
