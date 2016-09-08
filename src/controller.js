@@ -1,13 +1,10 @@
-let vscode    = require('vscode')
-let cp        = require('child_process')
-let formatter = require('./wire/formatter')
-let parser    = require('./wire/parser')
-let ipkg      = require('./ipkg')
+let vscode     = require('vscode')
+let ipkg       = require('./ipkg')
+let IdrisModel = require('./model')
 
+let model = null
 let outputChannel = vscode.window.createOutputChannel('Idris')
 let diagnosticCollection = vscode.languages.createDiagnosticCollection()
-
-var childProcess = null
 
 let getCommands = () => {
   return [
@@ -16,11 +13,12 @@ let getCommands = () => {
 }
 
 var buffer = ''
-var requestId = 0
-var warnings = {}
 
-let getUID = () => {
-  return ++requestId
+let initialize = (compilerOptions) => {
+  if (!model) {
+    model = new IdrisModel()
+  }
+  model.setCompilerOptions(compilerOptions);
 }
 
 let handleCommand = (cmd, cwd) => {
@@ -113,6 +111,31 @@ let initChildProcess = (resolve, params, options) => {
 let typecheckFile = () => {
   let root = vscode.workspace.rootPath
   let compilerOptions = ipkg.compilerOptions(root)
+  compilerOptions.subscribe((compilerOptions) => {
+    initialize(compilerOptions)
+    let uri = vscode.window.activeTextEditor.document.uri.path
+    let successHandler = (arg) => {
+      outputChannel.clear()
+      outputChannel.show()
+      outputChannel.append("Idris: File loaded successfull")
+      diagnosticCollection.clear()
+    }
+    console.log("type check file");    
+    new Promise((resolve, reject) => {
+      model.load(uri).filter((arg) => {
+        return arg.responseType === 'return'
+      }).subscribe(successHandler, displayErrors)
+      outputChannel.clear()
+      outputChannel.show()
+      outputChannel.append("loading...")
+      resolve()
+    }).then(function () {
+    }).catch(function () {
+    })
+  })
+
+  /*let root = vscode.workspace.rootPath
+  let compilerOptions = ipkg.compilerOptions(root)
   
   let uri = vscode.window.activeTextEditor.document.uri.path
   let uid = getUID()
@@ -136,7 +159,35 @@ let typecheckFile = () => {
     }).then(function () {
     }).catch(function () {
     })
+  })*/
+}
+
+let displayErrors = (err) => {
+  let message = ret[1]
+  let warning = warnings[id]
+  outputChannel.clear()
+  outputChannel.show()
+  diagnosticCollection.clear()
+  let buf = []
+  let diagnostics = []
+  let len = err.warnings.length
+  buf.push("Errors (" + len + ")")
+  err.warnings.forEach(function(w) {
+    let file = w[0].replace("./", cwd + "/")
+    let line = w[1][0]
+    let char = w[1][1]
+    let message = w[3]
+    buf.push(file + ":" + line + ":" + char)
+    buf.push(message)
+    buf.push("")
+    if (line > 0) {
+      let range = new vscode.Range(line - 1, char - 1, line, 0)
+      let diagnostic = new vscode.Diagnostic(range, message, vscode.DiagnosticSeverity.Error)
+      diagnostics.push([vscode.Uri.file(file), [diagnostic]])          
+    }
   })
+  outputChannel.appendLine(buf.join('\n'))
+  diagnosticCollection.set(diagnostics)
 }
 
 module.exports = {

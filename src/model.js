@@ -1,4 +1,5 @@
 let IdrisIdeMode = require('./ide-mode')
+let Rx           = require('rx-lite')
 
 class IdrisModel {
   constructor() {
@@ -18,14 +19,16 @@ class IdrisModel {
     }
     if (!this.ideModeRef) {
       this.ideModeRef = new IdrisIdeMode()
-      this.ideModeRef.on('message', this.handleCommand)
+      this.ideModeRef.on('message', (obj) => { this.handleCommand(obj) })
+      let listenerEventsArr = this.ideModeRef.listeners('message');
+      console.log(listenerEventsArr.length)
       this.ideModeRef.start(compilerOptions)
       this.oldCompilerOptions = compilerOptions
     }
     return this.ideModeRef
   }
   
-  objectEqual = function(a, b) {
+  objectEqual(a, b) {
     return JSON.stringify(a) === JSON.stringify(b)
   }
 
@@ -34,20 +37,37 @@ class IdrisModel {
   }
 
   setCompilerOptions(options) {
-    return this.compilerOptions = options
+    this.compilerOptions = options
+  }
+
+  prepareCommand(cmd) {
+    console.log("prepare command")
+    let id = this.getUID()
+    let subject = new Rx.Subject
+    this.subjects[id] = subject
+    this.warnings[id] = []
+    this.ideMode(this.compilerOptions).send([cmd, id])
+    return subject
+  }
+
+  getUID() {
+    return ++this.requestId
   }
 
   handleCommand(cmd) {
-    var i, id, msg, okparams, op, params, ret, subject, warning
+    console.log("handleCommand => " + cmd)    
     if (cmd.length > 0) {
-      op = cmd[0], params = 3 <= cmd.length ? slice.call(cmd, 1, i = cmd.length - 1) : (i = 1, []), id = cmd[i++]
+      let op = cmd[0]
+      let params = cmd.slice(1, cmd.length - 1)
+      let id = cmd[cmd.length - 1]
       if (this.subjects[id] != null) {
-        subject = this.subjects[id]
+        let subject = this.subjects[id]
         switch (op) {
           case ':return':
-            ret = params[0]
+            let ret = params[0]
+            console.log("ret => " + ret)
             if (ret[0] === ':ok') {
-              okparams = ret[1]
+              let okparams = ret[1]
               if (okparams[0] === ':metavariable-lemma') {
                 subject.onNext({
                   responseType: 'return',
@@ -63,35 +83,33 @@ class IdrisModel {
               subject.onError({
                 message: ret[1],
                 warnings: this.warnings[id],
-                highlightInformation: ret[2]
+                highlightInformation: ret[2],
+                cwd: this.compilerOptions.src
               })
             }
             subject.onCompleted()
-            return delete this.subjects[id]
+            delete this.subjects[id]
+            break
           case ':write-string':
-            msg = params[0]
-            return subject.onNext({
+            let msg = params[0]
+            subject.onNext({
               responseType: 'write-string',
               msg: msg
             })
+            break
           case ':warning':
-            warning = params[0]
-            return this.warnings[id].push(warning)
+            let warning = params[0]
+            this.warnings[id].push(warning)
+            break
           case ':set-prompt':
             break
-          default:
-            return console.log(op, params)
         }
       }
     }
   }
 
-  getUID() {
-    return ++this.requestId
-  }
-
   load(uri) {
-    this.ideMode(this.compilerOptions).send([':load-file', uri])
+    return this.prepareCommand([':load-file', uri])
   }
 }
 
