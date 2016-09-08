@@ -53,6 +53,7 @@ let getInfoForWord = (uri, cmd) => {
 
   let successHandler = (arg) => {
     let info = arg.msg[0]
+    let highlightingInfo = args.msg[1]
     outputChannel.clear()
     outputChannel.show()
     outputChannel.appendLine('Idris: ' + cmdMsgs[cmd] + ' ' + currentWord)
