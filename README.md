@@ -5,9 +5,17 @@
 
 ## Implemented features
 
-* typechecking (shift + cmd/ctrl + l)
+* typechecking
+
+`(shift + cmd/ctrl + l)`
 
 ![typechecking](./images/screenshots/typechecking.gif)
+
+* Showing the type of a variable
+
+`(shift + cmd/ctrl + o)`
+
+![typeof](./images/screenshots/typeof.gif)
 
 * ipkg highlighting
 
