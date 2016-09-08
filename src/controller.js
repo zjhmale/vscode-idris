@@ -15,16 +15,16 @@ let runCommand = (command) => {
     let root = vscode.workspace.rootPath
     let compilerOptions = ipkg.compilerOptions(root)
     let uri = vscode.window.activeTextEditor.document.uri.path
-  
+
     compilerOptions.subscribe((compilerOptions) => {
       commands.initialize(compilerOptions)
       command(uri)
     })
   }
 }
-    
+
 module.exports = {
-  getCommands,  
+  getCommands,
   destroy: commands.destroy,
   diagnosticCollection: commands.diagnosticCollection
 }

@@ -79,15 +79,15 @@
     }],
     "keybindings": [{
       "key": "shift+ctrl+l",
-		  "mac": "shift+cmd+l",
+      "mac": "shift+cmd+l",
       "command": "idris.typecheck"
     }, {
       "key": "shift+ctrl+o",
-		  "mac": "shift+cmd+o",
+      "mac": "shift+cmd+o",
       "command": "idris.typeof"
     }, {
       "key": "shift+ctrl+d",
-		  "mac": "shift+cmd+d",
+      "mac": "shift+cmd+d",
       "command": "idris.docsfor"
     }],
     "snippets": [{

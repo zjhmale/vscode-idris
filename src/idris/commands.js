@@ -49,7 +49,7 @@ let getInfoForWord = (uri, type) => {
     let type = arg.msg[0]
     outputChannel.clear()
     outputChannel.show()
-		let msg = type == 'type' ? 'Type of' : 'Docs for' 
+    let msg = type == 'type' ? 'Type of' : 'Docs for' 
     outputChannel.appendLine('Idris: ' + msg + ' ' + currentWord)
     outputChannel.append(type)
     diagnosticCollection.clear()
@@ -59,11 +59,11 @@ let getInfoForWord = (uri, type) => {
     model.load(uri).filter((arg) => {
       return arg.responseType === 'return'
     }).flatMap(() => {
-			if (type == 'type') {
-	      return model.getType(currentWord)
-			} else {
-				return model.getDocs(currentWord)
-			}
+      if (type == 'type') {
+        return model.getType(currentWord)
+      } else {
+        return model.getDocs(currentWord)
+      }
     }).subscribe(successHandler, displayErrors)
     outputChannel.clear()
     outputChannel.show()
