@@ -5,31 +5,39 @@
 
 ## Implemented features
 
-* typechecking
+### typechecking
 
 `(shift + cmd/ctrl + l)`
 
 ![typechecking](./images/screenshots/typechecking.gif)
 
-* Showing the type of an identifier
+### Showing the type of an identifier
 
 `(shift + cmd/ctrl + o)`
 
 ![typeof](./images/screenshots/typeof.gif)
 
-* Showing the docs for an identifier
+### Showing the docs for an identifier
 
 `(shift + cmd/ctrl + d)`
 
-![typeof](./images/screenshots/docsfor.gif)
+![docsfor](./images/screenshots/docsfor.gif)
 
-* Showing the definition for an identifier 
+### Showing the definition for an identifier 
 
 `(shift + cmd/ctrl + f)`
 
-![typeof](./images/screenshots/definition.gif)
+![definition](./images/screenshots/definition.gif)
 
-* ipkg highlighting
+### REPL
+
+well, it is not a real `REPL` currently, it can only eval current line, more details [here](https://github.com/zjhmale/vscode-idris/issues/3).
+
+`(shift + cmd/ctrl + r)`
+
+![repl](./images/screenshots/repl.gif)
+
+### ipkg highlighting
 
 ![ipkg](./images/screenshots/ipkg-highlight.png)
 
