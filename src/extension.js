@@ -18,5 +18,6 @@ function activate(context) {
 exports.activate = activate
 
 function deactivate() {
+  controller.destroy()
 }
 exports.deactivate = deactivate

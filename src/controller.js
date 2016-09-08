@@ -113,7 +113,12 @@ let displayErrors = (err) => {
   diagnosticCollection.set(diagnostics)
 }
 
+let destroy = () => {
+  if(model != null) model.stop()
+}
+    
 module.exports = {
+  destroy,
   getCommands,
   diagnosticCollection
 }
