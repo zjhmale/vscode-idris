@@ -17,6 +17,12 @@
 
 ![typeof](./images/screenshots/typeof.gif)
 
+* Showing the docs for a variable
+
+`(shift + cmd/ctrl + d)`
+
+![typeof](./images/screenshots/docsfor.gif)
+
 * ipkg highlighting
 
 ![ipkg](./images/screenshots/ipkg-highlight.png)
