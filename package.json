@@ -73,6 +73,9 @@
     }, {
       "command": "idris.typeof",
       "title": "Idris: Type of Identifier"
+    }, {
+      "command": "idris.docsfor",
+      "title": "Idris: Docs for Identifier"
     }],
     "keybindings": [{
       "key": "shift+ctrl+l",
@@ -82,6 +85,10 @@
       "key": "shift+ctrl+o",
 		  "mac": "shift+cmd+o",
       "command": "idris.typeof"
+    }, {
+      "key": "shift+ctrl+d",
+		  "mac": "shift+cmd+d",
+      "command": "idris.docsfor"
     }],
     "snippets": [{
       "language": "idris",

@@ -110,6 +110,10 @@ class IdrisModel {
   getType(word) {
     return this.prepareCommand([':type-of', word])
   }
+
+  getDocs(word) {
+    return this.prepareCommand([':docs-for', word])
+  }
 }
 
 module.exports = IdrisModel
