@@ -122,6 +122,10 @@ class IdrisModel {
   interpret(code) {
     return this.prepareCommand([':interpret', code])
   }
+
+  getVersion() {
+    return this.prepareCommand(':version')
+  }
 }
 
 module.exports = IdrisModel

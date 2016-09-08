@@ -99,6 +99,16 @@ let printDefinition = (uri) => {
   getInfoForWord(uri, 'definition')
 }
 
+let idrisAscii = (version) => {
+  return [
+    "    ____    __     _"
+  , "   /  _/___/ /____(_)____"
+  , "   / // __  / ___/ / ___/     Version " + version
+  , " _/ // /_/ / /  / (__  )      http://www.idris-lang.org/"
+  , "/___/\_____/_/  /_/____/       Type :? for help"
+  ]
+} 
+
 let runREPL = (uri) => {
   let editor = vscode.window.activeTextEditor
   let text = editor.document.lineAt(editor.selection.start).text
@@ -106,12 +116,19 @@ let runREPL = (uri) => {
   let successHandler = (arg) => {
     let result = arg.msg[0]
     let highlightingInfo = arg.msg[1]
+    
     outputChannel.clear()
     diagnosticCollection.clear()
     replChannel.clear()
     replChannel.show()
-    replChannel.appendLine("λΠ> " + text)
-    replChannel.appendLine(result)
+    
+    model.getVersion().subscribe((arg) => {
+      let version = arg.msg[0][0].join(".")
+      replChannel.appendLine(idrisAscii(version).join('\n'))
+      replChannel.appendLine("\nType checking " + uri + "\n")
+      replChannel.appendLine("λΠ> " + text)
+      replChannel.appendLine(result)
+    }, displayErrors)
   }
 
   new Promise((resolve, reject) => {
