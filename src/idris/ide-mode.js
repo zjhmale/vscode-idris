@@ -2,6 +2,7 @@ let formatter    = require('../wire/formatter')
 let parser       = require('../wire/parser')
 let cp           = require('child_process')
 let EventEmitter = require('events').EventEmitter
+let vscode       = require('vscode')
 
 var buffer = ''
 
