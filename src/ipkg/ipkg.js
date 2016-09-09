@@ -50,9 +50,8 @@ let readIpkgFile = (ipkgFile) => {
 compilerOptions = (directory) => {
   let ipkgFilesObserver = findIpkgFile(directory)
   return ipkgFilesObserver.flatMap((ipkgFiles) => {
-    var ipkgFile
     if (ipkgFiles.length) {
-      ipkgFile = ipkgFiles[0]
+      let ipkgFile = ipkgFiles[0]
       return readIpkgFile(ipkgFile).map(parseIpkgFile(ipkgFile))
     } else {
       return Rx.Observable["return"]({})

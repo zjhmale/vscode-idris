@@ -31,7 +31,7 @@
 
 ### REPL
 
-well, it is not a real `REPL` currently, it can only eval current line, more details [here](https://github.com/zjhmale/vscode-idris/issues/3).
+seriously, it is not a real `REPL` at the moment, it can only eval current line, more details [here](https://github.com/zjhmale/vscode-idris/issues/3).
 
 `(shift + cmd/ctrl + r)`
 

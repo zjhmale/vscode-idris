@@ -11,14 +11,12 @@ let isBoolean = function(s) {
 }
 
 let serialize = function(obj) {
-  var msg
-  msg = formatSexp(obj) + '\n'
+  let msg = formatSexp(obj) + '\n'
   return hexLength(msg) + msg
 }
 
 let hexLength = function(str) {
-  var hex
-  hex = str.length.toString(16)
+  let hex = str.length.toString(16)
   return Array(7 - hex.length).join('0') + hex
 }
 

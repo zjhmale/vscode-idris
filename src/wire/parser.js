@@ -48,8 +48,7 @@ let openP = text.character('(')
 let closeP = text.character(')')
 
 let sexpP = parse.rec(function(self) {
-  var choices
-  choices = parse.choice(boolP, integerP, stringP, symbolP, self)
+  let choices = parse.choice(boolP, integerP, stringP, symbolP, self)
   return lang.between(openP, closeP, lang.sepBy(text.space, choices)).map(stream.toArray)
 })
 

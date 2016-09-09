@@ -4,8 +4,6 @@ let cp           = require('child_process')
 let EventEmitter = require('events').EventEmitter
 let vscode       = require('vscode')
 
-var buffer = ''
-
 class IdrisIdeMode extends EventEmitter {
   constructor() {
     super()
@@ -48,12 +46,9 @@ class IdrisIdeMode extends EventEmitter {
   }
 
   error(error) {
-    var msg
-    if (error.code == 'ENOENT') {
-      msg: "Couldn't find idris executable at \"" + error.path + "\""
-    } else {
-      msg: error.message + '(' + error.code + ')'
-    }
+    let msg = error.code == 'ENOENT' 
+      ? "Couldn't find idris executable at \"" + error.path + "\""
+      : error.message + '(' + error.code + ')'
     vscode.window.showErrorMessage(msg)
   }
 
@@ -62,13 +57,10 @@ class IdrisIdeMode extends EventEmitter {
       let msg = "The idris compiler was closed"
       vscode.window.showInformationMessage(msg)
     } else {
-      var long
       let short = "The idris compiler was closed or crashed"
-      if (signal) {
-        long = "It was closed with the signal: #{signal}"
-      } else {
-        long = "It (probably) crashed with the error code: #{code}"
-      }
+      let lone = signal
+        ? "It was closed with the signal: " + signal
+        : "It (probably) crashed with the error code: " + code
       vscode.window.showErrorMessage(short + " " + long)
     }
   }
