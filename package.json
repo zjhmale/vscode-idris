@@ -81,7 +81,7 @@
       "title": "Idris: Definition of Identifier"
     }, {
       "command": "idris.show-holes",
-      "title": "Idris: List the currently-active holes"
+      "title": "Idris: List the currently active holes"
     }, {
       "command": "idris.run-repl",
       "title": "Idris: Eval current line"

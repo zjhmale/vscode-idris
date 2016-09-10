@@ -29,6 +29,12 @@
 
 ![definition](./images/screenshots/definition.gif)
 
+### List all the currently active holes
+
+`(shift + cmd/ctrl + h)`
+
+![showholes](./images/screenshots/showholes.gif)
+
 ### REPL
 
 seriously, it is not a real `REPL` at the moment, it can only eval current line, more details [here](https://github.com/zjhmale/vscode-idris/issues/3).
