@@ -80,6 +80,9 @@
       "command": "idris.print-definition",
       "title": "Idris: Definition of Identifier"
     }, {
+      "command": "idris.show-holes",
+      "title": "Idris: List the currently-active holes"
+    }, {
       "command": "idris.run-repl",
       "title": "Idris: Eval current line"
     }],
@@ -99,6 +102,10 @@
       "key": "shift+ctrl+f",
       "mac": "shift+cmd+f",
       "command": "idris.print-definition"
+    }, {
+      "key": "shift+ctrl+h",
+      "mac": "shift+cmd+h",
+      "command": "idris.show-holes"
     }, {
       "key": "shift+ctrl+r",
       "mac": "shift+cmd+r",

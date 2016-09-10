@@ -126,6 +126,10 @@ class IdrisModel {
   getVersion() {
     return this.prepareCommand(':version')
   }
+
+  holes(width) {
+    return this.prepareCommand([':metavariables', width])
+  }
 }
 
 module.exports = IdrisModel

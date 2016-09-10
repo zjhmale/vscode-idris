@@ -99,6 +99,39 @@ let printDefinition = (uri) => {
   getInfoForWord(uri, 'definition')
 }
 
+let showHoles = (uri) => {
+  let successHandler = (arg) => {
+    let holes = arg.msg[0]
+    let hs = holes.map(([name, premises, [type, _]]) => {
+      let ps = premises.map(([name, type, _]) => {
+        return `    ${ name } : ${ type }`
+      })
+      let conclusion = `${ name } : ${ type }`
+      let divider = '-'.repeat(conclusion.length)
+      return `${ name }\n${ ps.join('\n') }\n${ divider }\n${ conclusion }`
+    })
+    outputChannel.clear()
+    outputChannel.show()
+    outputChannel.appendLine('Idris: Holes')
+    outputChannel.append(hs.join('\n'))
+    diagnosticCollection.clear()
+  }
+
+  new Promise((resolve, reject) => {
+    model.load(uri).filter((arg) => {
+      return arg.responseType === 'return'
+    }).flatMap(() => {
+      return model.holes(80)
+    }).subscribe(successHandler, displayErrors)
+    outputChannel.clear()
+    outputChannel.show()
+    outputChannel.append("loading...")
+    resolve()
+  }).then(function () {
+  }).catch(function () {
+  })
+}
+
 let idrisAscii = (version) => {
   return [
     "    ____    __     _"
@@ -186,6 +219,7 @@ module.exports = {
   typeForWord,
   docsForWord,
   printDefinition,
+  showHoles,
   runREPL,
   destroy
 }

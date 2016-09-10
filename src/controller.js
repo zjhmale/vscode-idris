@@ -8,6 +8,7 @@ let getCommands = () => {
     ['idris.type-of', runCommand(commands.typeForWord)],
     ['idris.docs-for', runCommand(commands.docsForWord)],
     ['idris.print-definition', runCommand(commands.printDefinition)],
+    ['idris.show-holes', runCommand(commands.showHoles)],
     ['idris.run-repl', runCommand(commands.runREPL)]
   ]
 }
