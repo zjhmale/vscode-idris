@@ -10,6 +10,7 @@ let getCommands = () => {
     ['idris.print-definition', runCommand(commands.printDefinition)],
     ['idris.show-holes', runCommand(commands.showHoles)],
     ['idris.add-clause', runCommand(commands.addClause)],
+    ['idris.case-split', runCommand(commands.caseSplit)],
     ['idris.run-repl', runCommand(commands.runREPL)]
   ]
 }

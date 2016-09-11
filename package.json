@@ -86,6 +86,9 @@
       "command": "idris.add-clause",
       "title": "Idris: Generate an initial pattern match clause"
     }, {
+      "command": "idris.case-split",
+      "title": "Idris: Generate a case split for the pattern variable"
+    }, {
       "command": "idris.run-repl",
       "title": "Idris: Eval current line"
     }],
@@ -113,6 +116,10 @@
       "key": "shift+ctrl+a",
       "mac": "shift+cmd+a",
       "command": "idris.add-clause"
+    }, {
+      "key": "shift+ctrl+c",
+      "mac": "shift+cmd+c",
+      "command": "idris.case-split"
     }, {
       "key": "shift+ctrl+r",
       "mac": "shift+cmd+r",

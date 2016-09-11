@@ -134,6 +134,10 @@ class IdrisModel {
   addClause(line, word) {
     return this.prepareCommand([':add-clause', line, word])
   }
+
+  caseSplit(line, word) {
+    return this.prepareCommand([':case-split', line, word])    
+  }
 }
 
 module.exports = IdrisModel

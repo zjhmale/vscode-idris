@@ -212,6 +212,36 @@ let addClause = (uri) => {
   })
 }
 
+let caseSplit = (uri) => {
+  let currentWord = getWord()
+  if (!currentWord) return
+  let editor = vscode.window.activeTextEditor 
+  let line = editor.selection.active.line
+
+  let successHandler = (arg) => {
+    let split = arg.msg[0]
+    editor.edit((edit) => {
+      let start = new vscode.Position(line, 0)
+      let end = new vscode.Position(line + 1, 0)
+      edit.replace(new vscode.Range(start, end), split)
+    })
+
+    outputChannel.clear()
+  }
+
+  new Promise((resolve, reject) => {
+    model.load(uri).filter((arg) => {
+      return arg.responseType === 'return'
+    }).flatMap(() => {
+      return model.caseSplit(line + 1, currentWord)
+    }).subscribe(successHandler, displayErrors)
+    showLoading()
+    resolve()
+  }).then(function () {
+  }).catch(function () {
+  })
+}
+
 let displayErrors = (err) => {
   replChannel.clear()
   outputChannel.clear()
@@ -254,6 +284,7 @@ module.exports = {
   printDefinition,
   showHoles,
   addClause,
+  caseSplit,
   runREPL,
   destroy
 }
