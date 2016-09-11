@@ -13,6 +13,12 @@ let initialize = (compilerOptions) => {
   model.setCompilerOptions(compilerOptions);
 }
 
+let showLoading = () => {
+    outputChannel.clear()
+    outputChannel.show()
+    outputChannel.append("loading...")
+}
+
 let typecheckFile = (uri) => {
   let successHandler = (_) => {
     outputChannel.clear()
@@ -25,9 +31,7 @@ let typecheckFile = (uri) => {
     model.load(uri).filter((arg) => {
       return arg.responseType === 'return'
     }).subscribe(successHandler, displayErrors)
-    outputChannel.clear()
-    outputChannel.show()
-    outputChannel.append("loading...")
+    showLoading()
     resolve()
   }).then(function () {
   }).catch(function () {
@@ -78,9 +82,7 @@ let getInfoForWord = (uri, cmd) => {
           break
       }
     }).subscribe(successHandler, displayErrors)
-    outputChannel.clear()
-    outputChannel.show()
-    outputChannel.append("loading...")
+    showLoading()
     resolve()
   }).then(function () {
   }).catch(function () {
@@ -123,9 +125,7 @@ let showHoles = (uri) => {
     }).flatMap(() => {
       return model.holes(80)
     }).subscribe(successHandler, displayErrors)
-    outputChannel.clear()
-    outputChannel.show()
-    outputChannel.append("loading...")
+    showLoading()
     resolve()
   }).then(function () {
   }).catch(function () {
@@ -170,9 +170,7 @@ let runREPL = (uri) => {
     }).flatMap(() => {
       return model.interpret(text)
     }).subscribe(successHandler, displayErrors)
-    replChannel.clear()
-    replChannel.show()
-    replChannel.append("loading...")
+    showLoading()
     resolve()
   }).then(function () {
   }).catch(function () {
