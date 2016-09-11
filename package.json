@@ -84,7 +84,7 @@
       "title": "Idris: List the currently active holes"
     }, {
       "command": "idris.add-clause",
-      "title": "Idris: Generate an initial pattern-match clause"
+      "title": "Idris: Generate an initial pattern match clause"
     }, {
       "command": "idris.run-repl",
       "title": "Idris: Eval current line"

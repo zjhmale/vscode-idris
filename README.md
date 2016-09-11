@@ -35,6 +35,12 @@
 
 ![showholes](./images/screenshots/showholes.gif)
 
+### Generate an initial pattern match clause
+
+`(shift + cmd/ctrl + a)`
+
+![addclause](./images/screenshots/addclause.gif)
+
 ### REPL
 
 seriously, it is not a real `REPL` at the moment, it can only eval current line, more details [here](https://github.com/zjhmale/vscode-idris/issues/3).
