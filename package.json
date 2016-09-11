@@ -89,6 +89,9 @@
       "command": "idris.case-split",
       "title": "Idris: Generate a case split for the pattern variable"
     }, {
+      "command": "idris.proof-search",
+      "title": "Idris: Attempt to fill out the holes by proof search"
+    }, {
       "command": "idris.run-repl",
       "title": "Idris: Eval current line"
     }],
@@ -120,6 +123,10 @@
       "key": "shift+ctrl+c",
       "mac": "shift+cmd+c",
       "command": "idris.case-split"
+    }, {
+      "key": "shift+ctrl+s",
+      "mac": "shift+cmd+s",
+      "command": "idris.proof-search"
     }, {
       "key": "shift+ctrl+r",
       "mac": "shift+cmd+r",

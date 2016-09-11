@@ -22,6 +22,7 @@ let showLoading = () => {
 let getWord = () => {
   let editor = vscode.window.activeTextEditor
   let document = editor.document
+  document.save()
   let position = editor.selection.active
   let wordRange = document.getWordRangeAtPosition(position)
   let currentWord = document.getText(wordRange)
@@ -156,12 +157,12 @@ let runREPL = (uri) => {
   let successHandler = (arg) => {
     let result = arg.msg[0]
     let highlightingInfo = arg.msg[1]
-    
+
     outputChannel.clear()
     diagnosticCollection.clear()
     replChannel.clear()
     replChannel.show()
-    
+
     model.getVersion().subscribe((arg) => {
       let version = arg.msg[0][0].join(".")
       replChannel.appendLine(idrisAscii(version).join('\n'))
@@ -242,6 +243,38 @@ let caseSplit = (uri) => {
   })
 }
 
+let proofSearch = (uri) => {
+  let currentWord = getWord()
+  if (!currentWord) return
+  let editor = vscode.window.activeTextEditor
+  let line = editor.selection.active.line
+  let position = editor.selection.active
+  let wordRange = editor.document.getWordRangeAtPosition(position)
+
+  let successHandler = (arg) => {
+    let res = arg.msg[0]
+    editor.edit((edit) => {
+      let start = new vscode.Position(wordRange.start.line, wordRange.start.character - 1)
+      let end = wordRange.end
+      edit.replace(new vscode.Range(start, end), res)
+    })
+
+    outputChannel.clear()
+  }
+
+  new Promise((resolve, reject) => {
+    model.load(uri).filter((arg) => {
+      return arg.responseType === 'return'
+    }).flatMap(() => {
+      return model.proofSearch(line + 1, currentWord)
+    }).subscribe(successHandler, displayErrors)
+    showLoading()
+    resolve()
+  }).then(function () {
+  }).catch(function () {
+  })
+}
+
 let displayErrors = (err) => {
   replChannel.clear()
   outputChannel.clear()
@@ -285,6 +318,7 @@ module.exports = {
   showHoles,
   addClause,
   caseSplit,
+  proofSearch,
   runREPL,
   destroy
 }

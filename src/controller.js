@@ -11,6 +11,7 @@ let getCommands = () => {
     ['idris.show-holes', runCommand(commands.showHoles)],
     ['idris.add-clause', runCommand(commands.addClause)],
     ['idris.case-split', runCommand(commands.caseSplit)],
+    ['idris.proof-search', runCommand(commands.proofSearch)],
     ['idris.run-repl', runCommand(commands.runREPL)]
   ]
 }

@@ -138,6 +138,10 @@ class IdrisModel {
   caseSplit(line, word) {
     return this.prepareCommand([':case-split', line, word])    
   }
+
+  proofSearch(line, word) {
+    return this.prepareCommand([':proof-search', line, word, []])
+  }
 }
 
 module.exports = IdrisModel
