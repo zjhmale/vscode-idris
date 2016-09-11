@@ -130,6 +130,10 @@ class IdrisModel {
   holes(width) {
     return this.prepareCommand([':metavariables', width])
   }
+
+  addClause(line, word) {
+    return this.prepareCommand([':add-clause', line, word])
+  }
 }
 
 module.exports = IdrisModel

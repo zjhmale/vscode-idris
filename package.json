@@ -83,6 +83,9 @@
       "command": "idris.show-holes",
       "title": "Idris: List the currently active holes"
     }, {
+      "command": "idris.add-clause",
+      "title": "Idris: Generate an initial pattern-match clause"
+    }, {
       "command": "idris.run-repl",
       "title": "Idris: Eval current line"
     }],
@@ -106,6 +109,10 @@
       "key": "shift+ctrl+h",
       "mac": "shift+cmd+h",
       "command": "idris.show-holes"
+    }, {
+      "key": "shift+ctrl+a",
+      "mac": "shift+cmd+a",
+      "command": "idris.add-clause"
     }, {
       "key": "shift+ctrl+r",
       "mac": "shift+cmd+r",

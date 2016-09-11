@@ -19,6 +19,21 @@ let showLoading = () => {
     outputChannel.append("loading...")
 }
 
+let getWord = () => {
+  let editor = vscode.window.activeTextEditor
+  let document = editor.document
+  let position = editor.selection.active
+  let wordRange = document.getWordRangeAtPosition(position)
+  let currentWord = document.getText(wordRange)
+  if (currentWord.match(/\r|\n| /g)) {
+    outputChannel.clear()
+    vscode.window.showWarningMessage("Please move cursor to an Identifier")
+    return null
+  } else {
+    return currentWord
+  }
+}
+
 let typecheckFile = (uri) => {
   let successHandler = (_) => {
     outputChannel.clear()
@@ -45,17 +60,9 @@ let cmdMsgs = {
 }
 
 let getInfoForWord = (uri, cmd) => {
-  let editor = vscode.window.activeTextEditor
-  let document = editor.document
-  let position = editor.selection.active
-  let wordRange = document.getWordRangeAtPosition(position)
-  let currentWord = document.getText(wordRange)
-  if (currentWord.match(/\r|\n| /g)) {
-    outputChannel.clear()
-    vscode.window.showWarningMessage("Please move cursor to an Identifier")
-    return
-  }
-
+  let currentWord = getWord()
+  if (!currentWord) return
+  
   let successHandler = (arg) => {
     let info = arg.msg[0]
     let highlightingInfo = arg.msg[1]
@@ -177,6 +184,34 @@ let runREPL = (uri) => {
   })
 }
 
+let addClause = (uri) => {
+  let currentWord = getWord()
+  if (!currentWord) return
+  let editor = vscode.window.activeTextEditor 
+  let line = editor.selection.active.line
+
+  let successHandler = (arg) => {
+    let clause = arg.msg[0]
+    editor.edit((edit) => {
+      edit.insert(new vscode.Position(line + 1, 0), clause)
+    })
+
+    outputChannel.clear()
+  }
+
+  new Promise((resolve, reject) => {
+    model.load(uri).filter((arg) => {
+      return arg.responseType === 'return'
+    }).flatMap(() => {
+      return model.addClause(line + 1, currentWord)
+    }).subscribe(successHandler, displayErrors)
+    showLoading()
+    resolve()
+  }).then(function () {
+  }).catch(function () {
+  })
+}
+
 let displayErrors = (err) => {
   replChannel.clear()
   outputChannel.clear()
@@ -218,6 +253,7 @@ module.exports = {
   docsForWord,
   printDefinition,
   showHoles,
+  addClause,
   runREPL,
   destroy
 }

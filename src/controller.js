@@ -9,6 +9,7 @@ let getCommands = () => {
     ['idris.docs-for', runCommand(commands.docsForWord)],
     ['idris.print-definition', runCommand(commands.printDefinition)],
     ['idris.show-holes', runCommand(commands.showHoles)],
+    ['idris.add-clause', runCommand(commands.addClause)],
     ['idris.run-repl', runCommand(commands.runREPL)]
   ]
 }
