@@ -41,6 +41,12 @@
 
 ![addclause](./images/screenshots/addclause.gif)
 
+### Generate a case split for the pattern variable
+
+`(shift + cmd/ctrl + c)`
+
+![casesplit](./images/screenshots/casesplit.gif)
+
 ### REPL
 
 seriously, it is not a real `REPL` at the moment, it can only eval current line, more details [here](https://github.com/zjhmale/vscode-idris/issues/3).
