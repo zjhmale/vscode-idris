@@ -47,6 +47,12 @@
 
 ![casesplit](./images/screenshots/casesplit.gif)
 
+### Attempt to fill out the holes by proof search
+
+`(shift + cmd/ctrl + s)`
+
+![proofsearch](./images/screenshots/proofsearch.gif)
+
 ### REPL
 
 seriously, it is not a real `REPL` at the moment, it can only eval current line, more details [here](https://github.com/zjhmale/vscode-idris/issues/3).
