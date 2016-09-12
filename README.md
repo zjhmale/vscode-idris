@@ -53,6 +53,12 @@
 
 ![proofsearch](./images/screenshots/proofsearch.gif)
 
+### Create a with rule pattern match template for the clause of function
+
+`(shift + cmd/ctrl + w)`
+
+![makewith](./images/screenshots/makewith.gif)
+
 ### REPL
 
 seriously, it is not a real `REPL` at the moment, it can only eval current line, more details [here](https://github.com/zjhmale/vscode-idris/issues/3).
