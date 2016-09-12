@@ -71,7 +71,7 @@
 
 ![makelemma](./images/screenshots/makelemma.gif)
 
-### Search names, types and documentation
+### Search names, types and documentations
 
 `(shift + cmd/ctrl + k)`
 
@@ -84,6 +84,10 @@ seriously, it is not a real `REPL` at the moment, it can only eval current line,
 `(shift + cmd/ctrl + r)`
 
 ![repl](./images/screenshots/repl.gif)
+
+### code completion
+
+![completion](./images/screenshots/completion.gif)
 
 ### ipkg highlighting
 
