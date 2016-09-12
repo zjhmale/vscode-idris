@@ -14,6 +14,7 @@ let getCommands = () => {
     ['idris.proof-search', runCommand(commands.proofSearch)],
     ['idris.make-with', runCommand(commands.makeWith)],
     ['idris.make-case', runCommand(commands.makeCase)],
+    ['idris.make-lemma', runCommand(commands.makeLemma)],
     ['idris.run-repl', runCommand(commands.runREPL)]
   ]
 }

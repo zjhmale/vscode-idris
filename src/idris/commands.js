@@ -335,6 +335,48 @@ let makeCase = (uri) => {
   })
 }
 
+let makeLemma = (uri) => {
+  let currentWord = getWord()
+  if (!currentWord) return
+  let editor = vscode.window.activeTextEditor
+  var line = editor.selection.active.line
+  let position = editor.selection.active
+  let wordRange = editor.document.getWordRangeAtPosition(position)
+
+  let successHandler = (arg) => {
+    let lemty = arg.msg[0]
+    let param1 = arg.msg[1]
+    let param2 = arg.msg[2]
+    if (lemty == ':metavariable-lemma') {
+      editor.edit((edit) => {
+        let start = new vscode.Position(wordRange.start.line, wordRange.start.character - 1)
+        let end = wordRange.end
+        edit.replace(new vscode.Range(start, end), param1[1])
+
+        while (line > 0) {
+          if (editor.document.lineAt(line).isEmptyOrWhitespace) break
+          line--
+        }
+        edit.insert(new vscode.Position(line + 1, 0), param2[1] + "\n\n")
+      })
+    }
+    
+    outputChannel.clear()
+  }
+
+  new Promise((resolve, reject) => {
+    model.load(uri).filter((arg) => {
+      return arg.responseType === 'return'
+    }).flatMap(() => {
+      return model.makeLemma(line + 1, currentWord)
+    }).subscribe(successHandler, displayErrors)
+    showLoading()
+    resolve()
+  }).then(function () {
+  }).catch(function () {
+  })
+}
+
 let displayErrors = (err) => {
   replChannel.clear()
   outputChannel.clear()
@@ -381,6 +423,7 @@ module.exports = {
   proofSearch,
   makeWith,
   makeCase,
+  makeLemma,
   runREPL,
   destroy
 }

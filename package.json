@@ -98,6 +98,9 @@
       "command": "idris.make-case",
       "title": "Idris: Make a case pattern match template for holes"
     }, {
+      "command": "idris.make-lemma",
+      "title": "Idris: Make a top level lemma which solves the hole under the cursor"
+    }, {
       "command": "idris.run-repl",
       "title": "Idris: Eval current line"
     }],
@@ -141,6 +144,10 @@
       "key": "shift+ctrl+m",
       "mac": "shift+cmd+m",
       "command": "idris.make-case"
+    }, {
+      "key": "shift+ctrl+l",
+      "mac": "shift+cmd+l",
+      "command": "idris.make-lemma"
     }, {
       "key": "shift+ctrl+r",
       "mac": "shift+cmd+r",
