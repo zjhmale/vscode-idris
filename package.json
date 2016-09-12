@@ -93,7 +93,10 @@
       "title": "Idris: Attempt to fill out the holes by proof search"
     }, {
       "command": "idris.make-with",
-      "title": "Idris: Make a with rule pattern match template for the clause of function "
+      "title": "Idris: Make a with rule pattern match template for the clause of function"
+    }, {
+      "command": "idris.make-case",
+      "title": "Idris: Make a case pattern match template for holes"
     }, {
       "command": "idris.run-repl",
       "title": "Idris: Eval current line"
@@ -134,6 +137,10 @@
       "key": "shift+ctrl+w",
       "mac": "shift+cmd+w",
       "command": "idris.make-with"
+    }, {
+      "key": "shift+ctrl+m",
+      "mac": "shift+cmd+m",
+      "command": "idris.make-case"
     }, {
       "key": "shift+ctrl+r",
       "mac": "shift+cmd+r",

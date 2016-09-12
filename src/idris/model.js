@@ -146,6 +146,14 @@ class IdrisModel {
   makeWith(line, word) {
     return this.prepareCommand([':make-with', line, word])
   }
+
+  makeLemma(line, word) {
+    return this.prepareCommand([':make-lemma', line, word])
+  }
+
+  makeCase(line, word) {
+    return this.prepareCommand([':make-case', line, word])    
+  }
 }
 
 module.exports = IdrisModel
