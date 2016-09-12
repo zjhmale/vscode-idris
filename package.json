@@ -108,8 +108,8 @@
       "title": "Idris: Eval current line"
     }],
     "keybindings": [{
-      "key": "shift+ctrl+l",
-      "mac": "shift+cmd+l",
+      "key": "shift+ctrl+t",
+      "mac": "shift+cmd+t",
       "command": "idris.typecheck"
     }, {
       "key": "shift+ctrl+o",

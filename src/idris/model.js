@@ -158,6 +158,10 @@ class IdrisModel {
   apropos(name) {
     return this.prepareCommand([':apropos', name])
   }
+  
+  replCompletions(word) {
+    return this.prepareCommand([':repl-completions', word])
+  }
 }
 
 module.exports = IdrisModel

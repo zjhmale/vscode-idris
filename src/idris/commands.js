@@ -14,10 +14,14 @@ let initialize = (compilerOptions) => {
   model.setCompilerOptions(compilerOptions);
 }
 
+let getModel = () => {
+  return model
+}
+
 let showLoading = () => {
-    outputChannel.clear()
-    outputChannel.show()
-    outputChannel.append("loading...")
+  outputChannel.clear()
+  outputChannel.show()
+  outputChannel.append("loading...")
 }
 
 let getWord = () => {
@@ -440,6 +444,7 @@ let destroy = () => {
 }
 
 module.exports = {
+  getModel,
   diagnosticCollection,
   initialize,
   typecheckFile,

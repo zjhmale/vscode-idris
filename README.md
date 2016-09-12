@@ -7,7 +7,7 @@
 
 ### typechecking
 
-`(shift + cmd/ctrl + l)`
+`(shift + cmd/ctrl + t)`
 
 ![typechecking](./images/screenshots/typechecking.gif)
 
