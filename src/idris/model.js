@@ -142,6 +142,10 @@ class IdrisModel {
   proofSearch(line, word) {
     return this.prepareCommand([':proof-search', line, word, []])
   }
+
+  makeWith(line, word) {
+    return this.prepareCommand([':make-with', line, word])
+  }
 }
 
 module.exports = IdrisModel

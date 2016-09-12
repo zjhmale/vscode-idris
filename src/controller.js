@@ -12,6 +12,7 @@ let getCommands = () => {
     ['idris.add-clause', runCommand(commands.addClause)],
     ['idris.case-split', runCommand(commands.caseSplit)],
     ['idris.proof-search', runCommand(commands.proofSearch)],
+    ['idris.make-with', runCommand(commands.makeWith)],
     ['idris.run-repl', runCommand(commands.runREPL)]
   ]
 }

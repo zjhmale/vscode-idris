@@ -69,28 +69,31 @@
     }],
     "commands": [{
       "command": "idris.typecheck",
-      "title": "Idris: Typecheck File"
+      "title": "Idris: Typecheck file"
     }, {
       "command": "idris.type-of",
-      "title": "Idris: Type of Identifier"
+      "title": "Idris: Type of identifier"
     }, {
       "command": "idris.docs-for",
-      "title": "Idris: Docs for Identifier"
+      "title": "Idris: Docs for identifier"
     }, {
       "command": "idris.print-definition",
-      "title": "Idris: Definition of Identifier"
+      "title": "Idris: Print definition of identifier"
     }, {
       "command": "idris.show-holes",
-      "title": "Idris: List the currently active holes"
+      "title": "Idris: Show the currently active holes"
     }, {
       "command": "idris.add-clause",
-      "title": "Idris: Generate an initial pattern match clause"
+      "title": "Idris: Add an initial pattern match clause"
     }, {
       "command": "idris.case-split",
-      "title": "Idris: Generate a case split for the pattern variable"
+      "title": "Idris: Add a case split for the pattern variable"
     }, {
       "command": "idris.proof-search",
       "title": "Idris: Attempt to fill out the holes by proof search"
+    }, {
+      "command": "idris.make-with",
+      "title": "Idris: Make a with rule pattern match template for the clause of function "
     }, {
       "command": "idris.run-repl",
       "title": "Idris: Eval current line"
@@ -127,6 +130,10 @@
       "key": "shift+ctrl+s",
       "mac": "shift+cmd+s",
       "command": "idris.proof-search"
+    }, {
+      "key": "shift+ctrl+w",
+      "mac": "shift+cmd+w",
+      "command": "idris.make-with"
     }, {
       "key": "shift+ctrl+r",
       "mac": "shift+cmd+r",
