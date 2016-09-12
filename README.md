@@ -65,6 +65,12 @@
 
 ![makecase](./images/screenshots/makecase.gif)
 
+### Create a top level function with a type which solves the hole under the cursor
+
+`(shift + cmd/ctrl + l)`
+
+![makelemma](./images/screenshots/makelemma.gif)
+
 ### REPL
 
 seriously, it is not a real `REPL` at the moment, it can only eval current line, more details [here](https://github.com/zjhmale/vscode-idris/issues/3).
