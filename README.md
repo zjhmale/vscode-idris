@@ -59,6 +59,12 @@
 
 ![makewith](./images/screenshots/makewith.gif)
 
+### Create a case pattern match template for the holes
+
+`(shift + cmd/ctrl + m)`
+
+![makecase](./images/screenshots/makecase.gif)
+
 ### REPL
 
 seriously, it is not a real `REPL` at the moment, it can only eval current line, more details [here](https://github.com/zjhmale/vscode-idris/issues/3).
