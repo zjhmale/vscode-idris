@@ -4,6 +4,7 @@ let vscode     = require('vscode')
 let model = null
 let outputChannel = vscode.window.createOutputChannel('Idris')
 let replChannel = vscode.window.createOutputChannel('Idris REPL')
+let aproposChannel = vscode.window.createOutputChannel('Idris Apropos')
 let diagnosticCollection = vscode.languages.createDiagnosticCollection()
 
 let initialize = (compilerOptions) => {
@@ -377,8 +378,36 @@ let makeLemma = (uri) => {
   })
 }
 
+let apropos = (uri) => {
+  vscode.window.showInputBox({prompt: 'Idris: Apropos'}).then(val => {
+    let successHandler = (arg) => {
+      let result = arg.msg[0]
+      let highlightingInfo = arg.msg[1]
+
+      outputChannel.clear()
+      diagnosticCollection.clear()
+      aproposChannel.clear()
+      aproposChannel.show()
+      aproposChannel.appendLine(result)
+    }
+
+    new Promise((resolve, reject) => {
+      model.load(uri).filter((arg) => {
+        return arg.responseType === 'return'
+      }).flatMap(() => {
+        return model.apropos(val)
+      }).subscribe(successHandler, displayErrors)
+      showLoading()
+      resolve()
+    }).then(function () {
+    }).catch(function () {
+    })
+  });
+}
+
 let displayErrors = (err) => {
   replChannel.clear()
+  aproposChannel.clear()
   outputChannel.clear()
   outputChannel.show()
   diagnosticCollection.clear()
@@ -424,6 +453,7 @@ module.exports = {
   makeWith,
   makeCase,
   makeLemma,
+  apropos,
   runREPL,
   destroy
 }

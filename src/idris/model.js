@@ -154,6 +154,10 @@ class IdrisModel {
   makeCase(line, word) {
     return this.prepareCommand([':make-case', line, word])    
   }
+
+  apropos(name) {
+    return this.prepareCommand([':apropos', name])
+  }
 }
 
 module.exports = IdrisModel

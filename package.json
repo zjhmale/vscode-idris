@@ -101,6 +101,9 @@
       "command": "idris.make-lemma",
       "title": "Idris: Make a top level lemma which solves the hole under the cursor"
     }, {
+      "command": "idris.apropos",
+      "title": "Idris: Search names, types, and documentation"
+    }, {
       "command": "idris.run-repl",
       "title": "Idris: Eval current line"
     }],
@@ -148,6 +151,10 @@
       "key": "shift+ctrl+l",
       "mac": "shift+cmd+l",
       "command": "idris.make-lemma"
+    }, {
+      "key": "shift+ctrl+k",
+      "mac": "shift+cmd+k",
+      "command": "idris.apropos"
     }, {
       "key": "shift+ctrl+r",
       "mac": "shift+cmd+r",
