@@ -71,6 +71,12 @@
 
 ![makelemma](./images/screenshots/makelemma.gif)
 
+### Search names, types and documentation
+
+`(shift + cmd/ctrl + k)`
+
+![apropos](./images/screenshots/apropos.gif)
+
 ### REPL
 
 seriously, it is not a real `REPL` at the moment, it can only eval current line, more details [here](https://github.com/zjhmale/vscode-idris/issues/3).
