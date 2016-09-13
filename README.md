@@ -29,7 +29,7 @@
 ## Installation
 
 1. Within Visual Studio Code, open the command palette (Ctrl-Shift-P / Cmd-Shift-P).
-2. Select `Install Extension` and search for 'idris' or run `ext install idris`.
+2. Select `Install Extension` and search for 'Idris' or run `ext install Idris`.
 
 ## Acknowledgements
 

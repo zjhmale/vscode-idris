@@ -1,17 +1,12 @@
 {
-  "name": "vscode-idris",
-  "displayName": "idris Syntax Highlighting",
-  "description": "Syntax highlighting and snippets for the idris programming language.",
+  "name": "Idris",
+  "description": "Idris Language Support for Visual Studio Code",
   "version": "1.0.0",
   "publisher": "zjhmale",
   "engines": {
     "vscode": "^0.10.1"
   },
   "icon": "images/idris.png",
-  "galleryBanner": {
-    "color": "#00ff99",
-    "theme": "light"
-  },
   "keywords": [
     "language",
     "idris",
