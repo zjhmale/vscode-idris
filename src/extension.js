@@ -29,6 +29,5 @@ exports.activate = activate
 
 function deactivate() {
   controller.destroy()
-  completion.destroy()
 }
 exports.deactivate = deactivate

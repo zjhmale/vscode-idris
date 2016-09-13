@@ -58,7 +58,7 @@ class IdrisIdeMode extends EventEmitter {
       vscode.window.showInformationMessage(msg)
     } else {
       let short = "The idris compiler was closed or crashed"
-      let lone = signal
+      let long = signal
         ? "It was closed with the signal: " + signal
         : "It (probably) crashed with the error code: " + code
       vscode.window.showErrorMessage(short + " " + long)

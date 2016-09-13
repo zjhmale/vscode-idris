@@ -57,7 +57,7 @@ let list7 =
     ":cd C:/Path/to/dir"
   ]
 
-suite("The sub-parser(s)",() => {
+suite("The sub-parser(s)", () => {
   test("for :True and :False should work.", () => {
     assert.equal(runP(parser.trueP, ':True'), true)
     assert.equal(runP(parser.falseP, ':False'), false)

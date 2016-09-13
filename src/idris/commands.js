@@ -365,7 +365,7 @@ let makeLemma = (uri) => {
         edit.insert(new vscode.Position(line + 1, 0), param2[1] + "\n\n")
       })
     }
-    
+
     outputChannel.clear()
   }
 
