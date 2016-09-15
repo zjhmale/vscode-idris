@@ -46,7 +46,7 @@ class IdrisIdeMode extends EventEmitter {
   }
 
   error(error) {
-    let msg = error.code == 'ENOENT' 
+    let msg = error.code == 'ENOENT'
       ? "Couldn't find idris executable at \"" + error.path + "\""
       : error.message + '(' + error.code + ')'
     vscode.window.showErrorMessage(msg)

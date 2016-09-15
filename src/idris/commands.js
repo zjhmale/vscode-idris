@@ -68,7 +68,7 @@ let cmdMsgs = {
 let getInfoForWord = (uri, cmd) => {
   let currentWord = getWord()
   if (!currentWord) return
-  
+
   let successHandler = (arg) => {
     let info = arg.msg[0]
     let highlightingInfo = arg.msg[1]

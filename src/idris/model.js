@@ -136,7 +136,7 @@ class IdrisModel {
   }
 
   caseSplit(line, word) {
-    return this.prepareCommand([':case-split', line, word])    
+    return this.prepareCommand([':case-split', line, word])
   }
 
   proofSearch(line, word) {
@@ -152,13 +152,13 @@ class IdrisModel {
   }
 
   makeCase(line, word) {
-    return this.prepareCommand([':make-case', line, word])    
+    return this.prepareCommand([':make-case', line, word])
   }
 
   apropos(name) {
     return this.prepareCommand([':apropos', name])
   }
-  
+
   replCompletions(word) {
     return this.prepareCommand([':repl-completions', word])
   }

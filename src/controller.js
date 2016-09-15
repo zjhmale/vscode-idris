@@ -22,9 +22,12 @@ let getCommands = () => {
 
 let runCommand = (command) => {
   return (_) => {
+    let document = vscode.window.activeTextEditor.document
+    if (document.languageId != 'idris') return
+    let uri = document.uri.path
+
     let root = vscode.workspace.rootPath
     let compilerOptions = ipkg.compilerOptions(root)
-    let uri = vscode.window.activeTextEditor.document.uri.path
 
     compilerOptions.subscribe((compilerOptions) => {
       commands.initialize(compilerOptions)

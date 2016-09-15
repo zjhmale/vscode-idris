@@ -23,7 +23,7 @@ function activate(context) {
     let disposable = vscode.commands.registerCommand(key, value)
     context.subscriptions.push(disposable)
   })
-  context.subscriptions.push(vscode.languages.registerCompletionItemProvider(IDRIS_MODE, new completion.IdrisCompletionProvider(), ...triggers));
+  context.subscriptions.push(vscode.languages.registerCompletionItemProvider(IDRIS_MODE, new completion.IdrisCompletionProvider(), ...triggers))
 }
 exports.activate = activate
 
