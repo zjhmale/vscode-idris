@@ -64,43 +64,56 @@
     }],
     "commands": [{
       "command": "idris.typecheck",
-      "title": "Idris: Typecheck file"
+      "title": "Idris: typecheck",
+      "description": "Typecheck file"
     }, {
       "command": "idris.type-of",
-      "title": "Idris: Type of identifier"
+      "title": "Idris: type of",
+      "description": "Type of identifier"
     }, {
       "command": "idris.docs-for",
-      "title": "Idris: Docs for identifier"
+      "title": "Idris: dosc for",
+      "description": "Docs for identifier"
     }, {
       "command": "idris.print-definition",
-      "title": "Idris: Print definition of identifier"
+      "title": "Idris: definition of",
+      "description": "Print definition of identifier"
     }, {
       "command": "idris.show-holes",
-      "title": "Idris: Show the currently active holes"
+      "title": "Idris: show holes",
+      "description": "Show the currently active holes"
     }, {
       "command": "idris.add-clause",
-      "title": "Idris: Add an initial pattern match clause"
+      "title": "Idris: add clause",
+      "description": "Add an initial pattern match clause"
     }, {
       "command": "idris.case-split",
-      "title": "Idris: Add a case split for the pattern variable"
+      "title": "Idris: case split",
+      "description": "Add a case split for the pattern variable"
     }, {
       "command": "idris.proof-search",
-      "title": "Idris: Attempt to fill out the holes by proof search"
+      "title": "Idris: proof search",
+      "description": "Attempt to fill out the holes by proof search"
     }, {
       "command": "idris.make-with",
-      "title": "Idris: Make a with rule pattern match template for the clause of function"
+      "title": "Idris: make with",
+      "description": "Make a with rule pattern match template for the clause of function"
     }, {
       "command": "idris.make-case",
-      "title": "Idris: Make a case pattern match template for holes"
+      "title": "Idris: make case",
+      "description": "Make a case pattern match template for holes"
     }, {
       "command": "idris.make-lemma",
-      "title": "Idris: Make a top level lemma which solves the hole under the cursor"
+      "title": "Idris: make lemma",
+      "description": "Make a top level lemma which solves the hole under the cursor"
     }, {
       "command": "idris.apropos",
-      "title": "Idris: Search names, types, and documentation"
+      "title": "Idris: apropos",
+      "description": "Search names, types, and documentation"
     }, {
       "command": "idris.run-repl",
-      "title": "Idris: Eval current line"
+      "title": "Idris: repl",
+      "description": "Eval current line"
     }],
     "keybindings": [{
       "key": "shift+ctrl+t",
