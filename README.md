@@ -17,10 +17,10 @@
 | Clause-adding | shift + cmd/ctrl + a |
 | Case-splitting | shift + cmd/ctrl + c |
 | Proof-search | shift + cmd/ctrl + s |
-| make-with | shift + cmd/ctrl + w |
-| make-case | shift + cmd/ctrl + m |
-| make-lemma | shift + cmd/ctrl + l |
-| apropos | shift + cmd/ctrl + k |
+| Make-with | shift + cmd/ctrl + w |
+| Make-case | shift + cmd/ctrl + m |
+| Make-lemma | shift + cmd/ctrl + l |
+| Apropos | shift + cmd/ctrl + k |
 | REPL | shift + cmd/ctrl + r |
 
 * ipkg highlighting
