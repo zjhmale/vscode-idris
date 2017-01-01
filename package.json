@@ -1,10 +1,10 @@
 {
   "name": "Idris",
   "description": "Idris Language Support for Visual Studio Code",
-  "version": "1.0.0",
+  "version": "0.3.0",
   "publisher": "zjhmale",
   "engines": {
-    "vscode": "^0.10.1"
+    "vscode": "^1.7.0"
   },
   "icon": "images/idris.png",
   "keywords": [
@@ -187,6 +187,6 @@
     "eslint-config-standard": "^6.0.0",
     "eslint-plugin-promise": "^2.0.1",
     "eslint-plugin-standard": "^2.0.0",
-    "vscode": "^0.11.0"
+    "vscode": "^1.0.0"
   }
 }
