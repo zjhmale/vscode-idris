@@ -31,7 +31,7 @@
   "activationEvents": [
     "onLanguage:idris"
   ],
-  "main": "./src/extension",
+  "main": "./out/extension",
   "contributes": {
     "languages": [{
       "id": "idris",
@@ -174,6 +174,7 @@
     }]
   },
   "scripts": {
+    "prepublish": "rm -rf out && mkdir out && cp -r ./src/* ./out",
     "postinstall": "node ./node_modules/vscode/bin/install",
     "test": "node ./node_modules/vscode/bin/test"
   },
