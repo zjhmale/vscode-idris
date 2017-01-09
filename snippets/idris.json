@@ -34,6 +34,15 @@
           , "\tneutral = $0"
         ]
     },
+    "Num implementation": {
+        "prefix": "Num",
+        "body": [
+            "Num ${Type} where"
+          , "(+) a b = ?holePlus"
+          , "(*) a b = ?holeMult"
+          , "fromInteger i = ?holeFromInteger"
+        ]
+    },
     "Functor implementation": {
         "prefix": "Functor",
         "body": [
