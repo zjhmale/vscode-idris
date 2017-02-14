@@ -122,7 +122,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>(?&lt;!\w)\'\w+(?!')</string>
+			<string>(?&lt;!\w)\'\w++(?!')</string>
 			<key>name</key>
 			<string>string.label.idris</string>
 		</dict>
