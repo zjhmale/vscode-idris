@@ -121,6 +121,12 @@
 			</array>
 		</dict>
 		<dict>
+			<key>match</key>
+			<string>(?&lt;!\w)\'\w+(?!')</string>
+			<key>name</key>
+			<string>string.label.idris</string>
+		</dict>
+		<dict>
 			<key>begin</key>
 			<string>(?&lt;!\w)\'</string>
 			<key>beginCaptures</key>
@@ -159,7 +165,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>\b(class)\b</string>
+			<string>\b(class|interface)\b</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -194,7 +200,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>\b(instance)\b</string>
+			<string>\b(instance|implementation)\b</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
