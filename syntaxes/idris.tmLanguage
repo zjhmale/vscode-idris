@@ -665,7 +665,7 @@
 					<key>comment</key>
 					<string>I'm not sure that these are all keywords, but don't know where to check it</string>
 					<key>match</key>
-					<string>\b(infix[lr]?|let|where|of|with)\b</string>
+					<string>\b(infix[lr]?|let|where|of|with|rewrite)\b</string>
 					<key>name</key>
 					<string>keyword.other.idris</string>
 				</dict>
