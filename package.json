@@ -4,7 +4,7 @@
   "version": "0.3.0",
   "publisher": "zjhmale",
   "engines": {
-    "vscode": "^1.7.0"
+    "vscode": "^1.8.0"
   },
   "icon": "images/idris.png",
   "keywords": [
@@ -188,6 +188,6 @@
     "eslint-config-standard": "^6.0.0",
     "eslint-plugin-promise": "^2.0.1",
     "eslint-plugin-standard": "^2.0.0",
-    "vscode": "^1.0.0"
+    "vscode": "^1.0.5"
   }
 }
