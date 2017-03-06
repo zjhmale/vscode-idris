@@ -72,7 +72,7 @@
       "description": "Type of identifier"
     }, {
       "command": "idris.docs-for",
-      "title": "Idris: dosc for",
+      "title": "Idris: docs for",
       "description": "Docs for identifier"
     }, {
       "command": "idris.print-definition",
