@@ -165,7 +165,7 @@
 		</dict>
 		<dict>
 			<key>begin</key>
-			<string>\b(class|interface)\b</string>
+			<string>\b(class|interface|record)\b</string>
 			<key>beginCaptures</key>
 			<dict>
 				<key>1</key>
@@ -515,7 +515,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>^%(default)\s+(total|partial)$</string>
+					<string>^%(default)\s+(total|partial|mutual)$</string>
 					<key>name</key>
 					<string>meta.directive.totality.idris</string>
 				</dict>
