@@ -13,7 +13,7 @@ for (var i = 0; i < 26; i++) {
 function activate(context) {
   vscode.languages.setLanguageConfiguration("idris", {
     indentationRules: {
-      decreaseIndentPattern: /[\]})][ \t]*$/m,
+      decreaseIndentPattern: /[}][ \t]*$/m,
       increaseIndentPattern: /((\b(if\b.*|then|else|do|of|let|in|where))|=|->|>>=|>=>|=<<|(^(data)( |\t)+(\w|')+( |\t)*))( |\t)*$/
     }
   })
