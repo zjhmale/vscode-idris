@@ -79,7 +79,7 @@
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(total|partial)\b</string>
+			<string>\b(total|partial|mutual)\b</string>
 			<key>name</key>
 			<string>storage.modifier.totality.idris</string>
 		</dict>
@@ -515,7 +515,7 @@
 						</dict>
 					</dict>
 					<key>match</key>
-					<string>^%(default)\s+(total|partial|mutual)$</string>
+					<string>^%(default)\s+(total|partial)$</string>
 					<key>name</key>
 					<string>meta.directive.totality.idris</string>
 				</dict>
