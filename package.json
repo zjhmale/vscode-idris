@@ -115,86 +115,86 @@
       "title": "Idris: repl",
       "description": "Eval current line"
     }],
-		"keybindings": [
-			{
-				"key": "shift+ctrl+t",
-				"mac": "shift+cmd+t",
-				"when": "editorFocus && editorLangId == idris",
-				"command": "idris.typecheck"
-			},
-			{
-				"key": "shift+ctrl+o",
-				"mac": "shift+cmd+o",
-				"when": "editorFocus && editorLangId == idris",
-				"command": "idris.type-of"
-			},
-			{
-				"key": "shift+ctrl+d",
-				"mac": "shift+cmd+d",
-				"when": "editorFocus && editorLangId == idris",
-				"command": "idris.docs-for"
-			},
-			{
-				"key": "shift+ctrl+f",
-				"mac": "shift+cmd+f",
-				"when": "editorFocus && editorLangId == idris",
-				"command": "idris.print-definition"
-			},
-			{
-				"key": "shift+ctrl+h",
-				"mac": "shift+cmd+h",
-				"when": "editorFocus && editorLangId == idris",
-				"command": "idris.show-holes"
-			},
-			{
-				"key": "shift+ctrl+a",
-				"mac": "shift+cmd+a",
-				"when": "editorFocus && editorLangId == idris",
-				"command": "idris.add-clause"
-			},
-			{
-				"key": "shift+ctrl+c",
-				"mac": "shift+cmd+c",
-				"when": "editorFocus && editorLangId == idris",
-				"command": "idris.case-split"
-			},
-			{
-				"key": "shift+ctrl+s",
-				"mac": "shift+cmd+s",
-				"when": "editorFocus && editorLangId == idris",
-				"command": "idris.proof-search"
-			},
-			{
-				"key": "shift+ctrl+w",
-				"mac": "shift+cmd+w",
-				"when": "editorFocus && editorLangId == idris",
-				"command": "idris.make-with"
-			},
-			{
-				"key": "shift+ctrl+m",
-				"mac": "shift+cmd+m",
-				"when": "editorFocus && editorLangId == idris",
-				"command": "idris.make-case"
-			},
-			{
-				"key": "shift+ctrl+l",
-				"mac": "shift+cmd+l",
-				"when": "editorFocus && editorLangId == idris",
-				"command": "idris.make-lemma"
-			},
-			{
-				"key": "shift+ctrl+k",
-				"mac": "shift+cmd+k",
-				"when": "editorFocus && editorLangId == idris",
-				"command": "idris.apropos"
-			},
-			{
-				"key": "shift+ctrl+r",
-				"mac": "shift+cmd+r",
-				"when": "editorFocus && editorLangId == idris",
-				"command": "idris.run-repl"
-			}
-		],
+    "keybindings": [
+      {
+        "key": "shift+ctrl+t",
+        "mac": "shift+cmd+t",
+        "when": "editorFocus && editorLangId == idris",
+        "command": "idris.typecheck"
+      },
+      {
+        "key": "shift+ctrl+o",
+        "mac": "shift+cmd+o",
+        "when": "editorFocus && editorLangId == idris",
+        "command": "idris.type-of"
+      },
+      {
+        "key": "shift+ctrl+d",
+        "mac": "shift+cmd+d",
+        "when": "editorFocus && editorLangId == idris",
+        "command": "idris.docs-for"
+      },
+      {
+        "key": "shift+ctrl+f",
+        "mac": "shift+cmd+f",
+        "when": "editorFocus && editorLangId == idris",
+        "command": "idris.print-definition"
+      },
+      {
+        "key": "shift+ctrl+h",
+        "mac": "shift+cmd+h",
+        "when": "editorFocus && editorLangId == idris",
+        "command": "idris.show-holes"
+      },
+      {
+        "key": "shift+ctrl+a",
+        "mac": "shift+cmd+a",
+        "when": "editorFocus && editorLangId == idris",
+        "command": "idris.add-clause"
+      },
+      {
+        "key": "shift+ctrl+c",
+        "mac": "shift+cmd+c",
+        "when": "editorFocus && editorLangId == idris",
+        "command": "idris.case-split"
+      },
+      {
+        "key": "shift+ctrl+s",
+        "mac": "shift+cmd+s",
+        "when": "editorFocus && editorLangId == idris",
+        "command": "idris.proof-search"
+      },
+      {
+        "key": "shift+ctrl+w",
+        "mac": "shift+cmd+w",
+        "when": "editorFocus && editorLangId == idris",
+        "command": "idris.make-with"
+      },
+      {
+        "key": "shift+ctrl+m",
+        "mac": "shift+cmd+m",
+        "when": "editorFocus && editorLangId == idris",
+        "command": "idris.make-case"
+      },
+      {
+        "key": "shift+ctrl+l",
+        "mac": "shift+cmd+l",
+        "when": "editorFocus && editorLangId == idris",
+        "command": "idris.make-lemma"
+      },
+      {
+        "key": "shift+ctrl+k",
+        "mac": "shift+cmd+k",
+        "when": "editorFocus && editorLangId == idris",
+        "command": "idris.apropos"
+      },
+      {
+        "key": "shift+ctrl+r",
+        "mac": "shift+cmd+r",
+        "when": "editorFocus && editorLangId == idris",
+        "command": "idris.run-repl"
+      }
+    ],
     "snippets": [{
       "language": "idris",
       "path": "./snippets/idris.json"
