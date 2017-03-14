@@ -3,6 +3,7 @@
 ## 0.3.1
 
 * Update syntax to followed up Idirs 0.99.1 [@be5invis](https://github.com/be5invis)
+* Add key binding filter for actions [@be5invis](https://github.com/be5invis)
 * Fix typo for the title of `idris.docs-for` command [@FinnNk](https://github.com/FinnNk)
 
 ## 0.3.0
