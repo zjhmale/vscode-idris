@@ -86,13 +86,10 @@ let getInfoForWord = (uri, cmd) => {
       switch (cmd) {
         case 'type':
           return model.getType(currentWord)
-          break
         case 'docs':
           return model.getDocs(currentWord)
-          break
         case 'definition':
           return model.printDefinition(currentWord)
-          break
       }
     }).subscribe(successHandler, displayErrors)
     showLoading()
