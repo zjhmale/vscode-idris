@@ -27,7 +27,8 @@ let runCommand = (command) => {
     let uri = document.uri.fsPath
 
     let root = vscode.workspace.rootPath
-    let compilerOptions = ipkg.compilerOptions(root)
+    let safeRoot = root === undefined ? "" : root
+    let compilerOptions = ipkg.compilerOptions(safeRoot)
 
     compilerOptions.subscribe((compilerOptions) => {
       commands.initialize(compilerOptions)
