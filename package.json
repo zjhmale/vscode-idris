@@ -221,10 +221,6 @@
     "rx-lite": "4.0.0"
   },
   "devDependencies": {
-    "eslint": "^3.4.0",
-    "eslint-config-standard": "^6.0.0",
-    "eslint-plugin-promise": "^2.0.1",
-    "eslint-plugin-standard": "^2.0.0",
     "vscode": "^1.0.5"
   }
 }
