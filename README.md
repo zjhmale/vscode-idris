@@ -1,7 +1,8 @@
 # Idris for Visual Studio Code
 
 [![Build Status](https://travis-ci.org/zjhmale/vscode-idris.svg?branch=master)](https://travis-ci.org/zjhmale/vscode-idris)
-![status](https://img.shields.io/badge/status-0.3.0-green.svg)
+<img src="https://ci.appveyor.com/api/projects/status/github/zjhmale/vscode-idris?branch=master&svg=true" alt="Build Status">
+![status](https://img.shields.io/badge/status-0.3.1-green.svg)
 
 ## Implemented features
 
