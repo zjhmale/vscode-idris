@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.2
+
+* Start REPL for the currently opened Idris file
+* Refresh REPL when the currently opened Idris file is changed
+* Send selected text to REPL
+
 ## 0.3.1
 
 * Update syntax to followed up Idirs 0.99.1 [@be5invis](https://github.com/be5invis)
