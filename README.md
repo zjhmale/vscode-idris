@@ -11,18 +11,19 @@
 | command | shortcut |
 |---|---|
 | Typechecking | shift + cmd/ctrl + t |
-| Showing the types of a variable | shift + cmd/ctrl + o |
-| Showing the doc for a variable | shift + cmd/ctrl + d |
-| Showing the doc for a definition | shift + cmd/ctrl + f |
-| Showing holes | shift + cmd/ctrl + h |
-| Clause-adding | shift + cmd/ctrl + a |
-| Case-splitting | shift + cmd/ctrl + c |
-| Proof-search | shift + cmd/ctrl + s |
-| Make-with | shift + cmd/ctrl + w |
-| Make-case | shift + cmd/ctrl + m |
-| Make-lemma | shift + cmd/ctrl + l |
+| Show the types of a variable | shift + cmd/ctrl + o |
+| Show the doc for a variable | shift + cmd/ctrl + d |
+| Show the doc for a definition | shift + cmd/ctrl + f |
+| Show holes | shift + cmd/ctrl + h |
+| Add clause | shift + cmd/ctrl + a |
+| Split case | shift + cmd/ctrl + c |
+| Search proof | shift + cmd/ctrl + s |
+| Make with | shift + cmd/ctrl + w |
+| Make case | shift + cmd/ctrl + m |
+| Make lemma | shift + cmd/ctrl + l |
 | Apropos | shift + cmd/ctrl + k |
-| Eval-line | shift + cmd/ctrl + e |
+| Eval current line | shift + cmd/ctrl + e |
+| Start / Refresh REPL | shift + cmd/ctrl + r |
 
 * ipkg highlighting
 * autocompletion
