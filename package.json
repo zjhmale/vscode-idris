@@ -111,9 +111,13 @@
       "title": "Idris: apropos",
       "description": "Search names, types, and documentation"
     }, {
-      "command": "idris.run-repl",
-      "title": "Idris: repl",
+      "command": "idris.eval-line",
+      "title": "Idris: eval line",
       "description": "Eval current line"
+    }, {
+      "command": "idris.start-repl",
+      "title": "Idris: start repl",
+      "description": " current line"
     }],
     "keybindings": [
       {
@@ -189,10 +193,16 @@
         "command": "idris.apropos"
       },
       {
+        "key": "shift+ctrl+e",
+        "mac": "shift+cmd+e",
+        "when": "editorFocus && editorLangId == idris",
+        "command": "idris.eval-line"
+      },
+      {
         "key": "shift+ctrl+r",
         "mac": "shift+cmd+r",
         "when": "editorFocus && editorLangId == idris",
-        "command": "idris.run-repl"
+        "command": "idris.start-repl"
       }
     ],
     "snippets": [{

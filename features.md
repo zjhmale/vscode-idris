@@ -1,4 +1,4 @@
-### typechecking
+### Typechecking
 
 `(shift + cmd/ctrl + t)`
 
@@ -70,15 +70,19 @@
 
 ![apropos](./images/screenshots/apropos.gif)
 
-### REPL
+### Evaluate current line of code in editor
 
-seriously, it is not a real `REPL` at the moment, it can only eval current line, more details [here](https://github.com/zjhmale/vscode-idris/issues/3).
+`(shift + cmd/ctrl + e)`
 
-`(shift + cmd/ctrl + r)`
+![eval-line](./images/screenshots/eval-line.gif)
 
-![repl](./images/screenshots/repl.gif)
+### Start REPL
 
-### code completion
+`(shift + cmd/ctrl + e)`
+
+![eval-line](./images/screenshots/start-repl.gif)
+
+### Code completion
 
 ![completion](./images/screenshots/completion.gif)
 

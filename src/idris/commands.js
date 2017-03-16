@@ -6,6 +6,7 @@ let outputChannel = vscode.window.createOutputChannel('Idris')
 let replChannel = vscode.window.createOutputChannel('Idris REPL')
 let aproposChannel = vscode.window.createOutputChannel('Idris Apropos')
 let diagnosticCollection = vscode.languages.createDiagnosticCollection()
+let term = null
 
 let initialize = (compilerOptions) => {
   if (!model) {
@@ -185,6 +186,22 @@ let runREPL = (uri) => {
   }).then(function () {
   }).catch(function () {
   })
+}
+
+let startREPL = (uri) => {
+  let startup = () => {
+    term = vscode.window.createTerminal("Idris REPL")
+    term.sendText("idris")
+    term.sendText(`:l ${uri}`)
+    term.show()
+  }
+  if (term == null) {
+    startup()
+  } else {
+    term.hide()
+    term.dispose()
+    startup()
+  }
 }
 
 let addClause = (uri) => {
@@ -457,5 +474,6 @@ module.exports = {
   makeLemma,
   apropos,
   runREPL,
-  destroy
+  destroy,
+  startREPL
 }

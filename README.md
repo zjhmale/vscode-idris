@@ -21,7 +21,7 @@
 | Make-case | shift + cmd/ctrl + m |
 | Make-lemma | shift + cmd/ctrl + l |
 | Apropos | shift + cmd/ctrl + k |
-| REPL | shift + cmd/ctrl + r |
+| Eval-line | shift + cmd/ctrl + e |
 
 * ipkg highlighting
 * autocompletion
