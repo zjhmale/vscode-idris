@@ -76,11 +76,11 @@
 
 ![eval-line](./images/screenshots/eval-line.gif)
 
-### Start REPL
+### Start or Refresh REPL
 
 `(shift + cmd/ctrl + e)`
 
-![eval-line](./images/screenshots/start-repl.gif)
+![eval-line](./images/screenshots/start-refresh-repl.gif)
 
 ### Code completion
 

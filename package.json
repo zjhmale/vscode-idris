@@ -115,8 +115,8 @@
       "title": "Idris: eval line",
       "description": "Eval current line"
     }, {
-      "command": "idris.start-repl",
-      "title": "Idris: start repl",
+      "command": "idris.start-refresh-repl",
+      "title": "Idris: start or refresh REPL",
       "description": " current line"
     }],
     "keybindings": [
@@ -202,7 +202,7 @@
         "key": "shift+ctrl+r",
         "mac": "shift+cmd+r",
         "when": "editorFocus && editorLangId == idris",
-        "command": "idris.start-repl"
+        "command": "idris.start-refresh-repl"
       }
     ],
     "snippets": [{
