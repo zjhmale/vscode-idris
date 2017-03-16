@@ -2,6 +2,7 @@ sudo: false
 
 os:
   - osx
+  - linux
 
 install:
   - npm install
