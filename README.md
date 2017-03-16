@@ -24,6 +24,7 @@
 | Apropos | shift + cmd/ctrl + k |
 | Eval current line | shift + cmd/ctrl + e |
 | Start / Refresh REPL | shift + cmd/ctrl + r |
+| Send selection to REPL | shift + cmd/ctrl + x |
 
 * ipkg highlighting
 * autocompletion

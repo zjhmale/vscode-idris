@@ -78,9 +78,15 @@
 
 ### Start or Refresh REPL
 
-`(shift + cmd/ctrl + e)`
+`(shift + cmd/ctrl + r)`
 
-![eval-line](./images/screenshots/start-refresh-repl.gif)
+![start-refresh-repl](./images/screenshots/start-refresh-repl.gif)
+
+### Send selected text to REPL
+
+`(shift + cmd/ctrl + x)`
+
+![send-selection-repl](./images/screenshots/send-selection-repl.gif)
 
 ### Code completion
 

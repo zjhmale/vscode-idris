@@ -188,20 +188,34 @@ let runREPL = (uri) => {
   })
 }
 
+let startup = (uri) => {
+  term = vscode.window.createTerminal("Idris REPL")
+  term.sendText("idris")
+  term.sendText(`:l ${uri}`)
+  term.show()
+}
+
 let startREPL = (uri) => {
-  let startup = () => {
-    term = vscode.window.createTerminal("Idris REPL")
-    term.sendText("idris")
-    term.sendText(`:l ${uri}`)
-    term.show()
-  }
   if (term == null) {
-    startup()
+    startup(uri)
   } else {
     term.hide()
     term.dispose()
-    startup()
+    startup(uri)
   }
+}
+
+let sendREPL = (uri) => {
+  let editor = vscode.window.activeTextEditor
+  let selection = editor.selection
+  let text = editor.document.getText(selection)
+
+  if (term == null) {
+    startup(uri)
+  }
+
+  term.show()
+  term.sendText(text)
 }
 
 let addClause = (uri) => {
@@ -475,5 +489,6 @@ module.exports = {
   apropos,
   runREPL,
   destroy,
-  startREPL
+  startREPL,
+  sendREPL
 }
