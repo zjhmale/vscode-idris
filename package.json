@@ -33,96 +33,138 @@
   ],
   "main": "./out/extension",
   "contributes": {
-    "languages": [{
-      "id": "idris",
-      "aliases": [
-        "Idris",
-        "idris"
-      ],
-      "extensions": [
-        ".idr",
-        ".lidr"
-      ],
-      "configuration": "./configs/idris.json"
-    }, {
-      "id": "ipkg",
-      "aliases": [
-        "Ipkg",
-        "ipkg"],
-      "extensions": [
-        ".ipkg"
-      ]
-    }],
-    "grammars": [{
-      "language": "idris",
-      "scopeName": "source.idris",
-      "path": "./syntaxes/idris.tmLanguage"
-    }, {
-      "language": "ipkg",
-      "scopeName": "source.ipkg",
-      "path": "./syntaxes/ipkg.tmLanguage"
-    }],
-    "commands": [{
-      "command": "idris.typecheck",
-      "title": "Idris: typecheck",
-      "description": "Typecheck file"
-    }, {
-      "command": "idris.type-of",
-      "title": "Idris: type of",
-      "description": "Type of identifier"
-    }, {
-      "command": "idris.docs-for",
-      "title": "Idris: docs for",
-      "description": "Docs for identifier"
-    }, {
-      "command": "idris.print-definition",
-      "title": "Idris: definition of",
-      "description": "Print definition of identifier"
-    }, {
-      "command": "idris.show-holes",
-      "title": "Idris: show holes",
-      "description": "Show the currently active holes"
-    }, {
-      "command": "idris.add-clause",
-      "title": "Idris: add clause",
-      "description": "Add an initial pattern match clause"
-    }, {
-      "command": "idris.case-split",
-      "title": "Idris: case split",
-      "description": "Add a case split for the pattern variable"
-    }, {
-      "command": "idris.proof-search",
-      "title": "Idris: proof search",
-      "description": "Attempt to fill out the holes by proof search"
-    }, {
-      "command": "idris.make-with",
-      "title": "Idris: make with",
-      "description": "Make a with rule pattern match template for the clause of function"
-    }, {
-      "command": "idris.make-case",
-      "title": "Idris: make case",
-      "description": "Make a case pattern match template for holes"
-    }, {
-      "command": "idris.make-lemma",
-      "title": "Idris: make lemma",
-      "description": "Make a top level lemma which solves the hole under the cursor"
-    }, {
-      "command": "idris.apropos",
-      "title": "Idris: apropos",
-      "description": "Search names, types, and documentation"
-    }, {
-      "command": "idris.eval-line",
-      "title": "Idris: eval line",
-      "description": "Eval current line"
-    }, {
-      "command": "idris.start-refresh-repl",
-      "title": "Idris: start or refresh REPL",
-      "description": "Start REPL for currently opened file or refresh REPL when opened file is changed"
-    }, {
-      "command": "idris.send-selection-repl",
-      "title": "Idris: send selected text to REPL",
-      "description": "Send selected text to a refreshed REPL with currently opened file"
-    }],
+    "languages": [
+      {
+        "id": "idris",
+        "aliases": [
+          "Idris",
+          "idris"
+        ],
+        "extensions": [
+          ".idr",
+          ".lidr"
+        ],
+        "configuration": "./configs/idris.json"
+      },
+      {
+        "id": "ipkg",
+        "aliases": [
+          "Ipkg",
+          "ipkg"
+        ],
+        "extensions": [
+          ".ipkg"
+        ]
+      },
+      {
+        "id": "log",
+        "aliases": [
+          "Log",
+          "log"
+        ],
+        "extensions": [
+          ".log"
+        ],
+        "configuration": "./configs/idris.json",
+        "mimetypes": [
+          "text/x-code-output"
+        ]
+      }
+    ],
+    "grammars": [
+      {
+        "language": "idris",
+        "scopeName": "source.idris",
+        "path": "./syntaxes/idris.tmLanguage"
+      },
+      {
+        "language": "ipkg",
+        "scopeName": "source.ipkg",
+        "path": "./syntaxes/ipkg.tmLanguage"
+      },
+      {
+        "language": "log",
+        "scopeName": "source.idris",
+        "path": "./syntaxes/idris.tmLanguage"
+      }
+    ],
+    "commands": [
+      {
+        "command": "idris.typecheck",
+        "title": "Idris: typecheck",
+        "description": "Typecheck file"
+      },
+      {
+        "command": "idris.type-of",
+        "title": "Idris: type of",
+        "description": "Type of identifier"
+      },
+      {
+        "command": "idris.docs-for",
+        "title": "Idris: docs for",
+        "description": "Docs for identifier"
+      },
+      {
+        "command": "idris.print-definition",
+        "title": "Idris: definition of",
+        "description": "Print definition of identifier"
+      },
+      {
+        "command": "idris.show-holes",
+        "title": "Idris: show holes",
+        "description": "Show the currently active holes"
+      },
+      {
+        "command": "idris.add-clause",
+        "title": "Idris: add clause",
+        "description": "Add an initial pattern match clause"
+      },
+      {
+        "command": "idris.case-split",
+        "title": "Idris: case split",
+        "description": "Add a case split for the pattern variable"
+      },
+      {
+        "command": "idris.proof-search",
+        "title": "Idris: proof search",
+        "description": "Attempt to fill out the holes by proof search"
+      },
+      {
+        "command": "idris.make-with",
+        "title": "Idris: make with",
+        "description": "Make a with rule pattern match template for the clause of function"
+      },
+      {
+        "command": "idris.make-case",
+        "title": "Idris: make case",
+        "description": "Make a case pattern match template for holes"
+      },
+      {
+        "command": "idris.make-lemma",
+        "title": "Idris: make lemma",
+        "description": "Make a top level lemma which solves the hole under the cursor"
+      },
+      {
+        "command": "idris.apropos",
+        "title": "Idris: apropos",
+        "description": "Search names, types, and documentation"
+      },
+      {
+        "command": "idris.eval-line",
+        "title": "Idris: eval line",
+        "description": "Eval current line"
+      },
+      {
+        "command": "idris.start-refresh-repl",
+        "title": "Idris: start or refresh REPL",
+        "description": "Start REPL for currently opened file or refresh REPL when opened file is changed"
+      },
+      {
+        "command": "idris.send-selection-repl",
+        "title": "Idris: send selected text to REPL",
+        "description": "Send selected text to a refreshed REPL with currently opened file"
+      }
+    ],
     "keybindings": [
       {
         "key": "shift+ctrl+t",
@@ -215,10 +257,12 @@
         "command": "idris.send-selection-repl"
       }
     ],
-    "snippets": [{
-      "language": "idris",
-      "path": "./snippets/idris.json"
-    }]
+    "snippets": [
+      {
+        "language": "idris",
+        "path": "./snippets/idris.json"
+      }
+    ]
   },
   "scripts": {
     "prepublish": "rm -rf out && mkdir out && cp -r ./src/* ./out",

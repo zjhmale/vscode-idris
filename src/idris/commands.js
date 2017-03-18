@@ -72,7 +72,7 @@ let getInfoForWord = (uri, cmd) => {
 
   let successHandler = (arg) => {
     let info = arg.msg[0]
-    let highlightingInfo = arg.msg[1]
+    //let highlightingInfo = arg.msg[1]
     outputChannel.clear()
     outputChannel.show()
     outputChannel.appendLine('Idris: ' + cmdMsgs[cmd] + ' ' + currentWord)
@@ -143,6 +143,7 @@ let showHoles = (uri) => {
   })
 }
 
+/*
 let idrisAscii = (version) => {
   return [
     "    ____    __     _"
@@ -150,8 +151,10 @@ let idrisAscii = (version) => {
   , "   / // __  / ___/ / ___/     Version " + version
   , " _/ // /_/ / /  / (__  )      http://www.idris-lang.org/"
   , "/___/\_____/_/  /_/____/       Type :? for help"
+  , ""
   ]
-} 
+}
+*/
 
 let runREPL = (uri) => {
   let editor = vscode.window.activeTextEditor
@@ -159,7 +162,7 @@ let runREPL = (uri) => {
 
   let successHandler = (arg) => {
     let result = arg.msg[0]
-    let highlightingInfo = arg.msg[1]
+    //let highlightingInfo = arg.msg[1]
 
     outputChannel.clear()
     diagnosticCollection.clear()
@@ -168,8 +171,8 @@ let runREPL = (uri) => {
 
     model.getVersion().subscribe((arg) => {
       let version = arg.msg[0][0].join(".")
-      replChannel.appendLine(idrisAscii(version).join('\n'))
-      replChannel.appendLine("\nType checking " + uri + "\n")
+      //replChannel.appendLine(idrisAscii(version).join('\n'))
+      replChannel.appendLine("Type checking " + uri + "\n")
       replChannel.appendLine("λΠ> " + text)
       replChannel.appendLine(result)
     }, displayErrors)
@@ -414,7 +417,7 @@ let apropos = (uri) => {
   vscode.window.showInputBox({prompt: 'Idris: Apropos'}).then(val => {
     let successHandler = (arg) => {
       let result = arg.msg[0]
-      let highlightingInfo = arg.msg[1]
+      //let highlightingInfo = arg.msg[1]
 
       outputChannel.clear()
       diagnosticCollection.clear()
