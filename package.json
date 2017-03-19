@@ -55,20 +55,6 @@
         "extensions": [
           ".ipkg"
         ]
-      },
-      {
-        "id": "log",
-        "aliases": [
-          "Log",
-          "log"
-        ],
-        "extensions": [
-          ".log"
-        ],
-        "configuration": "./configs/idris.json",
-        "mimetypes": [
-          "text/x-code-output"
-        ]
       }
     ],
     "grammars": [
@@ -81,11 +67,6 @@
         "language": "ipkg",
         "scopeName": "source.ipkg",
         "path": "./syntaxes/ipkg.json"
-      },
-      {
-        "language": "log",
-        "scopeName": "source.idris",
-        "path": "./syntaxes/idris.json"
       }
     ],
     "commands": [
