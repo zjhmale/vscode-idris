@@ -21,6 +21,10 @@
 			"match": "\\b(package|opts|modules|sourcedir|makefile|objs|executable|main|libs|pkgs|tests)\\b"
 		},
 		{
+			"name": "constant.language.ipkg",
+			"match": "\\b(brief|version|readme|license|author|maintainer|homepage|sourceloc|bugtracker)\\b"
+		},
+		{
 			"name": "string.quoted.double.ipkg",
 			"begin": "\"",
 			"end": "\""

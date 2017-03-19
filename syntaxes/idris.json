@@ -15,7 +15,7 @@
 		},
 		{
 			"name": "keyword.control.idris",
-			"match": "\\b(where|with|syntax|proof|postulate|using|namespace|class|instance|interface|implementation)\\b"
+			"match": "\\b(where|with|syntax|proof|postulate|using|namespace|class|instance|interface|implementation|record|rewrite)\\b"
 		},
 		{
 			"name": "keyword.control.idris",
@@ -82,6 +82,10 @@
 					"include": "#escape_characters"
 				}
 			]
+		},
+		{
+			"name": "variable.parameter.idris",
+			"match": "(?<!\\w)\\'\\w++(?!')"
 		},
 		{
 			"name": "string.quoted.single.idris",
