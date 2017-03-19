@@ -84,7 +84,7 @@
 			]
 		},
 		{
-			"name": "variable.parameter.idris",
+			"name": "variable.other.idris",
 			"match": "(?<!\\w)\\'\\w++(?!')"
 		},
 		{
