@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.3
+
+* Update syntax files
+
 ## 0.3.2
 
 * Start REPL for the currently opened Idris file
