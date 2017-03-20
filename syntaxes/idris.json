@@ -10,7 +10,7 @@
 			"match": "\\b(if|then|else|do|let|in|codata|record|dsl)\\b"
 		},
 		{
-			"name": "keyword.control.idris",
+			"name": "storage.declaration.idris",
 			"match": "\\b(impossible|case|of|total|partial|mutual|infix|infixl|infixr)\\b"
 		},
 		{
@@ -18,7 +18,7 @@
 			"match": "\\b(where|with|syntax|proof|postulate|using|namespace|class|instance|interface|implementation|record|rewrite)\\b"
 		},
 		{
-			"name": "keyword.control.idris",
+			"name": "storage.visibility.idris",
 			"match": "\\b(public|private|export|implicit)\\b"
 		},
 		{
@@ -32,102 +32,10 @@
 			"comment": "Line comment"
 		},
 		{
-			"name": "storage.type.function.idris",
-			"match": "\\?[-!#\\$%&\\*\\+\\.\\/<=>@\\\\^|~:]+|[-!#\\$%&\\*\\+\\.\\/<=>@\\\\^|~:\\?][-!#\\$%&\\*\\+\\.\\/<=>@\\\\^|~:]*"
-		},
-		{
-			"name": "storage.type.builtin.idris",
-			"match": "\\b(Type|Int|Nat|Integer|Float|Char|String|Ptr|Bits8|Bits16|Bits32|Bits64|Bool)\\b"
-		},
-		{
-			"name": "constant.numeric.idris",
-			"match": "\\b(S|Z)\\b"
-		},
-		{
-			"match": "\\b([0-9]+|0([xX][0-9a-fA-F]+|[oO][0-7]+))\\b",
-			"name": "constant.numeric.idris",
-			"comment": "integer literal"
-		},
-		{
-			"match": "\\b([0-9]+\\.[0-9]+([eE][+-]?[0-9]+)?|[0-9]+[eE][+-]?[0-9]+)\\b",
-			"name": "constant.numeric.float.idris",
-			"comment": "float literal"
-		},
-		{
-			"match": "\\(\\)",
-			"name": "constant.unit.idris"
-		},
-		{
 			"name": "comment.block.idris",
 			"begin": "\\{-",
 			"end": "-\\}",
 			"comment": "Block comment"
-		},
-		{
-			"name": "string.quoted.double.idris",
-			"begin": "\"",
-			"beginCaptures": {
-				"0": {
-					"name": "punctuation.definition.string.begin.idris"
-				}
-			},
-			"end": "\"",
-			"endCaptures": {
-				"0": {
-					"name": "punctuation.definition.string.end.idris"
-				}
-			},
-			"patterns": [
-				{
-					"include": "#escape_characters"
-				}
-			]
-		},
-		{
-			"name": "variable.other.idris",
-			"match": "(?<!\\w)\\'\\w++(?!')"
-		},
-		{
-			"name": "string.quoted.single.idris",
-			"match": "(')(?:(?:\\\\\")|(?:\\\\[0-9]+)|(\\\\o[0-7]+)|(\\\\x[0-9a-fA-F]+)|(?:[^'])|(NUL|SOH|STX|ETX|EOT|ENQ|ACK|BEL|BS|HT|LF|VT|FF|CR|SO|SI|DLE|DC1|DC2|DC3|DC4|NAK|SYN|ETB|CAN|EM|SUB|ESC|FS|GS|RS|US|SP|DEL))(')",
-			"captures": {
-				"1": {
-					"name": "punctuation.definition.string.begin.idris"
-				},
-				"2": {
-					"name": "constant.character.escape.octal.idris"
-				},
-				"3": {
-					"name": "constant.character.escape.hexadecimal.idris"
-				},
-				"4": {
-					"name": "constant.character.escape.control.idris"
-				},
-				"5": {
-					"name": "punctuation.definition.string.end.idris"
-				}
-			},
-			"patterns": [
-				{
-					"name": "invalid.illegal.idris",
-					"match": "\\\\n"
-				}
-			]
-		},
-		{
-			"name": "keyword.operator.function.infix.idris",
-			"begin": "`",
-			"beginCaptures": {
-				"0": {
-					"name": "punctuation.definition.entity.idris"
-				}
-			},
-			"end": "`",
-			"endCaptures": {
-				"0": {
-					"name": "punctuation.definition.entity.idris"
-				}
-			}
 		},
 		{
 			"begin": "\\b(module)\\b",
@@ -161,45 +69,19 @@
 				}
 			]
 		},
-		{
-			"name": "meta.declaration.data.idris",
-			"begin": "\\b(data)\\s+([\\w']+)\\s*(:)?",
-			"beginCaptures": {
-				"1": {
-					"name": "keyword.other.idris"
-				},
-				"2": {
-					"name": "entity.name.type.idris"
-				},
-				"3": {
-					"name": "keyword.operator.colon.idris"
-				}
-			},
-			"end": "\\b(where)\\b|(=)|$",
-			"endCaptures": {
-				"1": {
-					"name": "keyword.other.idris"
-				},
-				"2": {
-					"name": "keyword.operator.idris"
-				}
-			},
-			"patterns": [
-				{
-					"include": "#type_signature"
-				}
-			]
-		},
-		{
-			"include": "#function_signature"
-		},
-		{
-			"name": "keyword.operator.idris",
-			"match": "[|&!%$?~+:\\-.=</>\\\\*]+"
-		},
-		{
-			"include": "#data_ctor"
-		}
+		{ "include": "#data_decl" },
+		{ "include": "#function_signature" },
+		{ "include": "#operator" },
+		{ "include": "#infix_function" },
+		{ "include": "#prelude_type" },
+		{ "include": "#delimiter" },
+		{ "include": "#number_nat" },
+		{ "include": "#number_integer" },
+		{ "include": "#number_float" },
+		{ "include": "#unit" },
+		{ "include": "#string_double" },
+		{ "include": "#string_single" },
+		{ "include": "#data_ctor" }
 	],
 	"repository": {
 		"context_signature": {
@@ -258,43 +140,38 @@
 			"comment": "Parameter types in a type signature",
 			"patterns": [
 				{
-					"include": "#prelude_type"
-				},
-				{
 					"name": "meta.parameter.named.idris",
 					"comment": "(x : Nat)",
-					"begin": "\\(([\\w']+)\\s*:(?!:)",
+					"begin": "(\\()([\\w']+)\\s*:(?!:)",
 					"beginCaptures": {
-						"1": {
-							"name": "entity.name.tag.idris"
-						}
+						"1": { "name": "punctuation.delimiter.idris" },
+						"2": { "name": "variable.parameter.idris" }
 					},
 					"end": "\\)",
+					"endCaptures": {
+						"0": { "name": "punctuation.delimiter.idris" }
+					},
 					"patterns": [
-						{
-							"include": "#prelude_type"
-						}
+						{ "include": "#type_signature" }
 					]
 				},
 				{
 					"name": "meta.parameter.implicit.idris",
 					"comment": "{auto p : a = b}",
-					"begin": "\\{((auto|default .+)\\s+)?([\\w']+)\\s*:(?!:)",
+					"begin": "(\\{)((auto|default .+)\\s+)?([\\w']+)\\s*:(?!:)",
 					"beginCaptures": {
-						"1": {
-							"name": "storage.modifier.idris"
-						},
-						"3": {
-							"name": "entity.name.tag.idris"
-						}
+						"1": { "name": "punctuation.delimiter.idris" },
+						"2": { "name": "storage.modifier.idris" },
+						"4": { "name": "variable.parameter.idris" }
 					},
 					"end": "\\}",
+					"endCaptures": {
+						"0": { "name": "punctuation.delimiter.idris" }
+					},
 					"patterns": [
-						{
-							"include": "#prelude_type"
-						}
+						{ "include": "#type_signature" }
 					]
-				}
+				}				
 			]
 		},
 		"type_signature": {
@@ -303,15 +180,20 @@
 					"name": "keyword.operator.arrow.idris",
 					"match": "->"
 				},
-				{
-					"include": "#context_signature"
-				},
-				{
-					"include": "#parameter_type"
-				},
-				{
-					"include": "#language_const"
-				}
+				{ "include": "#context_signature" },
+				{ "include": "#parameter_type" },
+				{ "include": "#language_const" },
+				{ "include": "#operator" },
+				{ "include": "#infix_function" },
+				{ "include": "#prelude_type" },
+				{ "include": "#delimiter" },
+				{ "include": "#number_nat" },
+				{ "include": "#number_integer" },
+				{ "include": "#number_float" },
+				{ "include": "#unit" },
+				{ "include": "#string_double" },
+				{ "include": "#string_single" },
+				{ "include": "#data_ctor" }
 			]
 		},
 		"function_signature": {
@@ -330,9 +212,7 @@
 			},
 			"end": "(;|(?<=[^\\s>])\\s*(?!->)\\s*$)",
 			"patterns": [
-				{
-					"include": "#type_signature"
-				}
+				{ "include": "#type_signature" }
 			],
 			"comment": "The end patterm is a bit tricky. It's either ';' or something, at the end of the line,\nbut not '->', because a type signature can be multiline. Though, it doesn't help, if you\nbreak the signature before arrows."
 		},
@@ -368,11 +248,118 @@
 				}
 			]
 		},
+		"data_decl": {
+			"name": "meta.declaration.data.idris",
+			"begin": "\\b(data)\\s+([\\w']+)\\s*(:)?",
+			"beginCaptures": {
+				"1": { "name": "keyword.other.idris" },
+				"2": { "name": "entity.name.type.idris" },
+				"3": { "name": "keyword.operator.colon.idris" }
+			},
+			"end": "\\b(where)\\b|(=)|$",
+			"endCaptures": {
+				"1": { "name": "keyword.other.idris" },
+				"2": { "name": "keyword.operator.idris" }
+			},
+			"patterns": [ { "include": "#type_signature" } ]
+		},
 		"data_ctor": {
 			"patterns": [
 				{
-					"name": "entity.name.tag.idris",
+					"name": "entity.name.constructor.idris",
 					"match": "\\b[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}']*(?:\\.[\\p{Lu}\\p{Lt}][\\p{Ll}_\\p{Lu}\\p{Lt}\\p{Nd}']*)*\\b"
+				}
+			]
+		},
+		"prelude_type": {
+			"name": "support.type.builtin.idris",
+			"match": "\\b(Type|Int|Nat|Integer|Float|Char|String|Ptr|Bits8|Bits16|Bits32|Bits64|Bool)\\b"
+		},
+		"operator": {
+			"name": "keyword.operator.idris",
+			"match": "\\?[-!#\\$%&\\*\\+\\.\\/<=>@\\\\^|~:]+|[-!#\\$%&\\*\\+\\.\\/<=>@\\\\^|~:\\?][-!#\\$%&\\*\\+\\.\\/<=>@\\\\^|~:]*"
+		},
+		"infix_function": {
+			"name": "keyword.operator.function.infix.idris",
+			"begin": "`",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.entity.idris"
+				}
+			},
+			"end": "`",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.definition.entity.idris"
+				}
+			}
+		},
+		"delimiter": {
+			"name": "punctuation.delimiter.idris",
+			"match": "[\\(\\)\\[\\]{},;]"
+		},
+		"unit": {
+			"match": "\\(\\)",
+			"name": "constant.unit.idris"
+		},
+		"number_nat": {
+			"name": "constant.numeric.idris",
+			"match": "\\b(S|Z)\\b"
+		},
+		"number_integer": {
+			"match": "\\b([0-9]+|0([xX][0-9a-fA-F]+|[oO][0-7]+))\\b",
+			"name": "constant.numeric.idris",
+			"comment": "integer literal"
+		},
+		"number_float": {
+			"match": "\\b([0-9]+\\.[0-9]+([eE][+-]?[0-9]+)?|[0-9]+[eE][+-]?[0-9]+)\\b",
+			"name": "constant.numeric.float.idris",
+			"comment": "float literal"
+		},
+		"string_double": {
+			"name": "string.quoted.double.idris",
+			"begin": "\"",
+			"beginCaptures": {
+				"0": {
+					"name": "punctuation.definition.string.begin.idris"
+				}
+			},
+			"end": "\"",
+			"endCaptures": {
+				"0": {
+					"name": "punctuation.definition.string.end.idris"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#escape_characters"
+				}
+			]
+		},
+		"string_single": {
+			"name": "string.quoted.single.idris",
+			"match": "(')(?:(?:\\\\\")|(?:\\\\[0-9]+)|(\\\\o[0-7]+)|(\\\\x[0-9a-fA-F]+)|(?:[^'])|(NUL|SOH|STX|ETX|EOT|ENQ|ACK|BEL|BS|HT|LF|VT|FF|CR|SO|SI|DLE|DC1|DC2|DC3|DC4|NAK|SYN|ETB|CAN|EM|SUB|ESC|FS|GS|RS|US|SP|DEL))(')",
+			"captures": {
+				"1": {
+					"name": "punctuation.definition.string.begin.idris"
+				},
+				"2": {
+					"name": "constant.character.escape.octal.idris"
+				},
+				"3": {
+					"name": "constant.character.escape.hexadecimal.idris"
+				},
+				"4": {
+					"name": "constant.character.escape.control.idris"
+				},
+				"5": {
+					"name": "punctuation.definition.string.end.idris"
+				}
+			},
+			"patterns": [
+				{
+					"name": "invalid.illegal.idris",
+					"match": "\\\\n"
 				}
 			]
 		}
