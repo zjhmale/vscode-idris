@@ -14,9 +14,11 @@ class IdrisIdeMode extends EventEmitter {
   start(compilerOptions) {
     if ((this.process == null) || !this.process.connected) {
       let pathToIdris = 'idris'
-      let pkgs = compilerOptions.pkgs && compilerOptions.pkgs.length ? (p = compilerOptions.pkgs.map((p) => {
-        return ["-p", p]
-      }), [].concat.apply([], p)) : []
+      let pkgs = compilerOptions.pkgs && compilerOptions.pkgs.length 
+        ? [].concat.apply([], compilerOptions.pkgs.map((p) => {
+            return ["-p", p]
+          }))
+        : []
       let params = ['--ide-mode'].concat(pkgs, compilerOptions.options ? compilerOptions.options.split(' ') : [])
       let options = compilerOptions.src ? {
         cwd: compilerOptions.src
