@@ -11,11 +11,11 @@
 		},
 		{
 			"name": "storage.declaration.idris",
-			"match": "\\b(impossible|case|of|total|partial|mutual|infix|infixl|infixr)\\b"
+			"match": "\\b(impossible|case|of|total|partial|mutual|infix|infixl|infixr|constructor)\\b"
 		},
 		{
 			"name": "keyword.control.idris",
-			"match": "\\b(where|with|syntax|proof|postulate|using|namespace|class|instance|interface|implementation|record|rewrite)\\b"
+			"match": "\\b(where|with|syntax|proof|postulate|using|namespace|rewrite)\\b"
 		},
 		{
 			"name": "storage.visibility.idris",
@@ -142,10 +142,11 @@
 				{
 					"name": "meta.parameter.named.idris",
 					"comment": "(x : Nat)",
-					"begin": "(\\()([\\w']+)\\s*:(?!:)",
+					"begin": "(\\()([\\w']+)\\s*(:)(?!:)",
 					"beginCaptures": {
 						"1": { "name": "punctuation.delimiter.idris" },
-						"2": { "name": "variable.parameter.idris" }
+						"2": { "name": "variable.parameter.idris" },
+						"3": { "name": "keyword.operator.annot.idris" }
 					},
 					"end": "\\)",
 					"endCaptures": {
@@ -158,11 +159,12 @@
 				{
 					"name": "meta.parameter.implicit.idris",
 					"comment": "{auto p : a = b}",
-					"begin": "(\\{)((auto|default .+)\\s+)?([\\w']+)\\s*:(?!:)",
+					"begin": "(\\{)((auto|default .+)\\s+)?([\\w']+)\\s*(:)(?!:)",
 					"beginCaptures": {
 						"1": { "name": "punctuation.delimiter.idris" },
 						"2": { "name": "storage.modifier.idris" },
-						"4": { "name": "variable.parameter.idris" }
+						"4": { "name": "variable.parameter.idris" },
+						"5": { "name": "keyword.operator.annot.idris" }
 					},
 					"end": "\\}",
 					"endCaptures": {
@@ -180,8 +182,8 @@
 					"name": "keyword.operator.arrow.idris",
 					"match": "->"
 				},
-				{ "include": "#context_signature" },
 				{ "include": "#parameter_type" },
+				{ "include": "#context_signature" },
 				{ "include": "#language_const" },
 				{ "include": "#operator" },
 				{ "include": "#infix_function" },
@@ -250,7 +252,7 @@
 		},
 		"data_decl": {
 			"name": "meta.declaration.data.idris",
-			"begin": "\\b(data)\\s+([\\w']+)\\s*(:)?",
+			"begin": "\\b(data|class|instance|interface|implementation|record)\\s+([\\w']+)\\s*(:)?",
 			"beginCaptures": {
 				"1": { "name": "keyword.other.idris" },
 				"2": { "name": "entity.name.type.idris" },
