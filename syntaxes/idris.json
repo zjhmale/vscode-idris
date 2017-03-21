@@ -7,7 +7,7 @@
 	"patterns": [
 		{
 			"name": "keyword.control.idris",
-			"match": "\\b(if|then|else|do|let|in|codata|record|dsl)\\b"
+			"match": "\\b(if|then|else|do|let|in|dsl)\\b"
 		},
 		{
 			"name": "storage.declaration.idris",
@@ -252,7 +252,7 @@
 		},
 		"data_decl": {
 			"name": "meta.declaration.data.idris",
-			"begin": "\\b(data|class|instance|interface|implementation|record)\\s+([\\w']+)\\s*(:)?",
+			"begin": "\\b(data|codata|class|instance|interface|implementation|record)\\s+([\\w']+)\\s*(:)?",
 			"beginCaptures": {
 				"1": { "name": "keyword.other.idris" },
 				"2": { "name": "entity.name.type.idris" },
