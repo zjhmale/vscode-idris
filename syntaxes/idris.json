@@ -252,11 +252,9 @@
 		},
 		"data_decl": {
 			"name": "meta.declaration.data.idris",
-			"begin": "\\b(data|codata|class|instance|interface|implementation|record)\\s+([\\w']+)\\s*(:)?",
+			"begin": "\\b(data|codata|class|instance|interface|implementation|record)\\s",
 			"beginCaptures": {
-				"1": { "name": "keyword.other.idris" },
-				"2": { "name": "entity.name.type.idris" },
-				"3": { "name": "keyword.operator.colon.idris" }
+				"1": { "name": "keyword.other.idris" }
 			},
 			"end": "\\b(where)\\b|(=)|$",
 			"endCaptures": {
