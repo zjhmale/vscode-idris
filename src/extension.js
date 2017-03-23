@@ -1,6 +1,7 @@
 let vscode     = require('vscode')
 let controller = require('./controller')
 let completion = require('./completion')
+let typeHover  = require('./typeHover')
 
 let IDRIS_MODE = { language: 'idris', scheme: 'file' }
 
@@ -24,6 +25,7 @@ function activate(context) {
     context.subscriptions.push(disposable)
   })
   context.subscriptions.push(vscode.languages.registerCompletionItemProvider(IDRIS_MODE, new completion.IdrisCompletionProvider(), ...triggers))
+  context.subscriptions.push(vscode.languages.registerHoverProvider(IDRIS_MODE, new typeHover.IdrisHoverProvider()))
 }
 exports.activate = activate
 

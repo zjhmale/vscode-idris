@@ -25,11 +25,15 @@ let showLoading = () => {
   outputChannel.append("loading...")
 }
 
-let getWord = () => {
+let getCurrentPosition = () => {
   let editor = vscode.window.activeTextEditor
   let document = editor.document
   document.save()
   let position = editor.selection.active
+  return [document, position]
+}
+
+let getWordBase = (document, position) => {
   let wordRange = document.getWordRangeAtPosition(position)
   let currentWord = document.getText(wordRange)
   if (currentWord.match(/\r|\n| /g)) {
@@ -39,6 +43,11 @@ let getWord = () => {
   } else {
     return currentWord
   }
+}
+
+getWord = () => {
+  let [document, position] = getCurrentPosition()
+  return getWordBase(document, position)
 }
 
 let typecheckFile = (uri) => {
@@ -493,5 +502,6 @@ module.exports = {
   runREPL,
   destroy,
   startREPL,
-  sendREPL
+  sendREPL,
+  getWordBase
 }
