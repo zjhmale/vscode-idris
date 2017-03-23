@@ -1,6 +1,6 @@
-let ipkg     = require('./ipkg/ipkg')
+let ipkg = require('./ipkg/ipkg')
 let commands = require('./idris/commands')
-let vscode   = require('vscode')
+let vscode = require('vscode')
 
 let getCommands = () => {
   return [
@@ -22,25 +22,30 @@ let getCommands = () => {
   ]
 }
 
+let withCompilerOptions = (callback) => {
+  let document = vscode.window.activeTextEditor.document
+  if (document.languageId != 'idris') return
+
+  let uri = document.uri.fsPath
+  let root = vscode.workspace.rootPath
+  let safeRoot = root === undefined ? "" : root
+  let compilerOptions = ipkg.compilerOptions(safeRoot)
+
+  compilerOptions.subscribe((compilerOptions) => {
+    commands.initialize(compilerOptions)
+    callback(uri)
+  })
+}
+
 let runCommand = (command) => {
   return (_) => {
-    let document = vscode.window.activeTextEditor.document
-    if (document.languageId != 'idris') return
-    let uri = document.uri.fsPath
-
-    let root = vscode.workspace.rootPath
-    let safeRoot = root === undefined ? "" : root
-    let compilerOptions = ipkg.compilerOptions(safeRoot)
-
-    compilerOptions.subscribe((compilerOptions) => {
-      commands.initialize(compilerOptions)
-      command(uri)
-    })
+    withCompilerOptions(command)
   }
 }
 
 module.exports = {
   getCommands,
   destroy: commands.destroy,
-  diagnosticCollection: commands.diagnosticCollection
+  diagnosticCollection: commands.diagnosticCollection,
+  withCompilerOptions: withCompilerOptions
 }

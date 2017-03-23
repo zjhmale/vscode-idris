@@ -1,4 +1,5 @@
 let commands = require('./idris/commands')
+let controller = require('./controller')
 let ipkg = require('./ipkg/ipkg')
 let vscode = require('vscode')
 
@@ -6,17 +7,11 @@ let IdrisHoverProvider = (function () {
   function IdrisHoverProvider() { }
 
   IdrisHoverProvider.prototype.provideHover = function (document, position, token) {
-    let uri = document.uri.path
     let currentWord = commands.getWordBase(document, position)
     if (!currentWord) return
 
-    let root = vscode.workspace.rootPath
-    let safeRoot = root === undefined ? "" : root
-    let compilerOptions = ipkg.compilerOptions(safeRoot)
-
     return new Promise((resolve, reject) => {
-      compilerOptions.subscribe((compilerOptions) => {
-        commands.initialize(compilerOptions)
+      controller.withCompilerOptions((uri) => {
         commands.getModel().load(uri).filter((arg) => {
           return arg.responseType === 'return'
         }).flatMap(() => {
