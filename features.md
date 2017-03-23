@@ -88,10 +88,14 @@
 
 ![send-selection-repl](./images/screenshots/send-selection-repl.gif)
 
+### ipkg highlighting
+
+![ipkg](./images/screenshots/ipkg-highlight.png)
+
 ### Code completion
 
 ![completion](./images/screenshots/completion.gif)
 
-### ipkg highlighting
+### Show type on hover
 
-![ipkg](./images/screenshots/ipkg-highlight.png)
+![hover](./images/screenshots/hover.gif)

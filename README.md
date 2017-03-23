@@ -10,7 +10,7 @@
 
 ## Implemented features
 
-[screenshots](https://github.com/zjhmale/vscode-idris/blob/master/features.md)
+[screenshots](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md)
 
 | command | shortcut |
 |---|---|
@@ -31,7 +31,8 @@
 | Send selection to REPL | shift + cmd/ctrl + x |
 
 * ipkg highlighting
-* autocompletion
+* Auto completion
+* Show types on hover
 
 ## Installation
 
@@ -40,8 +41,7 @@
 
 ## Acknowledgements
 
-* Grammar file is taken from [idris-sublime](https://github.com/idris-hackers/idris-sublime).
-* Internal design is inspired by [atom-language-idris](https://github.com/idris-hackers/atom-language-idris). 
+* Internal design is inspired by [atom-language-idris](https://github.com/idris-hackers/atom-language-idris).
 
 ## License
 
