@@ -37,6 +37,10 @@ let withCompilerOptions = (callback) => {
   })
 }
 
+let typeCheckOnSave = () => {
+  withCompilerOptions(commands.typecheckFile)
+}
+
 let runCommand = (command) => {
   return (_) => {
     withCompilerOptions(command)
@@ -47,5 +51,6 @@ module.exports = {
   getCommands,
   destroy: commands.destroy,
   diagnosticCollection: commands.diagnosticCollection,
-  withCompilerOptions: withCompilerOptions
+  withCompilerOptions: withCompilerOptions,
+  typeCheckOnSave: typeCheckOnSave
 }

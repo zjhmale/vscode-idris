@@ -19,6 +19,10 @@ function activate(context) {
     }
   })
 
+  vscode.workspace.onDidSaveTextDocument((event) => {
+    controller.typeCheckOnSave()
+  })
+
   context.subscriptions.push(controller.diagnosticCollection)
   controller.getCommands().forEach(([key, value]) => {
     let disposable = vscode.commands.registerCommand(key, value)
