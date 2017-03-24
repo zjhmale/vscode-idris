@@ -6,7 +6,6 @@
 
 [![Build Status](https://travis-ci.org/zjhmale/vscode-idris.svg?branch=master)](https://travis-ci.org/zjhmale/vscode-idris)
 [![Build Status](https://ci.appveyor.com/api/projects/status/github/zjhmale/vscode-idris?branch=master&svg=true)](https://ci.appveyor.com/project/zjhmale/vscode-idris)
-![status](https://img.shields.io/badge/status-0.3.3-green.svg)
 
 ## Implemented features
 
