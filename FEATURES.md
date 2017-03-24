@@ -96,6 +96,6 @@
 
 ![completion](./images/screenshots/completion.gif)
 
-### Show type on hover
+### Show type definition on hover
 
 ![hover](./images/screenshots/hover.gif)

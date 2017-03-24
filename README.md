@@ -9,7 +9,7 @@
 
 ## Implemented features
 
-[screenshots](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md)
+[Screenshots](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md)
 
 | command | shortcut |
 |---|---|
@@ -31,7 +31,8 @@
 
 * ipkg highlighting
 * Auto completion
-* Show types on hover
+* Show type definition on hover
+* Type checking on saving file
 
 ## Installation
 

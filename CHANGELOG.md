@@ -3,7 +3,7 @@
 ## 0.3.6
 
 * Syntax file improvement [#24](https://github.com/zjhmale/vscode-idris/issues/24) [@be5invis](https://github.com/be5invis)
-* Fix loading `pkgs` for bootstrapping [@be5invis](https://github.com/be5invis)
+* Fix loading `pkgs` for bootstrapping [774ecde](https://github.com/zjhmale/vscode-idris/commit/774ecded6419af483ce0c255957282f5076a283d) [@be5invis](https://github.com/be5invis)
 * Show type definition on hover [#22](https://github.com/zjhmale/vscode-idris/issues/22)
 * Type checking on saving file [#25](https://github.com/zjhmale/vscode-idris/issues/25)
 
@@ -25,18 +25,4 @@
 
 ## 0.3.0
 
-### Basic features [#4](https://github.com/zjhmale/vscode-idris/issues/4)
-
-* Typechecking
-* Showing the types of a variable
-* Showing the doc for a variable
-* Showing the doc for a definition
-* Showing holes
-* Clause-adding
-* Case-splitting
-* Proof-search
-* Make-with
-* Make-case
-* Make-lemma
-* Apropos
-* Basic REPL
+* Basic features [#4](https://github.com/zjhmale/vscode-idris/issues/4)
