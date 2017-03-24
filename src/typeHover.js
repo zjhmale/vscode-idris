@@ -7,7 +7,7 @@ let IdrisHoverProvider = (function () {
   function IdrisHoverProvider() { }
 
   IdrisHoverProvider.prototype.provideHover = function (document, position, token) {
-    let currentWord = commands.getWordBase(document, position)
+    let currentWord = commands.getWordBase(document, position, true)
     if (!currentWord) return
 
     return new Promise((resolve, reject) => {

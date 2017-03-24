@@ -33,12 +33,14 @@ let getCurrentPosition = () => {
   return [document, position]
 }
 
-let getWordBase = (document, position) => {
+let getWordBase = (document, position, isHover) => {
   let wordRange = document.getWordRangeAtPosition(position)
   let currentWord = document.getText(wordRange)
   if (currentWord.match(/\r|\n| /g)) {
     outputChannel.clear()
-    vscode.window.showWarningMessage("Please move cursor to an Identifier")
+    if (!isHover) {
+      vscode.window.showWarningMessage("Please move cursor to an Identifier")
+    }
     return null
   } else {
     return currentWord
@@ -47,7 +49,7 @@ let getWordBase = (document, position) => {
 
 getWord = () => {
   let [document, position] = getCurrentPosition()
-  return getWordBase(document, position)
+  return getWordBase(document, position, false)
 }
 
 let typecheckFile = (uri) => {
