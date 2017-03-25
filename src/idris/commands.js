@@ -38,9 +38,9 @@ let getWordBase = (document, position, isHover) => {
   let currentWord = document.getText(wordRange)
   if (currentWord.match(/\r|\n| /g)) {
     outputChannel.clear()
-    /* if (!isHover) {
+    if (!isHover) {
       vscode.window.showWarningMessage("Please move cursor to an Identifier")
-    } */
+    }
     return null
   } else {
     return currentWord
