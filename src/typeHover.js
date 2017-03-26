@@ -21,7 +21,11 @@ let IdrisHoverProvider = (function () {
             resolve(arg.msg[0])
           },
           function (err) {
-            resolve(err.message)
+            if (err.warnings.length > 0) {
+              resolve(err.warnings[0][3])
+            } else {
+              resolve(err.message)
+            }
           })
       })
     }).then(function (info) {
