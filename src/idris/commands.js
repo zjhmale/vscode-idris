@@ -56,7 +56,7 @@ let typecheckFile = (uri) => {
   let successHandler = (_) => {
     outputChannel.clear()
     outputChannel.show()
-    outputChannel.append("Idris: File loaded successfull")
+    outputChannel.append("Idris: File loaded successfully")
     diagnosticCollection.clear()
   }
 
