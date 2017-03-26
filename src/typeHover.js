@@ -26,7 +26,10 @@ let IdrisHoverProvider = (function () {
       })
     }).then(function (info) {
       if (info != null) {
-        return new vscode.Hover(info)
+        return new vscode.Hover({
+          language: 'idris',
+          value: info
+        })
       } else {
         return null
       }
