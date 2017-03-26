@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.7
+
+* Eliminate warning messages for hover [28](https://github.com/zjhmale/vscode-idris/issues/28)
+
 ## 0.3.6
 
 * Syntax file improvement [#24](https://github.com/zjhmale/vscode-idris/issues/24) [@be5invis](https://github.com/be5invis)
