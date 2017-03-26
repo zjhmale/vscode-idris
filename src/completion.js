@@ -18,7 +18,9 @@ let IdrisCompletionProvider = (function() {
 
       return compilerOptions.flatMap((compilerOptions) => {
         commands.initialize(compilerOptions)
-        return commands.getModel().replCompletions(trimmedPrefix)
+        return commands.getModel().replCompletions(trimmedPrefix).filter((arg) => {
+          return arg.responseType === 'return'
+        })
       }).toPromise().then((arg) => {
         let ref = arg.msg[0][0]
         let results = ref.map((v, i, arr) => {
