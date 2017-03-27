@@ -70,11 +70,11 @@
 
 ![apropos](./images/screenshots/apropos.gif)
 
-### Evaluate current line of code in editor
+### Evaluate selected code in editor
 
 `(shift + cmd/ctrl + e)`
 
-![eval-line](./images/screenshots/eval-line.gif)
+![eval-selection](./images/screenshots/eval-selection.gif)
 
 ### Start or Refresh REPL
 
@@ -82,7 +82,7 @@
 
 ![start-refresh-repl](./images/screenshots/start-refresh-repl.gif)
 
-### Send selected text to REPL
+### Send selected code to REPL
 
 `(shift + cmd/ctrl + x)`
 

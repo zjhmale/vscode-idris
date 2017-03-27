@@ -25,9 +25,13 @@
 | Make case | shift + cmd/ctrl + m |
 | Make lemma | shift + cmd/ctrl + l |
 | Apropos | shift + cmd/ctrl + k |
-| Eval current line | shift + cmd/ctrl + e |
+| Eval selected code | shift + cmd/ctrl + e |
 | Start / Refresh REPL | shift + cmd/ctrl + r |
-| Send selection to REPL | shift + cmd/ctrl + x |
+| Send selected code to REPL | shift + cmd/ctrl + x |
+
+**Heads up** All the command above can also be triggered in the right-click menu
+
+![menu](./images/screenshots/menu.gif)
 
 * ipkg highlighting
 * Auto completion
