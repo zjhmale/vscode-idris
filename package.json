@@ -69,6 +69,28 @@
         "path": "./syntaxes/ipkg.json"
       }
     ],
+    "configuration": {
+      "type": "idris",
+      "title": "Settings for Idris project",
+      "properties": {
+        "idris.executablePath": {
+          "type": "string",
+          "default": "idris",
+          "description": "The full path to the idris executable."
+        },
+        "idris.onHover": {
+          "type": "string",
+          "enum": [
+            "info",
+            "type",
+            "fallback",
+            "none"
+          ],
+          "default": "fallback",
+          "description": "Controls the onHover behavior. 'info' will display idris info, 'type' will display idris type, 'fallback' will try info and fallback to type, and 'none' will disable onHover tooltips."
+        }
+      }
+    },
     "commands": [
       {
         "command": "idris.typecheck",

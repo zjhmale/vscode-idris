@@ -13,7 +13,8 @@ class IdrisIdeMode extends EventEmitter {
 
   start(compilerOptions) {
     if ((this.process == null) || !this.process.connected) {
-      let pathToIdris = 'idris'
+      let pathToIdris = vscode.workspace.getConfiguration('idris').get('executablePath')
+    
       let pkgs = compilerOptions.pkgs && compilerOptions.pkgs.length 
         ? [].concat.apply([], compilerOptions.pkgs.map((p) => {
             return ["-p", p]
