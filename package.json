@@ -120,6 +120,18 @@
         {
           "command": "idris.proof-search",
           "group": "idris@7"
+        },
+        {
+          "command": "idris.make-with",
+          "group": "idris@8"
+        },
+        {
+          "command": "idris.make-case",
+          "group": "idris@9"
+        },
+        {
+          "command": "idris.make-lemma",
+          "group": "idris@10"
         }
       ]
     },
@@ -166,17 +178,17 @@
       },
       {
         "command": "idris.make-with",
-        "title": "Idris: make with",
+        "title": "Create a with rule pattern match template for the clause of function",
         "description": "Make a with rule pattern match template for the clause of function"
       },
       {
         "command": "idris.make-case",
-        "title": "Idris: make case",
+        "title": "Create a case pattern match template for the hole",
         "description": "Make a case pattern match template for holes"
       },
       {
         "command": "idris.make-lemma",
-        "title": "Idris: make lemma",
+        "title": "Create a top level function with a type which solves the hole under the cursor",
         "description": "Make a top level lemma which solves the hole under the cursor"
       },
       {
