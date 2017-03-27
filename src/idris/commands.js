@@ -246,7 +246,7 @@ let addClause = (uri) => {
   let successHandler = (arg) => {
     let clause = arg.msg[0]
     editor.edit((edit) => {
-      edit.insert(new vscode.Position(line + 1, 0), clause)
+      edit.insert(new vscode.Position(line + 1, 0), line + 1 == editor.document.lineCount ? "\n" + clause : clause)
     })
 
     outputChannel.clear()

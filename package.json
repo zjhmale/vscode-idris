@@ -91,45 +91,77 @@
         }
       }
     },
+    "menus": {
+      "editor/context": [
+        {
+          "command": "idris.typecheck",
+          "group": "idris@1"
+        },
+        {
+          "command": "idris.type-of",
+          "group": "idris@2"
+        },
+        {
+          "command": "idris.docs-for",
+          "group": "idris@3"
+        },
+        {
+          "command": "idris.print-definition",
+          "group": "idris@4"
+        },
+        {
+          "command": "idris.add-clause",
+          "group": "idris@5"
+        },
+        {
+          "command": "idris.case-split",
+          "group": "idris@6"
+        },
+        {
+          "command": "idris.proof-search",
+          "group": "idris@7"
+        }
+      ]
+    },
     "commands": [
       {
         "command": "idris.typecheck",
-        "title": "Idris: typecheck",
+        "title": "Typechecking currently opened file",
         "description": "Typecheck file"
       },
       {
         "command": "idris.type-of",
-        "title": "Idris: type of",
+        "title": "Show type of the identifier",
         "description": "Type of identifier"
       },
       {
         "command": "idris.docs-for",
-        "title": "Idris: docs for",
+        "title": "Show documentation of the identifier",
         "description": "Docs for identifier"
       },
       {
         "command": "idris.print-definition",
-        "title": "Idris: definition of",
+        "title": "Show definition of the identifier",
         "description": "Print definition of identifier"
       },
       {
         "command": "idris.show-holes",
-        "title": "Idris: show holes",
+        "title": "List all active holes in currently opened file",
         "description": "Show the currently active holes"
       },
       {
         "command": "idris.add-clause",
-        "title": "Idris: add clause",
+        "title": "Generate an initial pattern match clause",
         "description": "Add an initial pattern match clause"
       },
       {
         "command": "idris.case-split",
-        "title": "Idris: case split",
+        "title": "Generate a case split for the pattern variable",
         "description": "Add a case split for the pattern variable"
       },
       {
         "command": "idris.proof-search",
-        "title": "Idris: proof search",
+        "title": "Attempt to fill out the hole",
         "description": "Attempt to fill out the holes by proof search"
       },
       {
