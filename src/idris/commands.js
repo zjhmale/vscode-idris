@@ -172,9 +172,10 @@ let idrisAscii = (version) => {
 }
 */
 
-let runREPL = (uri) => {
+let evalSelection = (uri) => {
   let editor = vscode.window.activeTextEditor
-  let text = editor.document.lineAt(editor.selection.start).text
+  let selection = editor.selection
+  let text = editor.document.getText(selection)
 
   let successHandler = (arg) => {
     let result = arg.msg[0]
@@ -507,7 +508,7 @@ module.exports = {
   makeCase,
   makeLemma,
   apropos,
-  runREPL,
+  evalSelection,
   destroy,
   startREPL,
   sendREPL,

@@ -16,7 +16,7 @@ let getCommands = () => {
     ['idris.make-case', runCommand(commands.makeCase)],
     ['idris.make-lemma', runCommand(commands.makeLemma)],
     ['idris.apropos', runCommand(commands.apropos)],
-    ['idris.eval-line', runCommand(commands.runREPL)],
+    ['idris.eval-selection', runCommand(commands.evalSelection)],
     ['idris.start-refresh-repl', runCommand(commands.startREPL)],
     ['idris.send-selection-repl', runCommand(commands.sendREPL)]
   ]

@@ -132,6 +132,18 @@
         {
           "command": "idris.make-lemma",
           "group": "idris@10"
+        },
+        {
+          "command": "idris.eval-selection",
+          "group": "idris@11"
+        },
+        {
+          "command": "idris.start-refresh-repl",
+          "group": "idris@12"
+        },
+        {
+          "command": "idris.send-selection-repl",
+          "group": "idris@13"
         }
       ]
     },
@@ -193,22 +205,22 @@
       },
       {
         "command": "idris.apropos",
-        "title": "Idris: apropos",
+        "title": "Search names, types and documentations",
         "description": "Search names, types, and documentation"
       },
       {
-        "command": "idris.eval-line",
-        "title": "Idris: eval line",
+        "command": "idris.eval-selection",
+        "title": "Evaluate selected code",
         "description": "Eval current line"
       },
       {
         "command": "idris.start-refresh-repl",
-        "title": "Idris: start or refresh REPL",
+        "title": "Start or Refresh REPL",
         "description": "Start REPL for currently opened file or refresh REPL when opened file is changed"
       },
       {
         "command": "idris.send-selection-repl",
-        "title": "Idris: send selected text to REPL",
+        "title": "Send selected code to REPL",
         "description": "Send selected text to a refreshed REPL with currently opened file"
       }
     ],
@@ -289,7 +301,7 @@
         "key": "shift+ctrl+e",
         "mac": "shift+cmd+e",
         "when": "editorFocus && editorLangId == idris",
-        "command": "idris.eval-line"
+        "command": "idris.eval-selection"
       },
       {
         "key": "shift+ctrl+r",
