@@ -2,6 +2,7 @@ let commands = require('./idris/commands')
 let controller = require('./controller')
 let ipkg = require('./ipkg/ipkg')
 let vscode = require('vscode')
+let Rx = require('rx-lite')
 
 // to determine whether range1 is inside range2
 let isRangeInsideRange = (range1, range2) => {
@@ -34,13 +35,34 @@ let IdrisHoverProvider = (function () {
           })
         }
 
+        let hoverMode = vscode.workspace.getConfiguration('idris').get('hoverMode')
+
+        if (hoverMode == 'none') {
+          resolve(null)
+        }
+
         commands.getModel().load(uri).filter((arg) => {
           return arg.responseType === 'return'
         }).flatMap(() => {
-          return commands.getModel().getType(currentWord)
+          return Rx.Observable.zip(commands.getModel().getType(currentWord), commands.getModel().getDocs(currentWord))
         }).subscribe(
           function (arg) {
-            resolve(arg.msg[0])
+            let typeMsg = arg[0].msg[0]
+            let infoMsg = arg[1].msg[0].replace(/\n    \n    /g, "").replace(/\n        \n        /g, "")
+            if (hoverMode == 'info') {
+              resolve(infoMsg)
+            } else if (hoverMode == 'type') {
+              resolve(typeMsg)
+            } else if (hoverMode == 'fallback') {
+              if (infoMsg) {
+                resolve(infoMsg)
+              } else {
+                resolve(typeMsg)
+              }
+            } else {
+              vscode.window.showErrorMessage("Invalid option for idris.hoveMode")
+              resolve(null)
+            }
           },
           function (err) {
             if (err.warnings.length > 0) {
