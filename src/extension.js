@@ -5,6 +5,8 @@ let typeHover  = require('./typeHover')
 
 let IDRIS_MODE = { language: 'idris', scheme: 'file' }
 
+let idrisExecutablePath = vscode.workspace.getConfiguration('idris').get('executablePath');
+
 var triggers = []
 for (var i = 0; i < 26; i++) {
   triggers.push(String.fromCharCode(97 + i))
@@ -19,10 +21,6 @@ function activate(context) {
     }
   })
 
-  vscode.workspace.onDidSaveTextDocument((event) => {
-    controller.typeCheckOnSave()
-  })
-
   context.subscriptions.push(controller.diagnosticCollection)
   controller.getCommands().forEach(([key, value]) => {
     let disposable = vscode.commands.registerCommand(key, value)
@@ -30,6 +28,16 @@ function activate(context) {
   })
   context.subscriptions.push(vscode.languages.registerCompletionItemProvider(IDRIS_MODE, new completion.IdrisCompletionProvider(), ...triggers))
   context.subscriptions.push(vscode.languages.registerHoverProvider(IDRIS_MODE, new typeHover.IdrisHoverProvider()))
+  context.subscriptions.push(vscode.workspace.onDidSaveTextDocument((event) => {
+    controller.typeCheckOnSave()
+  }))
+  context.subscriptions.push(vscode.workspace.onDidChangeConfiguration(() => {
+    let newIdrisExecutablePath = vscode.workspace.getConfiguration('idris').get('executablePath')
+    if (idrisExecutablePath != newIdrisExecutablePath) {
+      idrisExecutablePath = newIdrisExecutablePath
+      controller.reInitialize()
+    }
+  }))
 }
 exports.activate = activate
 

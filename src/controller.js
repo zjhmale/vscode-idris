@@ -22,16 +22,26 @@ let getCommands = () => {
   ]
 }
 
-let withCompilerOptions = (callback) => {
-  let document = vscode.window.activeTextEditor.document
-  if (document.languageId != 'idris') return
-
-  let uri = document.uri.fsPath
+let getCompilerOptsPromise = () => {
   let root = vscode.workspace.rootPath
   let safeRoot = root === undefined ? "" : root
   let compilerOptions = ipkg.compilerOptions(safeRoot)
 
-  compilerOptions.subscribe((compilerOptions) => {
+  return compilerOptions
+}
+
+let reInitialize = () => {
+  getCompilerOptsPromise().subscribe((compilerOptions) => {
+    commands.reInitialize(compilerOptions)
+  })
+}
+
+let withCompilerOptions = (callback) => {
+  let document = vscode.window.activeTextEditor.document
+  if (document.languageId != 'idris') return
+  let uri = document.uri.fsPath
+
+  getCompilerOptsPromise().subscribe((compilerOptions) => {
     commands.initialize(compilerOptions)
     callback(uri)
   })
@@ -52,5 +62,6 @@ module.exports = {
   destroy: commands.destroy,
   diagnosticCollection: commands.diagnosticCollection,
   withCompilerOptions: withCompilerOptions,
-  typeCheckOnSave: typeCheckOnSave
+  typeCheckOnSave: typeCheckOnSave,
+  reInitialize: reInitialize
 }

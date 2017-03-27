@@ -15,6 +15,11 @@ let initialize = (compilerOptions) => {
   model.setCompilerOptions(compilerOptions);
 }
 
+let reInitialize = (compilerOptions) => {
+  model = new IdrisModel()
+  model.setCompilerOptions(compilerOptions)
+}
+
 let getModel = () => {
   return model
 }
@@ -489,6 +494,7 @@ module.exports = {
   getModel,
   diagnosticCollection,
   initialize,
+  reInitialize,
   typecheckFile,
   typeForWord,
   docsForWord,
