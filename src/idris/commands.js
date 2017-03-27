@@ -92,7 +92,7 @@ let getInfoForWord = (uri, cmd) => {
     outputChannel.clear()
     outputChannel.show()
     outputChannel.appendLine('Idris: ' + cmdMsgs[cmd] + ' ' + currentWord)
-    outputChannel.append(info)
+    outputChannel.append(info.replace(/\n    \n    /g, "").replace(/\n        \n        /g, ""))
     diagnosticCollection.clear()
   }
 
