@@ -28,8 +28,9 @@ function activate(context) {
   })
   context.subscriptions.push(vscode.languages.registerCompletionItemProvider(IDRIS_MODE, new completion.IdrisCompletionProvider(), ...triggers))
   context.subscriptions.push(vscode.languages.registerHoverProvider(IDRIS_MODE, new typeHover.IdrisHoverProvider()))
-  context.subscriptions.push(vscode.workspace.onDidSaveTextDocument((event) => {
+  context.subscriptions.push(vscode.workspace.onDidSaveTextDocument(() => {
     controller.typeCheckOnSave()
+    completion.buildCompletionList()
   }))
   context.subscriptions.push(vscode.workspace.onDidChangeConfiguration(() => {
     let newIdrisExecutablePath = vscode.workspace.getConfiguration('idris').get('executablePath')
@@ -38,6 +39,10 @@ function activate(context) {
       controller.reInitialize()
     }
   }))
+  context.subscriptions.push(vscode.window.onDidChangeActiveTextEditor(() => {
+    completion.buildCompletionList()
+  }))
+  completion.buildCompletionList()
 }
 exports.activate = activate
 

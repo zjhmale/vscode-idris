@@ -1,9 +1,26 @@
-let ipkg     = require('./ipkg/ipkg')
+let ipkg = require('./ipkg/ipkg')
 let commands = require('./idris/commands')
-let vscode   = require('vscode')
+let controller = require('./controller')
+let vscode = require('vscode')
 
-let IdrisCompletionProvider = (function() {
-  function IdrisCompletionProvider() {}
+let identRegex = /'?[a-zA-Z0-9_][a-zA-Z0-9_-]*'?/g
+var identMatch
+var identList
+
+let buildCompletionList = () => {
+  identList = []
+
+  let text = vscode.window.activeTextEditor.document.getText()
+  while (identMatch = identRegex.exec(text)) {
+    let ident = identMatch[0]
+    if (identList.indexOf(ident) <= -1) {
+      identList.push(ident)
+    }
+  }
+}
+
+let IdrisCompletionProvider = (function () {
+  function IdrisCompletionProvider() { }
 
   IdrisCompletionProvider.prototype.provideCompletionItems = (document, position, token) => {
     var wordRange = document.getWordRangeAtPosition(position)
@@ -11,24 +28,37 @@ let IdrisCompletionProvider = (function() {
 
     let trimmedPrefix = currentWord.trim()
 
-    if (trimmedPrefix.length > 2) {
-      let root = vscode.workspace.rootPath
-      let compilerOptions = ipkg.compilerOptions(root)
-      let uri = vscode.window.activeTextEditor.document.uri.path
+    if (trimmedPrefix.length >= 2) {
+      let suggestMode = vscode.workspace.getConfiguration('idris').get('suggestMode')
 
-      return compilerOptions.flatMap((compilerOptions) => {
-        commands.initialize(compilerOptions)
-        return commands.getModel().replCompletions(trimmedPrefix).filter((arg) => {
-          return arg.responseType === 'return'
+      if (suggestMode == 'allWords') {
+        identList.filter((ident) => {
+          ident.startsWith(trimmedPrefix)
         })
-      }).toPromise().then((arg) => {
-        let ref = arg.msg[0][0]
-        let results = ref.map((v, i, arr) => {
-          var ci = new vscode.CompletionItem(v, 1)
-          return ci
+
+        return identList.map((ident) => {
+          return new vscode.CompletionItem(ident, 0)
         })
-        return results
-      })
+      } else if (suggestMode == 'replCompletion') {
+        let root = vscode.workspace.rootPath
+        let compilerOptions = ipkg.compilerOptions(root)
+
+        return compilerOptions.flatMap((compilerOptions) => {
+          commands.initialize(compilerOptions)
+          return commands.getModel().replCompletions(trimmedPrefix).filter((arg) => {
+            return arg.responseType === 'return'
+          })
+        }).toPromise().then((arg) => {
+          let ref = arg.msg[0][0]
+          let results = ref.map((v, i, arr) => {
+            return new vscode.CompletionItem(v, 1)
+          })
+          return results
+        })
+      } else {
+        vscode.window.showErrorMessage("Invalid option for idris.suggestMode")
+        return null
+      }
     } else {
       return null
     }
@@ -37,5 +67,6 @@ let IdrisCompletionProvider = (function() {
 }())
 
 module.exports = {
-    IdrisCompletionProvider
+  IdrisCompletionProvider,
+  buildCompletionList
 }

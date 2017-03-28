@@ -88,6 +88,15 @@
           ],
           "default": "fallback",
           "description": "Controls the hover behavior. 'info' will display Idris documentation, 'type' will display Idris type, 'fallback' will try 'info' first and fallback to 'type' if we can not get the documentation, and 'none' will disable hover tooltips."
+        },
+        "idris.suggestMode": {
+          "type": "string",
+          "enum": [
+            "allWords",
+            "replCompletion"
+          ],
+          "default": "allWords",
+          "description": "Controls the auto-completion behavior. 'allWords' will include all words from the current document, 'replCompletion' will get suggestions from Idris REPL process."
         }
       }
     },
