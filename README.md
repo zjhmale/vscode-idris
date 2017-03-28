@@ -34,7 +34,7 @@
 ![menu](./images/screenshots/menu.gif)
 
 * ipkg highlighting
-* Auto completion
+* Auto-completion
 * Show type definition on hover
 * Type checking on saving file
 
@@ -43,6 +43,17 @@
 1. Within Visual Studio Code, open the command palette (Ctrl-Shift-P / Cmd-Shift-P).
 2. Select `Install Extension` and search for 'Idris' or run `ext install Idris`.
 3. [Download Idris](https://www.idris-lang.org/download/) and make sure the `idris` executable is on your `PATH`.
+
+## Options
+
+The following Visual Studio Code settings along with their *default* values that are available for the Idris extension. If you want to change any of these, you can do so in user preferences (`cmd+,`) or workspace settings (`.vscode/settings.json`). You don't have to copy these if you don't intend to change them.
+
+```javascript
+{
+    "idris.executablePath": "idris", // The full path to the idris executable.
+    "idris.hoverMode": "fallback",   // Controls the hover behavior. 'info' will display Idris documentation, 'type' will display Idris type, 'fallback' will try 'info' first and fallback to 'type' if we can not get the documentation, and 'none' will disable hover tooltips.
+}
+```
 
 ## Acknowledgements
 

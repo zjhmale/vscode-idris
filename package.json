@@ -87,7 +87,7 @@
             "none"
           ],
           "default": "fallback",
-          "description": "Controls the hover behavior. 'info' will display idris info, 'type' will display idris type, 'fallback' will try info and fallback to type, and 'none' will disable hover tooltips."
+          "description": "Controls the hover behavior. 'info' will display Idris documentation, 'type' will display Idris type, 'fallback' will try 'info' first and fallback to 'type' if we can not get the documentation, and 'none' will disable hover tooltips."
         }
       }
     },
