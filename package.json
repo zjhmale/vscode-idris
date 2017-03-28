@@ -95,58 +95,72 @@
       "editor/context": [
         {
           "command": "idris.typecheck",
+          "when": "editorFocus && editorLangId == idris",
           "group": "idris@1"
         },
         {
           "command": "idris.type-of",
+          "when": "editorFocus && editorLangId == idris",
           "group": "idris@2"
         },
         {
           "command": "idris.docs-for",
+          "when": "editorFocus && editorLangId == idris",
           "group": "idris@3"
         },
         {
           "command": "idris.print-definition",
+          "when": "editorFocus && editorLangId == idris",
           "group": "idris@4"
         },
         {
           "command": "idris.add-clause",
+          "when": "editorFocus && editorLangId == idris",
           "group": "idris@5"
         },
         {
           "command": "idris.case-split",
+          "when": "editorFocus && editorLangId == idris",
           "group": "idris@6"
         },
         {
           "command": "idris.proof-search",
+          "when": "editorFocus && editorLangId == idris",
           "group": "idris@7"
         },
         {
           "command": "idris.make-with",
+          "when": "editorFocus && editorLangId == idris",
           "group": "idris@8"
         },
         {
           "command": "idris.make-case",
+          "when": "editorFocus && editorLangId == idris",
           "group": "idris@9"
         },
         {
           "command": "idris.make-lemma",
+          "when": "editorFocus && editorLangId == idris",
           "group": "idris@10"
         },
         {
           "command": "idris.eval-selection",
+          "when": "editorFocus && editorLangId == idris",
           "group": "idris@11"
         },
         {
           "command": "idris.start-refresh-repl",
+          "when": "editorFocus && editorLangId == idris",
           "group": "idris@12"
         },
         {
           "command": "idris.send-selection-repl",
+          "when": "editorFocus && editorLangId == idris",
           "group": "idris@13"
         },
         {
           "command": "idris.cleanup-ibc",
+          "when": "editorFocus && editorLangId == idris",
           "group": "idris@14"
         }
       ]
