@@ -1,6 +1,8 @@
 let ipkg = require('./ipkg/ipkg')
 let commands = require('./idris/commands')
 let vscode = require('vscode')
+let glob = require("glob")
+let fs = require('fs');
 
 let getCommands = () => {
   return [
@@ -18,15 +20,31 @@ let getCommands = () => {
     ['idris.apropos', runCommand(commands.apropos)],
     ['idris.eval-selection', runCommand(commands.evalSelection)],
     ['idris.start-refresh-repl', runCommand(commands.startREPL)],
-    ['idris.send-selection-repl', runCommand(commands.sendREPL)]
+    ['idris.send-selection-repl', runCommand(commands.sendREPL)],
+    ['idris.cleanup-ibc', runCommand(cleanupIbc)]
   ]
 }
 
-let getCompilerOptsPromise = () => {
+let getSafeRoot = () => {
   let root = vscode.workspace.rootPath
   let safeRoot = root === undefined ? "" : root
-  let compilerOptions = ipkg.compilerOptions(safeRoot)
+  return safeRoot
+}
 
+let cleanupIbc = (_) => {
+  glob(getSafeRoot() + "/**/*", (err, files) => {
+    if (!err) {
+      files.forEach((file) => {
+        if (file.endsWith(".ibc")) {
+          fs.unlinkSync(file)
+        }
+      })
+    }
+  })
+}
+
+let getCompilerOptsPromise = () => {
+  let compilerOptions = ipkg.compilerOptions(getSafeRoot())
   return compilerOptions
 }
 
