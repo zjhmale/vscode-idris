@@ -96,7 +96,7 @@
             "replCompletion"
           ],
           "default": "allWords",
-          "description": "Controls the auto-completion behavior. 'allWords' will include all words from the current document, 'replCompletion' will get suggestions from Idris REPL process."
+          "description": "Controls the auto-completion behavior. 'allWords' will always include all words from the currently opened documentation, 'replCompletion' will get suggestions from Idris REPL process."
         }
       }
     },
