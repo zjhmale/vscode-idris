@@ -2,9 +2,9 @@
 
 ## 0.6.0
 
-* Support `Cleanup Idris binary file` action [#42](https://github.com/zjhmale/vscode-idris/issues/42)
+* Support `Cleanup Idris binary files` action [#42](https://github.com/zjhmale/vscode-idris/issues/42)
 * Add [when-clause-context](https://code.visualstudio.com/docs/getstarted/keybindings#_when-clause-contexts) for right-click menu items [#44](https://github.com/zjhmale/vscode-idris/issues/44)
-* Support a new auto-completion mode for all words in the current documentation [#43](https://github.com/zjhmale/vscode-idris/issues/43)
+* Support a new auto-completion mode which will always include all words in the currently opened documentation [#43](https://github.com/zjhmale/vscode-idris/issues/43)
 
 ## 0.3.9
 
