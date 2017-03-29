@@ -99,3 +99,7 @@
 ### Show type definition on hover
 
 ![hover](./images/screenshots/hover.gif)
+
+### Cleanup Idris binary files
+
+![cleanup-ibc](./images/screenshots/cleanup-ibc.gif)

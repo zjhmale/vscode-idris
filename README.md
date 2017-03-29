@@ -28,6 +28,7 @@
 | Eval selected code | shift + cmd/ctrl + e |
 | Start / Refresh REPL | shift + cmd/ctrl + r |
 | Send selected code to REPL | shift + cmd/ctrl + x |
+| Cleanup Idris binary files | shift + cmd/ctrl + u |
 
 **Heads up** All the command above can also be triggered in the right-click menu
 
@@ -52,6 +53,7 @@ The following Visual Studio Code settings along with their *default* values that
 {
     "idris.executablePath": "idris", // The full path to the idris executable.
     "idris.hoverMode": "fallback",   // Controls the hover behavior. 'info' will display Idris documentation, 'type' will display Idris type, 'fallback' will try 'info' first and fallback to 'type' if we can not get the documentation, and 'none' will disable hover tooltips.
+    "idris.suggestMode": "allWords"  // Controls the auto-completion behavior. 'allWords' will include all words from the current document, 'replCompletion' will get suggestions from Idris REPL process.
 }
 ```
 
