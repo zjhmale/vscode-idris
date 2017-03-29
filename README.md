@@ -9,7 +9,7 @@
 
 ## Implemented features
 
-[Screenshots](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md)
+Check out [FEATURES.md](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md) to see screenshots for implemented features.
 
 | command | shortcut |
 |---|---|
@@ -30,7 +30,7 @@
 | Send selected code to REPL | shift + cmd/ctrl + x |
 | Cleanup Idris binary files | shift + cmd/ctrl + u |
 
-**Heads up** All the command above can also be triggered in the right-click menu
+**Heads up:** All the command above can also be triggered in the right-click menu
 
 ![menu](./images/screenshots/menu.gif)
 
@@ -44,6 +44,10 @@
 1. Within Visual Studio Code, open the command palette (Ctrl-Shift-P / Cmd-Shift-P).
 2. Select `Install Extension` and search for 'Idris' or run `ext install Idris`.
 3. [Download Idris](https://www.idris-lang.org/download/) and make sure the `idris` executable is on your `PATH`.
+
+## Contributing
+
+Check out [CONTRIBUTING.md](https://github.com/zjhmale/vscode-idris/blob/master/CONTRIBUTING.md).
 
 ## Options
 
