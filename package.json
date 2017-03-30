@@ -177,82 +177,82 @@
     "commands": [
       {
         "command": "idris.typecheck",
-        "title": "Typechecking currently opened file",
+        "title": "Idris: Typechecking currently opened file",
         "description": "Typecheck file"
       },
       {
         "command": "idris.type-of",
-        "title": "Show type of the identifier",
+        "title": "Idris: Show type of the identifier",
         "description": "Type of identifier"
       },
       {
         "command": "idris.docs-for",
-        "title": "Show documentation of the identifier",
+        "title": "Idris: Show documentation of the identifier",
         "description": "Docs for identifier"
       },
       {
         "command": "idris.print-definition",
-        "title": "Show definition of the identifier",
+        "title": "Idris: Show definition of the identifier",
         "description": "Print definition of identifier"
       },
       {
         "command": "idris.show-holes",
-        "title": "List all active holes in currently opened file",
+        "title": "Idris: List all active holes in currently opened file",
         "description": "Show the currently active holes"
       },
       {
         "command": "idris.add-clause",
-        "title": "Generate an initial pattern match clause",
+        "title": "Idris: Generate an initial pattern match clause",
         "description": "Add an initial pattern match clause"
       },
       {
         "command": "idris.case-split",
-        "title": "Generate a case split for the pattern variable",
+        "title": "Idris: Generate a case split for the pattern variable",
         "description": "Add a case split for the pattern variable"
       },
       {
         "command": "idris.proof-search",
-        "title": "Attempt to fill out the hole",
+        "title": "Idris: Attempt to fill out the hole",
         "description": "Attempt to fill out the holes by proof search"
       },
       {
         "command": "idris.make-with",
-        "title": "Create a with rule pattern match template for the clause of function",
+        "title": "Idris: Create a with rule pattern match template for the clause of function",
         "description": "Make a with rule pattern match template for the clause of function"
       },
       {
         "command": "idris.make-case",
-        "title": "Create a case pattern match template for the hole",
+        "title": "Idris: Create a case pattern match template for the hole",
         "description": "Make a case pattern match template for holes"
       },
       {
         "command": "idris.make-lemma",
-        "title": "Create a top level function with a type which solves the hole under the cursor",
+        "title": "Idris: Create a top level function with a type which solves the hole under the cursor",
         "description": "Make a top level lemma which solves the hole under the cursor"
       },
       {
         "command": "idris.apropos",
-        "title": "Search names, types and documentations",
+        "title": "Idris: Search names, types and documentations",
         "description": "Search names, types, and documentation"
       },
       {
         "command": "idris.eval-selection",
-        "title": "Evaluate selected code",
+        "title": "Idris: Evaluate selected code",
         "description": "Eval current line"
       },
       {
         "command": "idris.start-refresh-repl",
-        "title": "Start or Refresh REPL",
+        "title": "Idris: Start or Refresh REPL",
         "description": "Start REPL for currently opened file or refresh REPL when opened file is changed"
       },
       {
         "command": "idris.send-selection-repl",
-        "title": "Send selected code to REPL",
+        "title": "Idris: Send selected code to REPL",
         "description": "Send selected text to a refreshed REPL with currently opened file"
       },
       {
         "command": "idris.cleanup-ibc",
-        "title": "Cleanup idris binary files",
+        "title": "Idris: Cleanup idris binary files",
         "description": "Cleanup idris binary files"
       }
     ],
