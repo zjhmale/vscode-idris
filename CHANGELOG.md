@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.6.1
+
+* Fix huge memory usage issue [#52](https://github.com/zjhmale/vscode-idris/issues/52)
+* Fix shortcuts confliction again [#53](https://github.com/zjhmale/vscode-idris/issues/53)
+* Update commands title [#54](https://github.com/zjhmale/vscode-idris/issues/54)
+
 ## 0.6.0
 
 * Support `Cleanup Idris binary files` action [#42](https://github.com/zjhmale/vscode-idris/issues/42)
