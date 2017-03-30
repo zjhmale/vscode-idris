@@ -2,6 +2,7 @@ let vscode = require('vscode')
 let controller = require('./controller')
 let completion = require('./providers/completionProvider')
 let hover = require('./providers/hoverProvider')
+let definition = require('./providers/definitionProvider')
 
 let IDRIS_MODE = { language: 'idris', scheme: 'file' }
 
@@ -28,6 +29,7 @@ function activate(context) {
   })
   context.subscriptions.push(vscode.languages.registerCompletionItemProvider(IDRIS_MODE, new completion.IdrisCompletionProvider(), ...triggers))
   context.subscriptions.push(vscode.languages.registerHoverProvider(IDRIS_MODE, new hover.IdrisHoverProvider()))
+  context.subscriptions.push(vscode.languages.registerDefinitionProvider(IDRIS_MODE, new definition.IdrisDefinitionProvider()))
   context.subscriptions.push(vscode.workspace.onDidSaveTextDocument(() => {
     controller.typeCheckOnSave()
     completion.buildCompletionList()

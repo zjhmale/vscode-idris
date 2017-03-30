@@ -81,5 +81,6 @@ module.exports = {
   diagnosticCollection: commands.diagnosticCollection,
   withCompilerOptions: withCompilerOptions,
   typeCheckOnSave: typeCheckOnSave,
-  reInitialize: reInitialize
+  reInitialize: reInitialize,
+  getCompilerOptsPromise: getCompilerOptsPromise
 }

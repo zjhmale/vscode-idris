@@ -40,13 +40,12 @@ let IdrisCompletionProvider = (function () {
           return new vscode.CompletionItem(ident, 0)
         })
       } else if (suggestMode == 'replCompletion') {
-        let root = vscode.workspace.rootPath
-        let compilerOptions = ipkg.compilerOptions(root)
-
-        return compilerOptions.flatMap((compilerOptions) => {
+        return controller.getCompilerOptsPromise().flatMap((compilerOptions) => {
           commands.initialize(compilerOptions)
-          return commands.getModel().replCompletions(trimmedPrefix).filter((arg) => {
+          return commands.getModel().load(document.uri.fsPath).filter((arg) => {
             return arg.responseType === 'return'
+          }).flatMap(() => {
+            return commands.getModel().replCompletions(trimmedPrefix)
           })
         }).toPromise().then((arg) => {
           let ref = arg.msg[0][0]
