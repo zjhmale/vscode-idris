@@ -13,22 +13,22 @@ Check out [FEATURES.md](https://github.com/zjhmale/vscode-idris/blob/master/FEAT
 
 | command | shortcut |
 |---|---|
-| Typechecking | shift + cmd/ctrl + t |
-| Show the types of a variable | shift + cmd/ctrl + o |
-| Show the doc for a variable | shift + cmd/ctrl + d |
-| Show the doc for a definition | shift + cmd/ctrl + f |
-| Show holes | shift + cmd/ctrl + h |
-| Add clause | shift + cmd/ctrl + a |
-| Split case | shift + cmd/ctrl + c |
-| Search proof | shift + cmd/ctrl + s |
-| Make with | shift + cmd/ctrl + w |
-| Make case | shift + cmd/ctrl + m |
-| Make lemma | shift + cmd/ctrl + l |
-| Apropos | shift + cmd/ctrl + k |
-| Eval selected code | shift + cmd/ctrl + e |
-| Start / Refresh REPL | shift + cmd/ctrl + r |
-| Send selected code to REPL | shift + cmd/ctrl + x |
-| Cleanup Idris binary files | shift + cmd/ctrl + u |
+| Typechecking | shift + cmd/ctrl + alt + t |
+| Show the types of a variable | shift + cmd/ctrl + alt + o |
+| Show the doc for a variable | shift + cmd/ctrl + alt + d |
+| Show the doc for a definition | shift + cmd/ctrl + alt + f |
+| Show holes | shift + cmd/ctrl + alt + h |
+| Add clause | shift + cmd/ctrl + alt + a |
+| Split case | shift + cmd/ctrl + alt + c |
+| Search proof | shift + cmd/ctrl + alt + s |
+| Make with | shift + cmd/ctrl + alt + w |
+| Make case | shift + cmd/ctrl + alt + m |
+| Make lemma | shift + cmd/ctrl + alt + l |
+| Apropos | shift + cmd/ctrl + alt + k |
+| Eval selected code | shift + cmd/ctrl + alt + e |
+| Start / Refresh REPL | shift + cmd/ctrl + alt + r |
+| Send selected code to REPL | shift + cmd/ctrl + alt + x |
+| Cleanup Idris binary files | shift + cmd/ctrl + alt + u |
 
 **Heads up:** All the command above can also be triggered in the right-click menu
 
