@@ -58,7 +58,7 @@ class IdrisIdeMode extends EventEmitter {
   exited(code, signal) {
     if(signal == "SIGTERM") {
       let msg = "The idris compiler was closed"
-      vscode.window.showInformationMessage(msg)
+      console.info(msg)
     } else {
       let short = "The idris compiler was closed or crashed"
       let long = signal

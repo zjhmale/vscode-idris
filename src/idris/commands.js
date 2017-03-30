@@ -63,6 +63,7 @@ let typecheckFile = (uri) => {
     outputChannel.show()
     outputChannel.append("Idris: File loaded successfully")
     diagnosticCollection.clear()
+    destroy()
   }
 
   new Promise((resolve, reject) => {
@@ -488,7 +489,10 @@ let displayErrors = (err) => {
 }
 
 let destroy = () => {
-  if(model != null) model.stop()
+  if(model != null) {
+    model.stop()
+    model = null
+  }
 }
 
 module.exports = {
