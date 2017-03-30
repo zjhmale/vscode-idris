@@ -1,6 +1,6 @@
-let commands = require('./idris/commands')
-let controller = require('./controller')
-let ipkg = require('./ipkg/ipkg')
+let commands = require('../idris/commands')
+let controller = require('../controller')
+let ipkg = require('../ipkg/ipkg')
 let vscode = require('vscode')
 let Rx = require('rx-lite')
 
