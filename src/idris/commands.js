@@ -7,7 +7,7 @@ let replChannel = vscode.window.createOutputChannel('Idris REPL')
 let aproposChannel = vscode.window.createOutputChannel('Idris Apropos')
 let diagnosticCollection = vscode.languages.createDiagnosticCollection()
 let term = null
-let compilerOptions
+let innerCompilerOptions
 
 let getSafeRoot = () => {
   let root = vscode.workspace.rootPath
@@ -17,7 +17,7 @@ let getSafeRoot = () => {
 
 let init = (compilerOptions) => {
   if (compilerOptions) {
-    this.compilerOptions = compilerOptions
+    innerCompilerOptions = compilerOptions
     model.setCompilerOptions(compilerOptions)
   } else {
     vscode.window.showErrorMessage("Can not get compiler options for current project")
@@ -228,9 +228,29 @@ let evalSelection = (uri) => {
 
 let startup = (uri) => {
   term = vscode.window.createTerminal("Idris REPL")
-  term.sendText("idris")
-  term.sendText(`:l ${uri}`)
-  term.show()
+  let pkgs = innerCompilerOptions.pkgs && innerCompilerOptions.pkgs.length
+    ? [].concat.apply([], innerCompilerOptions.pkgs.map((p) => {
+      return ["-p", p]
+    }))
+    : []
+
+  let pkgsStr = pkgs.length == 0 ? "" : " " + pkgs.join(" ")
+  
+  term.sendText(`idris${pkgsStr}`)
+
+  if (innerCompilerOptions.src) {
+    let [path, module] = uri.split(innerCompilerOptions.src)
+    let moduleParts = module.split("/")
+    moduleParts.shift()
+    let moduleStr = moduleParts.join("/")
+
+    term.sendText(`:cd ${path + innerCompilerOptions.src}`)
+    term.sendText(`:l ${moduleStr}`)
+    term.show()
+  } else {
+    term.sendText(`:l ${uri}`)
+    term.show()
+  }
 }
 
 let startREPL = (uri) => {
