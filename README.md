@@ -44,7 +44,6 @@ Check out [FEATURES.md](https://github.com/zjhmale/vscode-idris/blob/master/FEAT
 1. Within Visual Studio Code, open the command palette (Ctrl-Shift-P / Cmd-Shift-P).
 2. Select `Install Extension` and search for 'Idris' or run `ext install Idris`.
 3. [Download Idris](https://www.idris-lang.org/download/) and make sure the `idris` executable is on your `PATH`.
-4. For the known issue [#52](https://github.com/zjhmale/vscode-idris/issues/52) here, please make sure you have installed Idris version `0.99.2` or above on your local machine, use `idris --version` to checkout.
 
 ## Contributing
 

@@ -9,6 +9,7 @@ let aproposChannel = vscode.window.createOutputChannel('Idris Apropos')
 let diagnosticCollection = vscode.languages.createDiagnosticCollection()
 let term = null
 let innerCompilerOptions
+let needDestroy = true
 
 let getSafeRoot = () => {
   let root = vscode.workspace.rootPath
@@ -51,6 +52,7 @@ let getCurrentPosition = () => {
   let editor = vscode.window.activeTextEditor
   let document = editor.document
   if (document.isDirty) {
+    needDestroy = false
     document.save()
   }
   let position = editor.selection.active
@@ -76,18 +78,25 @@ getWord = () => {
   return getWordBase(document, position, false)[0]
 }
 
+let handlerWrapper = (handler) => {
+  return (uri) => {
+    handler(uri)
+  }
+}
+
 let typecheckFile = (uri) => {
   let successHandler = (_) => {
     outputChannel.clear()
     outputChannel.show()
     outputChannel.append("Idris: File loaded successfully")
     diagnosticCollection.clear()
+    destroy()
   }
 
   new Promise((resolve, reject) => {
     model.load(uri).filter((arg) => {
       return arg.responseType === 'return'
-    }).subscribe(successHandler, displayErrors)
+    }).subscribe(handlerWrapper(successHandler), displayErrors)
     showLoading()
     resolve()
   }).then(function () {
@@ -113,6 +122,7 @@ let getInfoForWord = (uri, cmd) => {
     outputChannel.appendLine('Idris: ' + cmdMsgs[cmd] + ' ' + currentWord)
     outputChannel.append(info.replace(/\n    \n    /g, "").replace(/\n        \n        /g, ""))
     diagnosticCollection.clear()
+    needDestroy = true
   }
 
   new Promise((resolve, reject) => {
@@ -127,7 +137,7 @@ let getInfoForWord = (uri, cmd) => {
         case 'definition':
           return model.printDefinition(currentWord)
       }
-    }).subscribe(successHandler, displayErrors)
+    }).subscribe(handlerWrapper(successHandler), displayErrors)
     showLoading()
     resolve()
   }).then(function () {
@@ -170,7 +180,7 @@ let showHoles = (uri) => {
       return arg.responseType === 'return'
     }).flatMap(() => {
       return model.holes(80)
-    }).subscribe(successHandler, displayErrors)
+    }).subscribe(handlerWrapper(successHandler), displayErrors)
     showLoading()
     resolve()
   }).then(function () {
@@ -219,7 +229,7 @@ let evalSelection = (uri) => {
       return arg.responseType === 'return'
     }).flatMap(() => {
       return model.interpret(text)
-    }).subscribe(successHandler, displayErrors)
+    }).subscribe(handlerWrapper(successHandler), displayErrors)
     showLoading()
     resolve()
   }).then(function () {
@@ -285,6 +295,7 @@ let addClause = (uri) => {
     })
 
     outputChannel.clear()
+    needDestroy = true
   }
 
   new Promise((resolve, reject) => {
@@ -292,7 +303,7 @@ let addClause = (uri) => {
       return arg.responseType === 'return'
     }).flatMap(() => {
       return model.addClause(line + 1, currentWord)
-    }).subscribe(successHandler, displayErrors)
+    }).subscribe(handlerWrapper(successHandler), displayErrors)
     showLoading()
     resolve()
   }).then(function () {
@@ -315,6 +326,7 @@ let caseSplit = (uri) => {
     })
 
     outputChannel.clear()
+    needDestroy = true
   }
 
   new Promise((resolve, reject) => {
@@ -322,7 +334,7 @@ let caseSplit = (uri) => {
       return arg.responseType === 'return'
     }).flatMap(() => {
       return model.caseSplit(line + 1, currentWord)
-    }).subscribe(successHandler, displayErrors)
+    }).subscribe(handlerWrapper(successHandler), displayErrors)
     showLoading()
     resolve()
   }).then(function () {
@@ -347,6 +359,7 @@ let proofSearch = (uri) => {
     })
 
     outputChannel.clear()
+    needDestroy = true
   }
 
   new Promise((resolve, reject) => {
@@ -354,7 +367,7 @@ let proofSearch = (uri) => {
       return arg.responseType === 'return'
     }).flatMap(() => {
       return model.proofSearch(line + 1, currentWord)
-    }).subscribe(successHandler, displayErrors)
+    }).subscribe(handlerWrapper(successHandler), displayErrors)
     showLoading()
     resolve()
   }).then(function () {
@@ -377,6 +390,7 @@ let makeWith = (uri) => {
     })
 
     outputChannel.clear()
+    needDestroy = true
   }
 
   new Promise((resolve, reject) => {
@@ -384,7 +398,7 @@ let makeWith = (uri) => {
       return arg.responseType === 'return'
     }).flatMap(() => {
       return model.makeWith(line + 1, currentWord)
-    }).subscribe(successHandler, displayErrors)
+    }).subscribe(handlerWrapper(successHandler), displayErrors)
     showLoading()
     resolve()
   }).then(function () {
@@ -407,6 +421,7 @@ let makeCase = (uri) => {
     })
 
     outputChannel.clear()
+    needDestroy = true
   }
 
   new Promise((resolve, reject) => {
@@ -414,7 +429,7 @@ let makeCase = (uri) => {
       return arg.responseType === 'return'
     }).flatMap(() => {
       return model.makeCase(line + 1, currentWord)
-    }).subscribe(successHandler, displayErrors)
+    }).subscribe(handlerWrapper(successHandler), displayErrors)
     showLoading()
     resolve()
   }).then(function () {
@@ -449,6 +464,7 @@ let makeLemma = (uri) => {
     }
 
     outputChannel.clear()
+    needDestroy = true
   }
 
   new Promise((resolve, reject) => {
@@ -456,7 +472,7 @@ let makeLemma = (uri) => {
       return arg.responseType === 'return'
     }).flatMap(() => {
       return model.makeLemma(line + 1, currentWord)
-    }).subscribe(successHandler, displayErrors)
+    }).subscribe(handlerWrapper(successHandler), displayErrors)
     showLoading()
     resolve()
   }).then(function () {
@@ -482,7 +498,7 @@ let apropos = (uri) => {
         return arg.responseType === 'return'
       }).flatMap(() => {
         return model.apropos(val)
-      }).subscribe(successHandler, displayErrors)
+      }).subscribe(handlerWrapper(successHandler), displayErrors)
       showLoading()
       resolve()
     }).then(function () {
@@ -522,7 +538,7 @@ let displayErrors = (err) => {
 }
 
 let destroy = () => {
-  if(model != null) {
+  if(model != null && needDestroy) {
     model.stop()
     model = null
   }
