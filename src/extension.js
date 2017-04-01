@@ -8,8 +8,8 @@ let IDRIS_MODE = { language: 'idris', scheme: 'file' }
 
 let idrisExecutablePath = vscode.workspace.getConfiguration('idris').get('executablePath');
 
-var triggers = []
-for (var i = 0; i < 26; i++) {
+let triggers = []
+for (let i = 0; i < 26; i++) {
   triggers.push(String.fromCharCode(97 + i))
   triggers.push(String.fromCharCode(65 + i))
 }

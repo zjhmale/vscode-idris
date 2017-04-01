@@ -4,8 +4,8 @@ let controller = require('../controller')
 let vscode = require('vscode')
 
 let identRegex = /'?[a-zA-Z0-9_][a-zA-Z0-9_-]*'?/g
-var identMatch
-var identList
+let identMatch
+let identList
 
 let buildCompletionList = () => {
   identList = []
@@ -23,8 +23,8 @@ let IdrisCompletionProvider = (function () {
   function IdrisCompletionProvider() { }
 
   IdrisCompletionProvider.prototype.provideCompletionItems = (document, position, token) => {
-    var wordRange = document.getWordRangeAtPosition(position)
-    var currentWord = document.getText(wordRange)
+    let wordRange = document.getWordRangeAtPosition(position)
+    let currentWord = document.getText(wordRange)
 
     let trimmedPrefix = currentWord.trim()
 

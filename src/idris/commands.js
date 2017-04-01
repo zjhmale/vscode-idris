@@ -393,7 +393,7 @@ let makeLemma = (uri) => {
   let currentWord = getWord()
   if (!currentWord) return
   let editor = vscode.window.activeTextEditor
-  var line = editor.selection.active.line
+  let line = editor.selection.active.line
   let position = editor.selection.active
   let wordRange = editor.document.getWordRangeAtPosition(position)
 
