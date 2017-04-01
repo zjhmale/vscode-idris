@@ -7,17 +7,33 @@ let replChannel = vscode.window.createOutputChannel('Idris REPL')
 let aproposChannel = vscode.window.createOutputChannel('Idris Apropos')
 let diagnosticCollection = vscode.languages.createDiagnosticCollection()
 let term = null
+let compilerOptions
+
+let getSafeRoot = () => {
+  let root = vscode.workspace.rootPath
+  let safeRoot = root === undefined ? "" : root
+  return safeRoot
+}
+
+let init = (compilerOptions) => {
+  if (compilerOptions) {
+    this.compilerOptions = compilerOptions
+    model.setCompilerOptions(compilerOptions)
+  } else {
+    vscode.window.showErrorMessage("Can not get compiler options for current project")
+  }
+}
 
 let initialize = (compilerOptions) => {
   if (!model) {
     model = new IdrisModel()
   }
-  model.setCompilerOptions(compilerOptions);
+  init(compilerOptions)
 }
 
 let reInitialize = (compilerOptions) => {
   model = new IdrisModel()
-  model.setCompilerOptions(compilerOptions)
+  init(compilerOptions)
 }
 
 let getModel = () => {
@@ -516,5 +532,6 @@ module.exports = {
   destroy,
   startREPL,
   sendREPL,
-  getWordBase
+  getWordBase,
+  getSafeRoot
 }

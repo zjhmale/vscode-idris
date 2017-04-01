@@ -25,14 +25,8 @@ let getCommands = () => {
   ]
 }
 
-let getSafeRoot = () => {
-  let root = vscode.workspace.rootPath
-  let safeRoot = root === undefined ? "" : root
-  return safeRoot
-}
-
 let cleanupIbc = (_) => {
-  glob(getSafeRoot() + "/**/*", (err, files) => {
+  glob(commands.getSafeRoot() + "/**/*", (err, files) => {
     if (!err) {
       files.forEach((file) => {
         if (file.endsWith(".ibc")) {
@@ -44,7 +38,7 @@ let cleanupIbc = (_) => {
 }
 
 let getCompilerOptsPromise = () => {
-  let compilerOptions = ipkg.compilerOptions(getSafeRoot())
+  let compilerOptions = ipkg.compilerOptions(commands.getSafeRoot())
   return compilerOptions
 }
 
