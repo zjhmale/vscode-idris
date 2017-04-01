@@ -1,5 +1,6 @@
 let formatter    = require('../wire/formatter')
 let parser       = require('../wire/parser')
+let ipkg         = require('../ipkg/ipkg')
 let cp           = require('child_process')
 let EventEmitter = require('events').EventEmitter
 let vscode       = require('vscode')
@@ -14,13 +15,8 @@ class IdrisIdeMode extends EventEmitter {
   start(compilerOptions) {
     if ((this.process == null) || !this.process.connected) {
       let pathToIdris = vscode.workspace.getConfiguration('idris').get('executablePath')
-    
-      let pkgs = compilerOptions.pkgs && compilerOptions.pkgs.length 
-        ? [].concat.apply([], compilerOptions.pkgs.map((p) => {
-            return ["-p", p]
-          }))
-        : []
-      let params = ['--ide-mode'].concat(pkgs, compilerOptions.options ? compilerOptions.options.split(' ') : [])
+
+      let params = ['--ide-mode'].concat(ipkg.getPkgOpts(compilerOptions))
       let options = compilerOptions.src ? {
         cwd: compilerOptions.src
       } : {}

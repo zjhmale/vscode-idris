@@ -1,4 +1,5 @@
 let IdrisModel = require('./model')
+let ipkg       = require('../ipkg/ipkg')
 let vscode     = require('vscode')
 
 let model = null
@@ -228,15 +229,10 @@ let evalSelection = (uri) => {
 
 let startup = (uri) => {
   term = vscode.window.createTerminal("Idris REPL")
-  let pkgs = innerCompilerOptions.pkgs && innerCompilerOptions.pkgs.length
-    ? [].concat.apply([], innerCompilerOptions.pkgs.map((p) => {
-      return ["-p", p]
-    }))
-    : []
-
-  let pkgsStr = pkgs.length == 0 ? "" : " " + pkgs.join(" ")
+  let pkgOpts = ipkg.getPkgOpts(innerCompilerOptions)
+  let pkgOptsStr = pkgOpts.length == 0 ? "" : " " + pkgOpts.join(" ")
   
-  term.sendText(`idris${pkgsStr}`)
+  term.sendText(`idris${pkgOptsStr}`)
 
   if (innerCompilerOptions.src) {
     let [path, module] = uri.split(innerCompilerOptions.src)

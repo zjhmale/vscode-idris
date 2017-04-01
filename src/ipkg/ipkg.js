@@ -61,8 +61,20 @@ compilerOptions = (directory) => {
   })
 }
 
+let getPkgOpts = (compilerOptions) => {
+  let pkgs = compilerOptions.pkgs && compilerOptions.pkgs.length
+    ? [].concat.apply([], compilerOptions.pkgs.map((p) => {
+      return ["-p", p]
+    }))
+    : []
+
+  let pkgOpts = pkgs.concat(compilerOptions.options ? compilerOptions.options.split(' ') : [])
+  return pkgOpts
+}
+
 module.exports = {
   findIpkgFile: findIpkgFile,
   readIpkgFile: readIpkgFile,
-  compilerOptions: compilerOptions
+  compilerOptions: compilerOptions,
+  getPkgOpts: getPkgOpts
 }
