@@ -52,6 +52,7 @@ let getCurrentPosition = () => {
   let editor = vscode.window.activeTextEditor
   let document = editor.document
   if (document.isDirty) {
+    // if a concrete command use this function, it should set `needDestroy` to true when it finished.
     needDestroy = false
     document.save()
   }
