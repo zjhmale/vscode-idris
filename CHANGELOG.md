@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.6.6
+
+* `Go to Definition` and `Peek Definition` improvement [#63](https://github.com/zjhmale/vscode-idris/issues/63)
+* Fix can not Start/Reload REPL for Windows [#60](https://github.com/zjhmale/vscode-idris/issues/60) [@be5invis](https://github.com/be5invis)
+
 ## 0.6.3
 
 * Support `Go to Definition` and `Peek Definition` [#21](https://github.com/zjhmale/vscode-idris/issues/21)

@@ -14,7 +14,6 @@ let IdrisDefinitionProvider = (function () {
     let uri = document.uri.fsPath
     return new Promise((resolve, reject) => {
       let loc = findDefinition.findDefinitionInFiles(`${currentWord} :`, uri)
-      console.log(JSON.stringify(loc))
       resolve(loc)
     }).then(function (loc) {
       if (loc) {
