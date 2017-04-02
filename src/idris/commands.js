@@ -249,7 +249,7 @@ let evalSelection = (uri) => {
 }
 
 let startup = (uri) => {
-  const pathToIdris = vscode.workspace.getConfiguration('idris').get('executablePath') || 'idris';
+  const pathToIdris = vscode.workspace.getConfiguration('idris').get('executablePath');
   const idrisPath = which.sync(pathToIdris)
   const pkgOpts = ipkg.getPkgOpts(innerCompilerOptions)
   term = vscode.window.createTerminal("Idris REPL", idrisPath, pkgOpts)
