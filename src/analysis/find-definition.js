@@ -9,15 +9,15 @@ let getModuleName = (uri) => {
   return moduleMatch ? moduleMatch[1].trim() : null
 }
 
-let getExportedModules = (uri) => {
+let getImportedModules = (uri) => {
   let content = fs.readFileSync(uri).toString()
-  let exportPattern = /import(.*)\r\n/g
+  let importPattern = /import(.*)\r\n/g
   let match
-  let exportedModules = []
-  while (match = exportPattern.exec(content)) {
-    exportedModules.push(match[1].trim())
+  let importedModules = []
+  while (match = importPattern.exec(content)) {
+    importedModules.push(match[1].trim())
   }
-  return exportedModules
+  return importedModules
 }
 
 let findDefinitionInFile = (definition, uri) => {
@@ -49,9 +49,9 @@ let findDefinitionInFiles = (definition, uri) => {
       }
     }
   })
-  let exportedModules = getExportedModules(uri)
+  let importedModules = getImportedModules(uri)
   let legalLocations = locations.filter((loc) => {
-    return loc.path == uri || exportedModules.includes(loc.module)
+    return loc.path == uri || importedModules.includes(loc.module)
   })
   return legalLocations[0]
 }
