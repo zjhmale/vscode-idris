@@ -38,6 +38,7 @@ Check out [FEATURES.md](https://github.com/zjhmale/vscode-idris/blob/master/FEAT
 * Auto-completion
 * Show type definition on hover
 * Type checking on saving file
+* `Go to Definition` and `Peek Definition`
 
 ## Installation
 

@@ -103,3 +103,7 @@
 ### Cleanup Idris binary files
 
 ![cleanup-ibc](./images/screenshots/cleanup-ibc.gif)
+
+### Go to Definition and Peek Definition
+
+![find-definition](./images/screenshots/find-definition.gif)
