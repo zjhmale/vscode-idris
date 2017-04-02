@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.6.3
+
+* Support `Go to Definition` and `Peek Definition` [#21](https://github.com/zjhmale/vscode-idris/issues/21)
+* Fix `Can't find import` bug for REPL [#59](https://github.com/zjhmale/vscode-idris/issues/59)
+* Fix command confliction on unsaved files [#55](https://github.com/zjhmale/vscode-idris/issues/55)
+* Insert new line for `Add Clause` command [#56](https://github.com/zjhmale/vscode-idris/issues/56) [@wkwkes](https://github.com/wkwkes)
+
 ## 0.6.1
 
 * Fix huge memory usage issue [#52](https://github.com/zjhmale/vscode-idris/issues/52)
