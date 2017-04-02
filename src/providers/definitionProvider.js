@@ -11,6 +11,7 @@ let IdrisDefinitionProvider = (function () {
     let [currentWord, wordRange] = commands.getWordBase(document, position, true)
     if (!currentWord) return
 
+    commands.showOutputChannel(`Searching for the definition of ${currentWord} ...`)
     let uri = document.uri.fsPath
     return controller.getCompilerOptsPromise().flatMap((compilerOptions) => {
       commands.initialize(compilerOptions)
@@ -23,6 +24,7 @@ let IdrisDefinitionProvider = (function () {
       let typeMsg = arg.msg[0]
       // typeMsg here is => name : type
       let loc = findDefinition.findDefinitionInFiles(typeMsg, uri)
+      commands.clearOutputChannel()
       if (loc) {
         let pos = new vscode.Position(loc.line, loc.column);
         return new vscode.Location(vscode.Uri.file(loc.path), pos);

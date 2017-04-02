@@ -42,10 +42,18 @@ let getModel = () => {
   return model
 }
 
-let showLoading = () => {
+let showOutputChannel = (msg) => {
   outputChannel.clear()
   outputChannel.show()
-  outputChannel.append("loading...")
+  outputChannel.append(msg)
+}
+
+let clearOutputChannel = () => {
+  outputChannel.clear()
+}
+
+let showLoading = () => {
+  showOutputChannel("loading...")
 }
 
 let getCurrentPosition = () => {
@@ -567,5 +575,7 @@ module.exports = {
   startREPL,
   sendREPL,
   getWordBase,
-  getSafeRoot
+  getSafeRoot,
+  showOutputChannel,
+  clearOutputChannel
 }
