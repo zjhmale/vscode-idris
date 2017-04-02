@@ -1,3 +1,5 @@
+const which = require('which')
+
 let IdrisModel = require('./model')
 let ipkg       = require('../ipkg/ipkg')
 let vscode     = require('vscode')
@@ -247,11 +249,10 @@ let evalSelection = (uri) => {
 }
 
 let startup = (uri) => {
-  term = vscode.window.createTerminal("Idris REPL")
-  let pkgOpts = ipkg.getPkgOpts(innerCompilerOptions)
-  let pkgOptsStr = pkgOpts.length == 0 ? "" : " " + pkgOpts.join(" ")
-  
-  term.sendText(`idris${pkgOptsStr}`)
+  const pathToIdris = vscode.workspace.getConfiguration('idris').get('executablePath') || 'idris';
+  const idrisPath = which.sync(pathToIdris)
+  const pkgOpts = ipkg.getPkgOpts(innerCompilerOptions)
+  term = vscode.window.createTerminal("Idris REPL", idrisPath, pkgOpts)
 
   if (innerCompilerOptions.src) {
     let [path, module] = uri.split(innerCompilerOptions.src)
