@@ -1,8 +1,8 @@
-let ipkg = require('../ipkg/ipkg')
-let commands = require('../idris/commands')
-let controller = require('../controller')
-let vscode = require('vscode')
-let findDefinition = require('../analysis/find-definition')
+const ipkg = require('../ipkg/ipkg')
+const commands = require('../idris/commands')
+const controller = require('../controller')
+const vscode = require('vscode')
+const findDefinition = require('../analysis/find-definition')
 
 let IdrisDefinitionProvider = (function () {
   function GoDefinitionProvider() { }

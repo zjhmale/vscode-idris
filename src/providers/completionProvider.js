@@ -1,7 +1,7 @@
-let ipkg = require('../ipkg/ipkg')
-let commands = require('../idris/commands')
-let controller = require('../controller')
-let vscode = require('vscode')
+const ipkg = require('../ipkg/ipkg')
+const commands = require('../idris/commands')
+const controller = require('../controller')
+const vscode = require('vscode')
 
 let identRegex = /'?[a-zA-Z0-9_][a-zA-Z0-9_-]*'?/g
 let identMatch

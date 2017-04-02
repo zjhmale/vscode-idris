@@ -1,8 +1,8 @@
-let ipkg = require('./ipkg/ipkg')
-let commands = require('./idris/commands')
-let vscode = require('vscode')
-let glob = require("glob")
-let fs = require('fs');
+const ipkg = require('./ipkg/ipkg')
+const commands = require('./idris/commands')
+const vscode = require('vscode')
+const glob = require("glob")
+const fs = require('fs');
 
 let getCommands = () => {
   return [

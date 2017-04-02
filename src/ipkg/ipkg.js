@@ -1,6 +1,6 @@
-let path = require('path')
-let fs   = require('fs')
-let Rx   = require('rx-lite')
+const path = require('path')
+const fs   = require('fs')
+const Rx   = require('rx-lite')
 
 let optionsRegexp   = /opts\s*=\s*\"([^\"]*)\"/
 let sourcedirRegexp = /sourcedir\s*=\s*([a-zA-Z\/0-9.]+)/

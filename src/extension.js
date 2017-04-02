@@ -1,10 +1,10 @@
-let vscode = require('vscode')
-let controller = require('./controller')
-let completion = require('./providers/completionProvider')
-let hover = require('./providers/hoverProvider')
-let definition = require('./providers/definitionProvider')
+const vscode = require('vscode')
+const controller = require('./controller')
+const completion = require('./providers/completionProvider')
+const hover = require('./providers/hoverProvider')
+const definition = require('./providers/definitionProvider')
 
-let IDRIS_MODE = { language: 'idris', scheme: 'file' }
+const IDRIS_MODE = { language: 'idris', scheme: 'file' }
 
 let idrisExecutablePath = vscode.workspace.getConfiguration('idris').get('executablePath');
 

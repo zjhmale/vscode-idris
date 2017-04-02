@@ -1,8 +1,8 @@
-let commands = require('../idris/commands')
-let controller = require('../controller')
-let ipkg = require('../ipkg/ipkg')
-let vscode = require('vscode')
-let Rx = require('rx-lite')
+const commands = require('../idris/commands')
+const controller = require('../controller')
+const ipkg = require('../ipkg/ipkg')
+const vscode = require('vscode')
+const Rx = require('rx-lite')
 
 // to determine whether range1 is inside range2
 let isRangeInsideRange = (range1, range2) => {

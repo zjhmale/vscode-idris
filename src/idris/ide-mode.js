@@ -1,9 +1,9 @@
-let formatter    = require('../wire/formatter')
-let parser       = require('../wire/parser')
-let ipkg         = require('../ipkg/ipkg')
-let cp           = require('child_process')
-let EventEmitter = require('events').EventEmitter
-let vscode       = require('vscode')
+const formatter    = require('../wire/formatter')
+const parser       = require('../wire/parser')
+const ipkg         = require('../ipkg/ipkg')
+const cp           = require('child_process')
+const EventEmitter = require('events').EventEmitter
+const vscode       = require('vscode')
 
 class IdrisIdeMode extends EventEmitter {
   constructor() {

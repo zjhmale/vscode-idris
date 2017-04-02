@@ -1,8 +1,8 @@
-let CSON = require("cson")
-let request = require('request');
-let chalk = require('chalk');
-let fs = require('fs')
-let join = require('path').join
+const CSON = require("cson")
+const request = require('request');
+const chalk = require('chalk');
+const fs = require('fs')
+const join = require('path').join
 
 let getCSONFile = (url, callback) => {
   request(url, function (error, response, body) {

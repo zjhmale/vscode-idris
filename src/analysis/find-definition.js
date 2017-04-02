@@ -1,6 +1,6 @@
-let fs = require("fs")
-let glob = require("glob")
-let commands = require("../idris/commands")
+const fs = require("fs")
+const glob = require("glob")
+const commands = require("../idris/commands")
 
 let getModuleName = (uri) => {
   let content = fs.readFileSync(uri).toString()

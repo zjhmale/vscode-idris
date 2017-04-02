@@ -1,5 +1,5 @@
-let IdrisIdeMode = require('./ide-mode')
-let Rx           = require('rx-lite')
+const IdrisIdeMode = require('./ide-mode')
+const Rx           = require('rx-lite')
 
 class IdrisModel {
   constructor() {

@@ -1,8 +1,7 @@
 const which = require('which')
-
-let IdrisModel = require('./model')
-let ipkg       = require('../ipkg/ipkg')
-let vscode     = require('vscode')
+const IdrisModel = require('./model')
+const ipkg = require('../ipkg/ipkg')
+const vscode = require('vscode')
 
 let model = null
 let outputChannel = vscode.window.createOutputChannel('Idris')
