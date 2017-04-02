@@ -254,7 +254,7 @@ let startup = (uri) => {
   const pkgOpts = ipkg.getPkgOpts(innerCompilerOptions)
   term = vscode.window.createTerminal("Idris REPL", idrisPath, pkgOpts)
 
-  if (innerCompilerOptions.src) {
+  if (innerCompilerOptions.src && uri.includes(innerCompilerOptions.src)) {
     let [path, module] = uri.split(innerCompilerOptions.src)
     let moduleParts = module.split("/")
     moduleParts.shift()
