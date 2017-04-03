@@ -162,6 +162,10 @@ class IdrisModel {
   replCompletions(word) {
     return this.prepareCommand([':repl-completions', word])
   }
+
+  browseNamespace(moduleName) {
+    return this.prepareCommand([':browse-namespace', moduleName])
+  }
 }
 
 module.exports = IdrisModel

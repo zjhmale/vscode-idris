@@ -5,15 +5,15 @@ const vscode = require('vscode')
 const findDefinition = require('../analysis/find-definition')
 
 let IdrisDefinitionProvider = (function () {
-  function GoDefinitionProvider() { }
+  function IdrisDefinitionProvider() { }
 
-  GoDefinitionProvider.prototype.provideDefinition = function (document, position, token) {
+  IdrisDefinitionProvider.prototype.provideDefinition = function (document, position, token) {
     let [currentWord, wordRange] = commands.getWordBase(document, position, true)
     if (!currentWord) return
 
     let uri = document.uri.fsPath
     return new Promise((resolve, reject) => {
-      let loc = findDefinition.findDefinitionInFiles(`${currentWord} :`, uri)
+      let loc = findDefinition.findDefinitionInFiles(currentWord, uri)
       resolve(loc)
     }).then(function (loc) {
       if (loc) {
@@ -24,7 +24,7 @@ let IdrisDefinitionProvider = (function () {
       }
     })
   }
-  return GoDefinitionProvider
+  return IdrisDefinitionProvider
 }())
 
 module.exports = {

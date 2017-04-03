@@ -1,37 +1,24 @@
 const fs = require("fs")
 const glob = require("glob")
 const commands = require("../idris/commands")
-
-let getModuleName = (uri) => {
-  let content = fs.readFileSync(uri).toString()
-  let modulePattern = /module(.*)\r\n/g
-  let moduleMatch = modulePattern.exec(content)
-  return moduleMatch ? moduleMatch[1].trim() : null
-}
-
-let getImportedModules = (uri) => {
-  let content = fs.readFileSync(uri).toString()
-  let importPattern = /import(.*)\r\n/g
-  let match
-  let importedModules = []
-  while (match = importPattern.exec(content)) {
-    importedModules.push(match[1].trim())
-  }
-  return importedModules
-}
+const common = require('./common')
 
 let findDefinitionInFile = (definition, uri) => {
   let content = fs.readFileSync(uri).toString()
   let contents = content.split("\n")
   for (let i = 0; i < contents.length; i++) {
-    if (contents[i].includes(definition)) {
-      let moduleName = getModuleName(uri)
-      if (moduleName) {
-        return {
-          path: uri,
-          module: moduleName,
-          line: i,
-          column: contents[i].indexOf(definition)
+    if (contents[i].includes(definition) && contents[i].includes(":")) {
+      let start = contents[i].indexOf(definition) + definition.length
+      let end = contents[i].indexOf(":")
+      if (end > start && contents[i].slice(start, end).trim().length == 0) {
+        let moduleName = common.getModuleName(uri)
+        if (moduleName) {
+          return {
+            path: uri,
+            module: moduleName,
+            line: i,
+            column: contents[i].indexOf(definition)
+          }
         }
       }
     }
@@ -49,7 +36,7 @@ let findDefinitionInFiles = (definition, uri) => {
       }
     }
   })
-  let importedModules = getImportedModules(uri)
+  let importedModules = common.getImportedModules(uri)
   let legalLocations = locations.filter((loc) => {
     return loc.path == uri || importedModules.includes(loc.module)
   })
