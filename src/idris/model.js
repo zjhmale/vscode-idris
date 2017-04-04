@@ -1,5 +1,6 @@
 const IdrisIdeMode = require('./ide-mode')
-const Rx           = require('rx-lite')
+const Rx = require('rx-lite')
+const path = require('path')
 
 class IdrisModel {
   constructor() {
@@ -103,8 +104,30 @@ class IdrisModel {
     }
   }
 
+  changeDirectory(dir) {
+    return this.interpret(`:cd ${dir}`)
+  }
+
   load(uri) {
-    return this.prepareCommand([':load-file', uri])
+    let dir, cd
+    if (this.compilerOptions && this.compilerOptions.src) {
+      dir = this.compilerOptions.src
+    } else {
+      dir = path.dirname(uri)
+    }
+
+    if (dir != this.compilerOptions.src) {
+      this.compilerOptions.src = dir
+      cd = this.changeDirectory(dir).map((_) => {
+        return dir
+      })
+    } else {
+      cd = Rx.Observable.of(dir)
+    }
+
+    return cd.flatMap((_) => {
+      return this.prepareCommand([':load-file', uri])
+    })
   }
 
   getType(word) {
