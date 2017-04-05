@@ -10,19 +10,25 @@ let findDefinitionForADTFunctions = (contents, definition, uri, moduleName) => {
 
     // For the first function in ADT definition
     if (current.includes(definition) && new RegExp(`data\\s+\\w+\\s+=\\s+${definition}`, "g").test(former + current + latter)) {
-      return {
-        path: uri,
-        module: moduleName,
-        line: i,
-        column: current.indexOf(definition)
+      let latterIdx = current.indexOf(definition) + definition.length
+      let latterOne = current[latterIdx] ? current[latterIdx] : ""
+      if (!/\w/g.test(latterOne)) {
+        return {
+          path: uri,
+          module: moduleName,
+          line: i,
+          column: current.indexOf(definition)
+        }
       }
     }
 
     // For the rest of functions in ADT definition
     if (current.includes(definition) && current.includes("|") && !contents.includes("||")) {
+      let latterIdx = current.indexOf(definition) + definition.length
+      let latterOne = current[latterIdx] ? current[latterIdx] : ""
       let start = current.indexOf("|") + 1
       let end = current.indexOf(definition)
-      if (end > start && current.slice(start, end).trim().length == 0) {
+      if (end > start && current.slice(start, end).trim().length == 0 && !/\w/g.test(latterOne)) {
         return {
           path: uri,
           module: moduleName,
@@ -40,9 +46,11 @@ let findDefinitionForADTFunctions = (contents, definition, uri, moduleName) => {
 let findDefinitionForFunctions = (contents, definition, uri, moduleName) => {
   for (let i = 0; i < contents.length; i++) {
     if (contents[i].includes(definition) && contents[i].includes(":")) {
+      let idx = contents[i].indexOf(definition)
+      let formerOne = contents[i][idx - 1] ? contents[i][idx - 1] : ""
       let start = contents[i].indexOf(definition) + definition.length
       let end = contents[i].indexOf(":")
-      if (end > start && contents[i].slice(start, end).trim().length == 0) {
+      if (end > start && contents[i].slice(start, end).trim().length == 0 && !/\w/g.test(formerOne)) {
         return {
           path: uri,
           module: moduleName,
