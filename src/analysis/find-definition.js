@@ -1,6 +1,5 @@
 const fs = require("fs")
 const glob = require("glob")
-const commands = require("../idris/commands")
 const common = require('./common')
 
 let findDefinitionForADTFunctions = (contents, definition, uri, moduleName) => {
@@ -67,14 +66,11 @@ let findDefinitionInFile = (definition, uri) => {
 }
 
 let findDefinitionInFiles = (definition, uri) => {
-  let files = glob.sync(commands.getSafeRoot() + "/**/*")
   locations = []
-  files.forEach((file) => {
-    if (file.endsWith(".idr")) {
-      let location = findDefinitionInFile(definition, file)
-      if (location) {
-        locations.push(location)
-      }
+  common.getAllFiles('idr').forEach((file) => {
+    let location = findDefinitionInFile(definition, file)
+    if (location) {
+      locations.push(location)
     }
   })
   let importedModules = common.getImportedModules(uri)

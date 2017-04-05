@@ -1,4 +1,6 @@
 const fs = require("fs")
+const glob = require("glob")
+const commands = require("../idris/commands")
 
 let getModuleName = (uri) => {
   let content = fs.readFileSync(uri).toString()
@@ -18,7 +20,13 @@ let getImportedModules = (uri) => {
   return importedModules
 }
 
+let getAllFiles = (ext) => {
+  let files = glob.sync(commands.getSafeRoot() + "/**/*")
+  return files.filter((file) => file.endsWith(`.${ext}`))
+}
+
 module.exports = {
-	getModuleName,
-	getImportedModules
+  getModuleName,
+  getImportedModules,
+  getAllFiles
 }

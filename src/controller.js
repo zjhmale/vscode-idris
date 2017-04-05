@@ -1,7 +1,7 @@
 const ipkg = require('./ipkg/ipkg')
 const commands = require('./idris/commands')
+const common = require('./analysis/common')
 const vscode = require('vscode')
-const glob = require("glob")
 const fs = require('fs');
 
 let getCommands = () => {
@@ -26,14 +26,8 @@ let getCommands = () => {
 }
 
 let cleanupIbc = (_) => {
-  glob(commands.getSafeRoot() + "/**/*", (err, files) => {
-    if (!err) {
-      files.forEach((file) => {
-        if (file.endsWith(".ibc")) {
-          fs.unlinkSync(file)
-        }
-      })
-    }
+  common.getAllFiles('ibc').forEach((file) => {
+    fs.unlinkSync(file)
   })
 }
 
