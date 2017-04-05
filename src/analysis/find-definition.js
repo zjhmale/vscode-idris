@@ -2,11 +2,20 @@ const fs = require("fs")
 const glob = require("glob")
 const common = require('./common')
 
-let findDefinitionForADTFunctions = (contents, definition, uri, moduleName) => {
+let findDefinitionForADTTypeAndFunctions = (contents, definition, uri, moduleName) => {
   for (let i = 0; i < contents.length; i++) {
     let former = contents[i - 1] ? contents[i - 1] : ""
     let latter = contents[i + 1] ? contents[i + 1] : ""
     let current = contents[i]
+
+    if (new RegExp(`data\\s+${definition}\\s+=\\s+`, "g").test(current)) {
+      return {
+        path: uri,
+        module: moduleName,
+        line: i,
+        column: current.indexOf(definition)
+      }
+    }
 
     // For the first function in ADT definition
     if (current.includes(definition) && new RegExp(`data\\s+\\w+\\s+=\\s+${definition}`, "g").test(former + current + latter)) {
@@ -69,8 +78,8 @@ let findDefinitionInFile = (definition, uri) => {
   let content = fs.readFileSync(uri).toString()
   let contents = content.split("\n")
   let funcDef = findDefinitionForFunctions(contents, definition, uri, moduleName)
-  let adtFuncDef = findDefinitionForADTFunctions(contents, definition, uri, moduleName)
-  return funcDef || adtFuncDef
+  let adtTypeFuncDef = findDefinitionForADTTypeAndFunctions(contents, definition, uri, moduleName)
+  return funcDef || adtTypeFuncDef
 }
 
 let findDefinitionInFiles = (definition, uri) => {
