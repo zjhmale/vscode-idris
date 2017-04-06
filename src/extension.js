@@ -4,6 +4,7 @@ const completion = require('./providers/completionProvider')
 const hover = require('./providers/hoverProvider')
 const definition = require('./providers/definitionProvider')
 const documentSymbol = require('./providers/documentSymbolProvider')
+const workspaceSymbol = require('./providers/workspaceSymbolProvider')
 
 const IDRIS_MODE = { language: 'idris', scheme: 'file' }
 
@@ -32,6 +33,7 @@ function activate(context) {
   context.subscriptions.push(vscode.languages.registerHoverProvider(IDRIS_MODE, new hover.IdrisHoverProvider()))
   context.subscriptions.push(vscode.languages.registerDefinitionProvider(IDRIS_MODE, new definition.IdrisDefinitionProvider()))
   context.subscriptions.push(vscode.languages.registerDocumentSymbolProvider(IDRIS_MODE, new documentSymbol.IdrisDocumentSymbolProvider()))
+  context.subscriptions.push(vscode.languages.registerWorkspaceSymbolProvider(new workspaceSymbol.IdrisWorkspaceSymbolProvider()))
   context.subscriptions.push(vscode.workspace.onDidSaveTextDocument(() => {
     controller.typeCheckOnSave()
     completion.buildCompletionList()

@@ -375,7 +375,8 @@
     "nu-stream": "3.3.1",
     "request": "2.81.0",
     "rx-lite": "4.0.0",
-    "which": "^1.2.14"
+    "which": "^1.2.14",
+    "hashmap": "^2.0.5"
   },
   "devDependencies": {
     "vscode": "^1.0.5"
