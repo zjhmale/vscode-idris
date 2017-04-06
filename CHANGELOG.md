@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.6.9
+
+* Support `Go to Symbol` and `Search Symbol` [#48](https://github.com/zjhmale/vscode-idris/issues/48)
+* `Find definition` improvement [#67](https://github.com/zjhmale/vscode-idris/issues/67)
+* Fix `Can't find import` bug for typechecking [#66](https://github.com/zjhmale/vscode-idris/issues/66)
+
 ## 0.6.6
 
 * `Go to Definition` and `Peek Definition` improvement [#63](https://github.com/zjhmale/vscode-idris/issues/63)
