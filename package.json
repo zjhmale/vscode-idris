@@ -376,7 +376,8 @@
     "request": "2.81.0",
     "rx-lite": "4.0.0",
     "which": "^1.2.14",
-    "hashmap": "^2.0.5"
+    "hashmap": "^2.0.5",
+    "lodash": "^4.17.4"
   },
   "devDependencies": {
     "vscode": "^1.0.5"

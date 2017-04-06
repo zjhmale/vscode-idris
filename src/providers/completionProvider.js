@@ -2,21 +2,13 @@ const ipkg = require('../ipkg/ipkg')
 const commands = require('../idris/commands')
 const controller = require('../controller')
 const vscode = require('vscode')
+const common = require('../analysis/common')
 
-let identRegex = /'?[a-zA-Z0-9_][a-zA-Z0-9_-]*'?/g
-let identMatch
 let identList
 
 let buildCompletionList = () => {
-  identList = []
-
-  let text = vscode.window.activeTextEditor.document.getText()
-  while (identMatch = identRegex.exec(text)) {
-    let ident = identMatch[0]
-    if (identList.indexOf(ident) <= -1) {
-      identList.push(ident)
-    }
-  }
+  let uri = vscode.window.activeTextEditor.document.uri.fsPath
+  identList = common.getIdentList(uri)
 }
 
 let IdrisCompletionProvider = (function () {

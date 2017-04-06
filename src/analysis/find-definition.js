@@ -8,7 +8,8 @@ let findDefinitionForADTTypeAndFunctions = (contents, definition, uri, moduleNam
     let latter = contents[i + 1] ? contents[i + 1] : ""
     let current = contents[i]
 
-    if (new RegExp(`data\\s+${definition}\\s+=\\s+`, "g").test(current)) {
+    if (new RegExp(`data\\s+${definition}\\s+=\\s+`, "g").test(current)
+    && !current.trim().startsWith("--")) {
       return {
         path: uri,
         module: moduleName,
@@ -18,7 +19,9 @@ let findDefinitionForADTTypeAndFunctions = (contents, definition, uri, moduleNam
     }
 
     // For the first function in ADT definition
-    if (current.includes(definition) && new RegExp(`data\\s+\\w+\\s+=\\s+${definition}`, "g").test(former + current + latter)) {
+    if (current.includes(definition)
+      && new RegExp(`data\\s+\\w+\\s+=\\s+${definition}`, "g").test(former + current + latter)
+      && !current.trim().startsWith("--")) {
       let latterIdx = current.indexOf(definition) + definition.length
       let latterOne = current[latterIdx] ? current[latterIdx] : ""
       if (!/\w/g.test(latterOne)) {
@@ -32,7 +35,11 @@ let findDefinitionForADTTypeAndFunctions = (contents, definition, uri, moduleNam
     }
 
     // For the rest of functions in ADT definition
-    if (current.includes(definition) && current.includes("|") && !contents.includes("||")) {
+    if (current.includes(definition)
+      && current.includes("|")
+      && !current.includes("||")
+      && !current.includes(" = ")
+      && !current.trim().startsWith("--")) {
       let latterIdx = current.indexOf(definition) + definition.length
       let latterOne = current[latterIdx] ? current[latterIdx] : ""
       let start = current.indexOf("|") + 1
@@ -54,7 +61,10 @@ let findDefinitionForADTTypeAndFunctions = (contents, definition, uri, moduleNam
  */
 let findDefinitionForFunctions = (contents, definition, uri, moduleName) => {
   for (let i = 0; i < contents.length; i++) {
-    if (contents[i].includes(definition) && contents[i].includes(":")) {
+    if (contents[i].includes(definition)
+      && contents[i].includes(":")
+      && !contents[i].includes("::")
+      && !contents[i].trim().startsWith("--")) {
       let idx = contents[i].indexOf(definition)
       let formerOne = contents[i][idx - 1] ? contents[i][idx - 1] : ""
       let start = contents[i].indexOf(definition) + definition.length

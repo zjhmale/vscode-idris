@@ -36,6 +36,10 @@ let IdrisDocumentSymbolProvider = (function () {
               }
             })
             resolve(symbols)
+          },
+          function (err) {
+            vscode.window.showWarningMessage(`${err.message} : ${moduleName}`)
+            resolve(null)
           })
       })
     }).then(function (symbols) {

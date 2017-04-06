@@ -2,9 +2,26 @@ const fs = require("fs")
 const glob = require("glob")
 const commands = require("../idris/commands")
 
+let identRegex = /'?[a-zA-Z0-9_][a-zA-Z0-9_-]*'?/g
+let identMatch
+let identList
+
+let getIdentList = (uri) => {
+  identList = []
+
+  let content = fs.readFileSync(uri).toString()
+  while (identMatch = identRegex.exec(content)) {
+    let ident = identMatch[0]
+    if (identList.indexOf(ident) <= -1) {
+      identList.push(ident)
+    }
+  }
+  return identList
+}
+
 let getModuleName = (uri) => {
   let content = fs.readFileSync(uri).toString()
-  let modulePattern = /module(.*)\r\n/g
+  let modulePattern = /\bmodule(.*)\s+/g
   let moduleMatch = modulePattern.exec(content)
   return moduleMatch ? moduleMatch[1].trim() : null
 }
@@ -26,6 +43,7 @@ let getAllFiles = (ext) => {
 }
 
 module.exports = {
+  getIdentList,
   getModuleName,
   getImportedModules,
   getAllFiles
