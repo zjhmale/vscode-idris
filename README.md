@@ -39,6 +39,8 @@ Check out [FEATURES.md](https://github.com/zjhmale/vscode-idris/blob/master/FEAT
 * Show type definition on hover
 * Type checking on saving file
 * `Go to Definition` and `Peek Definition`
+* Go to Symbol (Outline symbols in currently opend file)
+* Search Symbol (Outline symbols in currently opend project)
 
 ## Installation
 

@@ -107,3 +107,11 @@
 ### Go to Definition and Peek Definition
 
 ![find-definition](./images/screenshots/find-definition.gif)
+
+### Go to Symbol (Outline symbols in currently opend file)
+
+![go-to-symbol](./images/screenshots/go-to-symbol.gif)
+
+### Search Symbol (Outline symbols in currently opend project)
+
+![search-symbol](./images/screenshots/search-symbol.gif)
