@@ -9,38 +9,36 @@
 
 ## Implemented features
 
-Check out [FEATURES.md](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md) to see screenshots for implemented features.
-
-| command | shortcut |
+| command screenshot | command name |
 |---|---|
-| Typechecking | shift + cmd/ctrl + alt + t |
-| Show the types of a variable | shift + cmd/ctrl + alt + o |
-| Show the doc for a variable | shift + cmd/ctrl + alt + d |
-| Show the doc for a definition | shift + cmd/ctrl + alt + f |
-| Show holes | shift + cmd/ctrl + alt + h |
-| Add clause | shift + cmd/ctrl + alt + a |
-| Split case | shift + cmd/ctrl + alt + c |
-| Search proof | shift + cmd/ctrl + alt + s |
-| Make with | shift + cmd/ctrl + alt + w |
-| Make case | shift + cmd/ctrl + alt + m |
-| Make lemma | shift + cmd/ctrl + alt + l |
-| Apropos | shift + cmd/ctrl + alt + k |
-| Eval selected code | shift + cmd/ctrl + alt + e |
-| Start / Refresh REPL | shift + cmd/ctrl + alt + r |
-| Send selected code to REPL | shift + cmd/ctrl + alt + x |
-| Cleanup Idris binary files | shift + cmd/ctrl + alt + u |
+| [Typechecking](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#typechecking) | idris.typecheck |
+| [Show the types of a variable](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#showing-the-type-of-an-identifier) | idris.type-of |
+| [Show the doc for a variable](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#showing-the-docs-for-an-identifier) | idris.docs-for |
+| [Show the doc for a definition](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#showing-the-definition-for-an-identifier) | idris.print-definition |
+| [Show holes](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#list-all-the-currently-active-holes) | idris.show-holes |
+| [Add clause](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#generate-an-initial-pattern-match-clause) | idris.add-clause |
+| [Split case](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#generate-a-case-split-for-the-pattern-variable) | idris.case-split |
+| [Search proof](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#attempt-to-fill-out-the-holes-by-proof-search) | idris.proof-search |
+| [Make with](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#create-a-with-rule-pattern-match-template-for-the-clause-of-function) | idris.make-with |
+| [Make case](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#create-a-case-pattern-match-template-for-the-holes) | idris.make-case |
+| [Make lemma](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#create-a-top-level-function-with-a-type-which-solves-the-hole-under-the-cursor) | idris.make-lemma |
+| [Apropos](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#search-names-types-and-documentations) | idris.apropos |
+| [Eval selected code](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#evaluate-selected-code-in-editor) | idris.eval-selection |
+| [Start / Refresh REPL](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#start-or-refresh-repl) | idris.start-refresh-repl |
+| [Send selected code to REPL](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#send-selected-code-to-repl) | idris.send-selection-repl |
+| [Cleanup Idris binary files](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#cleanup-idris-binary-files) | idris.cleanup-ibc |
 
 **Heads up:** All the command above can also be triggered in the right-click menu
 
 ![menu](./images/screenshots/menu.gif)
 
-* ipkg highlighting
-* Auto-completion
-* Show type definition on hover
+* [ipkg highlighting](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#ipkg-highlighting)
+* [Auto-completion](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#code-completion)
+* [Show type definition on hover](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#show-type-definition-on-hover)
 * Type checking on saving file
-* `Go to Definition` and `Peek Definition`
-* Go to Symbol (Outline symbols in currently opend file)
-* Search Symbol (Outline symbols in currently opend project)
+* [Go to Definition and Peek Definition](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#go-to-definition-and-peek-definition)
+* [Go to Symbol (Outline symbols in currently opend file)](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#go-to-symbol-outline-symbols-in-currently-opend-file)
+* [Search Symbol (Outline symbols in currently opend project)](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#search-symbol-outline-symbols-in-currently-opend-project)
 
 ## Installation
 
