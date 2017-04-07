@@ -25,7 +25,7 @@ let IdrisCompletionProvider = (function () {
 
       if (suggestMode == 'allWords') {
         return identList.filter((ident) => {
-          return ident.startsWith(trimmedPrefix)
+          return ident.startsWith(trimmedPrefix) || ident.toLowerCase().startsWith(trimmedPrefix)
         }).map((ident) => {
           return new vscode.CompletionItem(ident, 0)
         })
