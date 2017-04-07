@@ -8,7 +8,7 @@ let identList
 
 let buildCompletionList = () => {
   let uri = vscode.window.activeTextEditor.document.uri.fsPath
-  identList = common.getIdentList(uri)
+  identList = common.getIdents(uri)
 }
 
 let IdrisCompletionProvider = (function () {
@@ -24,11 +24,9 @@ let IdrisCompletionProvider = (function () {
       let suggestMode = vscode.workspace.getConfiguration('idris').get('suggestMode')
 
       if (suggestMode == 'allWords') {
-        identList.filter((ident) => {
-          ident.startsWith(trimmedPrefix)
-        })
-
-        return identList.map((ident) => {
+        return identList.filter((ident) => {
+          return ident.startsWith(trimmedPrefix)
+        }).map((ident) => {
           return new vscode.CompletionItem(ident, 0)
         })
       } else if (suggestMode == 'replCompletion') {
