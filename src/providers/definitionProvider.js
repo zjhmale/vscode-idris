@@ -13,8 +13,15 @@ let IdrisDefinitionProvider = (function () {
 
     let uri = document.uri.fsPath
     return new Promise((resolve, reject) => {
-      let loc = findDefinition.findDefinitionInFiles(currentWord, uri)
-      resolve(loc)
+      let currentLine = document.lineAt(position).text
+      let match = /import\s+(public\s+)?(([A-Z]\w*)(\.[A-Z]\w*)*)(\s+as\s+\w+)?/g.exec(currentLine)
+      if (match && match[2].includes(currentWord)) {
+        let loc = findDefinition.findDefinitionForModule(match[2])
+        resolve(loc)
+      } else {
+        let loc = findDefinition.findDefinitionInFiles(currentWord, uri)
+        resolve(loc)
+      }
     }).then(function (loc) {
       if (loc) {
         let pos = new vscode.Position(loc.line, loc.column);

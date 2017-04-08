@@ -9,7 +9,7 @@ let findDefinitionForADTTypeAndFunctions = (contents, definition, uri, moduleNam
     let current = contents[i]
 
     if (new RegExp(`data\\s+${definition}\\s+=\\s+`, "g").test(current)
-    && !current.trim().startsWith("--")) {
+      && !current.trim().startsWith("--")) {
       return {
         path: uri,
         module: moduleName,
@@ -107,6 +107,25 @@ let findDefinitionInFiles = (definition, uri) => {
   return legalLocations[0]
 }
 
+let findDefinitionForModule = (moduleName) => {
+  return common.getAllFiles('idr').map((file) => {
+    let content = fs.readFileSync(file).toString()
+    if (new RegExp(`module\\s+${moduleName}\\s*`, "g").test(content)) {
+      return {
+        path: file,
+        module: moduleName,
+        line: 0,
+        column: 0
+      }
+    } else {
+      return null
+    }
+  }).filter((loc) => {
+    return loc != null
+  })[0]
+}
+
 module.exports = {
-  findDefinitionInFiles
+  findDefinitionInFiles,
+  findDefinitionForModule
 }
