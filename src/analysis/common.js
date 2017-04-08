@@ -64,6 +64,10 @@ const excludes = [
   "Nothing"
 ]
 
+let getImportPattern = () => {
+  return /import\s+(public\s+)?(([A-Z]\w*)(\.[A-Z]\w*)*)(\s+as\s+\w+)?\r\n/g
+}
+
 let getAllIdents = () => {
   let files = getAllFiles('idr')
   let defList = files.map((uri) => {
@@ -120,11 +124,11 @@ let getModuleName = (uri) => {
 
 let getImportedModules = (uri) => {
   let content = fs.readFileSync(uri).toString()
-  let importPattern = /import(.*)\r\n/g
+  let importPattern = getImportPattern()
   let match
   let importedModules = []
   while (match = importPattern.exec(content)) {
-    importedModules.push(match[1].trim())
+    importedModules.push(match[2].trim())
   }
   return importedModules
 }
@@ -150,5 +154,6 @@ module.exports = {
   getIdents,
   getAllIdents,
   isDefinitonEqual,
-  getAllPositions
+  getAllPositions,
+  getImportPattern
 }

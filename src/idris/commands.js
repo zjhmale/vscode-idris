@@ -70,7 +70,7 @@ let getCurrentPosition = () => {
 }
 
 let getWordBase = (document, position, isHover) => {
-  let wordRange = document.getWordRangeAtPosition(position, /'?\w+'?/i)
+  let wordRange = document.getWordRangeAtPosition(position, /'?\w+(\.\w+)?'?/i)
   let currentWord = document.getText(wordRange)
   if (currentWord.match(/\r|\n| /g)) {
     outputChannel.clear()

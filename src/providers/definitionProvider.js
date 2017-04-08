@@ -2,6 +2,7 @@ const ipkg = require('../ipkg/ipkg')
 const commands = require('../idris/commands')
 const controller = require('../controller')
 const vscode = require('vscode')
+const common = require('../analysis/common')
 const findDefinition = require('../analysis/find-definition')
 
 let IdrisDefinitionProvider = (function () {
@@ -14,7 +15,7 @@ let IdrisDefinitionProvider = (function () {
     let uri = document.uri.fsPath
     return new Promise((resolve, reject) => {
       let currentLine = document.lineAt(position).text
-      let match = /import\s+(public\s+)?(([A-Z]\w*)(\.[A-Z]\w*)*)(\s+as\s+\w+)?/g.exec(currentLine)
+      let match = common.getImportPattern().exec(currentLine + "\r\n")
       if (match && match[2].includes(currentWord)) {
         let loc = findDefinition.findDefinitionForModule(match[2])
         resolve(loc)
