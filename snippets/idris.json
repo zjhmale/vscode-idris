@@ -93,6 +93,13 @@
           , "\tuninhabited ${2:Proof} impossible"
         ]
     },
+    "Cast implementation": {
+        "prefix": "Cast",
+        "body": [
+            "Cast ${1:FromType} ${2:ToType} where"
+          , "\tcase from = ?holeTo"
+        ]
+    },
     "Main": {
         "prefix": "main",
         "body": [
@@ -113,15 +120,15 @@
     },
     "Lambda (trigger does not work)": {
         "prefix": "lambda",
-        "body": "\\${inputs} -> ${body}",
+        "body": ["\\${inputs} => ${body}"],
         "description": "lambda expression"
     },
     "Case": {
         "prefix": "case",
         "body": [
             "case ${var} of"
-          , "\t${alt:Just a} -> ${body}"
-          , "\t${otehrwise:_} -> ${remaining}"
+          , "\t${alt:Just a} => ${body}"
+          , "\t${otehrwise:_} => ${remaining}"
         ],
         "description": "case expression"
     },
@@ -144,21 +151,21 @@
     "Map": {
         "prefix": "map",
         "body": [
-            "map (\\\\${element} -> ${element}) ${collection}"
+            "map (\\\\${element} => ${element}) ${collection}"
         ],
         "description": "map function"
     },
     "Foldl": {
         "prefix": "foldl",
         "body": [
-            "foldl (\\\\${x} ${element} -> ${x} + ${element}) ${acc} ${collection}"
+            "foldl (\\\\${x} ${element} => ${x} + ${element}) ${acc} ${collection}"
         ],
         "description": "foldl function"
     },
     "Foldr": {
         "prefix": "foldr",
         "body": [
-            "foldr (\\\\${element} ${x} -> ${x} + ${element}) ${acc} ${collection}"
+            "foldr (\\\\${element} ${x} => ${x} + ${element}) ${acc} ${collection}"
         ],
         "description": "foldr function"
     },
