@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.8.0
+
+* Performance improvement for `Search Symbol` [#70](https://github.com/zjhmale/vscode-idris/issues/70)
+* Remove default keybindings completely [#69](https://github.com/zjhmale/vscode-idris/issues/69)
+* `Find All References` [#27](https://github.com/zjhmale/vscode-idris/issues/27)
+* `Rename Symbol` [#50](https://github.com/zjhmale/vscode-idris/issues/50)
+* Update code snippets [#61](https://github.com/zjhmale/vscode-idris/issues/61)
+
 ## 0.6.9
 
 * Support `Go to Symbol` and `Search Symbol` [#48](https://github.com/zjhmale/vscode-idris/issues/48)
