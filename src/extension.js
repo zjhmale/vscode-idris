@@ -6,6 +6,7 @@ const definition = require('./providers/definitionProvider')
 const documentSymbol = require('./providers/documentSymbolProvider')
 const workspaceSymbol = require('./providers/workspaceSymbolProvider')
 const reference = require('./providers/referenceProvider')
+const rename = require('./providers/renameProvider')
 
 const IDRIS_MODE = { language: 'idris', scheme: 'file' }
 
@@ -36,6 +37,7 @@ function activate(context) {
   context.subscriptions.push(vscode.languages.registerDocumentSymbolProvider(IDRIS_MODE, new documentSymbol.IdrisDocumentSymbolProvider()))
   context.subscriptions.push(vscode.languages.registerWorkspaceSymbolProvider(new workspaceSymbol.IdrisWorkspaceSymbolProvider()))
   context.subscriptions.push(vscode.languages.registerReferenceProvider(IDRIS_MODE, new reference.IdrisReferenceProvider()))
+  context.subscriptions.push(vscode.languages.registerRenameProvider(IDRIS_MODE, new rename.IdrisRenameProvider()))
   context.subscriptions.push(vscode.workspace.onDidSaveTextDocument(() => {
     controller.typeCheckOnSave()
     completion.buildCompletionList()
