@@ -39,8 +39,6 @@ let IdrisRenameProvider = (function () {
         workspaceEdit.replace(fileUri, range, newName);
       })
       resolve(workspaceEdit)
-    }).then(function (workspaceEdit) {
-      return workspaceEdit
     })
   }
   return IdrisRenameProvider

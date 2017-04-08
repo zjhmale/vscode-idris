@@ -31,8 +31,6 @@ let IdrisWorkspaceSymbolProvider = (function () {
         return info
       })
       resolve(symbols)
-    }).then(function (symbols) {
-      return symbols
     })
   }
   return IdrisWorkspaceSymbolProvider

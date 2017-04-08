@@ -36,8 +36,6 @@ let IdrisReferenceProvider = (function () {
         return new vscode.Location(vscode.Uri.file(uri), range)
       })
       resolve(locations)
-    }).then(function (locations) {
-      return locations
     })
   }
   return IdrisReferenceProvider

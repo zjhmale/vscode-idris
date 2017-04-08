@@ -42,8 +42,6 @@ let IdrisDocumentSymbolProvider = (function () {
             resolve(null)
           })
       })
-    }).then(function (symbols) {
-      return symbols
     })
   }
   return IdrisDocumentSymbolProvider
