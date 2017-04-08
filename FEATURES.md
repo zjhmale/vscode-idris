@@ -115,3 +115,11 @@
 ### Search Symbol (Outline symbols in currently opend project)
 
 ![search-symbol](./images/screenshots/search-symbol.gif)
+
+### Find All References
+
+![find-all-references](./images/screenshots/reference.gif)
+
+### Rename Symbol
+
+![rename-symbol](./images/screenshots/rename.gif)

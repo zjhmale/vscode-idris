@@ -39,6 +39,8 @@
 * [Go to Definition and Peek Definition](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#go-to-definition-and-peek-definition)
 * [Go to Symbol (Outline symbols in currently opend file)](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#go-to-symbol-outline-symbols-in-currently-opend-file)
 * [Search Symbol (Outline symbols in currently opend project)](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#search-symbol-outline-symbols-in-currently-opend-project)
+* [Find all references](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#find-all-references)
+* [Rename symbol](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#rename-symbol)
 
 ## Installation
 
