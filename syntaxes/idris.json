@@ -48,7 +48,7 @@
 			"name": "meta.module.idris",
 			"patterns": [
 				{
-					"match": "([a-zA-Z._']+)",
+					"match": "([a-zA-Z0-9._']+)",
 					"name": "meta.declaration.module.idris"
 				}
 			]
@@ -64,7 +64,7 @@
 			"name": "meta.import.idris",
 			"patterns": [
 				{
-					"match": "([a-zA-Z._']+)",
+					"match": "([a-zA-Z0-9._']+)",
 					"name": "support.other.module.idris"
 				}
 			]
