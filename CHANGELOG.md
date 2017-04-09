@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.8.3
+
+* Update syntax file to support numbers in module names [2ceb72d](https://github.com/zjhmale/vscode-idris/commit/2ceb72ddb72df2d3e51586a50485a80f694dd7cc) [@be5invis](https://github.com/be5invis)
+* Support Latex snippets [#49](https://github.com/zjhmale/vscode-idris/issues/49)
+* Support go to module file from import clause [#72](https://github.com/zjhmale/vscode-idris/issues/72)
+* Support go to definition with module alias and re-export import clause [#71](https://github.com/zjhmale/vscode-idris/issues/71)
+
 ## 0.8.0
 
 * Performance improvement for `Search Symbol` [#70](https://github.com/zjhmale/vscode-idris/issues/70)
@@ -30,7 +37,7 @@
 
 * Fix huge memory usage issue [#52](https://github.com/zjhmale/vscode-idris/issues/52)
 * Fix shortcuts confliction again [#53](https://github.com/zjhmale/vscode-idris/issues/53)
-* Update commands title [#54](https://github.com/zjhmale/vscode-idris/issues/54)
+* Update commands' title [#54](https://github.com/zjhmale/vscode-idris/issues/54)
 
 ## 0.6.0
 
