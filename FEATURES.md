@@ -123,3 +123,7 @@
 ### Rename Symbol
 
 ![rename-symbol](./images/screenshots/rename.gif)
+
+### Latex snippets
+
+![latex-snippets](./images/screenshots/latex.gif)

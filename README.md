@@ -41,6 +41,7 @@
 * [Search Symbol (Outline symbols in currently opend project)](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#search-symbol-outline-symbols-in-currently-opend-project)
 * [Find all references](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#find-all-references)
 * [Rename symbol](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#rename-symbol)
+* [Latex snippets](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#latex-snippets)
 
 ## Installation
 

@@ -4,6 +4,31 @@ const controller = require('../controller')
 const vscode = require('vscode')
 const common = require('../analysis/common')
 const snippets = require('../../snippets/idris.json')
+const HashMap = require('hashmap')
+
+const unicodeMap = new HashMap()
+unicodeMap.set("\\alpha", "α")
+unicodeMap.set("\\beta", "β")
+unicodeMap.set("\\gamma", "γ")
+unicodeMap.set("\\delta", "δ")
+unicodeMap.set("\\zeta", "ζ")
+unicodeMap.set("\\eta", "η")
+unicodeMap.set("\\theta", "θ")
+unicodeMap.set("\\iota", "ι")
+unicodeMap.set("\\kappa", "κ")
+unicodeMap.set("\\lambda", "λ")
+unicodeMap.set("\\mu", "μ")
+unicodeMap.set("\\nu", "ν")
+unicodeMap.set("\\xi", "ξ")
+unicodeMap.set("\\pi", "π")
+unicodeMap.set("\\rho", "ρ")
+unicodeMap.set("\\sigma", "σ")
+unicodeMap.set("\\tau", "τ")
+unicodeMap.set("\\upsilon", "υ")
+unicodeMap.set("\\chi", "χ")
+unicodeMap.set("\\psi", "ψ")
+unicodeMap.set("\\omega", "ω")
+unicodeMap.set("\\phi", "ϕ")
 
 let identList
 
@@ -24,8 +49,8 @@ let IdrisCompletionProvider = (function () {
   })
 
   IdrisCompletionProvider.prototype.provideCompletionItems = (document, position, token) => {
-    let wordRange = document.getWordRangeAtPosition(position)
-    let currentWord = document.getText(wordRange)
+    let wordRange = document.getWordRangeAtPosition(position, /(\\)?'?\w+(\.\w+)?'?/i)
+    let currentWord = document.getText(wordRange).trim()
 
     let trimmedPrefix = currentWord.trim()
 
@@ -33,12 +58,25 @@ let IdrisCompletionProvider = (function () {
       let suggestMode = vscode.workspace.getConfiguration('idris').get('suggestMode')
 
       if (suggestMode == 'allWords') {
-        let suggestionItems = identList.filter((ident) => {
-          return ident.startsWith(trimmedPrefix) || ident.toLowerCase().startsWith(trimmedPrefix)
-        }).map((ident) => {
-          return new vscode.CompletionItem(ident, 0)
-        })
-        return suggestionItems.concat(snippetItems)
+        if (currentWord.startsWith("\\")) {
+          let result = []
+          unicodeMap.forEach((value, key) => {
+            if (key.startsWith(currentWord)) {
+              let item = new vscode.CompletionItem(key, 0)
+              item.insertText = value
+              item.range = wordRange
+              result.push(item)
+            }
+          })
+          return result
+        } else {
+          let suggestionItems = identList.filter((ident) => {
+            return ident.startsWith(trimmedPrefix) || ident.toLowerCase().startsWith(trimmedPrefix)
+          }).map((ident) => {
+            return new vscode.CompletionItem(ident, 0)
+          })
+          return suggestionItems.concat(snippetItems)
+        }
       } else if (suggestMode == 'replCompletion') {
         return controller.getCompilerOptsPromise().flatMap((compilerOptions) => {
           commands.initialize(compilerOptions)
