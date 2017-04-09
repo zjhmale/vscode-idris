@@ -92,17 +92,32 @@ let findDefinitionInFile = (definition, uri) => {
   return funcDef || adtTypeFuncDef
 }
 
-let findDefinitionInFiles = (definition, uri) => {
-  locations = []
-  common.getAllFiles('idr').forEach((file) => {
-    let location = findDefinitionInFile(definition, file)
-    if (location) {
-      locations.push(location)
-    }
+let getDefinitionLocations = (identifier) => {
+  return common.getAllFiles('idr').map((file) => {
+    return findDefinitionInFile(identifier, file)
+  }).filter((loc) => {
+    return loc != null && loc != undefined
   })
+}
+
+let findDefinitionInFiles = (identifier, uri) => {
+  let locations = getDefinitionLocations(identifier)
   let importedModules = common.getImportedModules(uri)
   let legalLocations = locations.filter((loc) => {
     return loc.path == uri || importedModules.includes(loc.module)
+  })
+  return legalLocations[0]
+}
+
+let findDefinitionWithAliasInFiles = (identifier, alias, uri) => {
+  let locations = getDefinitionLocations(identifier)
+  let importedModuleAlias = common.getImportedModuleAndAlias(uri)
+
+  let legalLocations = locations.filter((loc) => {
+    let isImported = importedModuleAlias.filter(({ moduleName, aliasName }) => {
+      return moduleName == loc.module && aliasName == alias
+    }).length == 1
+    return loc.path == uri || isImported
   })
   return legalLocations[0]
 }
@@ -127,5 +142,6 @@ let findDefinitionForModule = (moduleName) => {
 
 module.exports = {
   findDefinitionInFiles,
+  findDefinitionWithAliasInFiles,
   findDefinitionForModule
 }

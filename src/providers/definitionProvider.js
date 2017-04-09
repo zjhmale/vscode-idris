@@ -19,6 +19,12 @@ let IdrisDefinitionProvider = (function () {
       if (match && match[2].includes(currentWord)) {
         let loc = findDefinition.findDefinitionForModule(match[2])
         resolve(loc)
+      } else if(/(\w+)\.(\w+)/i.test(currentWord)) {
+        let match = /(\w+)\.(\w+)/i.exec(currentWord)
+        let moduleAliasName = match[1].trim()
+        let identifier = match[2].trim()
+        let loc = findDefinition.findDefinitionWithAliasInFiles(identifier, moduleAliasName, uri)
+        resolve(loc)
       } else {
         let loc = findDefinition.findDefinitionInFiles(currentWord, uri)
         resolve(loc)
