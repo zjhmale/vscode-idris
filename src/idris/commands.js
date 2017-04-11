@@ -2,6 +2,7 @@ const which = require('which')
 const IdrisModel = require('./model')
 const ipkg = require('../ipkg/ipkg')
 const vscode = require('vscode')
+const common = require('../analysis/common')
 
 let model = null
 let outputChannel = vscode.window.createOutputChannel('Idris')
@@ -11,12 +12,6 @@ let diagnosticCollection = vscode.languages.createDiagnosticCollection()
 let term = null
 let innerCompilerOptions
 let needDestroy = true
-
-let getSafeRoot = () => {
-  let root = vscode.workspace.rootPath
-  let safeRoot = root === undefined ? "" : root
-  return safeRoot
-}
 
 let init = (compilerOptions) => {
   if (compilerOptions) {
@@ -92,6 +87,23 @@ let handlerWrapper = (handler) => {
   return (uri) => {
     handler(uri)
   }
+}
+
+let buildIPKG = (uri) => {
+  let ipkgFile = common.getAllFiles("ipkg")[0]
+  if (!ipkgFile) return
+
+  new Promise((resolve, reject) => {
+    model.build(ipkgFile).subscribe((ret) => {
+      console.info("return => " + ret)
+    }, (err) => {
+      console.error("error => " + err)
+    })
+    showLoading()
+    resolve()
+  }).then(function () {
+  }).catch(function () {
+  })
 }
 
 let typecheckFile = (uri) => {
@@ -575,7 +587,7 @@ module.exports = {
   startREPL,
   sendREPL,
   getWordBase,
-  getSafeRoot,
   showOutputChannel,
-  clearOutputChannel
+  clearOutputChannel,
+  buildIPKG
 }

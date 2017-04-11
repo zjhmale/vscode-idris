@@ -4,7 +4,7 @@ const IdrisProcessBase = require('./idris-process-base')
 
 class IdrisIdeMode extends IdrisProcessBase {
   constructor() {
-    super(['--ide-mode'])
+    super(['--ide-mode'], false)
   }
 
   send(cmd) {

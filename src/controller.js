@@ -32,7 +32,7 @@ let cleanupIbc = (_) => {
 }
 
 let getCompilerOptsPromise = () => {
-  let compilerOptions = ipkg.compilerOptions(commands.getSafeRoot())
+  let compilerOptions = ipkg.compilerOptions(common.getSafeRoot())
   return compilerOptions
 }
 
@@ -55,6 +55,7 @@ let withCompilerOptions = (callback) => {
 
 let typeCheckOnSave = () => {
   withCompilerOptions(commands.typecheckFile)
+  withCompilerOptions(commands.buildIPKG)
 }
 
 let runCommand = (command) => {

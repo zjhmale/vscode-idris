@@ -1,5 +1,5 @@
 const IdrisIdeMode = require('./ide-mode')
-const IdrisRepl = require('./idris-repl')
+const IdrisBuild = require('./idris-build')
 const Rx = require('rx-lite')
 const path = require('path')
 
@@ -7,9 +7,10 @@ class IdrisModel {
   constructor() {
     this.requestId = 0
     this.ideModeRef = null
-    this.idrisReplRef = null
+    this.IdrisBuildRef = null
     this.subjects = {}
     this.warnings = {}
+    this.IdrisBuildSubject = null
     this.compilerOptions = {}
     this.oldCompilerOptions = {}
   }
@@ -27,17 +28,17 @@ class IdrisModel {
     return this.ideModeRef
   }
 
-  idrisRepl(compilerOptions) {
-    if (this.ideModeRef && !this.objectEqual(this.oldCompilerOptions, compilerOptions)) {
-      this.idrisReplRef.stop()
+  IdrisBuild(compilerOptions, ipkgFile) {
+    if (this.IdrisBuildRef && !this.objectEqual(this.oldCompilerOptions, compilerOptions)) {
+      this.IdrisBuildRef.stop()
     }
-    if (!this.ideModeRef) {
-      this.idrisReplRef = new IdrisRepl()
-      this.idrisReplRef.on('message', (obj) => { this.handleIdrisReplCommand(obj) })
-      this.idrisReplRef.start(compilerOptions)
+    if (!this.IdrisBuildRef) {
+      this.IdrisBuildRef = new IdrisBuild(ipkgFile)
+      this.IdrisBuildRef.on('message', (obj) => { this.handleIdrisBuildCommand(obj) })
+      this.IdrisBuildRef.start(compilerOptions)
       this.oldCompilerOptions = compilerOptions
     }
-    return this.idrisReplRef
+    return this.IdrisBuildRef
   }
 
   objectEqual(a, b) {
@@ -47,8 +48,6 @@ class IdrisModel {
   stop() {
     if (this.ideModeRef)
       this.ideModeRef.stop()
-    if (this.idrisReplRef)
-      this.idrisReplRef.stop()
   }
 
   setCompilerOptions(options) {
@@ -68,8 +67,8 @@ class IdrisModel {
     return ++this.requestId
   }
 
-  handleIdrisReplCommand(cmd) {
-
+  handleIdrisBuildCommand(cmd) {
+    this.IdrisBuildSubject.onNext(cmd)
   }
 
   handleIdeModeCommand(cmd) {
@@ -128,13 +127,23 @@ class IdrisModel {
     return this.interpret(`:cd ${dir}`)
   }
 
-  load(uri) {
-    let dir, cd
+  getDirectory(uri) {
     if (this.compilerOptions && this.compilerOptions.src) {
-      dir = this.compilerOptions.src
+      return this.compilerOptions.src
     } else {
-      dir = path.dirname(uri)
+      return path.dirname(uri)
     }
+  }
+
+  build(ipkgFile) {
+    this.IdrisBuildSubject = new Rx.Subject
+    this.IdrisBuild(this.compilerOptions, ipkgFile)
+    return this.IdrisBuildSubject
+  }
+
+  load(uri) {
+    let dir = this.getDirectory(uri)
+    let cd
 
     if (dir != this.compilerOptions.src) {
       this.compilerOptions.src = dir

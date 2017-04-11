@@ -1,31 +1,34 @@
-const ipkg         = require('../ipkg/ipkg')
-const cp           = require('child_process')
+const ipkg = require('../ipkg/ipkg')
+const cp = require('child_process')
 const EventEmitter = require('events').EventEmitter
-const vscode       = require('vscode')
+const vscode = require('vscode')
 
 class IdrisProcessBase extends EventEmitter {
-  constructor(labels) {
+  constructor(labels, isBuild) {
     super()
     this.process = null
     this.buffer = ''
     this.labels = labels
+    this.isBuild = isBuild
   }
 
   start(compilerOptions) {
     if ((this.process == null) || !this.process.connected) {
       let pathToIdris = vscode.workspace.getConfiguration('idris').get('executablePath')
 
-      let params = this.labels.concat(ipkg.getPkgOpts(compilerOptions))
+      let params = this.isBuild ? this.labels : this.labels.concat(ipkg.getPkgOpts(compilerOptions))
       let options = compilerOptions.src ? {
-        cwd: compilerOptions.src
+        cwd: this.isBuild ? vscode.workspace.rootPath : compilerOptions.src
       } : {}
 
       this.process = cp.spawn(pathToIdris, params, options)
 
-      this.process.on('error', this.error)
-      this.process.on('exit', this.exited)
-      this.process.on('close', this.exited)
-      this.process.on('disconnect', this.exited)
+      if (!this.isBuild) {
+        this.process.on('error', this.error)
+        this.process.on('exit', this.exited)
+        this.process.on('close', this.exited)
+        this.process.on('disconnect', this.exited)
+      }
 
       if (this.process.pid) {
         this.process.stdout.setEncoding('utf8').on('data', (data) => { this.stdout(data) })
@@ -49,7 +52,7 @@ class IdrisProcessBase extends EventEmitter {
   }
 
   exited(code, signal) {
-    if(signal == "SIGTERM") {
+    if (signal == "SIGTERM") {
       let msg = "The idris compiler was closed"
       console.info(msg)
     } else {
@@ -57,6 +60,7 @@ class IdrisProcessBase extends EventEmitter {
       let long = signal
         ? "It was closed with the signal: " + signal
         : "It (probably) crashed with the error code: " + code
+      console.log("isBuild =>" + this.isBuild)
       vscode.window.showErrorMessage(short + " " + long)
     }
   }

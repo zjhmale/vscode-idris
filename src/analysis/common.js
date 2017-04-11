@@ -2,6 +2,7 @@ const fs = require("fs")
 const glob = require("glob")
 const commands = require("../idris/commands")
 const _ = require('lodash')
+const vscode = require('vscode')
 
 const excludes = [
   "if",
@@ -155,8 +156,14 @@ let isDefinitonEqual = (def1, def2) => {
     && def1.column == def2.column
 }
 
+let getSafeRoot = () => {
+  let root = vscode.workspace.rootPath
+  let safeRoot = root === undefined ? "" : root
+  return safeRoot
+}
+
 let getAllFiles = (ext) => {
-  let files = glob.sync(commands.getSafeRoot() + "/**/*")
+  let files = glob.sync(getSafeRoot() + "/**/*")
   return files.filter((file) => {
     return file.endsWith(`.${ext}`)
   })
@@ -165,6 +172,7 @@ let getAllFiles = (ext) => {
 module.exports = {
   getModuleName,
   getImportedModules,
+  getSafeRoot,
   getAllFiles,
   getIdents,
   getAllIdents,
