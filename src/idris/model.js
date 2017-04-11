@@ -1,4 +1,5 @@
 const IdrisIdeMode = require('./ide-mode')
+const IdrisRepl = require('./idris-repl')
 const Rx = require('rx-lite')
 const path = require('path')
 
@@ -6,6 +7,7 @@ class IdrisModel {
   constructor() {
     this.requestId = 0
     this.ideModeRef = null
+    this.idrisReplRef = null
     this.subjects = {}
     this.warnings = {}
     this.compilerOptions = {}
@@ -14,9 +16,8 @@ class IdrisModel {
 
   ideMode(compilerOptions) {
     if (this.ideModeRef && !this.objectEqual(this.oldCompilerOptions, compilerOptions)) {
-      this.ideModeRef.process.removeAllListeners()
       this.ideModeRef.stop()
-      this.ideModeRef = null
+      this.idrisReplRef.stop()
     }
     if (!this.ideModeRef) {
       this.ideModeRef = new IdrisIdeMode()
@@ -33,6 +34,7 @@ class IdrisModel {
 
   stop() {
     this.ideModeRef.stop()
+    this.idrisReplRef.stop()
   }
 
   setCompilerOptions(options) {
