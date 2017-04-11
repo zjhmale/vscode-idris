@@ -17,24 +17,38 @@ class IdrisModel {
   ideMode(compilerOptions) {
     if (this.ideModeRef && !this.objectEqual(this.oldCompilerOptions, compilerOptions)) {
       this.ideModeRef.stop()
-      this.idrisReplRef.stop()
     }
     if (!this.ideModeRef) {
       this.ideModeRef = new IdrisIdeMode()
-      this.ideModeRef.on('message', (obj) => { this.handleCommand(obj) })
+      this.ideModeRef.on('message', (obj) => { this.handleIdeModeCommand(obj) })
       this.ideModeRef.start(compilerOptions)
       this.oldCompilerOptions = compilerOptions
     }
     return this.ideModeRef
   }
-  
+
+  idrisRepl(compilerOptions) {
+    if (this.ideModeRef && !this.objectEqual(this.oldCompilerOptions, compilerOptions)) {
+      this.idrisReplRef.stop()
+    }
+    if (!this.ideModeRef) {
+      this.idrisReplRef = new IdrisRepl()
+      this.idrisReplRef.on('message', (obj) => { this.handleIdrisReplCommand(obj) })
+      this.idrisReplRef.start(compilerOptions)
+      this.oldCompilerOptions = compilerOptions
+    }
+    return this.idrisReplRef
+  }
+
   objectEqual(a, b) {
     return JSON.stringify(a) === JSON.stringify(b)
   }
 
   stop() {
-    this.ideModeRef.stop()
-    this.idrisReplRef.stop()
+    if (this.ideModeRef)
+      this.ideModeRef.stop()
+    if (this.idrisReplRef)
+      this.idrisReplRef.stop()
   }
 
   setCompilerOptions(options) {
@@ -54,7 +68,11 @@ class IdrisModel {
     return ++this.requestId
   }
 
-  handleCommand(cmd) {
+  handleIdrisReplCommand(cmd) {
+
+  }
+
+  handleIdeModeCommand(cmd) {
     if (cmd.length > 0) {
       let op = cmd[0]
       let params = cmd.slice(1, cmd.length - 1)
