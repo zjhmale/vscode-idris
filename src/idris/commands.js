@@ -110,7 +110,7 @@ let buildIPKG = (uri) => {
           let line = parseInt(match[3])
           let column = parseInt(match[4])
           if (`${dir}/${moduleName}` == uri && msgs[i + 1] && msgs[i + 1].includes("not total")) {
-            let range = new vscode.Range(line - 1, column - 1, line, 0)
+            let range = new vscode.Range(line - 1, 0, line, 0)
             let diagnostic = new vscode.Diagnostic(range, msgs[i + 1], vscode.DiagnosticSeverity.Warning)
             diagnostics.push([vscode.Uri.file(uri), [diagnostic]])
           }
@@ -566,7 +566,7 @@ let displayErrors = (err) => {
       buf.push(message)
       buf.push("")
       if (line > 0) {
-        let range = new vscode.Range(line - 1, char - 1, line, 0)
+        let range = new vscode.Range(line - 1, 0, line, 0)
         let diagnostic = new vscode.Diagnostic(range, message, vscode.DiagnosticSeverity.Error)
         diagnostics.push([vscode.Uri.file(file), [diagnostic]])
       }
