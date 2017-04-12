@@ -60,7 +60,6 @@ class IdrisProcessBase extends EventEmitter {
       let long = signal
         ? "It was closed with the signal: " + signal
         : "It (probably) crashed with the error code: " + code
-      console.log("isBuild =>" + this.isBuild)
       vscode.window.showErrorMessage(short + " " + long)
     }
   }

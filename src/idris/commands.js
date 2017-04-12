@@ -90,6 +90,16 @@ let handlerWrapper = (handler) => {
   }
 }
 
+/**
+ * Get the column of the first character of a concrete line of code
+ */
+let getStartColumn = (line) => {
+  let document = vscode.window.activeTextEditor.document
+  let textAtLine = document.lineAt(line).text
+  let column = textAtLine.indexOf(textAtLine.trim())
+  return column
+}
+
 let buildIPKG = (uri) => {
   buildDiagnosticCollection.clear()
   let ipkgFile = common.getAllFiles("ipkg")[0]
@@ -99,7 +109,6 @@ let buildIPKG = (uri) => {
 
   new Promise((resolve, reject) => {
     model.build(ipkgFile).subscribe((ret) => {
-      console.log("ret => " + ret)
       let diagnostics = []
       let msgs = ret.split("\n")
       for (let i = 0; i < msgs.length; i++) {
@@ -108,16 +117,16 @@ let buildIPKG = (uri) => {
         if (match) {
           let moduleName = match[1]
           let line = parseInt(match[3])
-          let column = parseInt(match[4])
+          let column = getStartColumn(line)
           if (`${dir}/${moduleName}` == uri && msgs[i + 1] && msgs[i + 1].includes("not total")) {
-            let range = new vscode.Range(line - 1, 0, line, 0)
+            let range = new vscode.Range(line - 1, column, line, 0)
             let diagnostic = new vscode.Diagnostic(range, msgs[i + 1], vscode.DiagnosticSeverity.Warning)
             diagnostics.push([vscode.Uri.file(uri), [diagnostic]])
           }
         }
       }
       buildDiagnosticCollection.set(diagnostics)
-    }, (err) => {})
+    }, (err) => { })
     resolve()
   }).then(function () {
   }).catch(function () {
@@ -565,8 +574,9 @@ let displayErrors = (err) => {
       buf.push(file + ":" + line + ":" + char)
       buf.push(message)
       buf.push("")
-      if (line > 0) {
-        let range = new vscode.Range(line - 1, 0, line, 0)
+      if (line > 0 && line < vscode.window.activeTextEditor.document.lineCount) {
+        let column = getStartColumn(line)
+        let range = new vscode.Range(line - 1, column, line, 0)
         let diagnostic = new vscode.Diagnostic(range, message, vscode.DiagnosticSeverity.Error)
         diagnostics.push([vscode.Uri.file(file), [diagnostic]])
       }
