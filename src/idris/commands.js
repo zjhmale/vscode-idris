@@ -8,7 +8,8 @@ let model = null
 let outputChannel = vscode.window.createOutputChannel('Idris')
 let replChannel = vscode.window.createOutputChannel('Idris REPL')
 let aproposChannel = vscode.window.createOutputChannel('Idris Apropos')
-let diagnosticCollection = vscode.languages.createDiagnosticCollection()
+let tcDiagnosticCollection = vscode.languages.createDiagnosticCollection("Typechecking Diagnostic")
+let buildDiagnosticCollection = vscode.languages.createDiagnosticCollection("Build Diagnostic")
 let term = null
 let innerCompilerOptions
 let needDestroy = true
@@ -90,16 +91,33 @@ let handlerWrapper = (handler) => {
 }
 
 let buildIPKG = (uri) => {
+  buildDiagnosticCollection.clear()
   let ipkgFile = common.getAllFiles("ipkg")[0]
   if (!ipkgFile) return
 
+  let dir = model.getDirectory(uri)
+
   new Promise((resolve, reject) => {
     model.build(ipkgFile).subscribe((ret) => {
-      console.info("return => " + ret)
-    }, (err) => {
-      console.error("error => " + err)
-    })
-    showLoading()
+      console.log("ret => " + ret)
+      let diagnostics = []
+      let msgs = ret.split("\n")
+      for (let i = 0; i < msgs.length; i++) {
+        let l = msgs[i]
+        let match = /(\w+(\/\w+)?.idr):(\d+):(\d+):$/g.exec(l)
+        if (match) {
+          let moduleName = match[1]
+          let line = parseInt(match[3])
+          let column = parseInt(match[4])
+          if (`${dir}/${moduleName}` == uri && msgs[i + 1] && msgs[i + 1].includes("not total")) {
+            let range = new vscode.Range(line - 1, column - 1, line, 0)
+            let diagnostic = new vscode.Diagnostic(range, msgs[i + 1], vscode.DiagnosticSeverity.Warning)
+            diagnostics.push([vscode.Uri.file(uri), [diagnostic]])
+          }
+        }
+      }
+      buildDiagnosticCollection.set(diagnostics)
+    }, (err) => {})
     resolve()
   }).then(function () {
   }).catch(function () {
@@ -111,7 +129,7 @@ let typecheckFile = (uri) => {
     outputChannel.clear()
     outputChannel.show()
     outputChannel.append("Idris: File loaded successfully")
-    diagnosticCollection.clear()
+    tcDiagnosticCollection.clear()
     destroy()
   }
 
@@ -143,7 +161,7 @@ let getInfoForWord = (uri, cmd) => {
     outputChannel.show()
     outputChannel.appendLine('Idris: ' + cmdMsgs[cmd] + ' ' + currentWord)
     outputChannel.append(info.replace(/\n    \n    /g, "").replace(/\n        \n        /g, ""))
-    diagnosticCollection.clear()
+    tcDiagnosticCollection.clear()
     needDestroy = true
   }
 
@@ -184,17 +202,17 @@ let showHoles = (uri) => {
     let holes = arg.msg[0]
     let hs = holes.map(([name, premises, [type, _]]) => {
       let ps = premises.map(([name, type, _]) => {
-        return `    ${ name } : ${ type }`
+        return `    ${name} : ${type}`
       })
-      let conclusion = `${ name } : ${ type }`
+      let conclusion = `${name} : ${type}`
       let divider = '-'.repeat(conclusion.length)
-      return `${ name }\n${ ps.join('\n') }\n${ divider }\n${ conclusion }`
+      return `${name}\n${ps.join('\n')}\n${divider}\n${conclusion}`
     })
     outputChannel.clear()
     outputChannel.show()
     outputChannel.appendLine('Idris: Holes')
     outputChannel.append(hs.join('\n'))
-    diagnosticCollection.clear()
+    tcDiagnosticCollection.clear()
   }
 
   new Promise((resolve, reject) => {
@@ -233,7 +251,7 @@ let evalSelection = (uri) => {
     //let highlightingInfo = arg.msg[1]
 
     outputChannel.clear()
-    diagnosticCollection.clear()
+    tcDiagnosticCollection.clear()
     replChannel.clear()
     replChannel.show()
 
@@ -306,7 +324,7 @@ let sendREPL = (uri) => {
 let addClause = (uri) => {
   let currentWord = getWord()
   if (!currentWord) return
-  let editor = vscode.window.activeTextEditor 
+  let editor = vscode.window.activeTextEditor
   let line = editor.selection.active.line
 
   let successHandler = (arg) => {
@@ -335,7 +353,7 @@ let addClause = (uri) => {
 let caseSplit = (uri) => {
   let currentWord = getWord()
   if (!currentWord) return
-  let editor = vscode.window.activeTextEditor 
+  let editor = vscode.window.activeTextEditor
   let line = editor.selection.active.line
 
   let successHandler = (arg) => {
@@ -502,13 +520,13 @@ let makeLemma = (uri) => {
 }
 
 let apropos = (uri) => {
-  vscode.window.showInputBox({prompt: 'Idris: Apropos'}).then(val => {
+  vscode.window.showInputBox({ prompt: 'Idris: Apropos' }).then(val => {
     let successHandler = (arg) => {
       let result = arg.msg[0]
       //let highlightingInfo = arg.msg[1]
 
       outputChannel.clear()
-      diagnosticCollection.clear()
+      tcDiagnosticCollection.clear()
       aproposChannel.clear()
       aproposChannel.show()
       aproposChannel.appendLine(result)
@@ -533,13 +551,13 @@ let displayErrors = (err) => {
   aproposChannel.clear()
   outputChannel.clear()
   outputChannel.show()
-  diagnosticCollection.clear()
+  tcDiagnosticCollection.clear()
   let buf = []
   let diagnostics = []
   if (err.warnings) {
     let len = err.warnings.length
     buf.push("Errors (" + len + ")")
-    err.warnings.forEach(function(w) {
+    err.warnings.forEach(function (w) {
       let file = w[0].replace("./", err.cwd + "/")
       let line = w[1][0]
       let char = w[1][1]
@@ -554,12 +572,12 @@ let displayErrors = (err) => {
       }
     })
     outputChannel.appendLine(buf.join('\n'))
-    diagnosticCollection.set(diagnostics)
+    tcDiagnosticCollection.set(diagnostics)
   }
 }
 
 let destroy = () => {
-  if(model != null && needDestroy) {
+  if (model != null && needDestroy) {
     model.stop()
     model = null
   }
@@ -567,7 +585,8 @@ let destroy = () => {
 
 module.exports = {
   getModel,
-  diagnosticCollection,
+  tcDiagnosticCollection,
+  buildDiagnosticCollection,
   initialize,
   reInitialize,
   typecheckFile,

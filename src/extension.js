@@ -26,7 +26,8 @@ function activate(context) {
     }
   })
 
-  context.subscriptions.push(controller.diagnosticCollection)
+  context.subscriptions.push(controller.tcDiagnosticCollection)
+  context.subscriptions.push(controller.buildDiagnosticCollection)
   controller.getCommands().forEach(([key, value]) => {
     let disposable = vscode.commands.registerCommand(key, value)
     context.subscriptions.push(disposable)

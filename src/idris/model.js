@@ -29,15 +29,9 @@ class IdrisModel {
   }
 
   IdrisBuild(compilerOptions, ipkgFile) {
-    if (this.IdrisBuildRef && !this.objectEqual(this.oldCompilerOptions, compilerOptions)) {
-      this.IdrisBuildRef.stop()
-    }
-    if (!this.IdrisBuildRef) {
-      this.IdrisBuildRef = new IdrisBuild(ipkgFile)
-      this.IdrisBuildRef.on('message', (obj) => { this.handleIdrisBuildCommand(obj) })
-      this.IdrisBuildRef.start(compilerOptions)
-      this.oldCompilerOptions = compilerOptions
-    }
+    this.IdrisBuildRef = new IdrisBuild(ipkgFile)
+    this.IdrisBuildRef.on('message', (obj) => { this.handleIdrisBuildCommand(obj) })
+    this.IdrisBuildRef.start(compilerOptions)
     return this.IdrisBuildRef
   }
 

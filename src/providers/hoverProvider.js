@@ -26,8 +26,8 @@ let IdrisHoverProvider = (function () {
     return new Promise((resolve, reject) => {
       controller.withCompilerOptions((uri) => {
         let filePath = vscode.Uri.file(uri)
-        if (commands.diagnosticCollection.has(filePath)) {
-          let diagnostics = commands.diagnosticCollection.get(filePath)
+        if (commands.tcDiagnosticCollection.has(filePath)) {
+          let diagnostics = commands.tcDiagnosticCollection.get(filePath)
           diagnostics.forEach((d) => {
             if (isRangeInsideRange(wordRange, d.range)) {
               resolve(null)

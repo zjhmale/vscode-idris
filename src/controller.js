@@ -67,7 +67,8 @@ let runCommand = (command) => {
 module.exports = {
   getCommands,
   destroy: commands.destroy,
-  diagnosticCollection: commands.diagnosticCollection,
+  tcDiagnosticCollection: commands.tcDiagnosticCollection,
+  buildDiagnosticCollection: commands.buildDiagnosticCollection,
   withCompilerOptions: withCompilerOptions,
   typeCheckOnSave: typeCheckOnSave,
   reInitialize: reInitialize,
