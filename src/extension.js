@@ -28,6 +28,7 @@ function activate(context) {
 
   context.subscriptions.push(controller.tcDiagnosticCollection)
   context.subscriptions.push(controller.buildDiagnosticCollection)
+  context.subscriptions.push(controller.nonTotalDiagnosticCollection)
   controller.getCommands().forEach(([key, value]) => {
     let disposable = vscode.commands.registerCommand(key, value)
     context.subscriptions.push(disposable)
@@ -58,6 +59,6 @@ function activate(context) {
 exports.activate = activate
 
 function deactivate() {
-  controller.destroy()
+  controller.destroy(false)
 }
 exports.deactivate = deactivate

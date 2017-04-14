@@ -56,6 +56,7 @@ let withCompilerOptions = (callback) => {
 let typeCheckOnSave = () => {
   withCompilerOptions(commands.typecheckFile)
   withCompilerOptions(commands.buildIPKG)
+  withCompilerOptions(commands.checkTotality)
 }
 
 let runCommand = (command) => {
@@ -69,6 +70,7 @@ module.exports = {
   destroy: commands.destroy,
   tcDiagnosticCollection: commands.tcDiagnosticCollection,
   buildDiagnosticCollection: commands.buildDiagnosticCollection,
+  nonTotalDiagnosticCollection: commands.nonTotalDiagnosticCollection,
   withCompilerOptions: withCompilerOptions,
   typeCheckOnSave: typeCheckOnSave,
   reInitialize: reInitialize,

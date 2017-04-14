@@ -3,13 +3,18 @@ const IdrisModel = require('./model')
 const ipkg = require('../ipkg/ipkg')
 const vscode = require('vscode')
 const common = require('../analysis/common')
+const findDefinition = require('../analysis/find-definition')
+const Rx = require('rx-lite')
 
 let model = null
+let checkNotTotalModel = null
 let outputChannel = vscode.window.createOutputChannel('Idris')
 let replChannel = vscode.window.createOutputChannel('Idris REPL')
 let aproposChannel = vscode.window.createOutputChannel('Idris Apropos')
 let tcDiagnosticCollection = vscode.languages.createDiagnosticCollection("Typechecking Diagnostic")
+// Acutally build diagnostic also deal with the non totality warnings
 let buildDiagnosticCollection = vscode.languages.createDiagnosticCollection("Build Diagnostic")
+let nonTotalDiagnosticCollection = vscode.languages.createDiagnosticCollection("Non-total Diagnostic")
 let term = null
 let innerCompilerOptions
 let needDestroy = true
@@ -18,6 +23,7 @@ let init = (compilerOptions) => {
   if (compilerOptions) {
     innerCompilerOptions = compilerOptions
     model.setCompilerOptions(compilerOptions)
+    checkNotTotalModel.setCompilerOptions(compilerOptions)
   } else {
     vscode.window.showErrorMessage("Can not get compiler options for current project")
   }
@@ -27,11 +33,15 @@ let initialize = (compilerOptions) => {
   if (!model) {
     model = new IdrisModel()
   }
+  if (!checkNotTotalModel) {
+    checkNotTotalModel = new IdrisModel()
+  }
   init(compilerOptions)
 }
 
 let reInitialize = (compilerOptions) => {
   model = new IdrisModel()
+  checkNotTotalModel = new IdrisModel()
   init(compilerOptions)
 }
 
@@ -100,16 +110,59 @@ let getStartColumn = (line) => {
   return column
 }
 
+let checkTotality = (uri) => {
+  nonTotalDiagnosticCollection.clear()
+  let moduleName = common.getModuleName(uri)
+  if (!moduleName) return
+
+  let nonTotalDianostics = []
+
+  new Promise((resolve, reject) => {
+    checkNotTotalModel.load(uri).filter((arg) => {
+      return arg.responseType === 'return'
+    }).flatMap(() => {
+      return checkNotTotalModel.browseNamespace(moduleName)
+    }).flatMap((arg) => {
+      let docs = arg.msg[0][1].map((a) => {
+        return checkNotTotalModel.getDocs(a[0].split(":")[0].trim())
+      })
+
+      return Rx.Observable.zip(docs)
+    }).subscribe((docs) => {
+      docs.forEach((doc) => {
+        let infoMsg = doc.msg[0].replace(/\n    \n    /g, "").replace(/\n        \n        /g, "")
+        if (infoMsg.includes("not total")) {
+          let infos = infoMsg.split("\n")
+          let names = infos[0].split(":")[0].split(".")
+          let name = names[names.length - 1].trim()
+          let def = findDefinition.findDefinitionInFiles(name, uri)
+          if (def) {
+            let message = infos[infos.length - 1].trim()
+            let range = new vscode.Range(def.line, def.column, def.line + 1, 0)
+            let diagnostic = new vscode.Diagnostic(range, message, vscode.DiagnosticSeverity.Warning)
+            nonTotalDianostics.push([vscode.Uri.file(uri), [diagnostic]])
+          }
+        }
+      })
+      nonTotalDiagnosticCollection.set(nonTotalDianostics)
+      destroy(false)
+      resolve()
+    }, (err) => { })
+  }).then(function () {
+  }).catch(function () {
+  })
+}
+
 let buildIPKG = (uri) => {
   buildDiagnosticCollection.clear()
   let ipkgFile = common.getAllFiles("ipkg")[0]
   if (!ipkgFile) return
 
   let dir = model.getDirectory(uri)
+  let buildDiagnostics = []
 
   new Promise((resolve, reject) => {
     model.build(ipkgFile).subscribe((ret) => {
-      let diagnostics = []
       let msgs = ret.split("\n")
       for (let i = 0; i < msgs.length; i++) {
         let l = msgs[i]
@@ -117,17 +170,20 @@ let buildIPKG = (uri) => {
         if (match) {
           let moduleName = match[1]
           let line = parseInt(match[3])
-          let column = getStartColumn(line)
-          if (`${dir}/${moduleName}` == uri && msgs[i + 1] && msgs[i + 1].includes("not total")) {
-            let range = new vscode.Range(line - 1, column, line, 0)
-            let diagnostic = new vscode.Diagnostic(range, msgs[i + 1], vscode.DiagnosticSeverity.Warning)
-            diagnostics.push([vscode.Uri.file(uri), [diagnostic]])
+          if (line < vscode.window.activeTextEditor.document.lineCount) {
+            let column = getStartColumn(line)
+            if (`${dir}/${moduleName}` == uri && msgs[i + 1] && msgs[i + 1].includes("not total")) {
+              let range = new vscode.Range(line - 1, column, line, 0)
+              let diagnostic = new vscode.Diagnostic(range, msgs[i + 1], vscode.DiagnosticSeverity.Warning)
+              buildDiagnostics.push([vscode.Uri.file(uri), [diagnostic]])
+            }
           }
         }
       }
-      buildDiagnosticCollection.set(diagnostics)
+
+      buildDiagnosticCollection.set(buildDiagnostics)
+      resolve()
     }, (err) => { })
-    resolve()
   }).then(function () {
   }).catch(function () {
   })
@@ -139,7 +195,7 @@ let typecheckFile = (uri) => {
     outputChannel.show()
     outputChannel.append("Idris: File loaded successfully")
     tcDiagnosticCollection.clear()
-    destroy()
+    destroy(true)
   }
 
   new Promise((resolve, reject) => {
@@ -586,10 +642,21 @@ let displayErrors = (err) => {
   }
 }
 
-let destroy = () => {
-  if (model != null && needDestroy) {
-    model.stop()
-    model = null
+let destroy = (isOnSave) => {
+  if (isOnSave) {
+    if (model != null && needDestroy) {
+      model.stop()
+      model = null
+    }
+  } else {
+    if (model != null) {
+      model.stop()
+      model = null
+    }
+    if (checkNotTotalModel != null) {
+      checkNotTotalModel.stop()
+      checkNotTotalModel = null
+    }
   }
 }
 
@@ -597,6 +664,7 @@ module.exports = {
   getModel,
   tcDiagnosticCollection,
   buildDiagnosticCollection,
+  nonTotalDiagnosticCollection,
   initialize,
   reInitialize,
   typecheckFile,
@@ -618,5 +686,6 @@ module.exports = {
   getWordBase,
   showOutputChannel,
   clearOutputChannel,
-  buildIPKG
+  buildIPKG,
+  checkTotality
 }
