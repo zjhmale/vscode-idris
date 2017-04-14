@@ -88,21 +88,6 @@
 			"patterns": [
 				{
 					"name": "meta.context-signature.idris",
-					"match": "([\\w._']+)((\\s+[\\w_']+)+)\\s*(=>)",
-					"captures": {
-						"1": {
-							"name": "entity.other.inherited-class.idris"
-						},
-						"2": {
-							"name": "entity.other.attribute-name.idris"
-						},
-						"4": {
-							"name": "keyword.operator.double-arrow.idris"
-						}
-					}
-				},
-				{
-					"name": "meta.context-signature.idris",
 					"comment": "For things like '(Eq a, Show b) =>'\nIt begins with '(' either followed by ') =>' on the same line,\nor anything but ')' until the end of line.",
 					"begin": "(\\()((?=.*\\)\\s*=>)|(?=[^)]*$))",
 					"beginCaptures": {
@@ -120,18 +105,7 @@
 						}
 					},
 					"patterns": [
-						{
-							"name": "meta.class-constraint.idris",
-							"match": "([\\w']+)\\s+([\\w']+)",
-							"captures": {
-								"1": {
-									"name": "entity.other.inherited-class.idris"
-								},
-								"2": {
-									"name": "entity.other.attribute-name.idris"
-								}
-							}
-						}
+						{ "include": "#type_signature" }
 					]
 				}
 			]
@@ -183,7 +157,6 @@
 					"match": "->"
 				},
 				{ "include": "#parameter_type" },
-				{ "include": "#context_signature" },
 				{ "include": "#language_const" },
 				{ "include": "#operator" },
 				{ "include": "#infix_function" },
@@ -214,6 +187,7 @@
 			},
 			"end": "(;|(?<=[^\\s>])\\s*(?!->)\\s*$)",
 			"patterns": [
+				{ "include": "#context_signature" },
 				{ "include": "#type_signature" }
 			],
 			"comment": "The end patterm is a bit tricky. It's either ';' or something, at the end of the line,\nbut not '->', because a type signature can be multiline. Though, it doesn't help, if you\nbreak the signature before arrows."
