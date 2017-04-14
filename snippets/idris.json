@@ -2,114 +2,122 @@
     "Show implementation": {
         "prefix": "Show",
         "body": [
-            "Show ${Type} where"
-          , "\tshow s = $0"
+            "Show ${Type} where",
+            "\tshow s = ?holeShow"
         ]
     },
     "Eq implementation": {
         "prefix": "Eq",
         "body": [
-            "Eq ${Type} where"
-          , "\t(==) a b = $0"
+            "Eq ${Type} where",
+            "\ta == b = ?holeEq"
         ]
     },
     "Ord implementation": {
         "prefix": "Ord",
         "body": [
-            "Ord ${Type} where"
-          , "\tcompare a b = $0"
+            "Ord ${Type} where",
+            "\tcompare a b = ?holeOrd"
         ]
     },
     "Semigroup implementation": {
         "prefix": "Semigroup",
         "body": [
-            "Semigroup ${Type} where"
-          , "\t(<+>) a b = $0"
+            "Semigroup ${Type} where",
+            "\ta <+> b = ?holeSemigroup"
         ]
     },
     "Monoid implementation": {
         "prefix": "Monoid",
         "body": [
-            "Monoid ${Type} where"
-          , "\tneutral = $0"
+            "Monoid ${Type} where",
+            "\tneutral = ?holeMonoid"
         ]
     },
     "Num implementation": {
         "prefix": "Num",
         "body": [
-            "Num ${Type} where"
-          , "(+) a b = ?holePlus"
-          , "(*) a b = ?holeMult"
-          , "fromInteger i = ?holeFromInteger"
+            "Num ${Type} where",
+            "(+) a b = ?holePlus",
+            "(*) a b = ?holeMult",
+            "fromInteger i = ?holeFromInteger"
         ]
     },
     "Functor implementation": {
         "prefix": "Functor",
         "body": [
-            "Functor ${Type} where"
-          , "\tmap f fa = $0"
+            "Functor ${Type} where",
+            "\tmap f fa = ?holeFunctor"
         ]
     },
     "Applicative implementation": {
         "prefix": "Applicative",
         "body": [
-            "Applicative ${Type} where"
-          , "\tpure a = $0"
-          , "\t(<*>) f fa = $1"
+            "Applicative ${Type} where",
+            "\tpure a = ?holePureApplicative",
+            "\tf <*> fa = ?holeApplyApplicative"
         ]
     },
     "Monad implementation": {
         "prefix": "Monad",
         "body": [
-            "Monad ${Type} where"
-          , "\t(>>=) fa f = $0"
+            "Monad ${Type} where",
+            "\tfa >>= f = ?holeMonadBind"
         ]
     },
     "Traversable implementation": {
         "prefix": "Traversable",
         "body": [
-            "Traversable ${Type} where"
-          , "\ttraverse = $0"
+            "Traversable ${Type} where",
+            "\ttraverse = ?holeTraverse"
         ]
     },
     "Foldable implementation": {
         "prefix": "Foldable",
         "body": [
-            "Foldable ${Type} where"
-          , "\tfoldr = $0"
+            "Foldable ${Type} where",
+            "\tfoldr = ?holeFoldableFoldr"
         ]
     },
     "DecEq implementation": {
         "prefix": "DecEq",
         "body": [
-            "DecEq ${1:Type} where"
-          , "\tdecEq t1 t2 = ?holeDecEq"
+            "DecEq ${1:Type} where",
+            "\tdecEq t1 t2 = ?holeDecEq"
         ]
     },
     "Uninhabited implementation": {
         "prefix": "Uninhabited",
         "body": [
-            "Uninhabited (${1:TypeWhichIsUninhabited}) where"
-          , "\tuninhabited ${2:Proof} impossible"
+            "Uninhabited (${1:TypeWhichIsUninhabited}) where",
+            "\tuninhabited ${2:Proof} impossible"
         ]
     },
     "Cast implementation": {
         "prefix": "Cast",
         "body": [
-            "Cast ${1:FromType} ${2:ToType} where"
-          , "\tcase from = ?holeTo"
+            "Cast ${1:FromType} ${2:ToType} where",
+            "\tcase from = ?holeTo"
+        ]
+    },
+    "Alternative implementation": {
+        "prefix": "Alternative",
+        "body": [
+            "Alternative ${Type} where",
+            "\tempty = ?holeAlternativeEmpty",
+            "\tfa <|> fb = ?holeAlternative"
         ]
     },
     "Main": {
         "prefix": "main",
         "body": [
-            "module Main"
-          , ""
-          , "main : IO ()"
-          , "main = ${0:return ()}"
-          , ""
+            "module Main",
+            "",
+            "main : IO ()",
+            "main = ${0:return ()}",
+            ""
         ],
-        "description" : "main function"
+        "description": "main function"
     },
     "Module": {
         "prefix": "module",
@@ -120,31 +128,33 @@
     },
     "Lambda (trigger does not work)": {
         "prefix": "lambda",
-        "body": ["\\${inputs} => ${body}"],
+        "body": [
+            "\\${inputs} => ${body}"
+        ],
         "description": "lambda expression"
     },
     "Case": {
         "prefix": "case",
         "body": [
-            "case ${var} of"
-          , "\t${alt:Just a} => ${body}"
-          , "\t${otehrwise:_} => ${remaining}"
+            "case ${var} of",
+            "\t${alt:Just a} => ${body}",
+            "\t${otehrwise:_} => ${remaining}"
         ],
         "description": "case expression"
     },
     "Interface": {
         "prefix": "interface",
         "body": [
-            "interface ${name:MyClass} where"
-          , "\t${fname:myFunction} : ${type:String}"
+            "interface ${name:MyClass} where",
+            "\t${fname:myFunction} : ${type:String}"
         ],
         "description": "interface definition"
     },
     "Implementation": {
         "prefix": "implementation",
         "body": [
-            "implementation ${class:Show} ${type:String} where"
-          , "\t${function:function} = ${impl:id}"
+            "implementation ${class:Show} ${type:String} where",
+            "\t${function:function} = ${impl:id}"
         ],
         "description": "implement an interface"
     },
@@ -172,8 +182,8 @@
     "Do": {
         "prefix": "do",
         "body": [
-            "do"
-          , "\t${body:return value}"
+            "do",
+            "\t${body:return value}"
         ],
         "description": "do notation"
     },
@@ -187,19 +197,19 @@
     "If": {
         "prefix": "if",
         "body": [
-            "if ${cond}"
-          , "\tthen ${branch1}"
-          , "\telse ${branch2}"
+            "if ${cond}",
+            "\tthen ${branch1}",
+            "\telse ${branch2}"
         ],
         "description": "if expression"
     },
     "Let": {
         "prefix": "let",
         "body": [
-            "let"
-          , "\t${name} = ${value}"
-          , "in"
-          , "\t${expr}"
+            "let",
+            "\t${name} = ${value}",
+            "in",
+            "\t${expr}"
         ],
         "description": "let binding"
     },
@@ -213,17 +223,17 @@
     "Function": {
         "prefix": "fun",
         "body": [
-            "${name} : ${type1:Int} -> ${type2:Int}"
-          , "${name} ${val} = ${expr1}"
-          , "${name} ${val2:_} = ${expr2}"
+            "${name} : ${type1:Int} -> ${type2:Int}",
+            "${name} ${val} = ${expr1}",
+            "${name} ${val2:_} = ${expr2}"
         ],
         "description": "function declaration"
     },
     "Type Alias": {
         "prefix": "type",
         "body": [
-            "${type} : Type"
-          , "${type} = $0"
+            "${type} : Type",
+            "${type} = $0"
         ],
         "description": "type alias"
     }
