@@ -8,8 +8,6 @@ const workspaceSymbol = require('./providers/workspaceSymbolProvider')
 const reference = require('./providers/referenceProvider')
 const rename = require('./providers/renameProvider')
 
-const IDRIS_MODE = { language: 'idris', scheme: 'file' }
-
 let idrisExecutablePath = vscode.workspace.getConfiguration('idris').get('executablePath');
 
 let triggers = []
@@ -33,13 +31,13 @@ function activate(context) {
     let disposable = vscode.commands.registerCommand(key, value)
     context.subscriptions.push(disposable)
   })
-  context.subscriptions.push(vscode.languages.registerCompletionItemProvider(IDRIS_MODE, new completion.IdrisCompletionProvider(), ...triggers))
-  context.subscriptions.push(vscode.languages.registerHoverProvider(IDRIS_MODE, new hover.IdrisHoverProvider()))
-  context.subscriptions.push(vscode.languages.registerDefinitionProvider(IDRIS_MODE, new definition.IdrisDefinitionProvider()))
-  context.subscriptions.push(vscode.languages.registerDocumentSymbolProvider(IDRIS_MODE, new documentSymbol.IdrisDocumentSymbolProvider()))
+  context.subscriptions.push(vscode.languages.registerCompletionItemProvider(controller.IDRIS_MODE, new completion.IdrisCompletionProvider(), ...triggers))
+  context.subscriptions.push(vscode.languages.registerHoverProvider(controller.IDRIS_MODE, new hover.IdrisHoverProvider()))
+  context.subscriptions.push(vscode.languages.registerDefinitionProvider(controller.IDRIS_MODE, new definition.IdrisDefinitionProvider()))
+  context.subscriptions.push(vscode.languages.registerDocumentSymbolProvider(controller.IDRIS_MODE, new documentSymbol.IdrisDocumentSymbolProvider()))
   context.subscriptions.push(vscode.languages.registerWorkspaceSymbolProvider(new workspaceSymbol.IdrisWorkspaceSymbolProvider()))
-  context.subscriptions.push(vscode.languages.registerReferenceProvider(IDRIS_MODE, new reference.IdrisReferenceProvider()))
-  context.subscriptions.push(vscode.languages.registerRenameProvider(IDRIS_MODE, new rename.IdrisRenameProvider()))
+  context.subscriptions.push(vscode.languages.registerReferenceProvider(controller.IDRIS_MODE, new reference.IdrisReferenceProvider()))
+  context.subscriptions.push(vscode.languages.registerRenameProvider(controller.IDRIS_MODE, new rename.IdrisRenameProvider()))
   context.subscriptions.push(vscode.workspace.onDidSaveTextDocument(() => {
     controller.typeCheckOnSave()
     completion.buildCompletionList()

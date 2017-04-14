@@ -41,7 +41,17 @@
           "idris"
         ],
         "extensions": [
-          ".idr",
+          ".idr"
+        ],
+        "configuration": "./configs/idris.json"
+      },
+      {
+        "id": "lidris",
+        "aliases": [
+          "Literate Idris",
+          "literate idris"
+        ],
+        "extensions": [
           ".lidr"
         ],
         "configuration": "./configs/idris.json"
@@ -62,6 +72,11 @@
         "language": "idris",
         "scopeName": "source.idris",
         "path": "./syntaxes/idris.json"
+      },
+      {
+        "language": "lidris",
+        "scopeName": "source.idris.literate",
+        "path": "./syntaxes/idris.literate.json"
       },
       {
         "language": "ipkg",
@@ -170,6 +185,76 @@
         {
           "command": "idris.cleanup-ibc",
           "when": "editorFocus && editorLangId == idris",
+          "group": "idris@14"
+        },
+        {
+          "command": "idris.typecheck",
+          "when": "editorFocus && editorLangId == lidris",
+          "group": "idris@1"
+        },
+        {
+          "command": "idris.type-of",
+          "when": "editorFocus && editorLangId == lidris",
+          "group": "idris@2"
+        },
+        {
+          "command": "idris.docs-for",
+          "when": "editorFocus && editorLangId == lidris",
+          "group": "idris@3"
+        },
+        {
+          "command": "idris.print-definition",
+          "when": "editorFocus && editorLangId == lidris",
+          "group": "idris@4"
+        },
+        {
+          "command": "idris.add-clause",
+          "when": "editorFocus && editorLangId == lidris",
+          "group": "idris@5"
+        },
+        {
+          "command": "idris.case-split",
+          "when": "editorFocus && editorLangId == lidris",
+          "group": "idris@6"
+        },
+        {
+          "command": "idris.proof-search",
+          "when": "editorFocus && editorLangId == lidris",
+          "group": "idris@7"
+        },
+        {
+          "command": "idris.make-with",
+          "when": "editorFocus && editorLangId == lidris",
+          "group": "idris@8"
+        },
+        {
+          "command": "idris.make-case",
+          "when": "editorFocus && editorLangId == lidris",
+          "group": "idris@9"
+        },
+        {
+          "command": "idris.make-lemma",
+          "when": "editorFocus && editorLangId == lidris",
+          "group": "idris@10"
+        },
+        {
+          "command": "idris.eval-selection",
+          "when": "editorFocus && editorLangId == lidris",
+          "group": "idris@11"
+        },
+        {
+          "command": "idris.start-refresh-repl",
+          "when": "editorFocus && editorLangId == lidris",
+          "group": "idris@12"
+        },
+        {
+          "command": "idris.send-selection-repl",
+          "when": "editorFocus && editorLangId == lidris",
+          "group": "idris@13"
+        },
+        {
+          "command": "idris.cleanup-ibc",
+          "when": "editorFocus && editorLangId == lidris",
           "group": "idris@14"
         }
       ]

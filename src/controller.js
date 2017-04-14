@@ -4,6 +4,11 @@ const common = require('./analysis/common')
 const vscode = require('vscode')
 const fs = require('fs');
 
+const IDRIS_MODE = [
+  { language: 'idris', scheme: 'file' },
+  { language: 'lidris', scheme: 'file' }
+]
+
 let getCommands = () => {
   return [
     ['idris.typecheck', runCommand(commands.typecheckFile)],
@@ -44,7 +49,7 @@ let reInitialize = () => {
 
 let withCompilerOptions = (callback) => {
   let document = vscode.window.activeTextEditor.document
-  if (document.languageId != 'idris') return
+  if (!IDRIS_MODE.map((mode) => { return mode.language }).includes(document.languageId)) return
   let uri = document.uri.fsPath
 
   getCompilerOptsPromise().subscribe((compilerOptions) => {
@@ -74,5 +79,6 @@ module.exports = {
   withCompilerOptions: withCompilerOptions,
   typeCheckOnSave: typeCheckOnSave,
   reInitialize: reInitialize,
-  getCompilerOptsPromise: getCompilerOptsPromise
+  getCompilerOptsPromise: getCompilerOptsPromise,
+  IDRIS_MODE: IDRIS_MODE
 }

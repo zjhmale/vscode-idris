@@ -1,0 +1,16 @@
+{
+	"name": "Idris (Literate)",
+	"scopeName": "source.idris.literate",
+	"fileTypes": [
+		"lidr"
+	],
+	"patterns": [
+		{
+			"match": "^(?!>)(.*)(?=\n)",
+			"name": "comment.line.documentation.idris.literate"
+		},
+		{
+			"include": "source.idris"
+		}
+	]
+}

@@ -41,3 +41,4 @@ let translate = (name) => {
 
 translate("idris")
 translate("ipkg")
+translate("idris.literate")
