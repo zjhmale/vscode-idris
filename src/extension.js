@@ -7,6 +7,7 @@ const idrisDocumentSymbol = require('./providers/idris/documentSymbolProvider')
 const idrisWorkspaceSymbol = require('./providers/idris/workspaceSymbolProvider')
 const idrisReference = require('./providers/idris/referenceProvider')
 const idrisRename = require('./providers/idris/renameProvider')
+const ipkgDefinition = require('./providers/ipkg/definitionProvider')
 
 let idrisExecutablePath = vscode.workspace.getConfiguration('idris').get('executablePath');
 
@@ -38,6 +39,7 @@ function activate(context) {
   context.subscriptions.push(vscode.languages.registerWorkspaceSymbolProvider(new idrisWorkspaceSymbol.IdrisWorkspaceSymbolProvider()))
   context.subscriptions.push(vscode.languages.registerReferenceProvider(controller.IDRIS_MODE, new idrisReference.IdrisReferenceProvider()))
   context.subscriptions.push(vscode.languages.registerRenameProvider(controller.IDRIS_MODE, new idrisRename.IdrisRenameProvider()))
+  context.subscriptions.push(vscode.languages.registerDefinitionProvider(controller.IPKG_MODE, new ipkgDefinition.IPKGDefinitionProvider()))
   context.subscriptions.push(vscode.workspace.onDidSaveTextDocument(() => {
     controller.typeCheckOnSave()
     idrisCompletion.buildCompletionList()

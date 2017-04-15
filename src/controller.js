@@ -9,6 +9,8 @@ const IDRIS_MODE = [
   { language: 'lidris', scheme: 'file' }
 ]
 
+const IPKG_MODE = { language: 'ipkg', scheme: 'file' }
+
 let getCommands = () => {
   return [
     ['idris.typecheck', runCommand(commands.typecheckFile)],
@@ -81,5 +83,6 @@ module.exports = {
   typeCheckOnSave: typeCheckOnSave,
   reInitialize: reInitialize,
   getCompilerOptsPromise: getCompilerOptsPromise,
-  IDRIS_MODE: IDRIS_MODE
+  IDRIS_MODE: IDRIS_MODE,
+  IPKG_MODE: IPKG_MODE
 }
