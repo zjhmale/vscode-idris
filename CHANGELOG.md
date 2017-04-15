@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.8.6
+
+* Support totality checking for functions [#58](https://github.com/zjhmale/vscode-idris/issues/58)
+* Better support for literate programming [#75](https://github.com/zjhmale/vscode-idris/issues/75)
+* Support `Add proof clause` command [#76](https://github.com/zjhmale/vscode-idris/issues/76)
+* Update syntax file to fix context signature [df29a52](https://github.com/zjhmale/vscode-idris/commit/df29a527bb6a31ac7a57712791b84c0b8c7229e0) [@be5invis](https://github.com/be5invis)
+* Update code snippets [3c1c869](https://github.com/zjhmale/vscode-idris/commit/3c1c869abd9c6821c563a078571c89d608a445b4)
+
 ## 0.8.3
 
 * Update syntax file to support numbers in module names [2ceb72d](https://github.com/zjhmale/vscode-idris/commit/2ceb72ddb72df2d3e51586a50485a80f694dd7cc) [@be5invis](https://github.com/be5invis)
