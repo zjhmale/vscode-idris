@@ -1,12 +1,12 @@
 const vscode = require('vscode')
 const controller = require('./controller')
-const completion = require('./providers/idris/completionProvider')
-const hover = require('./providers/idris/hoverProvider')
-const definition = require('./providers/idris/definitionProvider')
-const documentSymbol = require('./providers/idris/documentSymbolProvider')
-const workspaceSymbol = require('./providers/idris/workspaceSymbolProvider')
-const reference = require('./providers/idris/referenceProvider')
-const rename = require('./providers/idris/renameProvider')
+const idrisCompletion = require('./providers/idris/completionProvider')
+const idrisHover = require('./providers/idris/hoverProvider')
+const idrisDefinition = require('./providers/idris/definitionProvider')
+const idrisDocumentSymbol = require('./providers/idris/documentSymbolProvider')
+const idrisWorkspaceSymbol = require('./providers/idris/workspaceSymbolProvider')
+const idrisReference = require('./providers/idris/referenceProvider')
+const idrisRename = require('./providers/idris/renameProvider')
 
 let idrisExecutablePath = vscode.workspace.getConfiguration('idris').get('executablePath');
 
@@ -31,16 +31,16 @@ function activate(context) {
     let disposable = vscode.commands.registerCommand(key, value)
     context.subscriptions.push(disposable)
   })
-  context.subscriptions.push(vscode.languages.registerCompletionItemProvider(controller.IDRIS_MODE, new completion.IdrisCompletionProvider(), ...triggers))
-  context.subscriptions.push(vscode.languages.registerHoverProvider(controller.IDRIS_MODE, new hover.IdrisHoverProvider()))
-  context.subscriptions.push(vscode.languages.registerDefinitionProvider(controller.IDRIS_MODE, new definition.IdrisDefinitionProvider()))
-  context.subscriptions.push(vscode.languages.registerDocumentSymbolProvider(controller.IDRIS_MODE, new documentSymbol.IdrisDocumentSymbolProvider()))
-  context.subscriptions.push(vscode.languages.registerWorkspaceSymbolProvider(new workspaceSymbol.IdrisWorkspaceSymbolProvider()))
-  context.subscriptions.push(vscode.languages.registerReferenceProvider(controller.IDRIS_MODE, new reference.IdrisReferenceProvider()))
-  context.subscriptions.push(vscode.languages.registerRenameProvider(controller.IDRIS_MODE, new rename.IdrisRenameProvider()))
+  context.subscriptions.push(vscode.languages.registerCompletionItemProvider(controller.IDRIS_MODE, new idrisCompletion.IdrisCompletionProvider(), ...triggers))
+  context.subscriptions.push(vscode.languages.registerHoverProvider(controller.IDRIS_MODE, new idrisHover.IdrisHoverProvider()))
+  context.subscriptions.push(vscode.languages.registerDefinitionProvider(controller.IDRIS_MODE, new idrisDefinition.IdrisDefinitionProvider()))
+  context.subscriptions.push(vscode.languages.registerDocumentSymbolProvider(controller.IDRIS_MODE, new idrisDocumentSymbol.IdrisDocumentSymbolProvider()))
+  context.subscriptions.push(vscode.languages.registerWorkspaceSymbolProvider(new idrisWorkspaceSymbol.IdrisWorkspaceSymbolProvider()))
+  context.subscriptions.push(vscode.languages.registerReferenceProvider(controller.IDRIS_MODE, new idrisReference.IdrisReferenceProvider()))
+  context.subscriptions.push(vscode.languages.registerRenameProvider(controller.IDRIS_MODE, new idrisRename.IdrisRenameProvider()))
   context.subscriptions.push(vscode.workspace.onDidSaveTextDocument(() => {
     controller.typeCheckOnSave()
-    completion.buildCompletionList()
+    idrisCompletion.buildCompletionList()
   }))
   context.subscriptions.push(vscode.workspace.onDidChangeConfiguration(() => {
     let newIdrisExecutablePath = vscode.workspace.getConfiguration('idris').get('executablePath')
@@ -50,9 +50,9 @@ function activate(context) {
     }
   }))
   context.subscriptions.push(vscode.window.onDidChangeActiveTextEditor(() => {
-    completion.buildCompletionList()
+    idrisCompletion.buildCompletionList()
   }))
-  completion.buildCompletionList()
+  idrisCompletion.buildCompletionList()
 }
 exports.activate = activate
 
