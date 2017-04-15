@@ -94,12 +94,6 @@ getWord = () => {
   return getWordBase(document, position, false)[0]
 }
 
-let handlerWrapper = (handler) => {
-  return (uri) => {
-    handler(uri)
-  }
-}
-
 /**
  * Get the column of the first character of a concrete line of code
  */
@@ -202,7 +196,7 @@ let typecheckFile = (uri) => {
   new Promise((resolve, reject) => {
     model.load(uri).filter((arg) => {
       return arg.responseType === 'return'
-    }).subscribe(handlerWrapper(successHandler), displayErrors)
+    }).subscribe(successHandler, displayErrors)
     showLoading()
     resolve()
   }).then(function () {
@@ -243,7 +237,7 @@ let getInfoForWord = (uri, cmd) => {
         case 'definition':
           return model.printDefinition(currentWord)
       }
-    }).subscribe(handlerWrapper(successHandler), displayErrors)
+    }).subscribe(successHandler, displayErrors)
     showLoading()
     resolve()
   }).then(function () {
@@ -286,7 +280,7 @@ let showHoles = (uri) => {
       return arg.responseType === 'return'
     }).flatMap(() => {
       return model.holes(80)
-    }).subscribe(handlerWrapper(successHandler), displayErrors)
+    }).subscribe(successHandler, displayErrors)
     showLoading()
     resolve()
   }).then(function () {
@@ -335,7 +329,7 @@ let evalSelection = (uri) => {
       return arg.responseType === 'return'
     }).flatMap(() => {
       return model.interpret(text)
-    }).subscribe(handlerWrapper(successHandler), displayErrors)
+    }).subscribe(successHandler, displayErrors)
     showLoading()
     resolve()
   }).then(function () {
@@ -408,7 +402,7 @@ let addClause = (uri) => {
       return arg.responseType === 'return'
     }).flatMap(() => {
       return model.addClause(line + 1, currentWord)
-    }).subscribe(handlerWrapper(successHandler), displayErrors)
+    }).subscribe(successHandler, displayErrors)
     showLoading()
     resolve()
   }).then(function () {
@@ -437,7 +431,7 @@ let addProofClause = (uri) => {
       return arg.responseType === 'return'
     }).flatMap(() => {
       return model.addProofClause(line + 1, currentWord)
-    }).subscribe(handlerWrapper(successHandler), displayErrors)
+    }).subscribe(successHandler, displayErrors)
     showLoading()
     resolve()
   }).then(function () {
@@ -468,7 +462,7 @@ let caseSplit = (uri) => {
       return arg.responseType === 'return'
     }).flatMap(() => {
       return model.caseSplit(line + 1, currentWord)
-    }).subscribe(handlerWrapper(successHandler), displayErrors)
+    }).subscribe(successHandler, displayErrors)
     showLoading()
     resolve()
   }).then(function () {
@@ -501,7 +495,7 @@ let proofSearch = (uri) => {
       return arg.responseType === 'return'
     }).flatMap(() => {
       return model.proofSearch(line + 1, currentWord)
-    }).subscribe(handlerWrapper(successHandler), displayErrors)
+    }).subscribe(successHandler, displayErrors)
     showLoading()
     resolve()
   }).then(function () {
@@ -532,7 +526,7 @@ let makeWith = (uri) => {
       return arg.responseType === 'return'
     }).flatMap(() => {
       return model.makeWith(line + 1, currentWord)
-    }).subscribe(handlerWrapper(successHandler), displayErrors)
+    }).subscribe(successHandler, displayErrors)
     showLoading()
     resolve()
   }).then(function () {
@@ -563,7 +557,7 @@ let makeCase = (uri) => {
       return arg.responseType === 'return'
     }).flatMap(() => {
       return model.makeCase(line + 1, currentWord)
-    }).subscribe(handlerWrapper(successHandler), displayErrors)
+    }).subscribe(successHandler, displayErrors)
     showLoading()
     resolve()
   }).then(function () {
@@ -606,7 +600,7 @@ let makeLemma = (uri) => {
       return arg.responseType === 'return'
     }).flatMap(() => {
       return model.makeLemma(line + 1, currentWord)
-    }).subscribe(handlerWrapper(successHandler), displayErrors)
+    }).subscribe(successHandler, displayErrors)
     showLoading()
     resolve()
   }).then(function () {
@@ -632,7 +626,7 @@ let apropos = (uri) => {
         return arg.responseType === 'return'
       }).flatMap(() => {
         return model.apropos(val)
-      }).subscribe(handlerWrapper(successHandler), displayErrors)
+      }).subscribe(successHandler, displayErrors)
       showLoading()
       resolve()
     }).then(function () {

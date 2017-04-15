@@ -1,6 +1,5 @@
-const commands = require('../idris/commands')
-const controller = require('../controller')
-const ipkg = require('../ipkg/ipkg')
+const commands = require('../../idris/commands')
+const controller = require('../../controller')
 const vscode = require('vscode')
 const Rx = require('rx-lite')
 

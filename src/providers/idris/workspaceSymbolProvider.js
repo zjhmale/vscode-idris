@@ -1,6 +1,6 @@
+const common = require('../../analysis/common')
+const findDefinition = require('../../analysis/find-definition')
 const vscode = require('vscode')
-const common = require('../analysis/common')
-const findDefinition = require('../analysis/find-definition')
 const _ = require('lodash')
 
 let IdrisWorkspaceSymbolProvider = (function () {

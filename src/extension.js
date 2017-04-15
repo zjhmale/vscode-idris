@@ -1,12 +1,12 @@
 const vscode = require('vscode')
 const controller = require('./controller')
-const completion = require('./providers/completionProvider')
-const hover = require('./providers/hoverProvider')
-const definition = require('./providers/definitionProvider')
-const documentSymbol = require('./providers/documentSymbolProvider')
-const workspaceSymbol = require('./providers/workspaceSymbolProvider')
-const reference = require('./providers/referenceProvider')
-const rename = require('./providers/renameProvider')
+const completion = require('./providers/idris/completionProvider')
+const hover = require('./providers/idris/hoverProvider')
+const definition = require('./providers/idris/definitionProvider')
+const documentSymbol = require('./providers/idris/documentSymbolProvider')
+const workspaceSymbol = require('./providers/idris/workspaceSymbolProvider')
+const reference = require('./providers/idris/referenceProvider')
+const rename = require('./providers/idris/renameProvider')
 
 let idrisExecutablePath = vscode.workspace.getConfiguration('idris').get('executablePath');
 

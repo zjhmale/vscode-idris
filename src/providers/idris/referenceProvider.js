@@ -1,13 +1,13 @@
+const commands = require('../../idris/commands')
+const common = require('../../analysis/common')
+const findDefinition = require('../../analysis/find-definition')
 const vscode = require('vscode')
-const commands = require('../idris/commands')
-const common = require('../analysis/common')
-const findDefinition = require('../analysis/find-definition')
 const _ = require('lodash')
 
-let IdrisRenameProvider = (function () {
-  function IdrisRenameProvider() { }
+let IdrisReferenceProvider = (function () {
+  function IdrisReferenceProvider() { }
 
-  IdrisRenameProvider.prototype.provideRenameEdits = function (document, position, newName, token) {
+  IdrisReferenceProvider.prototype.provideReferences = function (document, position, context, token) {
     let [currentWord, wordRange] = commands.getWordBase(document, position, true)
     if (!currentWord) return
 
@@ -30,20 +30,17 @@ let IdrisRenameProvider = (function () {
         return common.getAllPositions(name, uri)
       })
       let uniPositions = _.uniqWith(_.flatten(positions), _.isEqual);
-      let workspaceEdit = new vscode.WorkspaceEdit()
-      uniPositions.forEach(({ uri, line, column }) => {
-        let startPos = new vscode.Position(line, column);
-        let endPos = new vscode.Position(line, column + currentWord.length)
-        let range = new vscode.Range(startPos, endPos);
-        let fileUri = vscode.Uri.file(uri)
-        workspaceEdit.replace(fileUri, range, newName);
+      let locations = uniPositions.map(({ uri, line, column }) => {
+        let pos = new vscode.Position(line, column);
+        let range = new vscode.Range(pos, pos);
+        return new vscode.Location(vscode.Uri.file(uri), range)
       })
-      resolve(workspaceEdit)
+      resolve(locations)
     })
   }
-  return IdrisRenameProvider
+  return IdrisReferenceProvider
 }())
 
 module.exports = {
-  IdrisRenameProvider
+  IdrisReferenceProvider
 }
