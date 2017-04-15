@@ -93,7 +93,7 @@ let findDefinitionInFile = (definition, uri) => {
 }
 
 let getDefinitionLocations = (identifier) => {
-  return common.getAllFiles('idr').map((file) => {
+  return common.getAllFilesExts(['idr', 'lidr']).map((file) => {
     return findDefinitionInFile(identifier, file)
   }).filter((loc) => {
     return loc != null && loc != undefined
