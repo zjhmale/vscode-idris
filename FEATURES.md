@@ -98,6 +98,10 @@
 
 ![rename-symbol](./images/screenshots/rename.gif)
 
+### Change all occurrences
+
+![change-occurrences](./images/screenshots/change-occurrences.gif)
+
 ### Latex snippets
 
 ![latex-snippets](./images/screenshots/latex.gif)
