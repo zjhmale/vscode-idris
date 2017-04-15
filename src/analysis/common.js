@@ -169,11 +169,19 @@ let getAllFiles = (ext) => {
   })
 }
 
+let getAllFilesExts = (exts) => {
+  let filess = exts.map((ext) => {
+    return getAllFiles(ext)
+  })
+  return _.flatten(filess)
+}
+
 module.exports = {
   getModuleName,
   getImportedModules,
   getSafeRoot,
   getAllFiles,
+  getAllFilesExts,
   getIdents,
   getAllIdents,
   isDefinitonEqual,

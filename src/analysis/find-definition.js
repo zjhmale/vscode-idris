@@ -123,9 +123,9 @@ let findDefinitionWithAliasInFiles = (identifier, alias, uri) => {
 }
 
 let findDefinitionForModule = (moduleName) => {
-  return common.getAllFiles('idr').map((file) => {
+  return common.getAllFilesExts(['idr', 'lidr']).map((file) => {
     let content = fs.readFileSync(file).toString()
-    if (new RegExp(`module\\s+${moduleName}\\s*`, "g").test(content)) {
+    if (new RegExp(`(>\\s+)?module\\s+${moduleName}\\s*`, "g").test(content)) {
       return {
         path: file,
         module: moduleName,
