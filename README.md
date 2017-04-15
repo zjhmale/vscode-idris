@@ -17,6 +17,7 @@
 | [Show the doc for a definition](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#showing-the-definition-for-an-identifier) | idris.print-definition |
 | [Show holes](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#list-all-the-currently-active-holes) | idris.show-holes |
 | [Add clause](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#generate-an-initial-pattern-match-clause) | idris.add-clause |
+| [Add proof clause](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#generate-an-initial-pattern-match-clause-when-trying-to-proof-a-type) | idris.add-proof-clause |
 | [Split case](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#generate-a-case-split-for-the-pattern-variable) | idris.case-split |
 | [Search proof](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#attempt-to-fill-out-the-holes-by-proof-search) | idris.proof-search |
 | [Make with](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#create-a-with-rule-pattern-match-template-for-the-clause-of-function) | idris.make-with |
@@ -35,13 +36,14 @@
 * [ipkg highlighting](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#ipkg-highlighting)
 * [Auto-completion](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#code-completion)
 * [Show type definition on hover](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#show-type-definition-on-hover)
-* Type checking on saving file
+* [Type checking on saving file](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#type-checking-on-saving-file)
 * [Go to Definition and Peek Definition](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#go-to-definition-and-peek-definition)
 * [Go to Symbol (Outline symbols in currently opend file)](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#go-to-symbol-outline-symbols-in-currently-opend-file)
 * [Search Symbol (Outline symbols in currently opend project)](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#search-symbol-outline-symbols-in-currently-opend-project)
 * [Find all references](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#find-all-references)
 * [Rename symbol](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#rename-symbol)
 * [Latex snippets](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#latex-snippets)
+* [Literate Idris](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#literate-idris)
 
 ## Installation
 
