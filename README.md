@@ -1,7 +1,7 @@
 # Idris for Visual Studio Code
 
-[![Version](http://vsmarketplacebadge.apphb.com/version/zjhmale.Idris.svg)](https://marketplace.visualstudio.com/items?itemName=zjhmale.Idris)
-[![Installs](http://vsmarketplacebadge.apphb.com/installs/zjhmale.Idris.svg)](https://marketplace.visualstudio.com/items?itemName=zjhmale.Idris)
+[![Version](https://vsmarketplacebadge.apphb.com/version/zjhmale.Idris.svg)](https://marketplace.visualstudio.com/items?itemName=zjhmale.Idris)
+[![Installs](https://vsmarketplacebadge.apphb.com/installs/zjhmale.Idris.svg)](https://marketplace.visualstudio.com/items?itemName=zjhmale.Idris)
 [![Ratings](https://vsmarketplacebadge.apphb.com/rating/zjhmale.Idris.svg)](https://marketplace.visualstudio.com/items?itemName=zjhmale.Idris)
 
 [![Build Status](https://travis-ci.org/zjhmale/vscode-idris.svg?branch=master)](https://travis-ci.org/zjhmale/vscode-idris)
