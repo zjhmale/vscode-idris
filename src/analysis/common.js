@@ -70,7 +70,7 @@ let getImportPattern = () => {
 }
 
 let getAllIdents = () => {
-  let files = getAllFiles('idr')
+  let files = getAllFilesExts(['idr', 'lidr'])
   let defList = files.map((uri) => {
     return getIdents(uri).filter((name) => {
       return !/\b\d+\b/g.test(name) && !excludes.includes(name)
