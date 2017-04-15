@@ -143,49 +143,54 @@
           "group": "idris@5"
         },
         {
-          "command": "idris.case-split",
+          "command": "idris.add-proof-clause",
           "when": "editorFocus && editorLangId == idris",
           "group": "idris@6"
         },
         {
-          "command": "idris.proof-search",
+          "command": "idris.case-split",
           "when": "editorFocus && editorLangId == idris",
           "group": "idris@7"
         },
         {
-          "command": "idris.make-with",
+          "command": "idris.proof-search",
           "when": "editorFocus && editorLangId == idris",
           "group": "idris@8"
         },
         {
-          "command": "idris.make-case",
+          "command": "idris.make-with",
           "when": "editorFocus && editorLangId == idris",
           "group": "idris@9"
         },
         {
-          "command": "idris.make-lemma",
+          "command": "idris.make-case",
           "when": "editorFocus && editorLangId == idris",
           "group": "idris@10"
         },
         {
-          "command": "idris.eval-selection",
+          "command": "idris.make-lemma",
           "when": "editorFocus && editorLangId == idris",
           "group": "idris@11"
         },
         {
-          "command": "idris.start-refresh-repl",
+          "command": "idris.eval-selection",
           "when": "editorFocus && editorLangId == idris",
           "group": "idris@12"
         },
         {
-          "command": "idris.send-selection-repl",
+          "command": "idris.start-refresh-repl",
           "when": "editorFocus && editorLangId == idris",
           "group": "idris@13"
         },
         {
-          "command": "idris.cleanup-ibc",
+          "command": "idris.send-selection-repl",
           "when": "editorFocus && editorLangId == idris",
           "group": "idris@14"
+        },
+        {
+          "command": "idris.cleanup-ibc",
+          "when": "editorFocus && editorLangId == idris",
+          "group": "idris@15"
         },
         {
           "command": "idris.typecheck",
@@ -213,49 +218,54 @@
           "group": "idris@5"
         },
         {
-          "command": "idris.case-split",
+          "command": "idris.add-proof-clause",
           "when": "editorFocus && editorLangId == lidris",
           "group": "idris@6"
         },
         {
-          "command": "idris.proof-search",
+          "command": "idris.case-split",
           "when": "editorFocus && editorLangId == lidris",
           "group": "idris@7"
         },
         {
-          "command": "idris.make-with",
+          "command": "idris.proof-search",
           "when": "editorFocus && editorLangId == lidris",
           "group": "idris@8"
         },
         {
-          "command": "idris.make-case",
+          "command": "idris.make-with",
           "when": "editorFocus && editorLangId == lidris",
           "group": "idris@9"
         },
         {
-          "command": "idris.make-lemma",
+          "command": "idris.make-case",
           "when": "editorFocus && editorLangId == lidris",
           "group": "idris@10"
         },
         {
-          "command": "idris.eval-selection",
+          "command": "idris.make-lemma",
           "when": "editorFocus && editorLangId == lidris",
           "group": "idris@11"
         },
         {
-          "command": "idris.start-refresh-repl",
+          "command": "idris.eval-selection",
           "when": "editorFocus && editorLangId == lidris",
           "group": "idris@12"
         },
         {
-          "command": "idris.send-selection-repl",
+          "command": "idris.start-refresh-repl",
           "when": "editorFocus && editorLangId == lidris",
           "group": "idris@13"
         },
         {
-          "command": "idris.cleanup-ibc",
+          "command": "idris.send-selection-repl",
           "when": "editorFocus && editorLangId == lidris",
           "group": "idris@14"
+        },
+        {
+          "command": "idris.cleanup-ibc",
+          "when": "editorFocus && editorLangId == lidris",
+          "group": "idris@15"
         }
       ]
     },
@@ -289,6 +299,11 @@
         "command": "idris.add-clause",
         "title": "Idris: Generate an initial pattern match clause",
         "description": "Add an initial pattern match clause"
+      },
+      {
+        "command": "idris.add-proof-clause",
+        "title": "Idris: Generate an initial pattern match clause when trying to proof a type",
+        "description": "http://docs.idris-lang.org/en/latest/reference/misc.html#match-application"
       },
       {
         "command": "idris.case-split",

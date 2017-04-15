@@ -17,6 +17,7 @@ let getCommands = () => {
     ['idris.print-definition', runCommand(commands.printDefinition)],
     ['idris.show-holes', runCommand(commands.showHoles)],
     ['idris.add-clause', runCommand(commands.addClause)],
+    ['idris.add-proof-clause', runCommand(commands.addProofClause)],
     ['idris.case-split', runCommand(commands.caseSplit)],
     ['idris.proof-search', runCommand(commands.proofSearch)],
     ['idris.make-with', runCommand(commands.makeWith)],

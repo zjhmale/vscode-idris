@@ -181,6 +181,10 @@ class IdrisModel {
     return this.prepareCommand([':add-clause', line, word])
   }
 
+  addProofClause(line, word) {
+    return this.prepareCommand([':add-proof-clause', line, word])
+  }
+
   caseSplit(line, word) {
     return this.prepareCommand([':case-split', line, word])
   }
