@@ -123,6 +123,14 @@ let getModuleName = (uri) => {
   return moduleMatch ? moduleMatch[1].trim() : null
 }
 
+let getAllModuleName = () => {
+  let files = getAllFilesExts(['idr', 'lidr'])
+  let moduleNames = files.map((uri) => {
+    return getModuleName(uri)
+  })
+  return _.uniqWith(moduleNames, _.isEqual);
+}
+
 let getImportedModules = (uri) => {
   let content = fs.readFileSync(uri).toString()
   let importPattern = getImportPattern()
@@ -178,6 +186,7 @@ let getAllFilesExts = (exts) => {
 
 module.exports = {
   getModuleName,
+  getAllModuleName,
   getImportedModules,
   getSafeRoot,
   getAllFiles,

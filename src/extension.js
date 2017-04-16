@@ -8,6 +8,7 @@ const idrisWorkspaceSymbol = require('./providers/idris/workspaceSymbolProvider'
 const idrisReference = require('./providers/idris/referenceProvider')
 const idrisRename = require('./providers/idris/renameProvider')
 const ipkgDefinition = require('./providers/ipkg/definitionProvider')
+const ipkgCompletion = require('./providers/ipkg/completionProvider')
 
 let idrisExecutablePath = vscode.workspace.getConfiguration('idris').get('executablePath');
 
@@ -40,9 +41,11 @@ function activate(context) {
   context.subscriptions.push(vscode.languages.registerReferenceProvider(controller.IDRIS_MODE, new idrisReference.IdrisReferenceProvider()))
   context.subscriptions.push(vscode.languages.registerRenameProvider(controller.IDRIS_MODE, new idrisRename.IdrisRenameProvider()))
   context.subscriptions.push(vscode.languages.registerDefinitionProvider(controller.IPKG_MODE, new ipkgDefinition.IPKGDefinitionProvider()))
+  context.subscriptions.push(vscode.languages.registerCompletionItemProvider(controller.IPKG_MODE, new ipkgCompletion.IPKGCompletionProvider(), ...triggers))
   context.subscriptions.push(vscode.workspace.onDidSaveTextDocument(() => {
     controller.typeCheckOnSave()
     idrisCompletion.buildCompletionList()
+    ipkgCompletion.buildCompletionList()
   }))
   context.subscriptions.push(vscode.workspace.onDidChangeConfiguration(() => {
     let newIdrisExecutablePath = vscode.workspace.getConfiguration('idris').get('executablePath')
@@ -53,8 +56,10 @@ function activate(context) {
   }))
   context.subscriptions.push(vscode.window.onDidChangeActiveTextEditor(() => {
     idrisCompletion.buildCompletionList()
+    ipkgCompletion.buildCompletionList()
   }))
   idrisCompletion.buildCompletionList()
+  ipkgCompletion.buildCompletionList()
 }
 exports.activate = activate
 
