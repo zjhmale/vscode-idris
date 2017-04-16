@@ -66,7 +66,7 @@ const excludes = [
 ]
 
 let getImportPattern = () => {
-  return /import\s+(public\s+)?(([A-Z]\w*)(\.[A-Z]\w*)*)(\s+as\s+(\w+))?\r\n/g
+  return /import\s+(public\s+)?(([A-Z]\w*)(\.[A-Z]\w*)*)(\s+as\s+(\w+))?[\r\n|\n]/g
 }
 
 let getAllIdents = () => {
