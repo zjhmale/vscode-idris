@@ -20,12 +20,17 @@ let IPKGCompletionProvider = (function () {
     let trimmedPrefix = currentWord.trim()
 
     if (trimmedPrefix.length >= 2) {
-      let suggestionItems = identList.concat(moduleNames).filter((ident) => {
+      let identItems = identList.filter((ident) => {
         return ident.startsWith(trimmedPrefix) || ident.toLowerCase().startsWith(trimmedPrefix)
       }).map((ident) => {
         return new vscode.CompletionItem(ident, 0)
       })
-      return suggestionItems
+      let moduleItems = moduleNames.filter((ident) => {
+        return ident.startsWith(trimmedPrefix) || ident.toLowerCase().startsWith(trimmedPrefix)
+      }).map((ident) => {
+        return new vscode.CompletionItem(ident, 8)
+      })
+      return identItems.concat(moduleItems)
     } else {
       return null
     }
