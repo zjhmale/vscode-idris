@@ -2,6 +2,7 @@ const commands = require('../../idris/commands')
 const controller = require('../../controller')
 const common = require('../../analysis/common')
 const snippets = require('../../../snippets/idris.json')
+const completionUtil = require('../completionUtil')
 const HashMap = require('hashmap')
 const vscode = require('vscode')
 
@@ -50,6 +51,7 @@ let IdrisCompletionProvider = (function () {
   IdrisCompletionProvider.prototype.provideCompletionItems = (document, position, token) => {
     let wordRange = document.getWordRangeAtPosition(position, /(\\)?'?\w+(\.\w+)?'?/i)
     let currentWord = document.getText(wordRange).trim()
+    let currentLine = document.lineAt(position)
 
     let trimmedPrefix = currentWord.trim()
 
@@ -74,7 +76,13 @@ let IdrisCompletionProvider = (function () {
           }).map((ident) => {
             return new vscode.CompletionItem(ident, 0)
           })
-          return suggestionItems.concat(snippetItems)
+          if (/^(>\s+)?import/g.test(currentLine.text)) {
+            return suggestionItems
+              .concat(snippetItems)
+              .concat(completionUtil.getModuleNameCompletionItems(trimmedPrefix))
+          } else {
+            return suggestionItems.concat(snippetItems)
+          }
         }
       } else if (suggestMode == 'replCompletion') {
         return controller.getCompilerOptsPromise().flatMap((compilerOptions) => {
@@ -89,7 +97,13 @@ let IdrisCompletionProvider = (function () {
           let results = ref.map((v, i, arr) => {
             return new vscode.CompletionItem(v, 1)
           })
-          return results.concat(snippetItems)
+          if (/^(>\s+)?import/g.test(currentLine)) {
+            return results
+              .concat(snippetItems)
+              .concat(completionUtil.getModuleNameCompletionItems(trimmedPrefix))
+          } else {
+            return results.concat(snippetItems)
+          }
         })
       } else {
         vscode.window.showErrorMessage("Invalid option for idris.suggestMode")

@@ -1,4 +1,5 @@
 const common = require('../../analysis/common')
+const completionUtil = require('../completionUtil')
 const vscode = require('vscode')
 
 let identList
@@ -10,8 +11,6 @@ let buildCompletionList = () => {
 
 let IPKGCompletionProvider = (function () {
   function IPKGCompletionProvider() { }
-
-  let moduleNames = common.getAllModuleName()
 
   IPKGCompletionProvider.prototype.provideCompletionItems = (document, position, token) => {
     let wordRange = document.getWordRangeAtPosition(position, /(\\)?'?\w+(\.\w+)?'?/i)
@@ -25,12 +24,7 @@ let IPKGCompletionProvider = (function () {
       }).map((ident) => {
         return new vscode.CompletionItem(ident, 0)
       })
-      let moduleItems = moduleNames.filter((ident) => {
-        return ident.startsWith(trimmedPrefix) || ident.toLowerCase().startsWith(trimmedPrefix)
-      }).map((ident) => {
-        return new vscode.CompletionItem(ident, 8)
-      })
-      return identItems.concat(moduleItems)
+      return identItems.concat(completionUtil.getModuleNameCompletionItems(trimmedPrefix))
     } else {
       return null
     }
