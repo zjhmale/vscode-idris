@@ -33,7 +33,7 @@
 
 ![menu](./images/screenshots/menu.gif)
 
-* [ipkg](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#ipkg)
+* [iPKG](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#ipkg)
 * [Auto-completion](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#code-completion)
 * [Show type definition on hover](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#show-type-definition-on-hover)
 * [Type checking on saving file](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#type-checking-on-saving-file)

@@ -62,7 +62,7 @@
 
 ![send-selection-repl](./images/screenshots/send-selection-repl.gif)
 
-### ipkg
+### iPKG
 
 ![ipkg](./images/screenshots/ipkg.gif)
 
