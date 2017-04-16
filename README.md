@@ -70,7 +70,7 @@ The following Visual Studio Code settings along with their *default* values that
 
 ## Acknowledgements
 
-* Internal design is inspired by [atom-language-idris](https://github.com/idris-hackers/atom-language-idris).
+* The internal design is initially inspired by [atom-language-idris](https://github.com/idris-hackers/atom-language-idris).
 
 ## License
 

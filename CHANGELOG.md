@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.8.9
+
+* Auto-completion module names in iPKG file [#62](https://github.com/zjhmale/vscode-idris/issues/62)
+* Go to the definition of a concrete module file from iPKG file [#68](https://github.com/zjhmale/vscode-idris/issues/68)
+* Literate programming improvement [#79](https://github.com/zjhmale/vscode-idris/issues/79)
+* Extension activates on Idris file, iPKG file and literate Idris file [#80](https://github.com/zjhmale/vscode-idris/issues/80)
+* Auto-completion module names in import clause of Idris file and literate Idris file [#81](https://github.com/zjhmale/vscode-idris/issues/81)
+* Auto-completion for Idris keywords and iPKG keywords [#82](https://github.com/zjhmale/vscode-idris/issues/82)
+
 ## 0.8.6
 
 * Support totality checking for functions [#58](https://github.com/zjhmale/vscode-idris/issues/58)
