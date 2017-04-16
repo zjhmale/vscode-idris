@@ -62,9 +62,9 @@
 
 ![send-selection-repl](./images/screenshots/send-selection-repl.gif)
 
-### ipkg highlighting
+### ipkg
 
-![ipkg](./images/screenshots/ipkg-highlight.png)
+![ipkg](./images/screenshots/ipkg.gif)
 
 ### Code completion
 
