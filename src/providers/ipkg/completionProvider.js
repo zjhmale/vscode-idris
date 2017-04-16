@@ -24,7 +24,9 @@ let IPKGCompletionProvider = (function () {
       }).map((ident) => {
         return new vscode.CompletionItem(ident, 0)
       })
-      return identItems.concat(completionUtil.getModuleNameCompletionItems(trimmedPrefix))
+      return identItems
+        .concat(completionUtil.ipkgKeywordCompletionItems(trimmedPrefix))
+        .concat(completionUtil.getModuleNameCompletionItems(trimmedPrefix))
     } else {
       return null
     }

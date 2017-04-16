@@ -4,7 +4,7 @@ const commands = require("../idris/commands")
 const _ = require('lodash')
 const vscode = require('vscode')
 
-const excludes = [
+const idrisKeywords = [
   "if",
   "then",
   "else",
@@ -65,6 +65,30 @@ const excludes = [
   "Nothing"
 ]
 
+// https://github.com/idris-lang/Idris-dev/blob/master/src/Idris/Package/Parser.hs
+let ipkgKeywords = [
+  "package",
+  "executable",
+  "main",
+  "sourcedir",
+  "opts",
+  "pkgs",
+  "modules",
+  "libs",
+  "objs",
+  "makefile",
+  "tests",
+  "version",
+  "readme",
+  "license",
+  "homepage",
+  "sourceloc",
+  "bugtracker",
+  "brief",
+  "author",
+  "maintainer"
+]
+
 let getImportPattern = () => {
   return /import\s+(public\s+)?(([A-Z]\w*)(\.[A-Z]\w*)*)(\s+as\s+(\w+))?[\r\n|\n]/g
 }
@@ -73,7 +97,7 @@ let getAllIdents = () => {
   let files = getAllFilesExts(['idr', 'lidr'])
   let defList = files.map((uri) => {
     return getIdents(uri).filter((name) => {
-      return !/\b\d+\b/g.test(name) && !excludes.includes(name)
+      return !/\b\d+\b/g.test(name) && !idrisKeywords.includes(name)
     }).map((name) => {
       return { name, uri }
     })
@@ -185,6 +209,8 @@ let getAllFilesExts = (exts) => {
 }
 
 module.exports = {
+  idrisKeywords,
+  ipkgKeywords,
   getModuleName,
   getAllModuleName,
   getImportedModules,

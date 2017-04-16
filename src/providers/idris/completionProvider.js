@@ -76,12 +76,15 @@ let IdrisCompletionProvider = (function () {
           }).map((ident) => {
             return new vscode.CompletionItem(ident, 0)
           })
+
+          let baseItems = suggestionItems
+            .concat(snippetItems)
+            .concat(completionUtil.idrisKeywordCompletionItems(trimmedPrefix))
+
           if (/^(>\s+)?import/g.test(currentLine.text)) {
-            return suggestionItems
-              .concat(snippetItems)
-              .concat(completionUtil.getModuleNameCompletionItems(trimmedPrefix))
+            return baseItems.concat(completionUtil.getModuleNameCompletionItems(trimmedPrefix))
           } else {
-            return suggestionItems.concat(snippetItems)
+            return baseItems
           }
         }
       } else if (suggestMode == 'replCompletion') {
@@ -97,12 +100,15 @@ let IdrisCompletionProvider = (function () {
           let results = ref.map((v, i, arr) => {
             return new vscode.CompletionItem(v, 1)
           })
+
+          let baseItems = results
+            .concat(snippetItems)
+            .concat(completionUtil.idrisKeywordCompletionItems(trimmedPrefix))
+
           if (/^(>\s+)?import/g.test(currentLine)) {
-            return results
-              .concat(snippetItems)
-              .concat(completionUtil.getModuleNameCompletionItems(trimmedPrefix))
+            return baseItems.concat(completionUtil.getModuleNameCompletionItems(trimmedPrefix))
           } else {
-            return results.concat(snippetItems)
+            return baseItems
           }
         })
       } else {
