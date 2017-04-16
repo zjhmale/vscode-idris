@@ -29,7 +29,9 @@
     "Snippets"
   ],
   "activationEvents": [
-    "onLanguage:idris"
+    "onLanguage:idris",
+    "onLanguage:lidris",
+    "onLanguage:ipkg"
   ],
   "main": "./out/extension",
   "contributes": {
