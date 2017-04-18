@@ -16,8 +16,11 @@ class IdrisModel {
   }
 
   ideMode(compilerOptions) {
+    // Stop and nullify ideModeRef if it is already running but with
+    // outdated options, so that it can be restarted.
     if (this.ideModeRef && !this.objectEqual(this.oldCompilerOptions, compilerOptions)) {
       this.ideModeRef.stop()
+      this.ideModeRef = null
     }
     if (!this.ideModeRef) {
       this.ideModeRef = new IdrisIdeMode()
