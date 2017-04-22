@@ -345,13 +345,8 @@ let startup = (uri) => {
   term = vscode.window.createTerminal("Idris REPL", idrisPath, pkgOpts)
 
   if (innerCompilerOptions.src && uri.includes(innerCompilerOptions.src)) {
-    let [dpath, module] = uri.split(innerCompilerOptions.src)
-    let moduleParts = module.split(path.sep)
-    moduleParts.shift()
-    let moduleStr = moduleParts.join(path.sep)
-
-    term.sendText(`:cd ${dpath + innerCompilerOptions.src}`)
-    term.sendText(`:l ${moduleStr}`)
+    term.sendText(`:cd ${path.resolve(innerCompilerOptions.src)}`)
+    term.sendText(`:l ${path.relative(path.resolve(innerCompilerOptions.src), path.resolve(uri))}`)
     term.show()
   } else {
     term.sendText(`:l ${uri}`)
