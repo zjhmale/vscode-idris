@@ -5,6 +5,7 @@ const vscode = require('vscode')
 const common = require('../analysis/common')
 const findDefinition = require('../analysis/find-definition')
 const Rx = require('rx-lite')
+const path = require('path')
 
 let model = null
 let checkNotTotalModel = null
@@ -344,12 +345,12 @@ let startup = (uri) => {
   term = vscode.window.createTerminal("Idris REPL", idrisPath, pkgOpts)
 
   if (innerCompilerOptions.src && uri.includes(innerCompilerOptions.src)) {
-    let [path, module] = uri.split(innerCompilerOptions.src)
-    let moduleParts = module.split("/")
+    let [dpath, module] = uri.split(innerCompilerOptions.src)
+    let moduleParts = module.split(path.sep)
     moduleParts.shift()
-    let moduleStr = moduleParts.join("/")
+    let moduleStr = moduleParts.join(path.sep)
 
-    term.sendText(`:cd ${path + innerCompilerOptions.src}`)
+    term.sendText(`:cd ${dpath + innerCompilerOptions.src}`)
     term.sendText(`:l ${moduleStr}`)
     term.show()
   } else {
