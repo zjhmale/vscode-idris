@@ -72,6 +72,7 @@
 		{ "include": "#data_decl" },
 		{ "include": "#function_signature" },
 		{ "include": "#operator" },
+		{ "include": "#quasiquote" },
 		{ "include": "#infix_function" },
 		{ "include": "#prelude_type" },
 		{ "include": "#delimiter" },
@@ -159,6 +160,7 @@
 				{ "include": "#parameter_type" },
 				{ "include": "#language_const" },
 				{ "include": "#operator" },
+				{ "include": "#quasiquote" },
 				{ "include": "#infix_function" },
 				{ "include": "#prelude_type" },
 				{ "include": "#delimiter" },
@@ -252,6 +254,41 @@
 		"operator": {
 			"name": "keyword.operator.idris",
 			"match": "\\?[-!#\\$%&\\*\\+\\.\\/<=>@\\\\^|~:]+|[-!#\\$%&\\*\\+\\.\\/<=>@\\\\^|~:\\?][-!#\\$%&\\*\\+\\.\\/<=>@\\\\^|~:]*"
+		},
+		"quasiquote": {
+			"name": "meta.quasiquote.idris",
+			"begin": "`{",
+			"beginCaptures": {
+				"0": {
+					"name": "keyword.operator.quasiquote.idris"
+				}
+			},
+			"end": "}",
+			"endCaptures": {
+				"0": {
+					"name": "keyword.operator.quasiquote.idris"
+				}
+			},
+			"patterns": [
+				{
+					"name": "keyword.operator.arrow.idris",
+					"match": "->"
+				},
+				{ "include": "#parameter_type" },
+				{ "include": "#language_const" },
+				{ "include": "#operator" },
+				{ "include": "#quasiquote" },
+				{ "include": "#infix_function" },
+				{ "include": "#prelude_type" },
+				{ "include": "#delimiter" },
+				{ "include": "#number_nat" },
+				{ "include": "#number_integer" },
+				{ "include": "#number_float" },
+				{ "include": "#unit" },
+				{ "include": "#string_double" },
+				{ "include": "#string_single" },
+				{ "include": "#data_ctor" }
+			]
 		},
 		"infix_function": {
 			"name": "keyword.operator.function.infix.idris",
