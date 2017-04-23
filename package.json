@@ -31,7 +31,8 @@
   "activationEvents": [
     "onLanguage:idris",
     "onLanguage:lidris",
-    "onLanguage:ipkg"
+    "onLanguage:ipkg",
+    "onCommand:idris.new-project"
   ],
   "main": "./out/extension",
   "contributes": {
@@ -361,6 +362,11 @@
         "command": "idris.cleanup-ibc",
         "title": "Idris: Cleanup idris binary files",
         "description": "Cleanup idris binary files"
+      },
+      {
+        "command": "idris.new-project",
+        "title": "Idris: New Project",
+        "description": "Create a new ipkg based project using idringen"
       }
     ],
     "snippets": [

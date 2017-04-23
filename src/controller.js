@@ -3,6 +3,8 @@ const commands = require('./idris/commands')
 const common = require('./analysis/common')
 const vscode = require('vscode')
 const fs = require('fs');
+const cp = require('child_process')
+const path = require('path')
 
 const IDRIS_MODE = [
   { language: 'idris', scheme: 'file' },
@@ -29,13 +31,23 @@ let getCommands = () => {
     ['idris.eval-selection', runCommand(commands.evalSelection)],
     ['idris.start-refresh-repl', runCommand(commands.startREPL)],
     ['idris.send-selection-repl', runCommand(commands.sendREPL)],
-    ['idris.cleanup-ibc', runCommand(cleanupIbc)]
+    ['idris.cleanup-ibc', runCommand(cleanupIbc)],
+    ['idris.new-project', newProject]
   ]
 }
 
 let cleanupIbc = (_) => {
   common.getAllFiles('ibc').forEach((file) => {
     fs.unlinkSync(file)
+  })
+}
+
+let newProject = (_) => {
+  vscode.window.showInputBox({ prompt: 'Project name' }).then(val => {
+    let result = cp.spawnSync("idrin", ["new", val], { cwd: path.resolve(common.getSafeRoot(), "../") })
+    if (result.status != 0) {
+      vscode.window.showErrorMessage("Please install idringen first")
+    }
   })
 }
 
