@@ -156,20 +156,21 @@ let buildIPKG = (uri) => {
   let ipkgFile = common.getAllFiles("ipkg")[0]
   if (!ipkgFile) return
 
-  let dir = model.getDirectory(uri)
+  let reg = new RegExp("\\" + path.sep, "g")
+  let dir = model.getDirectory(uri).replace(reg, "/")
   let buildDiagnostics = []
 
   new Promise((resolve, reject) => {
     model.build(ipkgFile).subscribe((ret) => {
       let msgs = ret.split("\n")
       for (let i = 0; i < msgs.length; i++) {
-        let l = msgs[i]
-        let match = /(\w+(\/\w+)?.idr):(\d+):(\d+):$/g.exec(l)
+        let l = msgs[i].replace(reg, "/")
+        let match = /(\w+(\/\w+)?.idr):(\d+):(\d+):(\s+)?$/g.exec(l)
         if (match) {
           let moduleName = match[1]
           let line = parseInt(match[3])
           let column = getStartColumn(line)
-          if (`${dir}/${moduleName}` == uri && msgs[i + 1] && msgs[i + 1].includes("not total")) {
+          if (`${dir}/${moduleName}` == uri.replace(reg, "/") && msgs[i + 1] && msgs[i + 1].includes("not total")) {
             let range = new vscode.Range(line - 1, column, line, 0)
             let diagnostic = new vscode.Diagnostic(range, msgs[i + 1], vscode.DiagnosticSeverity.Warning)
             buildDiagnostics.push([vscode.Uri.file(uri), [diagnostic]])
