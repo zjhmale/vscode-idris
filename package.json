@@ -95,6 +95,11 @@
           "default": "idris",
           "description": "The full path to the idris executable."
         },
+        "idris.warnPartial": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show warning when a function is partial."
+        },
         "idris.hoverMode": {
           "type": "string",
           "enum": [

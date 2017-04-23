@@ -130,6 +130,7 @@ let checkTotality = (uri) => {
       docs.forEach((doc) => {
         let infoMsg = doc.msg[0].replace(/\n    \n    /g, "").replace(/\n        \n        /g, "")
         if (infoMsg.includes("not total")) {
+		  if(!vscode.workspace.getConfiguration('idris').get('warnPartial')) return;
           let infos = infoMsg.split("\n")
           let names = infos[0].split(":")[0].split(".")
           let name = names[names.length - 1].trim()
@@ -167,10 +168,12 @@ let buildIPKG = (uri) => {
         let l = msgs[i].replace(reg, "/")
         let match = /(\w+(\/\w+)?.idr):(\d+):(\d+):(\s+)?$/g.exec(l)
         if (match) {
+
           let moduleName = match[1]
           let line = parseInt(match[3])
           let column = getStartColumn(line)
           if (`${dir}/${moduleName}` == uri.replace(reg, "/") && msgs[i + 1] && msgs[i + 1].includes("not total")) {
+		 	if(!vscode.workspace.getConfiguration('idris').get('warnPartial')) continue;
             let range = new vscode.Range(line - 1, column, line, 0)
             let diagnostic = new vscode.Diagnostic(range, msgs[i + 1], vscode.DiagnosticSeverity.Warning)
             buildDiagnostics.push([vscode.Uri.file(uri), [diagnostic]])
