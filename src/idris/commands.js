@@ -197,7 +197,10 @@ let typecheckFile = (uri) => {
   new Promise((resolve, reject) => {
     model.load(uri).filter((arg) => {
       return arg.responseType === 'return'
-    }).subscribe(successHandler, displayErrors)
+    }).subscribe(successHandler, (err) => {
+      destroy(true)
+      displayErrors(err)
+    })
     showLoading()
     resolve()
   }).then(function () {
