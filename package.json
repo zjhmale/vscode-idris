@@ -366,7 +366,7 @@
     ]
   },
   "scripts": {
-    "prepublish": "rm -rf out && mkdir out && cp -r ./src/* ./out",
+    "prepublish": "node prelaunch.js",
     "postinstall": "node ./node_modules/vscode/bin/install",
     "test": "node ./node_modules/vscode/bin/test"
   },
@@ -381,7 +381,8 @@
     "rx-lite": "4.0.0",
     "which": "^1.2.14",
     "hashmap": "^2.0.5",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "fs-extra": "2.1.2"
   },
   "devDependencies": {
     "vscode": "^1.0.5"
