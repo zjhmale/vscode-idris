@@ -113,3 +113,7 @@
 ### Type checking on saving file
 
 ![typechecing-on-save](./images/screenshots/typecheckingonsave.gif)
+
+### Project Scaffolding
+
+![new-project](./images/screenshots/new-project.gif)

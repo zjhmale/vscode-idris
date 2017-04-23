@@ -45,6 +45,7 @@
 * [Change all occurrences](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#change-all-occurrences)
 * [Latex snippets](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#latex-snippets)
 * [Literate Idris](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#literate-idris)
+* [Project Scaffolding](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#project-scaffolding)
 
 ## Installation
 
@@ -65,6 +66,7 @@ The following Visual Studio Code settings along with their *default* values that
     "idris.executablePath": "idris", // The full path to the idris executable.
     "idris.hoverMode": "fallback",   // Controls the hover behavior. 'info' will display Idris documentation, 'type' will display Idris type, 'fallback' will try 'info' first and fallback to 'type' if we can not get the documentation, and 'none' will disable hover tooltips.
     "idris.suggestMode": "allWords"  // Controls the auto-completion behavior. 'allWords' will always include all words from the currently opened documentation, 'replCompletion' will get suggestions from Idris REPL process.
+    "idris.warnPartial": true        // Show warning when a function is partial.
 }
 ```
 
