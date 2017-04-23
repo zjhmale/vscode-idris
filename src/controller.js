@@ -63,8 +63,11 @@ let withCompilerOptions = (callback) => {
 
 let typeCheckOnSave = () => {
   withCompilerOptions(commands.typecheckFile)
-  withCompilerOptions(commands.buildIPKG)
-  withCompilerOptions(commands.checkTotality)
+  commands.clearTotalityDiagnostics()
+  if (vscode.workspace.getConfiguration('idris').get('warnPartial')) {
+    withCompilerOptions(commands.buildIPKG)
+    withCompilerOptions(commands.checkTotality)
+  }
 }
 
 let runCommand = (command) => {
