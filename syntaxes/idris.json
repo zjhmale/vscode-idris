@@ -69,22 +69,23 @@
 				}
 			]
 		},
+		{ "include": "#param_decl" },
 		{ "include": "#data_decl" },
 		{ "include": "#function_signature" },
-		{ "include": "#operator" },
-		{ "include": "#quasiquote" },
-		{ "include": "#infix_function" },
-		{ "include": "#prelude_type" },
-		{ "include": "#delimiter" },
-		{ "include": "#number_nat" },
-		{ "include": "#number_integer" },
-		{ "include": "#number_float" },
-		{ "include": "#unit" },
-		{ "include": "#string_double" },
-		{ "include": "#string_single" },
-		{ "include": "#data_ctor" }
+		{ "include": "#ty_expression" }
 	],
 	"repository": {
+		"param_decl": {
+			"name": "meta.declaration.data.idris",
+	 		"begin": "\\b(parameters)\\s+(\\()",
+			"end": "(\\))$",
+			"beginCaptures": {
+			        "1": { "name": "keyword.other.idris" },
+ 			        "2": { "name": "punctuation.context.begin.idris" }
+			},
+			"endCaptures": {"1": {"name": "punctuation.context.end.idris"}},
+			"patterns": [{"include":"#ty_expression"}]
+		},
 		"context_signature": {
 			"patterns": [
 				{
@@ -106,7 +107,7 @@
 						}
 					},
 					"patterns": [
-						{ "include": "#type_signature" }
+						{ "include": "#ty_expression" }
 					]
 				}
 			]
@@ -128,7 +129,7 @@
 						"0": { "name": "punctuation.delimiter.idris" }
 					},
 					"patterns": [
-						{ "include": "#type_signature" }
+						{ "include": "#ty_expression" }
 					]
 				},
 				{
@@ -146,17 +147,14 @@
 						"0": { "name": "punctuation.delimiter.idris" }
 					},
 					"patterns": [
-						{ "include": "#type_signature" }
+						{ "include": "#ty_expression" }
 					]
 				}				
 			]
 		},
-		"type_signature": {
+		"ty_expression": {
 			"patterns": [
-				{
-					"name": "keyword.operator.arrow.idris",
-					"match": "->"
-				},
+				{ "name": "keyword.operator.arrow.idris", "match": "->" },
 				{ "include": "#parameter_type" },
 				{ "include": "#language_const" },
 				{ "include": "#operator" },
@@ -190,7 +188,7 @@
 			"end": "(;|(?<=[^\\s>])\\s*(?!->)\\s*$)",
 			"patterns": [
 				{ "include": "#context_signature" },
-				{ "include": "#type_signature" }
+				{ "include": "#ty_expression" }
 			],
 			"comment": "The end patterm is a bit tricky. It's either ';' or something, at the end of the line,\nbut not '->', because a type signature can be multiline. Though, it doesn't help, if you\nbreak the signature before arrows."
 		},
@@ -237,7 +235,7 @@
 				"1": { "name": "keyword.other.idris" },
 				"2": { "name": "keyword.operator.idris" }
 			},
-			"patterns": [ { "include": "#type_signature" } ]
+			"patterns": [ { "include": "#ty_expression" } ]
 		},
 		"data_ctor": {
 			"patterns": [
@@ -275,19 +273,7 @@
 					"match": "->"
 				},
 				{ "include": "#parameter_type" },
-				{ "include": "#language_const" },
-				{ "include": "#operator" },
-				{ "include": "#quasiquote" },
-				{ "include": "#infix_function" },
-				{ "include": "#prelude_type" },
-				{ "include": "#delimiter" },
-				{ "include": "#number_nat" },
-				{ "include": "#number_integer" },
-				{ "include": "#number_float" },
-				{ "include": "#unit" },
-				{ "include": "#string_double" },
-				{ "include": "#string_single" },
-				{ "include": "#data_ctor" }
+				{ "include": "#ty_expression" }
 			]
 		},
 		"infix_function": {
