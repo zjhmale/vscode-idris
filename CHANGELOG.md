@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.9.0
+
+* Improvement for using with standalone Idris file [#94](https://github.com/zjhmale/vscode-idris/issues/94)
+* Improvement for using on Windows [#93](https://github.com/zjhmale/vscode-idris/issues/93)
+* Fix loading empty string when starting REPL on windows [#92](https://github.com/zjhmale/vscode-idris/issues/92) [@be5invis](https://github.com/be5invis)
+* Nullify `ideModeRef` after project options have been changed [5306560](https://github.com/zjhmale/vscode-idris/commit/53065605c172d867ed03ba2e9758f2542e121a22) [@dramforever](https://github.com/dramforever)
+* Update syntax file for parameter block [dec5b09](https://github.com/zjhmale/vscode-idris/commit/dec5b099ac4fb48dfb003987302fe05a8535b4fe) [@be5invis](https://github.com/be5invis)
+* Update syntax file for quasiquote [86e621b](https://github.com/zjhmale/vscode-idris/commit/86e621bfc79351300dce8f7655961807f7e3fefd) [@be5invis](https://github.com/be5invis)
+* Add a portable prelaunch script [#89](https://github.com/zjhmale/vscode-idris/issues/89)
+* Fix memory leak when type checking failed [#86](https://github.com/zjhmale/vscode-idris/issues/86)
+* Update syntax file for tail comments [69fe18d](https://github.com/zjhmale/vscode-idris/commit/69fe18d717f169750f290107cb2f0c39bbf1044e)
+
 ## 0.8.9
 
 * Auto-completion module names in iPKG file [#62](https://github.com/zjhmale/vscode-idris/issues/62)
