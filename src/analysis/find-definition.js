@@ -1,5 +1,6 @@
 const fs = require("fs")
 const glob = require("glob")
+const path = require("path")
 const common = require('./common')
 
 let findDefinitionForADTTypeAndFunctions = (contents, definition, uri, moduleName) => {
@@ -104,7 +105,8 @@ let findDefinitionInFiles = (identifier, uri) => {
   let locations = getDefinitionLocations(identifier)
   let importedModules = common.getImportedModules(uri)
   let legalLocations = locations.filter((loc) => {
-    return loc.path == uri || importedModules.includes(loc.module)
+    let reg = new RegExp("\\" + path.sep, "g")
+    return loc.path.replace(reg, "/") == uri.replace(reg, "/") || importedModules.includes(loc.module)
   })
   return legalLocations[0]
 }
