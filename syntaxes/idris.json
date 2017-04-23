@@ -185,7 +185,7 @@
 					"name": "keyword.operator.colon.idris"
 				}
 			},
-			"end": "(;|(?<=[^\\s>])\\s*(?!->)\\s*$)",
+			"end": "(;|(?=--)|(?<=[^\\s>])\\s*(?!->)\\s*$)",
 			"patterns": [
 				{ "include": "#context_signature" },
 				{ "include": "#ty_expression" }
