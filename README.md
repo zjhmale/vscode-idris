@@ -72,6 +72,10 @@ The following Visual Studio Code settings along with their *default* values that
 
 * The internal design is initially inspired by [atom-language-idris](https://github.com/idris-hackers/atom-language-idris).
 
+## Thanks
+
+* Belleve Invis [@be5invis](https://github.com/be5invis) (The maintainer of the syntax files)
+
 ## License
 
 [BSD 3-Clause](https://opensource.org/licenses/BSD-3-Clause), the same as Idris.
