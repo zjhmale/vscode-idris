@@ -202,7 +202,7 @@ let getAllFiles = (ext) => {
     })
   } else {
     let uri = vscode.window.activeTextEditor.document.uri.fsPath
-    return [uri]
+    return uri.endsWith(ext) ? [uri] : []
   }
 }
 
