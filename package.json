@@ -391,10 +391,5 @@
   },
   "devDependencies": {
     "vscode": "^1.0.5"
-  },
-  "__metadata": {
-    "id": "76c3476e-c1e8-4ced-99e2-2a01d34b4d63",
-    "publisherId": "ff9d21c0-2cd7-48be-9540-772f8cadf38c",
-    "publisherDisplayName": "zjhmale"
   }
 }
