@@ -1,400 +1,400 @@
 {
-	"name": "Idris",
-	"description": "Idris Language Support for Visual Studio Code",
-	"version": "0.9.0",
-	"publisher": "zjhmale",
-	"engines": {
-		"vscode": "^1.8.0"
-	},
-	"icon": "images/idris.png",
-	"keywords": [
-		"language",
-		"idris",
-		"highlight",
-		"syntax",
-		"snippets"
-	],
-	"license": "BSD",
-	"homepage": "https://github.com/zjhmale/vscode-idris",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/zjhmale/vscode-idris.git"
-	},
-	"bugs": {
-		"url": "https://github.com/zjhmale/vscode-idris/issues",
-		"email": "zjhmale@gmail.com"
-	},
-	"categories": [
-		"Languages",
-		"Snippets"
-	],
-	"activationEvents": [
-		"onLanguage:idris",
-		"onLanguage:lidris",
-		"onLanguage:ipkg"
-	],
-	"main": "./out/extension",
-	"contributes": {
-		"languages": [
-			{
-				"id": "idris",
-				"aliases": [
-					"Idris",
-					"idris"
-				],
-				"extensions": [
-					".idr"
-				],
-				"configuration": "./configs/idris.json"
-			},
-			{
-				"id": "lidris",
-				"aliases": [
-					"Literate Idris",
-					"literate idris"
-				],
-				"extensions": [
-					".lidr"
-				],
-				"configuration": "./configs/idris.json"
-			},
-			{
-				"id": "ipkg",
-				"aliases": [
-					"iPKG",
-					"ipkg"
-				],
-				"extensions": [
-					".ipkg"
-				]
-			}
-		],
-		"grammars": [
-			{
-				"language": "idris",
-				"scopeName": "source.idris",
-				"path": "./syntaxes/idris.json"
-			},
-			{
-				"language": "lidris",
-				"scopeName": "source.idris.literate",
-				"path": "./syntaxes/idris.literate.json"
-			},
-			{
-				"language": "ipkg",
-				"scopeName": "source.ipkg",
-				"path": "./syntaxes/ipkg.json"
-			}
-		],
-		"configuration": {
-			"type": "object",
-			"title": "Settings for Idris project",
-			"properties": {
-				"idris.executablePath": {
-					"type": "string",
-					"default": "idris",
-					"description": "The full path to the idris executable."
-				},
-				"idris.warnPartial": {
-					"type": "boolean",
-					"default": true,
-					"description": "Show warning when a function is partial."
-				},
-				"idris.hoverMode": {
-					"type": "string",
-					"enum": [
-						"info",
-						"type",
-						"fallback",
-						"none"
-					],
-					"default": "fallback",
-					"description": "Controls the hover behavior. 'info' will display Idris documentation, 'type' will display Idris type, 'fallback' will try 'info' first and fallback to 'type' if we can not get the documentation, and 'none' will disable hover tooltips."
-				},
-				"idris.suggestMode": {
-					"type": "string",
-					"enum": [
-						"allWords",
-						"replCompletion"
-					],
-					"default": "allWords",
-					"description": "Controls the auto-completion behavior. 'allWords' will always include all words from the currently opened documentation, 'replCompletion' will get suggestions from Idris REPL process."
-				}
-			}
-		},
-		"menus": {
-			"editor/context": [
-				{
-					"command": "idris.typecheck",
-					"when": "editorFocus && editorLangId == idris",
-					"group": "idris@1"
-				},
-				{
-					"command": "idris.type-of",
-					"when": "editorFocus && editorLangId == idris",
-					"group": "idris@2"
-				},
-				{
-					"command": "idris.docs-for",
-					"when": "editorFocus && editorLangId == idris",
-					"group": "idris@3"
-				},
-				{
-					"command": "idris.print-definition",
-					"when": "editorFocus && editorLangId == idris",
-					"group": "idris@4"
-				},
-				{
-					"command": "idris.add-clause",
-					"when": "editorFocus && editorLangId == idris",
-					"group": "idris@5"
-				},
-				{
-					"command": "idris.add-proof-clause",
-					"when": "editorFocus && editorLangId == idris",
-					"group": "idris@6"
-				},
-				{
-					"command": "idris.case-split",
-					"when": "editorFocus && editorLangId == idris",
-					"group": "idris@7"
-				},
-				{
-					"command": "idris.proof-search",
-					"when": "editorFocus && editorLangId == idris",
-					"group": "idris@8"
-				},
-				{
-					"command": "idris.make-with",
-					"when": "editorFocus && editorLangId == idris",
-					"group": "idris@9"
-				},
-				{
-					"command": "idris.make-case",
-					"when": "editorFocus && editorLangId == idris",
-					"group": "idris@10"
-				},
-				{
-					"command": "idris.make-lemma",
-					"when": "editorFocus && editorLangId == idris",
-					"group": "idris@11"
-				},
-				{
-					"command": "idris.eval-selection",
-					"when": "editorFocus && editorLangId == idris",
-					"group": "idris@12"
-				},
-				{
-					"command": "idris.start-refresh-repl",
-					"when": "editorFocus && editorLangId == idris",
-					"group": "idris@13"
-				},
-				{
-					"command": "idris.send-selection-repl",
-					"when": "editorFocus && editorLangId == idris",
-					"group": "idris@14"
-				},
-				{
-					"command": "idris.cleanup-ibc",
-					"when": "editorFocus && editorLangId == idris",
-					"group": "idris@15"
-				},
-				{
-					"command": "idris.typecheck",
-					"when": "editorFocus && editorLangId == lidris",
-					"group": "idris@1"
-				},
-				{
-					"command": "idris.type-of",
-					"when": "editorFocus && editorLangId == lidris",
-					"group": "idris@2"
-				},
-				{
-					"command": "idris.docs-for",
-					"when": "editorFocus && editorLangId == lidris",
-					"group": "idris@3"
-				},
-				{
-					"command": "idris.print-definition",
-					"when": "editorFocus && editorLangId == lidris",
-					"group": "idris@4"
-				},
-				{
-					"command": "idris.add-clause",
-					"when": "editorFocus && editorLangId == lidris",
-					"group": "idris@5"
-				},
-				{
-					"command": "idris.add-proof-clause",
-					"when": "editorFocus && editorLangId == lidris",
-					"group": "idris@6"
-				},
-				{
-					"command": "idris.case-split",
-					"when": "editorFocus && editorLangId == lidris",
-					"group": "idris@7"
-				},
-				{
-					"command": "idris.proof-search",
-					"when": "editorFocus && editorLangId == lidris",
-					"group": "idris@8"
-				},
-				{
-					"command": "idris.make-with",
-					"when": "editorFocus && editorLangId == lidris",
-					"group": "idris@9"
-				},
-				{
-					"command": "idris.make-case",
-					"when": "editorFocus && editorLangId == lidris",
-					"group": "idris@10"
-				},
-				{
-					"command": "idris.make-lemma",
-					"when": "editorFocus && editorLangId == lidris",
-					"group": "idris@11"
-				},
-				{
-					"command": "idris.eval-selection",
-					"when": "editorFocus && editorLangId == lidris",
-					"group": "idris@12"
-				},
-				{
-					"command": "idris.start-refresh-repl",
-					"when": "editorFocus && editorLangId == lidris",
-					"group": "idris@13"
-				},
-				{
-					"command": "idris.send-selection-repl",
-					"when": "editorFocus && editorLangId == lidris",
-					"group": "idris@14"
-				},
-				{
-					"command": "idris.cleanup-ibc",
-					"when": "editorFocus && editorLangId == lidris",
-					"group": "idris@15"
-				}
-			]
-		},
-		"commands": [
-			{
-				"command": "idris.typecheck",
-				"title": "Idris: Typechecking currently opened file",
-				"description": "Typecheck file"
-			},
-			{
-				"command": "idris.type-of",
-				"title": "Idris: Show type of the identifier",
-				"description": "Type of identifier"
-			},
-			{
-				"command": "idris.docs-for",
-				"title": "Idris: Show documentation of the identifier",
-				"description": "Docs for identifier"
-			},
-			{
-				"command": "idris.print-definition",
-				"title": "Idris: Show definition of the identifier",
-				"description": "Print definition of identifier"
-			},
-			{
-				"command": "idris.show-holes",
-				"title": "Idris: List all active holes in currently opened file",
-				"description": "Show the currently active holes"
-			},
-			{
-				"command": "idris.add-clause",
-				"title": "Idris: Generate an initial pattern match clause",
-				"description": "Add an initial pattern match clause"
-			},
-			{
-				"command": "idris.add-proof-clause",
-				"title": "Idris: Generate an initial pattern match clause when trying to proof a type",
-				"description": "http://docs.idris-lang.org/en/latest/reference/misc.html#match-application"
-			},
-			{
-				"command": "idris.case-split",
-				"title": "Idris: Generate a case split for the pattern variable",
-				"description": "Add a case split for the pattern variable"
-			},
-			{
-				"command": "idris.proof-search",
-				"title": "Idris: Attempt to fill out the hole",
-				"description": "Attempt to fill out the holes by proof search"
-			},
-			{
-				"command": "idris.make-with",
-				"title": "Idris: Create a with rule pattern match template for the clause of function",
-				"description": "Make a with rule pattern match template for the clause of function"
-			},
-			{
-				"command": "idris.make-case",
-				"title": "Idris: Create a case pattern match template for the hole",
-				"description": "Make a case pattern match template for holes"
-			},
-			{
-				"command": "idris.make-lemma",
-				"title": "Idris: Create a top level function with a type which solves the hole under the cursor",
-				"description": "Make a top level lemma which solves the hole under the cursor"
-			},
-			{
-				"command": "idris.apropos",
-				"title": "Idris: Search names, types and documentations",
-				"description": "Search names, types, and documentation"
-			},
-			{
-				"command": "idris.eval-selection",
-				"title": "Idris: Evaluate selected code",
-				"description": "Eval current line"
-			},
-			{
-				"command": "idris.start-refresh-repl",
-				"title": "Idris: Start or Refresh REPL",
-				"description": "Start REPL for currently opened file or refresh REPL when opened file is changed"
-			},
-			{
-				"command": "idris.send-selection-repl",
-				"title": "Idris: Send selected code to REPL",
-				"description": "Send selected text to a refreshed REPL with currently opened file"
-			},
-			{
-				"command": "idris.cleanup-ibc",
-				"title": "Idris: Cleanup idris binary files",
-				"description": "Cleanup idris binary files"
-			}
-		],
-		"snippets": [
-			{
-				"language": "idris",
-				"path": "./snippets/idris.json"
-			}
-		]
-	},
-	"scripts": {
-		"prepublish": "node prelaunch.js",
-		"postinstall": "node ./node_modules/vscode/bin/install",
-		"test": "node ./node_modules/vscode/bin/test"
-	},
-	"dependencies": {
-		"bennu": "17.3.0",
-		"chalk": "1.1.3",
-		"cson": "4.0.0",
-		"eslint-plugin-promise": "3.5.0",
-		"glob": "7.1.1",
-		"nu-stream": "3.3.1",
-		"request": "2.81.0",
-		"rx-lite": "4.0.0",
-		"which": "^1.2.14",
-		"hashmap": "^2.0.5",
-		"lodash": "^4.17.4",
-		"fs-extra": "2.1.2"
-	},
-	"devDependencies": {
-		"vscode": "^1.0.5"
-	},
-	"__metadata": {
-		"id": "76c3476e-c1e8-4ced-99e2-2a01d34b4d63",
-		"publisherId": "ff9d21c0-2cd7-48be-9540-772f8cadf38c",
-		"publisherDisplayName": "zjhmale"
-	}
+  "name": "Idris",
+  "description": "Idris Language Support for Visual Studio Code",
+  "version": "0.9.0",
+  "publisher": "zjhmale",
+  "engines": {
+    "vscode": "^1.8.0"
+  },
+  "icon": "images/idris.png",
+  "keywords": [
+    "language",
+    "idris",
+    "highlight",
+    "syntax",
+    "snippets"
+  ],
+  "license": "BSD",
+  "homepage": "https://github.com/zjhmale/vscode-idris",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zjhmale/vscode-idris.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zjhmale/vscode-idris/issues",
+    "email": "zjhmale@gmail.com"
+  },
+  "categories": [
+    "Languages",
+    "Snippets"
+  ],
+  "activationEvents": [
+    "onLanguage:idris",
+    "onLanguage:lidris",
+    "onLanguage:ipkg"
+  ],
+  "main": "./out/extension",
+  "contributes": {
+    "languages": [
+      {
+        "id": "idris",
+        "aliases": [
+          "Idris",
+          "idris"
+        ],
+        "extensions": [
+          ".idr"
+        ],
+        "configuration": "./configs/idris.json"
+      },
+      {
+        "id": "lidris",
+        "aliases": [
+          "Literate Idris",
+          "literate idris"
+        ],
+        "extensions": [
+          ".lidr"
+        ],
+        "configuration": "./configs/idris.json"
+      },
+      {
+        "id": "ipkg",
+        "aliases": [
+          "iPKG",
+          "ipkg"
+        ],
+        "extensions": [
+          ".ipkg"
+        ]
+      }
+    ],
+    "grammars": [
+      {
+        "language": "idris",
+        "scopeName": "source.idris",
+        "path": "./syntaxes/idris.json"
+      },
+      {
+        "language": "lidris",
+        "scopeName": "source.idris.literate",
+        "path": "./syntaxes/idris.literate.json"
+      },
+      {
+        "language": "ipkg",
+        "scopeName": "source.ipkg",
+        "path": "./syntaxes/ipkg.json"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "Settings for Idris project",
+      "properties": {
+        "idris.executablePath": {
+          "type": "string",
+          "default": "idris",
+          "description": "The full path to the idris executable."
+        },
+        "idris.warnPartial": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show warning when a function is partial."
+        },
+        "idris.hoverMode": {
+          "type": "string",
+          "enum": [
+            "info",
+            "type",
+            "fallback",
+            "none"
+          ],
+          "default": "fallback",
+          "description": "Controls the hover behavior. 'info' will display Idris documentation, 'type' will display Idris type, 'fallback' will try 'info' first and fallback to 'type' if we can not get the documentation, and 'none' will disable hover tooltips."
+        },
+        "idris.suggestMode": {
+          "type": "string",
+          "enum": [
+            "allWords",
+            "replCompletion"
+          ],
+          "default": "allWords",
+          "description": "Controls the auto-completion behavior. 'allWords' will always include all words from the currently opened documentation, 'replCompletion' will get suggestions from Idris REPL process."
+        }
+      }
+    },
+    "menus": {
+      "editor/context": [
+        {
+          "command": "idris.typecheck",
+          "when": "editorFocus && editorLangId == idris",
+          "group": "idris@1"
+        },
+        {
+          "command": "idris.type-of",
+          "when": "editorFocus && editorLangId == idris",
+          "group": "idris@2"
+        },
+        {
+          "command": "idris.docs-for",
+          "when": "editorFocus && editorLangId == idris",
+          "group": "idris@3"
+        },
+        {
+          "command": "idris.print-definition",
+          "when": "editorFocus && editorLangId == idris",
+          "group": "idris@4"
+        },
+        {
+          "command": "idris.add-clause",
+          "when": "editorFocus && editorLangId == idris",
+          "group": "idris@5"
+        },
+        {
+          "command": "idris.add-proof-clause",
+          "when": "editorFocus && editorLangId == idris",
+          "group": "idris@6"
+        },
+        {
+          "command": "idris.case-split",
+          "when": "editorFocus && editorLangId == idris",
+          "group": "idris@7"
+        },
+        {
+          "command": "idris.proof-search",
+          "when": "editorFocus && editorLangId == idris",
+          "group": "idris@8"
+        },
+        {
+          "command": "idris.make-with",
+          "when": "editorFocus && editorLangId == idris",
+          "group": "idris@9"
+        },
+        {
+          "command": "idris.make-case",
+          "when": "editorFocus && editorLangId == idris",
+          "group": "idris@10"
+        },
+        {
+          "command": "idris.make-lemma",
+          "when": "editorFocus && editorLangId == idris",
+          "group": "idris@11"
+        },
+        {
+          "command": "idris.eval-selection",
+          "when": "editorFocus && editorLangId == idris",
+          "group": "idris@12"
+        },
+        {
+          "command": "idris.start-refresh-repl",
+          "when": "editorFocus && editorLangId == idris",
+          "group": "idris@13"
+        },
+        {
+          "command": "idris.send-selection-repl",
+          "when": "editorFocus && editorLangId == idris",
+          "group": "idris@14"
+        },
+        {
+          "command": "idris.cleanup-ibc",
+          "when": "editorFocus && editorLangId == idris",
+          "group": "idris@15"
+        },
+        {
+          "command": "idris.typecheck",
+          "when": "editorFocus && editorLangId == lidris",
+          "group": "idris@1"
+        },
+        {
+          "command": "idris.type-of",
+          "when": "editorFocus && editorLangId == lidris",
+          "group": "idris@2"
+        },
+        {
+          "command": "idris.docs-for",
+          "when": "editorFocus && editorLangId == lidris",
+          "group": "idris@3"
+        },
+        {
+          "command": "idris.print-definition",
+          "when": "editorFocus && editorLangId == lidris",
+          "group": "idris@4"
+        },
+        {
+          "command": "idris.add-clause",
+          "when": "editorFocus && editorLangId == lidris",
+          "group": "idris@5"
+        },
+        {
+          "command": "idris.add-proof-clause",
+          "when": "editorFocus && editorLangId == lidris",
+          "group": "idris@6"
+        },
+        {
+          "command": "idris.case-split",
+          "when": "editorFocus && editorLangId == lidris",
+          "group": "idris@7"
+        },
+        {
+          "command": "idris.proof-search",
+          "when": "editorFocus && editorLangId == lidris",
+          "group": "idris@8"
+        },
+        {
+          "command": "idris.make-with",
+          "when": "editorFocus && editorLangId == lidris",
+          "group": "idris@9"
+        },
+        {
+          "command": "idris.make-case",
+          "when": "editorFocus && editorLangId == lidris",
+          "group": "idris@10"
+        },
+        {
+          "command": "idris.make-lemma",
+          "when": "editorFocus && editorLangId == lidris",
+          "group": "idris@11"
+        },
+        {
+          "command": "idris.eval-selection",
+          "when": "editorFocus && editorLangId == lidris",
+          "group": "idris@12"
+        },
+        {
+          "command": "idris.start-refresh-repl",
+          "when": "editorFocus && editorLangId == lidris",
+          "group": "idris@13"
+        },
+        {
+          "command": "idris.send-selection-repl",
+          "when": "editorFocus && editorLangId == lidris",
+          "group": "idris@14"
+        },
+        {
+          "command": "idris.cleanup-ibc",
+          "when": "editorFocus && editorLangId == lidris",
+          "group": "idris@15"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "idris.typecheck",
+        "title": "Idris: Typechecking currently opened file",
+        "description": "Typecheck file"
+      },
+      {
+        "command": "idris.type-of",
+        "title": "Idris: Show type of the identifier",
+        "description": "Type of identifier"
+      },
+      {
+        "command": "idris.docs-for",
+        "title": "Idris: Show documentation of the identifier",
+        "description": "Docs for identifier"
+      },
+      {
+        "command": "idris.print-definition",
+        "title": "Idris: Show definition of the identifier",
+        "description": "Print definition of identifier"
+      },
+      {
+        "command": "idris.show-holes",
+        "title": "Idris: List all active holes in currently opened file",
+        "description": "Show the currently active holes"
+      },
+      {
+        "command": "idris.add-clause",
+        "title": "Idris: Generate an initial pattern match clause",
+        "description": "Add an initial pattern match clause"
+      },
+      {
+        "command": "idris.add-proof-clause",
+        "title": "Idris: Generate an initial pattern match clause when trying to proof a type",
+        "description": "http://docs.idris-lang.org/en/latest/reference/misc.html#match-application"
+      },
+      {
+        "command": "idris.case-split",
+        "title": "Idris: Generate a case split for the pattern variable",
+        "description": "Add a case split for the pattern variable"
+      },
+      {
+        "command": "idris.proof-search",
+        "title": "Idris: Attempt to fill out the hole",
+        "description": "Attempt to fill out the holes by proof search"
+      },
+      {
+        "command": "idris.make-with",
+        "title": "Idris: Create a with rule pattern match template for the clause of function",
+        "description": "Make a with rule pattern match template for the clause of function"
+      },
+      {
+        "command": "idris.make-case",
+        "title": "Idris: Create a case pattern match template for the hole",
+        "description": "Make a case pattern match template for holes"
+      },
+      {
+        "command": "idris.make-lemma",
+        "title": "Idris: Create a top level function with a type which solves the hole under the cursor",
+        "description": "Make a top level lemma which solves the hole under the cursor"
+      },
+      {
+        "command": "idris.apropos",
+        "title": "Idris: Search names, types and documentations",
+        "description": "Search names, types, and documentation"
+      },
+      {
+        "command": "idris.eval-selection",
+        "title": "Idris: Evaluate selected code",
+        "description": "Eval current line"
+      },
+      {
+        "command": "idris.start-refresh-repl",
+        "title": "Idris: Start or Refresh REPL",
+        "description": "Start REPL for currently opened file or refresh REPL when opened file is changed"
+      },
+      {
+        "command": "idris.send-selection-repl",
+        "title": "Idris: Send selected code to REPL",
+        "description": "Send selected text to a refreshed REPL with currently opened file"
+      },
+      {
+        "command": "idris.cleanup-ibc",
+        "title": "Idris: Cleanup idris binary files",
+        "description": "Cleanup idris binary files"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "idris",
+        "path": "./snippets/idris.json"
+      }
+    ]
+  },
+  "scripts": {
+    "prepublish": "node prelaunch.js",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "node ./node_modules/vscode/bin/test"
+  },
+  "dependencies": {
+    "bennu": "17.3.0",
+    "chalk": "1.1.3",
+    "cson": "4.0.0",
+    "eslint-plugin-promise": "3.5.0",
+    "glob": "7.1.1",
+    "nu-stream": "3.3.1",
+    "request": "2.81.0",
+    "rx-lite": "4.0.0",
+    "which": "^1.2.14",
+    "hashmap": "^2.0.5",
+    "lodash": "^4.17.4",
+    "fs-extra": "2.1.2"
+  },
+  "devDependencies": {
+    "vscode": "^1.0.5"
+  },
+  "__metadata": {
+    "id": "76c3476e-c1e8-4ced-99e2-2a01d34b4d63",
+    "publisherId": "ff9d21c0-2cd7-48be-9540-772f8cadf38c",
+    "publisherDisplayName": "zjhmale"
+  }
 }
