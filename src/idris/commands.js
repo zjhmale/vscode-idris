@@ -5,6 +5,7 @@ const vscode = require('vscode')
 const common = require('../analysis/common')
 const findDefinition = require('../analysis/find-definition')
 const Rx = require('rx-lite')
+const path = require('path')
 
 let model = null
 let checkNotTotalModel = null
@@ -196,7 +197,10 @@ let typecheckFile = (uri) => {
   new Promise((resolve, reject) => {
     model.load(uri).filter((arg) => {
       return arg.responseType === 'return'
-    }).subscribe(successHandler, displayErrors)
+    }).subscribe(successHandler, (err) => {
+      destroy(true)
+      displayErrors(err)
+    })
     showLoading()
     resolve()
   }).then(function () {
@@ -344,13 +348,8 @@ let startup = (uri) => {
   term = vscode.window.createTerminal("Idris REPL", idrisPath, pkgOpts)
 
   if (innerCompilerOptions.src && uri.includes(innerCompilerOptions.src)) {
-    let [path, module] = uri.split(innerCompilerOptions.src)
-    let moduleParts = module.split("/")
-    moduleParts.shift()
-    let moduleStr = moduleParts.join("/")
-
-    term.sendText(`:cd ${path + innerCompilerOptions.src}`)
-    term.sendText(`:l ${moduleStr}`)
+    term.sendText(`:cd ${path.resolve(innerCompilerOptions.src)}`)
+    term.sendText(`:l ${path.relative(path.resolve(innerCompilerOptions.src), path.resolve(uri))}`)
     term.show()
   } else {
     term.sendText(`:l ${uri}`)

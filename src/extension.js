@@ -58,8 +58,10 @@ function activate(context) {
     idrisCompletion.buildCompletionList()
     ipkgCompletion.buildCompletionList()
   }))
-  idrisCompletion.buildCompletionList()
-  ipkgCompletion.buildCompletionList()
+  if (vscode.window.activeTextEditor) {
+    idrisCompletion.buildCompletionList()
+    ipkgCompletion.buildCompletionList()
+  }
 }
 exports.activate = activate
 

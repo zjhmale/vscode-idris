@@ -195,10 +195,15 @@ let getSafeRoot = () => {
 }
 
 let getAllFiles = (ext) => {
-  let files = glob.sync(getSafeRoot() + "/**/*")
-  return files.filter((file) => {
-    return file.endsWith(`.${ext}`)
-  })
+  if (!_.isEmpty(getSafeRoot())) {
+    let files = glob.sync(getSafeRoot() + "/**/*")
+    return files.filter((file) => {
+      return file.endsWith(`.${ext}`)
+    })
+  } else {
+    let uri = vscode.window.activeTextEditor.document.uri.fsPath
+    return uri.endsWith(ext) ? [uri] : []
+  }
 }
 
 let getAllFilesExts = (exts) => {
