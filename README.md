@@ -50,8 +50,9 @@
 ## Installation
 
 1. Within Visual Studio Code, open the command palette (Ctrl-Shift-P / Cmd-Shift-P).
-2. Select `Install Extension` and search for 'Idris' or run `ext install Idris`.
-3. [Download Idris](https://www.idris-lang.org/download/) and make sure the `idris` executable is on your `PATH`.
+2. Select `Install Extension` and search for **Idris** or run `ext install Idris`.
+3. [Download Idris](https://www.idris-lang.org/download/) and make sure the **idris** executable is on your `PATH`.
+4. Run `cabal install idringen` and make sure the **idrin** executable is on your `PATH`.
 
 ## Contributing
 
