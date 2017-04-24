@@ -46,7 +46,14 @@ let newProject = (_) => {
   vscode.window.showInputBox({ prompt: 'Project name' }).then(val => {
     let result = cp.spawnSync("idrin", ["new", val], { cwd: path.resolve(common.getSafeRoot(), "../") })
     if (result.status != 0) {
-      vscode.window.showErrorMessage("Please install idringen first")
+      if (result.stderr) {
+        vscode.window.showErrorMessage(result.stderr.toString())
+      } else {
+        vscode.window.showErrorMessage("Please install idringen first")
+      }
+    } else {
+      if (result.stdout)
+        vscode.window.showInformationMessage(result.stdout.toString().split("\n")[1])
     }
   })
 }
