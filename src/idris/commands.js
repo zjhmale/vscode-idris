@@ -353,7 +353,7 @@ let startup = (uri) => {
   term = vscode.window.createTerminal("Idris REPL", idrisPath, pkgOpts)
 
   if (innerCompilerOptions.src && uri.includes(innerCompilerOptions.src)) {
-    term.sendText(`:cd ${path.resolve(innerCompilerOptions.src)}`)
+    term.sendText(`:cd ${path.resolve(innerCompilerOptions.src)}`.replace(/\\/g, "/"))
     uri = path.relative(path.resolve(innerCompilerOptions.src), path.resolve(uri))
   }
   uri = uri.replace(/\\/g, "/")
