@@ -7,7 +7,7 @@ class IdrisModel {
   constructor() {
     this.requestId = 0
     this.ideModeRef = null
-    this.IdrisBuildRef = null
+    this.idrisBuildRef = null
     this.subjects = {}
     this.warnings = {}
     this.IdrisBuildSubject = null
@@ -26,10 +26,10 @@ class IdrisModel {
   }
 
   IdrisBuild(compilerOptions, ipkgFile) {
-    this.IdrisBuildRef = new IdrisBuild(ipkgFile)
-    this.IdrisBuildRef.on('message', (obj) => { this.handleIdrisBuildCommand(obj) })
-    this.IdrisBuildRef.start(compilerOptions)
-    return this.IdrisBuildRef
+    this.idrisBuildRef = new IdrisBuild(ipkgFile)
+    this.idrisBuildRef.on('message', (obj) => { this.handleIdrisBuildCommand(obj) })
+    this.idrisBuildRef.start(compilerOptions)
+    return this.idrisBuildRef
   }
 
   objectEqual(a, b) {
