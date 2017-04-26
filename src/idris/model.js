@@ -10,7 +10,7 @@ class IdrisModel {
     this.idrisBuildRef = null
     this.subjects = {}
     this.warnings = {}
-    this.IdrisBuildSubject = null
+    this.idrisBuildSubject = null
     this.compilerOptions = {}
   }
 
@@ -25,7 +25,7 @@ class IdrisModel {
     return this.ideModeRef
   }
 
-  IdrisBuild(compilerOptions, ipkgFile) {
+  idrisBuild(compilerOptions, ipkgFile) {
     this.idrisBuildRef = new IdrisBuild(ipkgFile)
     this.idrisBuildRef.on('message', (obj) => { this.handleIdrisBuildCommand(obj) })
     this.idrisBuildRef.start(compilerOptions)
@@ -59,7 +59,7 @@ class IdrisModel {
   }
 
   handleIdrisBuildCommand(cmd) {
-    this.IdrisBuildSubject.onNext(cmd)
+    this.idrisBuildSubject.onNext(cmd)
   }
 
   handleIdeModeCommand(cmd) {
@@ -127,9 +127,9 @@ class IdrisModel {
   }
 
   build(ipkgFile) {
-    this.IdrisBuildSubject = new Rx.Subject
-    this.IdrisBuild(this.compilerOptions, ipkgFile)
-    return this.IdrisBuildSubject
+    this.idrisBuildSubject = new Rx.Subject
+    this.idrisBuild(this.compilerOptions, ipkgFile)
+    return this.idrisBuildSubject
   }
 
   load(uri) {
