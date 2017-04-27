@@ -201,6 +201,11 @@
           "group": "idris@15"
         },
         {
+          "command": "idris.search",
+          "when": "editorFocus && editorLangId == idris",
+          "group": "idris@17"
+        },
+        {
           "command": "idris.typecheck",
           "when": "editorFocus && editorLangId == lidris",
           "group": "idris@1"
@@ -274,6 +279,11 @@
           "command": "idris.cleanup-ibc",
           "when": "editorFocus && editorLangId == lidris",
           "group": "idris@15"
+        },
+        {
+          "command": "idris.search",
+          "when": "editorFocus && editorLangId == lidris",
+          "group": "idris@17"
         }
       ]
     },
