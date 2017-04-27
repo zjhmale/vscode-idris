@@ -5,6 +5,7 @@ const snippets = require('../../../snippets/idris.json')
 const completionUtil = require('../completionUtil')
 const HashMap = require('hashmap')
 const vscode = require('vscode')
+const Rx = require('rx-lite')
 
 const unicodeMap = new HashMap()
 unicodeMap.set("\\alpha", "α")
@@ -31,6 +32,8 @@ unicodeMap.set("\\omega", "ω")
 unicodeMap.set("\\phi", "ϕ")
 
 let identList
+// cache previous completion items when successfully typechecking file
+let lastReplCompletionItems = []
 
 let buildCompletionList = () => {
   let uri = vscode.window.activeTextEditor.document.uri.fsPath
@@ -88,27 +91,40 @@ let IdrisCompletionProvider = (function () {
           }
         }
       } else if (suggestMode == 'replCompletion') {
-        return controller.getCompilerOptsPromise().flatMap((compilerOptions) => {
-          commands.initialize(compilerOptions)
-          return commands.getModel().load(document.uri.fsPath).filter((arg) => {
-            return arg.responseType === 'return'
-          }).flatMap(() => {
-            return commands.getModel().replCompletions(trimmedPrefix)
+        return new Promise((resolve, reject) => {
+          controller.withCompilerOptions((uri) => {
+            commands.getModel().load(uri).flatMap((tcResult) => {
+              if (tcResult.responseType == "return") {
+                return commands.getModel().replCompletions(trimmedPrefix)
+              } else {
+                return Rx.Observable.of(false)
+              }
+            }).subscribe((arg) => {
+              resolve(arg)
+            }, (err) => {
+            })
           })
-        }).toPromise().then((arg) => {
-          let ref = arg.msg[0][0]
-          let results = ref.map((v, i, arr) => {
-            return new vscode.CompletionItem(v, 1)
-          })
+        }).then(function (arg) {
+          if (arg) {
+            let ref = arg.msg[0][0]
+            let results = ref.map((v, i, arr) => {
+              return new vscode.CompletionItem(v, 1)
+            })
 
-          let baseItems = results
-            .concat(snippetItems)
-            .concat(completionUtil.idrisKeywordCompletionItems(trimmedPrefix))
+            let baseItems = results
+              .concat(snippetItems)
+              .concat(completionUtil.idrisKeywordCompletionItems(trimmedPrefix))
 
-          if (/^(>\s+)?import/g.test(currentLine)) {
-            return baseItems.concat(completionUtil.getModuleNameCompletionItems(trimmedPrefix))
+            if (/^(>\s+)?import/g.test(currentLine)) {
+              let finalItems = baseItems.concat(completionUtil.getModuleNameCompletionItems(trimmedPrefix))
+              lastReplCompletionItems = finalItems
+              return finalItems
+            } else {
+              lastReplCompletionItems = baseItems
+              return baseItems
+            }
           } else {
-            return baseItems
+            return lastReplCompletionItems
           }
         })
       } else {
