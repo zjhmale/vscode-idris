@@ -8,9 +8,11 @@ class IdrisModel {
     this.requestId = 0
     this.ideModeRef = null
     this.idrisBuildRef = null
+    this.idrisReplRef = null
     this.subjects = {}
     this.warnings = {}
     this.idrisBuildSubject = null
+    this.idrisReplSubject = null
     this.compilerOptions = {}
   }
 
@@ -27,7 +29,7 @@ class IdrisModel {
 
   idrisBuild(compilerOptions, ipkgFile) {
     this.idrisBuildRef = new IdrisBuild(ipkgFile)
-    this.idrisBuildRef.on('message', (obj) => { this.handleIdrisBuildCommand(obj) })
+    this.idrisBuildRef.on('message', (obj) => { this.handleIdrisBuildMessage(obj) })
     this.idrisBuildRef.start(compilerOptions)
     return this.idrisBuildRef
   }
@@ -39,6 +41,8 @@ class IdrisModel {
   stop() {
     if (this.ideModeRef)
       this.ideModeRef.stop()
+    if (this.idrisReplRef)
+      this.idrisReplRef.stop()
   }
 
   setCompilerOptions(options) {
@@ -58,8 +62,8 @@ class IdrisModel {
     return ++this.requestId
   }
 
-  handleIdrisBuildCommand(cmd) {
-    this.idrisBuildSubject.onNext(cmd)
+  handleIdrisBuildMessage(msg) {
+    this.idrisBuildSubject.onNext(msg)
   }
 
   handleIdeModeCommand(cmd) {

@@ -32,7 +32,8 @@ let getCommands = () => {
     ['idris.start-refresh-repl', runCommand(commands.startREPL)],
     ['idris.send-selection-repl', runCommand(commands.sendREPL)],
     ['idris.cleanup-ibc', runCommand(cleanupIbc)],
-    ['idris.new-project', newProject]
+    ['idris.new-project', newProject],
+    ['idris.search', runCommand(commands.search)]
   ]
 }
 

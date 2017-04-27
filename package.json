@@ -367,6 +367,11 @@
         "command": "idris.new-project",
         "title": "Idris: New Project",
         "description": "Create a new ipkg based project using idringen"
+      },
+      {
+        "command": "idris.search",
+        "title": "Idris: Search for values by type",
+        "description": "Search Idris values by a concrete type signature"
       }
     ],
     "snippets": [

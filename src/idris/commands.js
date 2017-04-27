@@ -346,11 +346,17 @@ let evalSelection = (uri) => {
   })
 }
 
-let startup = (uri) => {
+let createIdrisTerm = () => {
   const pathToIdris = vscode.workspace.getConfiguration('idris').get('executablePath');
   const idrisPath = which.sync(pathToIdris)
   const pkgOpts = ipkg.getPkgOpts(innerCompilerOptions)
   term = vscode.window.createTerminal("Idris REPL", idrisPath, pkgOpts)
+
+  return term
+}
+
+let startup = (uri) => {
+  let term = createIdrisTerm()
 
   if (innerCompilerOptions.src && uri.includes(innerCompilerOptions.src)) {
     term.sendText(`:cd ${path.resolve(innerCompilerOptions.src)}`.replace(/\\/g, "/"))
@@ -361,14 +367,30 @@ let startup = (uri) => {
   term.show()
 }
 
-let startREPL = (uri) => {
+let toggleTerm = (action, arg) => {
   if (term == null) {
-    startup(uri)
+    action(arg)
   } else {
     term.hide()
     term.dispose()
-    startup(uri)
+    action(arg)
   }
+}
+
+let search = (_) => {
+  vscode.window.showInputBox({ prompt: 'Type signature' }).then(sig => {
+    let searchInTerm = (sig) => {
+      let term = createIdrisTerm()
+
+      term.sendText(`:search ${sig}`)
+      term.show()
+    }
+    toggleTerm(searchInTerm, sig)
+  })
+}
+
+let startREPL = (uri) => {
+  toggleTerm(startup, uri)
 }
 
 let sendREPL = (uri) => {
@@ -716,5 +738,6 @@ module.exports = {
   clearOutputChannel,
   buildIPKG,
   checkTotality,
-  clearTotalityDiagnostics
+  clearTotalityDiagnostics,
+  search
 }
