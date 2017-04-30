@@ -290,27 +290,27 @@
     "commands": [
       {
         "command": "idris.typecheck",
-        "title": "Idris: Typechecking currently opened file",
+        "title": "Idris: Typecheck the open file",
         "description": "Typecheck file"
       },
       {
         "command": "idris.type-of",
-        "title": "Idris: Show type of the identifier",
+        "title": "Idris: Print the type of the identifier under the cursor",
         "description": "Type of identifier"
       },
       {
         "command": "idris.docs-for",
-        "title": "Idris: Show documentation of the identifier",
+        "title": "Idris: Print the documentation of the identifier under the cursor",
         "description": "Docs for identifier"
       },
       {
         "command": "idris.print-definition",
-        "title": "Idris: Show definition of the identifier",
+        "title": "Idris: Print the definition of the identifier under the cursor",
         "description": "Print definition of identifier"
       },
       {
         "command": "idris.show-holes",
-        "title": "Idris: List all active holes in currently opened file",
+        "title": "Idris: List all active holes in the file",
         "description": "Show the currently active holes"
       },
       {
@@ -320,17 +320,17 @@
       },
       {
         "command": "idris.add-proof-clause",
-        "title": "Idris: Generate an initial pattern match clause when trying to proof a type",
+        "title": "Idris: Generate an initial pattern match clause when trying a proof",
         "description": "http://docs.idris-lang.org/en/latest/reference/misc.html#match-application"
       },
       {
         "command": "idris.case-split",
-        "title": "Idris: Generate a case split for the pattern variable",
+        "title": "Idris: Generate a case split for a pattern variable under the cursor",
         "description": "Add a case split for the pattern variable"
       },
       {
         "command": "idris.proof-search",
-        "title": "Idris: Attempt to fill out the hole",
+        "title": "Idris: Attempt to fill out a hole under the cursor",
         "description": "Attempt to fill out the holes by proof search"
       },
       {
@@ -340,7 +340,7 @@
       },
       {
         "command": "idris.make-case",
-        "title": "Idris: Create a case pattern match template for the hole",
+        "title": "Idris: Create a case pattern match template for a hole under the cursor",
         "description": "Make a case pattern match template for holes"
       },
       {
@@ -350,27 +350,27 @@
       },
       {
         "command": "idris.apropos",
-        "title": "Idris: Search names, types and documentations",
+        "title": "Idris: Search names, types and documentation",
         "description": "Search names, types, and documentation"
       },
       {
         "command": "idris.eval-selection",
-        "title": "Idris: Evaluate selected code",
+        "title": "Idris: Evaluate the selected code",
         "description": "Eval current line"
       },
       {
         "command": "idris.start-refresh-repl",
         "title": "Idris: Start or Refresh REPL",
-        "description": "Start REPL for currently opened file or refresh REPL when opened file is changed"
+        "description": "Start a REPL for the currently opened file or refresh the REPL when the opened file is changed"
       },
       {
         "command": "idris.send-selection-repl",
-        "title": "Idris: Send selected code to REPL",
-        "description": "Send selected text to a refreshed REPL with currently opened file"
+        "title": "Idris: Send selected code to the REPL",
+        "description": "Send selected text to a refreshed REPL with the currently opened file"
       },
       {
         "command": "idris.cleanup-ibc",
-        "title": "Idris: Cleanup idris binary files",
+        "title": "Idris: Cleanup all the idris binary files(*.ibc) in the project",
         "description": "Cleanup idris binary files"
       },
       {
