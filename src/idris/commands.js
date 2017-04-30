@@ -716,10 +716,6 @@ let destroy = (isOnSave) => {
       model = null
     }
   } else {
-    if (model != null) {
-      model.stop()
-      model = null
-    }
     if (checkNotTotalModel != null) {
       checkNotTotalModel.stop()
       checkNotTotalModel = null

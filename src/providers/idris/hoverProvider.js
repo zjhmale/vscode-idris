@@ -64,7 +64,7 @@ let IdrisHoverProvider = (function () {
             }
           },
           function (err) {
-            if (err.warnings.length > 0) {
+            if (err.warnings && err.warnings.length > 0) {
               resolve(err.warnings[0][3])
             } else {
               resolve(err.message)
