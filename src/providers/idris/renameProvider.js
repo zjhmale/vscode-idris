@@ -7,13 +7,13 @@ const _ = require('lodash')
 let IdrisRenameProvider = (function () {
   function IdrisRenameProvider() { }
 
-  IdrisRenameProvider.prototype.provideRenameEdits = function (document, position, newName, token) {
-    let [currentWord, wordRange] = commands.getWordBase(document, position, true)
+  IdrisRenameProvider.prototype.provideRenameEdits = function (document, position, newName, _token) {
+    let [currentWord, _wordRange] = commands.getWordBase(document, position, true)
     if (!currentWord) return
 
     let currentWordDef = findDefinition.findDefinitionInFiles(currentWord, document.uri.fsPath)
 
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, _reject) => {
       let uniIdents = common.getAllIdents()
       let positions = uniIdents.filter(({ name, uri }) => {
         if (name == currentWord) {

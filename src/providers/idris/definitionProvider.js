@@ -6,12 +6,12 @@ const vscode = require('vscode')
 let IdrisDefinitionProvider = (function () {
   function IdrisDefinitionProvider() { }
 
-  IdrisDefinitionProvider.prototype.provideDefinition = function (document, position, token) {
-    let [currentWord, wordRange] = commands.getWordBase(document, position, true)
+  IdrisDefinitionProvider.prototype.provideDefinition = function (document, position, _token) {
+    let [currentWord, _wordRange] = commands.getWordBase(document, position, true)
     if (!currentWord) return
 
     let uri = document.uri.fsPath
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, _reject) => {
       let currentLine = document.lineAt(position).text
       let match = common.getImportPattern().exec(currentLine + "\r\n")
       if (match && match[2].includes(currentWord)) {

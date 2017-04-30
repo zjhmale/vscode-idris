@@ -12,7 +12,7 @@ let buildCompletionList = () => {
 let IPKGCompletionProvider = (function () {
   function IPKGCompletionProvider() { }
 
-  IPKGCompletionProvider.prototype.provideCompletionItems = (document, position, token) => {
+  IPKGCompletionProvider.prototype.provideCompletionItems = (document, position, _token) => {
     let wordRange = document.getWordRangeAtPosition(position, /(\\)?'?\w+(\.\w+)?'?/i)
     let currentWord = document.getText(wordRange).trim()
 

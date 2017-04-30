@@ -7,8 +7,8 @@ const vscode = require('vscode')
 let IdrisDocumentSymbolProvider = (function () {
   function IdrisDocumentSymbolProvider() { }
 
-  IdrisDocumentSymbolProvider.prototype.provideDocumentSymbols = function (document, token) {
-    return new Promise((resolve, reject) => {
+  IdrisDocumentSymbolProvider.prototype.provideDocumentSymbols = function (_document, _token) {
+    return new Promise((resolve, _reject) => {
       controller.withCompilerOptions((uri) => {
         let moduleName = common.getModuleName(uri)
         if (!moduleName) resolve(null)

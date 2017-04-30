@@ -6,8 +6,8 @@ const _ = require('lodash')
 let IdrisWorkspaceSymbolProvider = (function () {
   function IdrisWorkspaceSymbolProvider() { }
 
-  IdrisWorkspaceSymbolProvider.prototype.provideWorkspaceSymbols = function (query, token) {
-    return new Promise((resolve, reject) => {
+  IdrisWorkspaceSymbolProvider.prototype.provideWorkspaceSymbols = function (query, _token) {
+    return new Promise((resolve, _reject) => {
       let uniIdents = common.getAllIdents()
       let defs = uniIdents.filter(({ name, _ }) => {
         return query != "" && (name.toLowerCase().includes(query) || name.includes(query))

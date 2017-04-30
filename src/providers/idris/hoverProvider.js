@@ -18,11 +18,11 @@ let isRangeInsideRange = (range1, range2) => {
 let IdrisHoverProvider = (function () {
   function IdrisHoverProvider() { }
 
-  IdrisHoverProvider.prototype.provideHover = function (document, position, token) {
+  IdrisHoverProvider.prototype.provideHover = function (document, position, _token) {
     let [currentWord, wordRange] = commands.getWordBase(document, position, true)
     if (!currentWord) return
 
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, _reject) => {
       controller.withCompilerOptions((uri) => {
         let filePath = vscode.Uri.file(uri)
         if (commands.tcDiagnosticCollection.has(filePath)) {

@@ -93,7 +93,7 @@ let getWordBase = (document, position, isHover) => {
   }
 }
 
-getWord = () => {
+let getWord = () => {
   let [document, position] = getCurrentPosition()
   return getWordBase(document, position, false)[0]
 }
@@ -122,7 +122,7 @@ let checkTotality = (uri) => {
 
   let nonTotalDianostics = []
 
-  new Promise((resolve, reject) => {
+  new Promise((resolve, _reject) => {
     checkNotTotalModel.load(uri).filter((arg) => {
       return arg.responseType === 'return'
     }).flatMap(() => {
@@ -158,7 +158,7 @@ let checkTotality = (uri) => {
       nonTotalDiagnosticCollection.set(nonTotalDianostics)
       destroy(false)
       resolve()
-    }, (err) => { })
+    }, (_err) => { })
   }).then(function () {
   }).catch(function () {
   })
@@ -172,7 +172,7 @@ let buildIPKG = (uri) => {
   let dir = model.getDirectory(uri).replace(reg, "/")
   let buildDiagnostics = []
 
-  new Promise((resolve, reject) => {
+  new Promise((resolve, _reject) => {
     model.build(ipkgFile).subscribe((ret) => {
       let msgs = ret.split("\n")
       for (let i = 0; i < msgs.length; i++) {
@@ -198,7 +198,7 @@ let buildIPKG = (uri) => {
       buildCheckingStatusItem.show()
       buildDiagnosticCollection.set(buildDiagnostics)
       resolve()
-    }, (err) => { })
+    }, (_err) => { })
   }).then(function () {
   }).catch(function () {
   })
@@ -215,7 +215,7 @@ let typecheckFile = (uri) => {
     destroy(true)
   }
 
-  new Promise((resolve, reject) => {
+  new Promise((resolve, _reject) => {
     model.load(uri).filter((arg) => {
       return arg.responseType === 'return'
     }).subscribe(successHandler, (err) => {
@@ -250,7 +250,7 @@ let getInfoForWord = (uri, cmd) => {
     needDestroy = true
   }
 
-  new Promise((resolve, reject) => {
+  new Promise((resolve, _reject) => {
     model.load(uri).filter((arg) => {
       return arg.responseType === 'return'
     }).flatMap(() => {
@@ -300,7 +300,7 @@ let showHoles = (uri) => {
     tcDiagnosticCollection.clear()
   }
 
-  new Promise((resolve, reject) => {
+  new Promise((resolve, _reject) => {
     model.load(uri).filter((arg) => {
       return arg.responseType === 'return'
     }).flatMap(() => {
@@ -313,18 +313,16 @@ let showHoles = (uri) => {
   })
 }
 
-/*
 let idrisAscii = (version) => {
   return [
-    "    ____    __     _"
-  , "   /  _/___/ /____(_)____"
-  , "   / // __  / ___/ / ___/     Version " + version
-  , " _/ // /_/ / /  / (__  )      http://www.idris-lang.org/"
-  , "/___/\_____/_/  /_/____/       Type :? for help"
-  , ""
+    "    ____    __     _",
+    "   /  _/___/ /____(_)____",
+    "   / // __  / ___/ / ___/     Version " + version,
+    " _/ // /_/ / /  / (__  )      http://www.idris-lang.org/",
+    "/___/\_____/_/  /_/____/       Type :? for help",
+    ""
   ]
 }
-*/
 
 let evalSelection = (uri) => {
   let editor = vscode.window.activeTextEditor
@@ -342,14 +340,14 @@ let evalSelection = (uri) => {
 
     model.getVersion().subscribe((arg) => {
       let version = arg.msg[0][0].join(".")
-      //replChannel.appendLine(idrisAscii(version).join('\n'))
+      replChannel.appendLine(idrisAscii(version).join('\n'))
       replChannel.appendLine("Type checking " + uri + "\n")
       replChannel.appendLine("λΠ> " + text)
       replChannel.appendLine(result)
     }, displayErrors)
   }
 
-  new Promise((resolve, reject) => {
+  new Promise((resolve, _reject) => {
     model.load(uri).filter((arg) => {
       return arg.responseType === 'return'
     }).flatMap(() => {
@@ -438,7 +436,7 @@ let addClause = (uri) => {
     needDestroy = true
   }
 
-  new Promise((resolve, reject) => {
+  new Promise((resolve, _reject) => {
     model.load(uri).filter((arg) => {
       return arg.responseType === 'return'
     }).flatMap(() => {
@@ -467,7 +465,7 @@ let addProofClause = (uri) => {
     needDestroy = true
   }
 
-  new Promise((resolve, reject) => {
+  new Promise((resolve, _reject) => {
     model.load(uri).filter((arg) => {
       return arg.responseType === 'return'
     }).flatMap(() => {
@@ -498,7 +496,7 @@ let caseSplit = (uri) => {
     needDestroy = true
   }
 
-  new Promise((resolve, reject) => {
+  new Promise((resolve, _reject) => {
     model.load(uri).filter((arg) => {
       return arg.responseType === 'return'
     }).flatMap(() => {
@@ -531,7 +529,7 @@ let proofSearch = (uri) => {
     needDestroy = true
   }
 
-  new Promise((resolve, reject) => {
+  new Promise((resolve, _reject) => {
     model.load(uri).filter((arg) => {
       return arg.responseType === 'return'
     }).flatMap(() => {
@@ -562,7 +560,7 @@ let makeWith = (uri) => {
     needDestroy = true
   }
 
-  new Promise((resolve, reject) => {
+  new Promise((resolve, _reject) => {
     model.load(uri).filter((arg) => {
       return arg.responseType === 'return'
     }).flatMap(() => {
@@ -593,7 +591,7 @@ let makeCase = (uri) => {
     needDestroy = true
   }
 
-  new Promise((resolve, reject) => {
+  new Promise((resolve, _reject) => {
     model.load(uri).filter((arg) => {
       return arg.responseType === 'return'
     }).flatMap(() => {
@@ -636,7 +634,7 @@ let makeLemma = (uri) => {
     needDestroy = true
   }
 
-  new Promise((resolve, reject) => {
+  new Promise((resolve, _reject) => {
     model.load(uri).filter((arg) => {
       return arg.responseType === 'return'
     }).flatMap(() => {
@@ -662,7 +660,7 @@ let apropos = (uri) => {
       aproposChannel.appendLine(result)
     }
 
-    new Promise((resolve, reject) => {
+    new Promise((resolve, _reject) => {
       model.load(uri).filter((arg) => {
         return arg.responseType === 'return'
       }).flatMap(() => {

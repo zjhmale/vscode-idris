@@ -411,6 +411,7 @@
     "fs-extra": "2.1.2"
   },
   "devDependencies": {
+    "eslint": "^3.19.0",
     "vscode": "^1.0.5"
   }
 }

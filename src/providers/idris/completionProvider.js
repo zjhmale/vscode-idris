@@ -67,7 +67,7 @@ let IdrisCompletionProvider = (function () {
     return item
   })
 
-  IdrisCompletionProvider.prototype.provideCompletionItems = (document, position, token) => {
+  IdrisCompletionProvider.prototype.provideCompletionItems = (document, position, _token) => {
     let wordRange = document.getWordRangeAtPosition(position, /(\\)?'?\w+(\.\w+)?'?/i)
     let currentWord = document.getText(wordRange).trim()
     let currentLine = document.lineAt(position)
@@ -101,7 +101,7 @@ let IdrisCompletionProvider = (function () {
         if (currentWord.startsWith("\\")) {
           return getUnicodeCompletion(currentWord, wordRange)
         } else {
-          return new Promise((resolve, reject) => {
+          return new Promise((resolve, _reject) => {
             controller.withCompilerOptions((uri) => {
               commands.getModel().load(uri).flatMap((tcResult) => {
                 if (tcResult.responseType == "return") {
@@ -111,13 +111,13 @@ let IdrisCompletionProvider = (function () {
                 }
               }).subscribe((arg) => {
                 resolve(arg)
-              }, (err) => {
+              }, (_err) => {
               })
             })
           }).then(function (arg) {
             if (arg) {
               let ref = arg.msg[0][0]
-              let results = ref.map((v, i, arr) => {
+              let results = ref.map((v, _i, _arr) => {
                 return new vscode.CompletionItem(v, 1)
               })
 

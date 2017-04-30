@@ -47,7 +47,7 @@ let readIpkgFile = (ipkgFile) => {
   })
 }
 
-compilerOptions = (directory) => {
+let compilerOptions = (directory) => {
   let ipkgFilesObserver = findIpkgFile(directory)
   return ipkgFilesObserver.flatMap((ipkgFiles) => {
     if (ipkgFiles.length) {
