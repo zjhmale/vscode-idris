@@ -31,7 +31,7 @@
 | [Project Scaffolding](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#project-scaffolding) | idris.new-project |
 | [Search values by type signature](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#search-value-by-type) | idris.search |
 
-**Heads up:** All the command above can also be triggered in the right-click menu
+**Heads up:** All the commands above can also be triggered in the right-click menu
 
 ![menu](./images/screenshots/menu.gif)
 

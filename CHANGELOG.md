@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.9.3
+
+* Remove doubling single quote [6e8edbd](https://github.com/zjhmale/vscode-idris/commit/6e8edbd6eb0d64127577bb84569008281f26d650) [@be5invis](https://github.com/be5invis)
+* Support option to turn of totality checking(partial warning) [1af2b48](https://github.com/zjhmale/vscode-idris/commit/1af2b488a4e4115a055983cb4e086456b371791d) [@be5invis](https://github.com/be5invis)
+* Integrate [idringen](https://github.com/zjhmale/idringen), support project scaffolding [#87](https://github.com/zjhmale/vscode-idris/issues/87)
+* Support search value by its type signature [#88](https://github.com/zjhmale/vscode-idris/issues/88)
+* Fix loading path without any path separator when start REPL on Windows [#100](https://github.com/zjhmale/vscode-idris/issues/100) [@Cedric-Venet](https://github.com/Cedric-Venet)
+* Fix `replCompletion` mode of auto-completion not working after type checking failed [#101](https://github.com/zjhmale/vscode-idris/issues/101)
+
 ## 0.9.0
 
 * Improvement for using with standalone Idris file [#94](https://github.com/zjhmale/vscode-idris/issues/94)
