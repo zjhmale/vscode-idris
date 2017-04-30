@@ -28,6 +28,8 @@
 | [Start / Refresh REPL](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#start-or-refresh-repl) | idris.start-refresh-repl |
 | [Send selected code to REPL](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#send-selected-code-to-repl) | idris.send-selection-repl |
 | [Cleanup Idris binary files](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#cleanup-idris-binary-files) | idris.cleanup-ibc |
+| [Project Scaffolding](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#project-scaffolding) | idris.new-project |
+| [Search values by type signature](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#search-value-by-type) | idris.search |
 
 **Heads up:** All the command above can also be triggered in the right-click menu
 
@@ -45,7 +47,6 @@
 * [Change all occurrences](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#change-all-occurrences)
 * [Latex snippets](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#latex-snippets)
 * [Literate Idris](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#literate-idris)
-* [Project Scaffolding](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#project-scaffolding)
 
 ## Installation
 

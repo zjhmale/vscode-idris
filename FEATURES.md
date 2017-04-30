@@ -117,3 +117,7 @@
 ### Project Scaffolding
 
 ![new-project](./images/screenshots/new-project.gif)
+
+### Search value by type
+
+![search](./images/screenshots/search.gif)
