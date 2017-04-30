@@ -121,3 +121,7 @@
 ### Search value by type
 
 ![search](./images/screenshots/search.gif)
+
+### Document highlights
+
+![document-highlights](./images/screenshots/document-highlights.gif)
