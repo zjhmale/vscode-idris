@@ -126,14 +126,20 @@ let getAllPositions = (name, uri) => {
   let positions = []
   let content = fs.readFileSync(uri).toString()
   let contents = content.split("\n")
-  let regex = new RegExp(`\\b${name}\\b`, "g")
+  let regex = name.endsWith("'") ? new RegExp(`\\b${name}`, "g") : new RegExp(`\\b${name}\\b`, "g")
   let match
   for (let i = 0; i < contents.length; i++) {
     let current = contents[i]
     while (match = regex.exec(current)) {
       let line = i
       let column = match.index
-      positions.push({ uri, line, column })
+      if (!name.endsWith("'")) {
+        if (!(current.slice(column + 1, column + 2) == "'")) {
+          positions.push({ uri, line, column })
+        }
+      } else {
+        positions.push({ uri, line, column })
+      }
     }
   }
   return positions

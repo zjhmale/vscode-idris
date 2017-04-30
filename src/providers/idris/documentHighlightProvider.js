@@ -11,6 +11,7 @@ let IdrisDocumentHighlightProvider = (function () {
     let [currentWord, _wordRange] = commands.getWordBase(document, position, true)
     if (!currentWord) return
 
+    console.log(currentWord)
     let uri = document.uri.fsPath
     let currentWordDef = findDefinition.findDefinitionInFiles(currentWord, uri)
 
