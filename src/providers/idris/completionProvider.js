@@ -40,6 +40,19 @@ let buildCompletionList = () => {
   identList = common.getIdents(uri)
 }
 
+let getUnicodeCompletion = (currentWord, wordRange) => {
+  let result = []
+  unicodeMap.forEach((value, key) => {
+    if (key.startsWith(currentWord)) {
+      let item = new vscode.CompletionItem(key, 0)
+      item.insertText = value
+      item.range = wordRange
+      result.push(item)
+    }
+  })
+  return result
+}
+
 let IdrisCompletionProvider = (function () {
   function IdrisCompletionProvider() { }
 
@@ -63,16 +76,7 @@ let IdrisCompletionProvider = (function () {
 
       if (suggestMode == 'allWords') {
         if (currentWord.startsWith("\\")) {
-          let result = []
-          unicodeMap.forEach((value, key) => {
-            if (key.startsWith(currentWord)) {
-              let item = new vscode.CompletionItem(key, 0)
-              item.insertText = value
-              item.range = wordRange
-              result.push(item)
-            }
-          })
-          return result
+          return getUnicodeCompletion(currentWord, wordRange)
         } else {
           let suggestionItems = identList.filter((ident) => {
             return ident.startsWith(trimmedPrefix) || ident.toLowerCase().startsWith(trimmedPrefix)
@@ -91,42 +95,46 @@ let IdrisCompletionProvider = (function () {
           }
         }
       } else if (suggestMode == 'replCompletion') {
-        return new Promise((resolve, reject) => {
-          controller.withCompilerOptions((uri) => {
-            commands.getModel().load(uri).flatMap((tcResult) => {
-              if (tcResult.responseType == "return") {
-                return commands.getModel().replCompletions(trimmedPrefix)
+        if (currentWord.startsWith("\\")) {
+          return getUnicodeCompletion(currentWord, wordRange)
+        } else {
+          return new Promise((resolve, reject) => {
+            controller.withCompilerOptions((uri) => {
+              commands.getModel().load(uri).flatMap((tcResult) => {
+                if (tcResult.responseType == "return") {
+                  return commands.getModel().replCompletions(trimmedPrefix)
+                } else {
+                  return Rx.Observable.of(false)
+                }
+              }).subscribe((arg) => {
+                resolve(arg)
+              }, (err) => {
+              })
+            })
+          }).then(function (arg) {
+            if (arg) {
+              let ref = arg.msg[0][0]
+              let results = ref.map((v, i, arr) => {
+                return new vscode.CompletionItem(v, 1)
+              })
+
+              let baseItems = results
+                .concat(snippetItems)
+                .concat(completionUtil.idrisKeywordCompletionItems(trimmedPrefix))
+
+              if (/^(>\s+)?import/g.test(currentLine)) {
+                let finalItems = baseItems.concat(completionUtil.getModuleNameCompletionItems(trimmedPrefix))
+                lastReplCompletionItems = finalItems
+                return finalItems
               } else {
-                return Rx.Observable.of(false)
+                lastReplCompletionItems = baseItems
+                return baseItems
               }
-            }).subscribe((arg) => {
-              resolve(arg)
-            }, (err) => {
-            })
-          })
-        }).then(function (arg) {
-          if (arg) {
-            let ref = arg.msg[0][0]
-            let results = ref.map((v, i, arr) => {
-              return new vscode.CompletionItem(v, 1)
-            })
-
-            let baseItems = results
-              .concat(snippetItems)
-              .concat(completionUtil.idrisKeywordCompletionItems(trimmedPrefix))
-
-            if (/^(>\s+)?import/g.test(currentLine)) {
-              let finalItems = baseItems.concat(completionUtil.getModuleNameCompletionItems(trimmedPrefix))
-              lastReplCompletionItems = finalItems
-              return finalItems
             } else {
-              lastReplCompletionItems = baseItems
-              return baseItems
+              return lastReplCompletionItems
             }
-          } else {
-            return lastReplCompletionItems
-          }
-        })
+          })
+        }
       } else {
         vscode.window.showErrorMessage("Invalid option for idris.suggestMode")
         return null
