@@ -19,6 +19,9 @@ let nonTotalDiagnosticCollection = vscode.languages.createDiagnosticCollection("
 let term = null
 let innerCompilerOptions
 let needDestroy = true
+let typeCheckingStatusItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, -1)
+let totalityCheckingStatusItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, -2)
+let buildCheckingStatusItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, -3)
 
 let init = (compilerOptions) => {
   if (compilerOptions) {
@@ -146,6 +149,12 @@ let checkTotality = (uri) => {
           }
         }
       })
+      if (nonTotalDianostics.length == 0) {
+        totalityCheckingStatusItem.text = "Idris: Totality checking ✔︎"
+      } else {
+        totalityCheckingStatusItem.text = "Idris: Totality checking ✗"
+      }
+      totalityCheckingStatusItem.show()
       nonTotalDiagnosticCollection.set(nonTotalDianostics)
       destroy(false)
       resolve()
@@ -181,7 +190,12 @@ let buildIPKG = (uri) => {
           }
         }
       }
-
+      if (buildDiagnostics.length == 0) {
+        buildCheckingStatusItem.text = "Idris: Build ✔︎"
+      } else {
+        buildCheckingStatusItem.text = "Idris: Build ✗"
+      }
+      buildCheckingStatusItem.show()
       buildDiagnosticCollection.set(buildDiagnostics)
       resolve()
     }, (err) => { })
@@ -196,6 +210,8 @@ let typecheckFile = (uri) => {
     outputChannel.show()
     outputChannel.append("Idris: File loaded successfully")
     tcDiagnosticCollection.clear()
+    typeCheckingStatusItem.text = "Idris: Type checking ✔︎"
+    typeCheckingStatusItem.show()
     destroy(true)
   }
 
@@ -688,6 +704,8 @@ let displayErrors = (err) => {
     })
     outputChannel.appendLine(buf.join('\n'))
     tcDiagnosticCollection.set(diagnostics)
+    typeCheckingStatusItem.text = "Idris: Type checking ✗︎"
+    typeCheckingStatusItem.show()
   }
 }
 
