@@ -152,7 +152,7 @@ let getAllModuleName = () => {
   let moduleNames = files.map((uri) => {
     return getModuleName(uri)
   })
-  return _.uniqWith(moduleNames, _.isEqual);
+  return _.uniqWith(moduleNames, _.isEqual)
 }
 
 let getImportedModules = (uri) => {

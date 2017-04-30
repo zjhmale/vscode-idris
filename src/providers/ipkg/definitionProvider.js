@@ -21,8 +21,8 @@ let IPKGDefinitionProvider = (function () {
       }
     }).then(function (loc) {
       if (loc) {
-        let pos = new vscode.Position(loc.line, loc.column);
-        return new vscode.Location(vscode.Uri.file(loc.path), pos);
+        let pos = new vscode.Position(loc.line, loc.column)
+        return new vscode.Location(vscode.Uri.file(loc.path), pos)
       } else {
         return null
       }

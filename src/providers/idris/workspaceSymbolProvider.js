@@ -17,10 +17,10 @@ let IdrisWorkspaceSymbolProvider = (function () {
       }).filter((i) => {
         return i.def != undefined
       })
-      let uniDefs = _.uniqWith(_.flatten(defs), _.isEqual);
+      let uniDefs = _.uniqWith(_.flatten(defs), _.isEqual)
       let symbols = uniDefs.map(({ name, def }) => {
-        let pos = new vscode.Position(def.line, def.column);
-        let range = new vscode.Range(pos, pos);
+        let pos = new vscode.Position(def.line, def.column)
+        let range = new vscode.Range(pos, pos)
         let info = new vscode.SymbolInformation(
           name,
           vscode.SymbolKind.Function,

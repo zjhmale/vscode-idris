@@ -2,7 +2,7 @@ const ipkg = require('./ipkg/ipkg')
 const commands = require('./idris/commands')
 const common = require('./analysis/common')
 const vscode = require('vscode')
-const fs = require('fs');
+const fs = require('fs')
 const cp = require('child_process')
 const path = require('path')
 

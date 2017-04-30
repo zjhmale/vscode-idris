@@ -1,6 +1,6 @@
 const CSON = require("cson")
-const request = require('request');
-const chalk = require('chalk');
+const request = require('request')
+const chalk = require('chalk')
 const fs = require('fs')
 const join = require('path').join
 

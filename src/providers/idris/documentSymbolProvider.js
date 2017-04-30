@@ -24,8 +24,8 @@ let IdrisDocumentSymbolProvider = (function () {
               let name = a[0].split(":")[0].trim()
               let def = findDefinition.findDefinitionInFiles(name, uri)
               if (def) {
-                let pos = new vscode.Position(def.line, def.column);
-                let loc = new vscode.Location(vscode.Uri.file(def.path), pos);
+                let pos = new vscode.Position(def.line, def.column)
+                let loc = new vscode.Location(vscode.Uri.file(def.path), pos)
                 let info = new vscode.SymbolInformation(
                   name,
                   vscode.SymbolKind.Function,

@@ -29,14 +29,14 @@ let IdrisRenameProvider = (function () {
       }).map(({ name, uri }) => {
         return common.getAllPositions(name, uri)
       })
-      let uniPositions = _.uniqWith(_.flatten(positions), _.isEqual);
+      let uniPositions = _.uniqWith(_.flatten(positions), _.isEqual)
       let workspaceEdit = new vscode.WorkspaceEdit()
       uniPositions.forEach(({ uri, line, column }) => {
-        let startPos = new vscode.Position(line, column);
+        let startPos = new vscode.Position(line, column)
         let endPos = new vscode.Position(line, column + currentWord.length)
-        let range = new vscode.Range(startPos, endPos);
+        let range = new vscode.Range(startPos, endPos)
         let fileUri = vscode.Uri.file(uri)
-        workspaceEdit.replace(fileUri, range, newName);
+        workspaceEdit.replace(fileUri, range, newName)
       })
       resolve(workspaceEdit)
     })

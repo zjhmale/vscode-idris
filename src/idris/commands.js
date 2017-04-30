@@ -363,7 +363,7 @@ let evalSelection = (uri) => {
 }
 
 let createIdrisTerm = () => {
-  const pathToIdris = vscode.workspace.getConfiguration('idris').get('executablePath');
+  const pathToIdris = vscode.workspace.getConfiguration('idris').get('executablePath')
   const idrisPath = which.sync(pathToIdris)
   const pkgOpts = ipkg.getPkgOpts(innerCompilerOptions)
   term = vscode.window.createTerminal("Idris REPL", idrisPath, pkgOpts)
@@ -673,7 +673,7 @@ let apropos = (uri) => {
     }).then(function () {
     }).catch(function () {
     })
-  });
+  })
 }
 
 let displayErrors = (err) => {

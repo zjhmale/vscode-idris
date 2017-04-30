@@ -10,7 +10,7 @@ const idrisRename = require('./providers/idris/renameProvider')
 const ipkgDefinition = require('./providers/ipkg/definitionProvider')
 const ipkgCompletion = require('./providers/ipkg/completionProvider')
 
-let idrisExecutablePath = vscode.workspace.getConfiguration('idris').get('executablePath');
+let idrisExecutablePath = vscode.workspace.getConfiguration('idris').get('executablePath')
 
 let triggers = []
 for (let i = 0; i < 26; i++) {

@@ -29,10 +29,10 @@ let IdrisReferenceProvider = (function () {
       }).map(({ name, uri }) => {
         return common.getAllPositions(name, uri)
       })
-      let uniPositions = _.uniqWith(_.flatten(positions), _.isEqual);
+      let uniPositions = _.uniqWith(_.flatten(positions), _.isEqual)
       let locations = uniPositions.map(({ uri, line, column }) => {
-        let pos = new vscode.Position(line, column);
-        let range = new vscode.Range(pos, pos);
+        let pos = new vscode.Position(line, column)
+        let range = new vscode.Range(pos, pos)
         return new vscode.Location(vscode.Uri.file(uri), range)
       })
       resolve(locations)
