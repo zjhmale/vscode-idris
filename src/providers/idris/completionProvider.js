@@ -6,6 +6,7 @@ const completionUtil = require('../completionUtil')
 const HashMap = require('hashmap')
 const vscode = require('vscode')
 const Rx = require('rx-lite')
+const _ = require('lodash')
 
 const unicodeMap = new HashMap()
 unicodeMap.set("\\alpha", "α")
@@ -36,8 +37,10 @@ let identList
 let lastReplCompletionItems = []
 
 let buildCompletionList = () => {
-  let uri = vscode.window.activeTextEditor.document.uri.fsPath
-  identList = common.getIdents(uri)
+  let idents = common.getAllFilesExts(['idr', 'lidr']).map((uri) => {
+    return common.getIdents(uri)
+  })
+  identList = _.uniqWith(_.flatten(idents), _.isEqual)
 }
 
 let getUnicodeCompletion = (currentWord, wordRange) => {

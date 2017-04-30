@@ -102,7 +102,7 @@ let getAllIdents = () => {
       return { name, uri }
     })
   })
-  let uniIdents = _.uniqWith(_.flatten(defList), _.isEqual);
+  let uniIdents = _.uniqWith(_.flatten(defList), _.isEqual)
   return uniIdents
 }
 
