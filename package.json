@@ -310,7 +310,7 @@
       },
       {
         "command": "idris.show-holes",
-        "title": "Idris: List all active holes in the file",
+        "title": "Idris: List all active holes in the currently opened file",
         "description": "Show the currently active holes"
       },
       {
