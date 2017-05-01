@@ -8,6 +8,7 @@ const idrisWorkspaceSymbol = require('./providers/idris/workspaceSymbolProvider'
 const idrisReference = require('./providers/idris/referenceProvider')
 const idrisRename = require('./providers/idris/renameProvider')
 const idrisDocumentHighlight = require('./providers/idris/documentHighlightProvider')
+const idrisSignatureHelp = require('./providers/idris/signatureHelpProvider')
 const ipkgDefinition = require('./providers/ipkg/definitionProvider')
 const ipkgCompletion = require('./providers/ipkg/completionProvider')
 
@@ -42,6 +43,7 @@ function activate(context) {
   context.subscriptions.push(vscode.languages.registerReferenceProvider(controller.IDRIS_MODE, new idrisReference.IdrisReferenceProvider()))
   context.subscriptions.push(vscode.languages.registerRenameProvider(controller.IDRIS_MODE, new idrisRename.IdrisRenameProvider()))
   context.subscriptions.push(vscode.languages.registerDocumentHighlightProvider(controller.IDRIS_MODE, new idrisDocumentHighlight.IdrisDocumentHighlightProvider()))
+  context.subscriptions.push(vscode.languages.registerSignatureHelpProvider(controller.IDRIS_MODE, new idrisSignatureHelp.IdrisSignatureHelpProvider(), " "))
   context.subscriptions.push(vscode.languages.registerDefinitionProvider(controller.IPKG_MODE, new ipkgDefinition.IPKGDefinitionProvider()))
   context.subscriptions.push(vscode.languages.registerCompletionItemProvider(controller.IPKG_MODE, new ipkgCompletion.IPKGCompletionProvider(), ...triggers))
   context.subscriptions.push(vscode.workspace.onDidSaveTextDocument(() => {

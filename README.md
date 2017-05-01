@@ -48,6 +48,7 @@
 * [Latex snippets](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#latex-snippets)
 * [Literate Idris](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#literate-idris)
 * [Document highlights](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#document-highlights)
+* [Parameter hints](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#parameter-hints)
 
 ## Installation
 

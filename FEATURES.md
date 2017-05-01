@@ -125,3 +125,7 @@
 ### Document highlights
 
 ![document-highlights](./images/screenshots/document-highlights.gif)
+
+### Parameter hints
+
+![parameter-hints](./images/screenshots/signature.gif)
