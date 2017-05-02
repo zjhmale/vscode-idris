@@ -11,25 +11,25 @@
 
 | command screenshot | command name |
 |---|---|
-| [Typechecking](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#typechecking) | idris.typecheck |
-| [Show the types of a variable](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#showing-the-type-of-an-identifier) | idris.type-of |
-| [Show the doc for a variable](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#showing-the-docs-for-an-identifier) | idris.docs-for |
-| [Show the doc for a definition](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#showing-the-definition-for-an-identifier) | idris.print-definition |
-| [Show holes](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#list-all-the-currently-active-holes) | idris.show-holes |
-| [Add clause](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#generate-an-initial-pattern-match-clause) | idris.add-clause |
-| [Add proof clause](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#generate-an-initial-pattern-match-clause-when-trying-to-proof-a-type) | idris.add-proof-clause |
-| [Split case](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#generate-a-case-split-for-the-pattern-variable) | idris.case-split |
-| [Search proof](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#attempt-to-fill-out-the-holes-by-proof-search) | idris.proof-search |
-| [Make with](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#create-a-with-rule-pattern-match-template-for-the-clause-of-function) | idris.make-with |
-| [Make case](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#create-a-case-pattern-match-template-for-the-holes) | idris.make-case |
-| [Make lemma](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#create-a-top-level-function-with-a-type-which-solves-the-hole-under-the-cursor) | idris.make-lemma |
-| [Apropos](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#search-names-types-and-documentations) | idris.apropos |
-| [Eval selected code](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#evaluate-selected-code-in-editor) | idris.eval-selection |
-| [Start / Refresh REPL](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#start-or-refresh-repl) | idris.start-refresh-repl |
-| [Send selected code to REPL](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#send-selected-code-to-repl) | idris.send-selection-repl |
-| [Cleanup Idris binary files](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#cleanup-idris-binary-files) | idris.cleanup-ibc |
-| [Project Scaffolding](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#project-scaffolding) | idris.new-project |
-| [Search values by type signature](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#search-value-by-type) | idris.search |
+| [Typecheck the currently open file](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#typechecking) | idris.typecheck |
+| [Print the type of the identifier under the cursor](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#showing-the-type-of-an-identifier) | idris.type-of |
+| [Print the documentation of the identifier under the cursor](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#showing-the-docs-for-an-identifier) | idris.docs-for |
+| [Print the definition of the identifier under the cursor](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#showing-the-definition-for-an-identifier) | idris.print-definition |
+| [List all active holes in the currently open file](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#list-all-the-currently-active-holes) | idris.show-holes |
+| [Generate an initial pattern match clause for the function under the cursor](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#generate-an-initial-pattern-match-clause) | idris.add-clause |
+| [Generate an initial pattern match clause when trying a proof](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#generate-an-initial-pattern-match-clause-when-trying-to-proof-a-type) | idris.add-proof-clause |
+| [Generate a case split for a pattern variable under the cursor](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#generate-a-case-split-for-the-pattern-variable) | idris.case-split |
+| [Attempt to fill out any holes by a proof search](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#attempt-to-fill-out-the-holes-by-proof-search) | idris.proof-search |
+| [Create a pattern-matching with-rule for the name under the cursor](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#create-a-with-rule-pattern-match-template-for-the-clause-of-function) | idris.make-with |
+| [Create a case pattern match template for a hole under the cursor](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#create-a-case-pattern-match-template-for-the-holes) | idris.make-case |
+| [Create a top-level function with a type matching the hole under the cursor](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#create-a-top-level-function-with-a-type-which-solves-the-hole-under-the-cursor) | idris.make-lemma |
+| [Search names, types and documentation](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#search-names-types-and-documentations) | idris.apropos |
+| [Evaluate the selected code](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#evaluate-selected-code-in-editor) | idris.eval-selection |
+| [Start or refresh a REPL for the currently open file](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#start-or-refresh-repl) | idris.start-refresh-repl |
+| [Send the selected code to the REPL](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#send-selected-code-to-repl) | idris.send-selection-repl |
+| [Cleanup all the idris binary files(*.ibc) in the project](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#cleanup-idris-binary-files) | idris.cleanup-ibc |
+| [Create a new project with scaffolding](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#project-scaffolding) | idris.new-project |
+| [Search for functions by type signature](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#search-value-by-type) | idris.search |
 
 **Heads up:** All the commands above can also be triggered in the right-click menu
 
