@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.9.6
+
+* Latex completion for `replCompletion` mode [#104](https://github.com/zjhmale/vscode-idris/issues/104)
+* Completion with symbols in whole project for `allWords` mode [#102](https://github.com/zjhmale/vscode-idris/issues/102)
+* Use status bar to show type checking and totality checking status [#106](https://github.com/zjhmale/vscode-idris/issues/106)
+* Fix typechecking pending bug [319a384](https://github.com/zjhmale/vscode-idris/commit/319a3846e1f2268e74dcecb87f590be41528fcdb)
+* Add document highlights for more precise semantic sensitive symbol selection highlighting [#107](https://github.com/zjhmale/vscode-idris/issues/107)
+* Add function parameter type hints [#51](https://github.com/zjhmale/vscode-idris/issues/51)
+
 ## 0.9.3
 
 * Remove doubling single quote [6e8edbd](https://github.com/zjhmale/vscode-idris/commit/6e8edbd6eb0d64127577bb84569008281f26d650) [@be5invis](https://github.com/be5invis)
