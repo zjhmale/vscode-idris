@@ -1,12 +1,15 @@
 const common = require('../../analysis/common')
 const completionUtil = require('../completionUtil')
 const vscode = require('vscode')
+const Maybe = require('../../maybe')
 
 let identList
 
 let buildCompletionList = () => {
-  let uri = vscode.window.activeTextEditor.document.uri.fsPath
-  identList = common.getIdents(uri)
+  Maybe.of(vscode.window.activeTextEditor).map((editor) => {
+    let uri = editor.document.uri.fsPath
+    identList = common.getIdents(uri)
+  })
 }
 
 let IPKGCompletionProvider = (function () {

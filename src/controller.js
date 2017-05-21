@@ -5,6 +5,7 @@ const vscode = require('vscode')
 const fs = require('fs')
 const cp = require('child_process')
 const path = require('path')
+const Maybe = require('./maybe')
 
 const IDRIS_MODE = [
   { language: 'idris', scheme: 'file' },
@@ -71,13 +72,15 @@ let reInitialize = () => {
 }
 
 let withCompilerOptions = (callback) => {
-  let document = vscode.window.activeTextEditor.document
-  if (!IDRIS_MODE.map((mode) => { return mode.language }).includes(document.languageId)) return
-  let uri = document.uri.fsPath
-
-  getCompilerOptsPromise().subscribe((compilerOptions) => {
-    commands.initialize(compilerOptions)
-    callback(uri)
+  Maybe.of(vscode.window.activeTextEditor).map((editor) => {
+    let document = editor.document
+    if (!IDRIS_MODE.map((mode) => { return mode.language }).includes(document.languageId)) return
+    let uri = document.uri.fsPath
+  
+    getCompilerOptsPromise().subscribe((compilerOptions) => {
+      commands.initialize(compilerOptions)
+      callback(uri)
+    })
   })
 }
 

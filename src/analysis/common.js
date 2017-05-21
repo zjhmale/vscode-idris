@@ -2,6 +2,7 @@ const fs = require("fs")
 const glob = require("glob")
 const _ = require('lodash')
 const vscode = require('vscode')
+const Maybe = require('../maybe.js')
 
 const idrisKeywords = [
   "if",
@@ -206,8 +207,10 @@ let getAllFiles = (ext) => {
       return file.endsWith(`.${ext}`)
     })
   } else {
-    let uri = vscode.window.activeTextEditor.document.uri.fsPath
-    return uri.endsWith(ext) ? [uri] : []
+    return Maybe.of(vscode.window.activeTextEditor)
+      .map((editor) => { return editor.document.uri.fsPath })
+      .map((uri) => { return uri.endsWith(ext) ? [uri] : [] })
+      .getOrElse([])
   }
 }
 

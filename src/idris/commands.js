@@ -6,6 +6,7 @@ const common = require('../analysis/common')
 const findDefinition = require('../analysis/find-definition')
 const Rx = require('rx-lite')
 const path = require('path')
+const Maybe = require('../maybe')
 
 let model = null
 let checkNotTotalModel = null
@@ -102,13 +103,16 @@ let getWord = () => {
  * Get the column of the first character of a concrete line of code
  */
 let getStartColumn = (line) => {
-  if (line >= vscode.window.activeTextEditor.document.lineCount)
-    return 0
+  return Maybe.of(vscode.window.activeTextEditor).map((editor) => {
+    let document = editor.document
 
-  let document = vscode.window.activeTextEditor.document
-  let textAtLine = document.lineAt(line).text
-  let column = textAtLine.indexOf(textAtLine.trim())
-  return column
+    if (line >= document.lineCount)
+      return 0
+
+    let textAtLine = document.lineAt(line).text
+    let column = textAtLine.indexOf(textAtLine.trim())
+    return column
+  }).getOrElse(0)
 }
 
 let clearTotalityDiagnostics = () => {
