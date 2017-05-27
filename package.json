@@ -98,7 +98,7 @@
         },
         "idris.warnPartial": {
           "type": "boolean",
-          "default": true,
+          "default": false,
           "description": "Show warning when a function is partial."
         },
         "idris.hoverMode": {
@@ -120,6 +120,11 @@
           ],
           "default": "allWords",
           "description": "Controls the auto-completion behavior. 'allWords' will always include all words from the currently opened documentation, 'replCompletion' will get suggestions from Idris REPL process."
+        },
+        "idris.showOutputWhenTypechecking": {
+          "type": "boolean",
+          "default": false,
+          "description": "Show output channel when typechecking finished."
         }
       }
     },

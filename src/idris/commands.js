@@ -209,10 +209,13 @@ let buildIPKG = (uri) => {
 }
 
 let typecheckFile = (uri) => {
+  let needShowOC = vscode.workspace.getConfiguration('idris').get('showOutputWhenTypechecking')
   let successHandler = (_) => {
-    outputChannel.clear()
-    outputChannel.show()
-    outputChannel.append("Idris: File loaded successfully")
+    if (needShowOC) {
+      outputChannel.clear()
+      outputChannel.show()
+      outputChannel.append("Idris: File loaded successfully")
+    }
     tcDiagnosticCollection.clear()
     typeCheckingStatusItem.text = "Idris: Type checking ✔︎"
     typeCheckingStatusItem.show()
@@ -224,9 +227,13 @@ let typecheckFile = (uri) => {
       return arg.responseType === 'return'
     }).subscribe(successHandler, (err) => {
       destroy(true)
-      displayErrors(err)
+      if (needShowOC) {
+        displayErrors(err)
+      }
     })
-    showLoading()
+    if (needShowOC) {
+      showLoading()
+    }
     resolve()
   }).then(function () {
   }).catch(function () {
