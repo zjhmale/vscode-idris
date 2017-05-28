@@ -125,6 +125,11 @@
           "type": "boolean",
           "default": false,
           "description": "Show output channel when typechecking finished."
+        },
+        "idris.numbersOfContinuousTypechecking": {
+          "type": "number",
+          "default": 10,
+          "description": "Kill Idris process every N times of typechecking to avoid memory leaking."
         }
       }
     },

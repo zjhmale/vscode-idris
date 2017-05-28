@@ -24,6 +24,8 @@ let typeCheckingStatusItem = vscode.window.createStatusBarItem(vscode.StatusBarA
 let totalityCheckingStatusItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, -2)
 let buildCheckingStatusItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, -3)
 
+let killIdrisCounter = 0;
+
 let init = (compilerOptions) => {
   if (compilerOptions) {
     innerCompilerOptions = compilerOptions
@@ -210,6 +212,8 @@ let buildIPKG = (uri) => {
 
 let typecheckFile = (uri) => {
   let needShowOC = vscode.workspace.getConfiguration('idris').get('showOutputWhenTypechecking')
+  let limit = vscode.workspace.getConfiguration('idris').get('numbersOfContinuousTypechecking')
+
   let successHandler = (_) => {
     if (needShowOC) {
       outputChannel.clear()
@@ -219,14 +223,24 @@ let typecheckFile = (uri) => {
     tcDiagnosticCollection.clear()
     typeCheckingStatusItem.text = "Idris: Type checking ✔︎"
     typeCheckingStatusItem.show()
-    destroy(true)
+    if (killIdrisCounter < limit) {
+      killIdrisCounter++
+    } else {
+      killIdrisCounter = 0
+      destroy(true)
+    }
   }
 
   new Promise((resolve, _reject) => {
     model.load(uri).filter((arg) => {
       return arg.responseType === 'return'
     }).subscribe(successHandler, (err) => {
-      destroy(true)
+      if (killIdrisCounter < limit) {
+        killIdrisCounter++
+      } else {
+        killIdrisCounter = 0
+        destroy(true)
+      }
       if (needShowOC) {
         displayErrors(err)
       }
