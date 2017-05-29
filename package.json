@@ -1,7 +1,7 @@
 {
   "name": "Idris",
   "description": "Idris Language Support for Visual Studio Code",
-  "version": "0.9.6",
+  "version": "0.9.8",
   "publisher": "zjhmale",
   "engines": {
     "vscode": "^1.8.0"
@@ -129,7 +129,7 @@
         "idris.numbersOfContinuousTypechecking": {
           "type": "number",
           "default": 10,
-          "description": "Kill Idris process every N times of typechecking to avoid memory leaking."
+          "description": "Kill Idris process every N times of continuous typechecking to avoid memory leaking."
         }
       }
     },

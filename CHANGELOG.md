@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.9.8
+
+* Add option to toggle showing output channel of displaying typechecking result [#109](https://github.com/zjhmale/vscode-idris/issues/109)
+* Ignore huge image files when publishing to marketplace [#110](https://github.com/zjhmale/vscode-idris/issues/110)
+* Add option to control the max times of continuous typechecking in order to avoid memory leaking without reducing user experience [#111](https://github.com/zjhmale/vscode-idris/issues/111)
+* Mock a maybe monad to simplify nullary checking [#112](https://github.com/zjhmale/vscode-idris/issues/112)
+
 ## 0.9.6
 
 * Latex completion for `replCompletion` mode [#104](https://github.com/zjhmale/vscode-idris/issues/104)
