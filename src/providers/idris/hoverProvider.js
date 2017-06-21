@@ -15,6 +15,9 @@ let isRangeInsideRange = (range1, range2) => {
   return startPred && endPred
 }
 
+// transform [[":foo", 1], [":bar", 2]] -> {"foo": 1, "bar": 2}
+const keywordListToObject = kw => kw.reduce((o, v) => {  o[v[0].substring(1)] = v[1];  return o; }, {})
+
 let IdrisHoverProvider = (function () {
   function IdrisHoverProvider() { }
 
@@ -46,8 +49,37 @@ let IdrisHoverProvider = (function () {
           return Rx.Observable.zip(commands.getModel().getType(currentWord), commands.getModel().getDocs(currentWord))
         }).subscribe(
           function (arg) {
-            let typeMsg = arg[0].msg[0]
-            let infoMsg = arg[1].msg[0].replace(/\n    \n    /g, "").replace(/\n        \n        /g, "")
+            const typeData = arg[0].msg
+            const docData = arg[1].msg
+            const infoMsg = []
+            const typeMsg = []
+
+            // Make an object that indexes type start character position to metadata.
+            const lookupTypeDataByPos = {}
+            for (const metadata of typeData[1]) {
+              lookupTypeDataByPos[metadata[0]] = keywordListToObject(metadata[2])
+            }
+
+            // Idris gives us one type per line, in typeData[0].  Thus, we need to know the character index
+            // of the beginning of each line, to extract its appropriate doc-overview.
+            let pos = 0
+            for (const line of typeData[0].split(/\n/)) {
+              const typeHover = '``` idris\n' + line + '\n```\n'
+              let infoHover = typeHover
+
+              const metadata = lookupTypeDataByPos[pos]
+              if (metadata) {
+                const docOverview = metadata['doc-overview']
+                if (docOverview) {
+                  infoHover += docOverview + '\n'
+                }
+              }
+
+              typeMsg.push(typeHover)
+              infoMsg.push(infoHover)
+              pos += line.length + 1 /* \n */
+            }
+
             if (hoverMode == 'info') {
               resolve(infoMsg)
             } else if (hoverMode == 'type') {
@@ -59,7 +91,7 @@ let IdrisHoverProvider = (function () {
                 resolve(typeMsg)
               }
             } else {
-              vscode.window.showErrorMessage("Invalid option for idris.hoveMode")
+              vscode.window.showErrorMessage("Invalid option for idris.hoverMode")
               resolve(null)
             }
           },
@@ -73,10 +105,7 @@ let IdrisHoverProvider = (function () {
       })
     }).then(function (info) {
       if (info != null) {
-        return new vscode.Hover({
-          language: 'idris',
-          value: info
-        })
+        return new vscode.Hover(info)
       } else {
         return null
       }
