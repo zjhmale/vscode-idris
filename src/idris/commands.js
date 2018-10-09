@@ -58,7 +58,7 @@ let getModel = () => {
 
 let showOutputChannel = (msg) => {
   outputChannel.clear()
-  outputChannel.show()
+  outputChannel.show(true)
   outputChannel.append(msg)
 }
 
@@ -217,7 +217,7 @@ let typecheckFile = (uri) => {
   let successHandler = (_) => {
     if (needShowOC) {
       outputChannel.clear()
-      outputChannel.show()
+      outputChannel.show(true)
       outputChannel.append("Idris: File loaded successfully")
     }
     tcDiagnosticCollection.clear()
@@ -268,7 +268,7 @@ let getInfoForWord = (uri, cmd) => {
     let info = arg.msg[0]
     //let highlightingInfo = arg.msg[1]
     outputChannel.clear()
-    outputChannel.show()
+    outputChannel.show(true)
     outputChannel.appendLine('Idris: ' + cmdMsgs[cmd] + ' ' + currentWord)
     outputChannel.append(info.replace(/\n    \n    /g, "").replace(/\n        \n        /g, ""))
     tcDiagnosticCollection.clear()
@@ -319,7 +319,7 @@ let showHoles = (uri) => {
       return `${name}\n${ps.join('\n')}\n${divider}\n${conclusion}`
     })
     outputChannel.clear()
-    outputChannel.show()
+    outputChannel.show(true)
     outputChannel.appendLine('Idris: Holes')
     outputChannel.append(hs.join('\n'))
     tcDiagnosticCollection.clear()
@@ -703,7 +703,7 @@ let displayErrors = (err) => {
   replChannel.clear()
   aproposChannel.clear()
   outputChannel.clear()
-  outputChannel.show()
+  outputChannel.show(true)
   tcDiagnosticCollection.clear()
   let buf = []
   let diagnostics = []
