@@ -4,7 +4,7 @@
   "version": "0.9.8",
   "publisher": "zjhmale",
   "engines": {
-    "vscode": "^1.30.0"
+    "vscode": "^1.31.0"
   },
   "icon": "images/idris.png",
   "keywords": [
