@@ -4,7 +4,7 @@
   "version": "0.9.8",
   "publisher": "zjhmale",
   "engines": {
-    "vscode": "^1.8.0"
+    "vscode": "^1.30.0"
   },
   "icon": "images/idris.png",
   "keywords": [
@@ -422,6 +422,6 @@
   },
   "devDependencies": {
     "eslint": "^3.19.0",
-    "vscode": "^1.0.5"
+    "vscode": "^1.1.34"
   }
 }
