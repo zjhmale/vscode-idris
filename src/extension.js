@@ -28,13 +28,21 @@ function activate(context) {
     }
   })
 
-  context.subscriptions.push(controller.tcDiagnosticCollection)
-  context.subscriptions.push(controller.buildDiagnosticCollection)
-  context.subscriptions.push(controller.nonTotalDiagnosticCollection)
   controller.getCommands().forEach(([key, value]) => {
     let disposable = vscode.commands.registerCommand(key, value)
     context.subscriptions.push(disposable)
   })
+
+  // If the end-user is joined into a Live Share session, then there's no need
+  // to register any of the language services or document event handlers.
+  if (vscode.workspace.workspaceFolders.find((folder) => folder.uri.scheme === "vsls")) {
+    return;
+  }
+
+  context.subscriptions.push(controller.tcDiagnosticCollection)
+  context.subscriptions.push(controller.buildDiagnosticCollection)
+  context.subscriptions.push(controller.nonTotalDiagnosticCollection)
+
   context.subscriptions.push(vscode.languages.registerCompletionItemProvider(controller.IDRIS_MODE, new idrisCompletion.IdrisCompletionProvider(), ...triggers))
   context.subscriptions.push(vscode.languages.registerHoverProvider(controller.IDRIS_MODE, new idrisHover.IdrisHoverProvider()))
   context.subscriptions.push(vscode.languages.registerDefinitionProvider(controller.IDRIS_MODE, new idrisDefinition.IdrisDefinitionProvider()))
