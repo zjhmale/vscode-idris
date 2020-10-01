@@ -11,7 +11,7 @@
 
 | command screenshot | command name |
 |---|---|
-| [Typecheck the currently open file](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#typechecking) | idris.typecheck |
+| [Type check the currently open file](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#typechecking) | idris.typecheck |
 | [Print the type of the identifier under the cursor](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#showing-the-type-of-an-identifier) | idris.type-of |
 | [Print the documentation of the identifier under the cursor](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#showing-the-docs-for-an-identifier) | idris.docs-for |
 | [Print the definition of the identifier under the cursor](https://github.com/zjhmale/vscode-idris/blob/master/FEATURES.md#showing-the-definition-for-an-identifier) | idris.print-definition |
@@ -71,12 +71,12 @@ The following Visual Studio Code settings along with their *default* values that
     "idris.hoverMode": "fallback",              // Controls the hover behavior. 'info' will display Idris documentation, 'type' will display Idris type, 'fallback' will try 'info' first and fallback to 'type' if we can not get the documentation, and 'none' will disable hover tooltips.
     "idris.suggestMode": "allWords"             // Controls the auto-completion behavior. 'allWords' will always include all words from the currently opened documentation, 'replCompletion' will get suggestions from Idris REPL process.
     "idris.warnPartial": false                  // Show warning when a function is partial.
-    "idris.showOutputWhenTypechecking": false   //Show output channel when typechecking finished.
-    "idris.numbersOfContinuousTypechecking": 10 //Kill Idris process every N times of continuous typechecking to avoid memory leaking.
+    "idris.showOutputWhenTypechecking": false   //Show output channel when type checking finished.
+    "idris.numbersOfContinuousTypechecking": 10 //Kill Idris process every "n" times of continuous type checking to avoid memory leaking.
 }
 ```
 
-## Acknowledgements
+## Acknowledgement
 
 * The internal design is initially inspired by [atom-language-idris](https://github.com/idris-hackers/atom-language-idris).
 
