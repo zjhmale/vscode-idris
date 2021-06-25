@@ -119,7 +119,7 @@ class IdrisModel {
   }
 
   changeDirectory(dir) {
-    return this.interpret(`:cd ${dir}`)
+    return this.interpret(`:cd "${dir}"`)
   }
 
   getDirectory(uri) {
