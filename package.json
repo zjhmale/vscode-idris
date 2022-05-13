@@ -1,6 +1,7 @@
 {
   "name": "Idris",
-  "description": "Idris Language Support for Visual Studio Code",
+  "displayName": "[Deprecated Idris 1 Only] Idris",
+  "description": "Idris 1 Language Support for Visual Studio Code",
   "version": "0.9.8",
   "publisher": "zjhmale",
   "engines": {
